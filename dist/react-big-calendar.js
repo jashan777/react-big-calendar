@@ -17248,7 +17248,7 @@
       noEventsInRange: propTypes.node,
       showMore: propTypes.func,
     }),
-    inclusiveRange: propTypes.default.array,
+    inclusiveRange: propTypes.array,
   }
   var Calendar$1 = uncontrollable(Calendar, {
     view: 'onView',
