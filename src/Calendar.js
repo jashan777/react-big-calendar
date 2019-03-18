@@ -720,7 +720,7 @@ class Calendar extends React.Component {
       noEventsInRange: PropTypes.node,
       showMore: PropTypes.func,
     }),
-    inclusiveRange:_propTypes2.default.array
+    inclusiveRange: PropTypes.default.array,
   }
 
   static defaultProps = {
@@ -731,7 +731,7 @@ class Calendar extends React.Component {
     views: [views.MONTH, views.WEEK, views.DAY, views.AGENDA],
     step: 30,
     length: 30,
-    inclusiveRange:[1,2,3,4,5],
+    inclusiveRange: [1, 2, 3, 4, 5],
     drilldownView: views.DAY,
 
     titleAccessor: 'title',
@@ -878,7 +878,7 @@ class Calendar extends React.Component {
     } = this.state.context
 
     let CalToolbar = components.toolbar || Toolbar
-    const label = View.title(current, { localizer, length,inclusiveRange })
+    const label = View.title(current, { localizer, length, inclusiveRange })
 
     return (
       <div
