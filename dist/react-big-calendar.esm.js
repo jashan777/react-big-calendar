@@ -6208,7 +6208,7 @@ Calendar.propTypes =
           noEventsInRange: PropTypes.node,
           showMore: PropTypes.func,
         }),
-        inclusiveRange: PropTypes.default.array,
+        inclusiveRange: PropTypes.array,
       }
     : {}
 var Calendar$1 = uncontrollable(Calendar, {
