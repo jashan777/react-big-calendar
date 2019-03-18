@@ -32,16 +32,20 @@ Week.navigate = (date, action) => {
   }
 }
 
-Week.range = (date, { localizer }) => {
+Week.range = (date, { localizer,inclusiveRange }) => {
   let firstOfWeek = localizer.startOfWeek()
   let start = dates.startOf(date, 'week', firstOfWeek)
   let end = dates.endOf(date, 'week', firstOfWeek)
-
-  return dates.range(start, end)
+  return inclusiveRange.map(number => {
+    return dates.range(start, end).find(function (d) {
+      return d.getDay() == number;
+    })
+  })
+ 
 }
 
-Week.title = (date, { localizer }) => {
-  let [start, ...rest] = Week.range(date, { localizer })
+Week.title = (date, { localizer,inclusiveRange }) => {
+  let [start, ...rest] = Week.range(date, { localizer,inclusiveRange })
   return localizer.format({ start, end: rest.pop() }, 'dayRangeHeaderFormat')
 }
 
