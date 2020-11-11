@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types'
 import React from 'react'
-import uncontrollable from 'uncontrollable'
-import cn from 'classnames'
+import { uncontrollable } from 'uncontrollable'
+import clsx from 'clsx'
 import {
   accessor,
-  elementType,
   dateFormat,
   dateRangeFormat,
+  DayLayoutAlgorithmPropType,
   views as componentViews,
 } from './utils/propTypes'
-import warning from 'warning'
 
 import { notify } from './utils/helpers'
 import { navigate, views } from './utils/constants'
@@ -251,7 +250,7 @@ class Calendar extends React.Component {
     /**
      *
      * ```js
-     * (dates: Date[] | { start: Date; end: Date }, view?: 'month'|'week'|'work_week'|'day'|'agenda') => void
+     * (dates: Date[] | { start: Date; end: Date }, view: 'month'|'week'|'work_week'|'day'|'agenda'|undefined) => void
      * ```
      *
      * Callback fired when the visible date range changes. Returns an Array of dates
@@ -270,6 +269,7 @@ class Calendar extends React.Component {
      *   slotInfo: {
      *     start: Date,
      *     end: Date,
+     *     resourceId:  (number|string),
      *     slots: Array<Date>,
      *     action: "select" | "click" | "doubleClick",
      *     bounds: ?{ // For "select" action
@@ -313,12 +313,21 @@ class Calendar extends React.Component {
     onDoubleClickEvent: PropTypes.func,
 
     /**
+     * Callback fired when a focused calendar event recieves a key press.
+     *
+     * ```js
+     * (event: Object, e: SyntheticEvent) => void
+     * ```
+     */
+    onKeyPressEvent: PropTypes.func,
+
+    /**
      * Callback fired when dragging a selection in the Time views.
      *
      * Returning `false` from the handler will prevent a selection.
      *
      * ```js
-     * (range: { start: Date, end: Date }) => ?boolean
+     * (range: { start: Date, end: Date, resourceId: (number|string) }) => ?boolean
      * ```
      */
     onSelecting: PropTypes.func,
@@ -364,7 +373,7 @@ class Calendar extends React.Component {
      * }
      * ```
      *
-     * @type Calendar.Views ('month'|'week'|'work_week'|'day'|'agenda')
+     * @type Views ('month'|'week'|'work_week'|'day'|'agenda')
      * @View
      ['month', 'week', 'day', 'agenda']
      */
@@ -378,7 +387,7 @@ class Calendar extends React.Component {
      * Set to `null` to disable drill-down actions.
      *
      * ```js
-     * <BigCalendar
+     * <Calendar
      *   drilldownView="agenda"
      * />
      * ```
@@ -393,7 +402,7 @@ class Calendar extends React.Component {
      * Return `null` to disable drill-down actions.
      *
      * ```js
-     * <BigCalendar
+     * <Calendar
      *   getDrilldownView={(targetDate, currentViewName, configuredViewNames) =>
      *     if (currentViewName === 'month' && configuredViewNames.includes('week'))
      *       return 'week'
@@ -425,8 +434,8 @@ class Calendar extends React.Component {
      * Distance in pixels, from the edges of the viewport, the "show more" overlay should be positioned.
      *
      * ```jsx
-     * <BigCalendar popupOffset={30}/>
-     * <BigCalendar popupOffset={{x: 30, y: 20}}/>
+     * <Calendar popupOffset={30}/>
+     * <Calendar popupOffset={{x: 30, y: 20}}/>
      * ```
      */
     popupOffset: PropTypes.oneOfType([
@@ -454,7 +463,7 @@ class Calendar extends React.Component {
     longPressThreshold: PropTypes.number,
 
     /**
-     * Determines the selectable time increments in week and day views
+     * Determines the selectable time increments in week and day views, in minutes.
      */
     step: PropTypes.number,
 
@@ -486,7 +495,7 @@ class Calendar extends React.Component {
 
     /**
      * Optionally provide a function that returns an object of className or style props
-     * to be applied to the the time-slot node. Caution! Styles that change layout or
+     * to be applied to the time-slot node. Caution! Styles that change layout or
      * position may break the calendar in unexpected ways.
      *
      * ```js
@@ -494,6 +503,15 @@ class Calendar extends React.Component {
      * ```
      */
     slotPropGetter: PropTypes.func,
+
+    /**
+     * Optionally provide a function that returns an object of props to be applied
+     * to the time-slot group node. Useful to dynamically change the sizing of time nodes.
+     * ```js
+     * () => { style?: Object }
+     * ```
+     */
+    slotGroupPropGetter: PropTypes.func,
 
     /**
      * Optionally provide a function that returns an object of className or style props
@@ -551,7 +569,7 @@ class Calendar extends React.Component {
      *     localizer.format(date, 'DDD', culture),
      *
      *   dayRangeHeaderFormat: ({ start, end }, culture, localizer) =>
-     *     localizer.format(start, { date: 'short' }, culture) + ' — ' +
+     *     localizer.format(start, { date: 'short' }, culture) + ' – ' +
      *     localizer.format(end, { date: 'short' }, culture)
      * }
      *
@@ -604,12 +622,12 @@ class Calendar extends React.Component {
       dayHeaderFormat: dateFormat,
 
       /**
-       * Toolbar header format for the Agenda view, e.g. "4/1/2015 — 5/1/2015"
+       * Toolbar header format for the Agenda view, e.g. "4/1/2015 – 5/1/2015"
        */
       agendaHeaderFormat: dateRangeFormat,
 
       /**
-       * A time range format for selecting time slots, e.g "8:00am — 2:00pm"
+       * A time range format for selecting time slots, e.g "8:00am – 2:00pm"
        */
       selectRangeFormat: dateRangeFormat,
 
@@ -643,7 +661,6 @@ class Calendar extends React.Component {
      *   event: MyEvent, // used by each view (Month, Day, Week)
      *   eventWrapper: MyEventWrapper,
      *   eventContainerWrapper: MyEventContainerWrapper,
-     *   dayWrapper: MyDayWrapper,
      *   dateCellWrapper: MyDateCellWrapper,
      *   timeSlotWrapper: MyTimeSlotWrapper,
      *   timeGutterHeader: MyTimeGutterWrapper,
@@ -671,34 +688,34 @@ class Calendar extends React.Component {
      * ```
      */
     components: PropTypes.shape({
-      event: elementType,
-      eventWrapper: elementType,
-      eventContainerWrapper: elementType,
-      dayWrapper: elementType,
-      dateCellWrapper: elementType,
-      timeSlotWrapper: elementType,
-      timeGutterHeader: elementType,
+      event: PropTypes.elementType,
+      eventWrapper: PropTypes.elementType,
+      eventContainerWrapper: PropTypes.elementType,
+      dateCellWrapper: PropTypes.elementType,
+      timeSlotWrapper: PropTypes.elementType,
+      timeGutterHeader: PropTypes.elementType,
+      resourceHeader: PropTypes.elementType,
 
-      toolbar: elementType,
+      toolbar: PropTypes.elementType,
 
       agenda: PropTypes.shape({
-        date: elementType,
-        time: elementType,
-        event: elementType,
+        date: PropTypes.elementType,
+        time: PropTypes.elementType,
+        event: PropTypes.elementType,
       }),
 
       day: PropTypes.shape({
-        header: elementType,
-        event: elementType,
+        header: PropTypes.elementType,
+        event: PropTypes.elementType,
       }),
       week: PropTypes.shape({
-        header: elementType,
-        event: elementType,
+        header: PropTypes.elementType,
+        event: PropTypes.elementType,
       }),
       month: PropTypes.shape({
-        header: elementType,
-        dateHeader: elementType,
-        event: elementType,
+        header: PropTypes.elementType,
+        dateHeader: PropTypes.elementType,
+        event: PropTypes.elementType,
       }),
     }),
 
@@ -721,6 +738,14 @@ class Calendar extends React.Component {
       showMore: PropTypes.func,
     }),
     inclusiveRange: PropTypes.array,
+
+    /**
+     * A day event layout(arrangement) algorithm.
+     * `overlap` allows events to be overlapped.
+     * `no-overlap` resizes events to avoid overlap.
+     * or custom `Function(events, minimumStartDifference, slotMetrics, accessors)`
+     */
+    dayLayoutAlgorithm: DayLayoutAlgorithmPropType,
   }
 
   static defaultProps = {
@@ -746,6 +771,7 @@ class Calendar extends React.Component {
 
     longPressThreshold: 250,
     getNow: () => new Date(),
+    dayLayoutAlgorithm: 'overlap',
   }
 
   constructor(...args) {
@@ -754,7 +780,7 @@ class Calendar extends React.Component {
       context: this.getContext(this.props),
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({ context: this.getContext(nextProps) })
   }
 
@@ -769,6 +795,7 @@ class Calendar extends React.Component {
     resourceTitleAccessor,
     eventPropGetter,
     slotPropGetter,
+    slotGroupPropGetter,
     dayPropGetter,
     view,
     views,
@@ -788,12 +815,13 @@ class Calendar extends React.Component {
           (eventPropGetter && eventPropGetter(...args)) || {},
         slotProp: (...args) =>
           (slotPropGetter && slotPropGetter(...args)) || {},
+        slotGroupProp: (...args) =>
+          (slotGroupPropGetter && slotGroupPropGetter(...args)) || {},
         dayProp: (...args) => (dayPropGetter && dayPropGetter(...args)) || {},
       },
       components: defaults(components[view] || {}, omit(components, names), {
         eventWrapper: NoopWrapper,
         eventContainerWrapper: NoopWrapper,
-        dayWrapper: NoopWrapper,
         dateCellWrapper: NoopWrapper,
         weekWrapper: NoopWrapper,
         timeSlotWrapper: NoopWrapper,
@@ -883,7 +911,7 @@ class Calendar extends React.Component {
     return (
       <div
         {...elementProps}
-        className={cn(className, 'rbc-calendar', props.rtl && 'rbc-is-rtl')}
+        className={clsx(className, 'rbc-calendar', props.rtl && 'rbc-rtl')}
         style={style}
       >
         {toolbar && (
@@ -898,7 +926,6 @@ class Calendar extends React.Component {
           />
         )}
         <View
-          ref="view"
           {...props}
           events={events}
           date={current}
@@ -915,6 +942,7 @@ class Calendar extends React.Component {
           onDrillDown={this.handleDrillDown}
           onSelectEvent={this.handleSelectEvent}
           onDoubleClickEvent={this.handleDoubleClickEvent}
+          onKeyPressEvent={this.handleKeyPressEvent}
           onSelectSlot={this.handleSelectSlot}
           onShowMore={onShowMore}
         />
@@ -938,7 +966,9 @@ class Calendar extends React.Component {
       if (viewComponent.range) {
         onRangeChange(viewComponent.range(date, { localizer }), view)
       } else {
-        warning(true, 'onRangeChange prop not supported for this view')
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('onRangeChange prop not supported for this view')
+        }
       }
     }
   }
@@ -978,6 +1008,10 @@ class Calendar extends React.Component {
 
   handleDoubleClickEvent = (...args) => {
     notify(this.props.onDoubleClickEvent, args)
+  }
+
+  handleKeyPressEvent = (...args) => {
+    notify(this.props.onKeyPressEvent, args)
   }
 
   handleSelectSlot = slotInfo => {
