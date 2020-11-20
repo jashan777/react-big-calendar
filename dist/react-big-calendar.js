@@ -13122,7 +13122,8 @@
         Wrapper =
           _this$props$component2 === void 0
             ? NoopWrapper
-            : _this$props$component2
+            : _this$props$component2,
+        isTimeGutter = _this$props.isTimeGutter
       var groupProps = getters ? getters.slotGroupProp() : {}
       return /*#__PURE__*/ React__default.createElement(
         'div',
@@ -13134,6 +13135,9 @@
         ),
         group.map(function(value, idx) {
           var slotProps = getters ? getters.slotProp(value, resource) : {}
+          var slotPropClassName = isTimeGutter
+            ? 'gutter-' + slotProps.className
+            : slotProps.className
           return /*#__PURE__*/ React__default.createElement(
             Wrapper,
             {
@@ -13144,7 +13148,7 @@
             /*#__PURE__*/ React__default.createElement(
               'div',
               _extends({}, slotProps, {
-                className: clsx('rbc-time-slot', slotProps.className),
+                className: clsx('rbc-time-slot', slotPropClassName),
               }),
               renderSlot && renderSlot(value, idx)
             )
@@ -13161,6 +13165,7 @@
     resource: propTypes.any,
     components: propTypes.object,
     getters: propTypes.object,
+    isTimeGutter: propTypes.bool,
   }
 
   function stringifyPercent(v) {
@@ -13888,6 +13893,7 @@
             components: components,
             renderSlot: _this2.renderSlot,
             getters: getters,
+            isTimeGutter: true,
           })
         })
       )

@@ -3183,7 +3183,10 @@ var TimeSlotGroup = /*#__PURE__*/ (function(_Component) {
       _this$props$component === void 0 ? {} : _this$props$component
     var _this$props$component2 = _this$props$component.timeSlotWrapper,
       Wrapper =
-        _this$props$component2 === void 0 ? NoopWrapper : _this$props$component2
+        _this$props$component2 === void 0
+          ? NoopWrapper
+          : _this$props$component2,
+      isTimeGutter = _this$props.isTimeGutter
     var groupProps = getters ? getters.slotGroupProp() : {}
     return /*#__PURE__*/ React.createElement(
       'div',
@@ -3195,6 +3198,9 @@ var TimeSlotGroup = /*#__PURE__*/ (function(_Component) {
       ),
       group.map(function(value, idx) {
         var slotProps = getters ? getters.slotProp(value, resource) : {}
+        var slotPropClassName = isTimeGutter
+          ? 'gutter-' + slotProps.className
+          : slotProps.className
         return /*#__PURE__*/ React.createElement(
           Wrapper,
           {
@@ -3205,7 +3211,7 @@ var TimeSlotGroup = /*#__PURE__*/ (function(_Component) {
           /*#__PURE__*/ React.createElement(
             'div',
             _extends({}, slotProps, {
-              className: clsx('rbc-time-slot', slotProps.className),
+              className: clsx('rbc-time-slot', slotPropClassName),
             }),
             renderSlot && renderSlot(value, idx)
           )
@@ -3224,6 +3230,7 @@ TimeSlotGroup.propTypes =
         resource: PropTypes.any,
         components: PropTypes.object,
         getters: PropTypes.object,
+        isTimeGutter: PropTypes.bool,
       }
     : {}
 
@@ -3946,6 +3953,7 @@ var TimeGutter = /*#__PURE__*/ (function(_Component) {
           components: components,
           renderSlot: _this2.renderSlot,
           getters: getters,
+          isTimeGutter: true,
         })
       })
     )
