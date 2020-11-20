@@ -12,18 +12,24 @@ export default class TimeSlotGroup extends Component {
       group,
       getters,
       components: { timeSlotWrapper: Wrapper = BackgroundWrapper } = {},
+      isTimeGutter,
     } = this.props
 
-	const groupProps = getters ? getters.slotGroupProp() : {}
+    const groupProps = getters ? getters.slotGroupProp() : {}
     return (
       <div className="rbc-timeslot-group" {...groupProps}>
         {group.map((value, idx) => {
           const slotProps = getters ? getters.slotProp(value, resource) : {}
+
+          const slotPropClassName = isTimeGutter
+            ? `gutter-${slotProps.className}`
+            : slotProps.className
+
           return (
             <Wrapper key={idx} value={value} resource={resource}>
               <div
                 {...slotProps}
-                className={clsx('rbc-time-slot', slotProps.className)}
+                className={clsx('rbc-time-slot', slotPropClassName)}
               >
                 {renderSlot && renderSlot(value, idx)}
               </div>
@@ -41,4 +47,5 @@ TimeSlotGroup.propTypes = {
   resource: PropTypes.any,
   components: PropTypes.object,
   getters: PropTypes.object,
+  isTimeGutter: PropTypes.bool,
 }
