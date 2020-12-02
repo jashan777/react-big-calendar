@@ -2,7 +2,7 @@ import _extends from '@babel/runtime/helpers/esm/extends'
 import _objectWithoutPropertiesLoose from '@babel/runtime/helpers/esm/objectWithoutPropertiesLoose'
 import _inheritsLoose from '@babel/runtime/helpers/esm/inheritsLoose'
 import PropTypes from 'prop-types'
-import React, { Component, useRef, useEffect } from 'react'
+import React, { PureComponent, useRef, useEffect } from 'react'
 import { uncontrollable } from 'uncontrollable'
 import clsx from 'clsx'
 import invariant from 'invariant'
@@ -287,11 +287,11 @@ function diff(dateA, dateB, unit) {
   )
 }
 
-var EventCell = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(EventCell, _React$Component)
+var EventCell = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(EventCell, _React$PureComponent)
 
   function EventCell() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = EventCell.prototype
@@ -397,7 +397,7 @@ var EventCell = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return EventCell
-})(React.Component)
+})(React.PureComponent)
 
 EventCell.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -3163,11 +3163,11 @@ function getStyledEvents$1(_ref) {
   return algorithm.apply(this, arguments)
 }
 
-var TimeSlotGroup = /*#__PURE__*/ (function(_Component) {
-  _inheritsLoose(TimeSlotGroup, _Component)
+var TimeSlotGroup = /*#__PURE__*/ (function(_PureComponent) {
+  _inheritsLoose(TimeSlotGroup, _PureComponent)
 
   function TimeSlotGroup() {
-    return _Component.apply(this, arguments) || this
+    return _PureComponent.apply(this, arguments) || this
   }
 
   var _proto = TimeSlotGroup.prototype
@@ -3221,7 +3221,7 @@ var TimeSlotGroup = /*#__PURE__*/ (function(_Component) {
   }
 
   return TimeSlotGroup
-})(Component)
+})(PureComponent)
 TimeSlotGroup.propTypes =
   process.env.NODE_ENV !== 'production'
     ? {
@@ -3239,7 +3239,7 @@ function stringifyPercent(v) {
 }
 /* eslint-disable react/prop-types */
 
-function TimeGridEvent(props) {
+var TimeGridEvent = /*#__PURE__*/ React.memo(function(props) {
   var _extends2
 
   var style = props.style,
@@ -3327,10 +3327,10 @@ function TimeGridEvent(props) {
       inner
     )
   )
-}
+})
 
-var DayColumn = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(DayColumn, _React$Component)
+var DayColumn = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(DayColumn, _React$PureComponent)
 
   function DayColumn() {
     var _this
@@ -3344,8 +3344,10 @@ var DayColumn = /*#__PURE__*/ (function(_React$Component) {
     }
 
     _this =
-      _React$Component.call.apply(_React$Component, [this].concat(_args)) ||
-      this
+      _React$PureComponent.call.apply(
+        _React$PureComponent,
+        [this].concat(_args)
+      ) || this
     _this.state = {
       selecting: false,
       timeIndicatorPosition: null,
@@ -3828,7 +3830,7 @@ var DayColumn = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return DayColumn
-})(React.Component)
+})(React.PureComponent)
 
 DayColumn.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -3869,8 +3871,8 @@ DayColumn.defaultProps = {
   timeslots: 2,
 }
 
-var TimeGutter = /*#__PURE__*/ (function(_Component) {
-  _inheritsLoose(TimeGutter, _Component)
+var TimeGutter = /*#__PURE__*/ (function(_PureComponent) {
+  _inheritsLoose(TimeGutter, _PureComponent)
 
   function TimeGutter() {
     var _this
@@ -3883,7 +3885,8 @@ var TimeGutter = /*#__PURE__*/ (function(_Component) {
       args[_key] = arguments[_key]
     }
 
-    _this = _Component.call.apply(_Component, [this].concat(args)) || this
+    _this =
+      _PureComponent.call.apply(_PureComponent, [this].concat(args)) || this
 
     _this.renderSlot = function(value, idx) {
       if (idx !== 0) return null
@@ -3960,7 +3963,7 @@ var TimeGutter = /*#__PURE__*/ (function(_Component) {
   }
 
   return TimeGutter
-})(Component)
+})(PureComponent)
 TimeGutter.propTypes =
   process.env.NODE_ENV !== 'production'
     ? {
@@ -4287,13 +4290,13 @@ function Resources(resources, accessors) {
   }
 }
 
-var TimeGrid = /*#__PURE__*/ (function(_Component) {
-  _inheritsLoose(TimeGrid, _Component)
+var TimeGrid = /*#__PURE__*/ (function(_PureComponent) {
+  _inheritsLoose(TimeGrid, _PureComponent)
 
   function TimeGrid(props) {
     var _this
 
-    _this = _Component.call(this, props) || this
+    _this = _PureComponent.call(this, props) || this
 
     _this.handleScroll = function(e) {
       if (_this.scrollRef.current) {
@@ -4609,7 +4612,7 @@ var TimeGrid = /*#__PURE__*/ (function(_Component) {
   }
 
   return TimeGrid
-})(Component)
+})(PureComponent)
 TimeGrid.propTypes =
   process.env.NODE_ENV !== 'production'
     ? {
@@ -4709,11 +4712,11 @@ Day.title = function(date, _ref) {
   return localizer.format(date, 'dayHeaderFormat')
 }
 
-var Week = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(Week, _React$Component)
+var Week = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(Week, _React$PureComponent)
 
   function Week() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = Week.prototype
@@ -4734,7 +4737,7 @@ var Week = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return Week
-})(React.Component)
+})(React.PureComponent)
 
 Week.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -5364,8 +5367,8 @@ function isValidView(view, _ref) {
  * function `endAccessor` that returns the end date + 1 day for those events that end at midnight.
  */
 
-var Calendar = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(Calendar, _React$Component)
+var Calendar = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(Calendar, _React$PureComponent)
 
   function Calendar() {
     var _this
@@ -5379,8 +5382,10 @@ var Calendar = /*#__PURE__*/ (function(_React$Component) {
     }
 
     _this =
-      _React$Component.call.apply(_React$Component, [this].concat(_args)) ||
-      this
+      _React$PureComponent.call.apply(
+        _React$PureComponent,
+        [this].concat(_args)
+      ) || this
 
     _this.getViews = function() {
       var views = _this.props.views
@@ -5729,7 +5734,7 @@ var Calendar = /*#__PURE__*/ (function(_React$Component) {
    */
 
   return Calendar
-})(React.Component)
+})(React.PureComponent)
 
 Calendar.defaultProps = {
   elementProps: {},
