@@ -4,7 +4,7 @@ import * as dates from './utils/dates'
 import { navigate } from './utils/constants'
 import TimeGrid from './TimeGrid'
 
-class Week extends React.Component {
+class Week extends React.PureComponent {
   render() {
     let { date, ...props } = this.props
     let range = Week.range(date, this.props)
@@ -32,20 +32,19 @@ Week.navigate = (date, action) => {
   }
 }
 
-Week.range = (date, { localizer,inclusiveRange }) => {
+Week.range = (date, { localizer, inclusiveRange }) => {
   let firstOfWeek = localizer.startOfWeek()
   let start = dates.startOf(date, 'week', firstOfWeek)
   let end = dates.endOf(date, 'week', firstOfWeek)
   return inclusiveRange.map(number => {
-    return dates.range(start, end).find(function (d) {
-      return d.getDay() == number;
+    return dates.range(start, end).find(function(d) {
+      return d.getDay() == number
     })
   })
- 
 }
 
-Week.title = (date, { localizer,inclusiveRange }) => {
-  let [start, ...rest] = Week.range(date, { localizer,inclusiveRange })
+Week.title = (date, { localizer, inclusiveRange }) => {
+  let [start, ...rest] = Week.range(date, { localizer, inclusiveRange })
   return localizer.format({ start, end: rest.pop() }, 'dayRangeHeaderFormat')
 }
 
