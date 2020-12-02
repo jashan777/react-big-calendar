@@ -17,7 +17,7 @@ const pointInColumn = (bounds, { x, y }) => {
 }
 const propTypes = {}
 
-class EventContainerWrapper extends React.Component {
+class EventContainerWrapper extends React.PureComponent {
   static propTypes = {
     accessors: PropTypes.object.isRequired,
     components: PropTypes.object.isRequired,

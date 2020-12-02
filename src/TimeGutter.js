@@ -1,11 +1,11 @@
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import * as TimeSlotUtils from './utils/TimeSlots'
 import TimeSlotGroup from './TimeSlotGroup'
 
-export default class TimeGutter extends Component {
+export default class TimeGutter extends PureComponent {
   constructor(...args) {
     super(...args)
 

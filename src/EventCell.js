@@ -3,7 +3,7 @@ import React from 'react'
 import clsx from 'clsx'
 import * as dates from './utils/dates'
 
-class EventCell extends React.Component {
+class EventCell extends React.PureComponent {
   render() {
     let {
       style,

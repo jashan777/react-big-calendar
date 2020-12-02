@@ -14,7 +14,7 @@ import TimeSlotGroup from './TimeSlotGroup'
 import TimeGridEvent from './TimeGridEvent'
 import { DayLayoutAlgorithmPropType } from './utils/propTypes'
 
-class DayColumn extends React.Component {
+class DayColumn extends React.PureComponent {
   state = { selecting: false, timeIndicatorPosition: null }
   intervalTriggered = false
 

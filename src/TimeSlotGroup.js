@@ -1,10 +1,10 @@
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import BackgroundWrapper from './BackgroundWrapper'
 
-export default class TimeSlotGroup extends Component {
+export default class TimeSlotGroup extends PureComponent {
   render() {
     const {
       renderSlot,
