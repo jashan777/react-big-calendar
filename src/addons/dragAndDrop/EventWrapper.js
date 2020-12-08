@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { accessor } from '../../utils/propTypes'
 import { accessor as get } from '../../utils/accessors'
 
-class EventWrapper extends React.Component {
+class EventWrapper extends React.PureComponent {
   static contextTypes = {
     draggable: PropTypes.shape({
       onStart: PropTypes.func,

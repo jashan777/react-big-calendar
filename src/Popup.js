@@ -8,7 +8,7 @@ import * as dates from './utils/dates'
 import EventCell from './EventCell'
 import { isSelected } from './utils/selection'
 
-class Popup extends React.Component {
+class Popup extends React.PureComponent {
   componentDidMount() {
     let { popupOffset = 5, popperRef } = this.props,
       { top, left, width, height } = getOffset(popperRef.current),

@@ -22,7 +22,7 @@ const eventTimes = (event, accessors) => {
   return { start, end }
 }
 
-class WeekWrapper extends React.Component {
+class WeekWrapper extends React.PureComponent {
   static propTypes = {
     isAllDay: PropTypes.bool,
     slotMetrics: PropTypes.object.isRequired,

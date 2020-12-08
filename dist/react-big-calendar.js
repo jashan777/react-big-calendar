@@ -3480,11 +3480,11 @@
     }
   }
 
-  var Popup = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(Popup, _React$Component)
+  var Popup = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Popup, _React$PureComponent)
 
     function Popup() {
-      return _React$Component.apply(this, arguments) || this
+      return _React$PureComponent.apply(this, arguments) || this
     }
 
     var _proto = Popup.prototype
@@ -3585,7 +3585,7 @@
     }
 
     return Popup
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   Popup.propTypes = {
     position: propTypes.object,
@@ -7972,13 +7972,13 @@
     if (dir === 'top') return window.pageYOffset || document.body.scrollTop || 0
   }
 
-  var BackgroundCells = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(BackgroundCells, _React$Component)
+  var BackgroundCells = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(BackgroundCells, _React$PureComponent)
 
     function BackgroundCells(props, context) {
       var _this
 
-      _this = _React$Component.call(this, props, context) || this
+      _this = _React$PureComponent.call(this, props, context) || this
       _this.state = {
         selecting: false,
       }
@@ -8179,7 +8179,7 @@
     }
 
     return BackgroundCells
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   BackgroundCells.propTypes = {
     date: propTypes.instanceOf(Date),
@@ -8271,11 +8271,11 @@
     },
   }
 
-  var EventRow = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(EventRow, _React$Component)
+  var EventRow = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(EventRow, _React$PureComponent)
 
     function EventRow() {
-      return _React$Component.apply(this, arguments) || this
+      return _React$PureComponent.apply(this, arguments) || this
     }
 
     var _proto = EventRow.prototype
@@ -8310,7 +8310,7 @@
     }
 
     return EventRow
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   EventRow.propTypes = _extends(
     {
@@ -11054,11 +11054,11 @@
     }).length
   }
 
-  var EventEndingRow = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(EventEndingRow, _React$Component)
+  var EventEndingRow = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(EventEndingRow, _React$PureComponent)
 
     function EventEndingRow() {
-      return _React$Component.apply(this, arguments) || this
+      return _React$PureComponent.apply(this, arguments) || this
     }
 
     var _proto = EventEndingRow.prototype
@@ -11161,7 +11161,7 @@
     }
 
     return EventEndingRow
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   EventEndingRow.propTypes = _extends(
     {
@@ -11288,8 +11288,8 @@
     }, isEqual)
   }
 
-  var DateContentRow = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(DateContentRow, _React$Component)
+  var DateContentRow = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(DateContentRow, _React$PureComponent)
 
     function DateContentRow() {
       var _this
@@ -11303,8 +11303,10 @@
       }
 
       _this =
-        _React$Component.call.apply(_React$Component, [this].concat(args)) ||
-        this
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(args)
+        ) || this
 
       _this.handleSelectSlot = function(slot) {
         var _this$props = _this.props,
@@ -11539,7 +11541,7 @@
     }
 
     return DateContentRow
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   DateContentRow.propTypes = {
     date: propTypes.instanceOf(Date),
@@ -11618,8 +11620,8 @@
     })
   }
 
-  var MonthView = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(MonthView, _React$Component)
+  var MonthView = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(MonthView, _React$PureComponent)
 
     function MonthView() {
       var _this
@@ -11633,8 +11635,10 @@
       }
 
       _this =
-        _React$Component.call.apply(_React$Component, [this].concat(_args)) ||
-        this
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(_args)
+        ) || this
 
       _this.getContainer = function() {
         return ReactDOM.findDOMNode(_assertThisInitialized(_this))
@@ -12004,7 +12008,7 @@
     }
 
     return MonthView
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   MonthView.propTypes = {
     events: propTypes.array.isRequired,
@@ -13955,8 +13959,8 @@
     resource: propTypes.object,
   }
 
-  var TimeGridHeader = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(TimeGridHeader, _React$Component)
+  var TimeGridHeader = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(TimeGridHeader, _React$PureComponent)
 
     function TimeGridHeader() {
       var _this
@@ -13970,8 +13974,10 @@
       }
 
       _this =
-        _React$Component.call.apply(_React$Component, [this].concat(args)) ||
-        this
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(args)
+        ) || this
 
       _this.handleHeaderClick = function(date, view, e) {
         e.preventDefault()
@@ -14203,7 +14209,7 @@
     }
 
     return TimeGridHeader
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   TimeGridHeader.propTypes = {
     range: propTypes.array.isRequired,
@@ -14624,11 +14630,11 @@
     scrollToTime: startOf(new Date(), 'day'),
   }
 
-  var Day = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(Day, _React$Component)
+  var Day = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Day, _React$PureComponent)
 
     function Day() {
-      return _React$Component.apply(this, arguments) || this
+      return _React$PureComponent.apply(this, arguments) || this
     }
 
     var _proto = Day.prototype
@@ -14649,7 +14655,7 @@
     }
 
     return Day
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   Day.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14761,11 +14767,11 @@
     })
   }
 
-  var WorkWeek = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(WorkWeek, _React$Component)
+  var WorkWeek = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(WorkWeek, _React$PureComponent)
 
     function WorkWeek() {
-      return _React$Component.apply(this, arguments) || this
+      return _React$PureComponent.apply(this, arguments) || this
     }
 
     var _proto = WorkWeek.prototype
@@ -14786,7 +14792,7 @@
     }
 
     return WorkWeek
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   WorkWeek.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -15193,8 +15199,8 @@
     return date
   }
 
-  var Toolbar = /*#__PURE__*/ (function(_React$Component) {
-    _inheritsLoose(Toolbar, _React$Component)
+  var Toolbar = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Toolbar, _React$PureComponent)
 
     function Toolbar() {
       var _this
@@ -15208,8 +15214,10 @@
       }
 
       _this =
-        _React$Component.call.apply(_React$Component, [this].concat(args)) ||
-        this
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(args)
+        ) || this
 
       _this.navigate = function(action) {
         _this.props.onNavigate(action)
@@ -15305,7 +15313,7 @@
     }
 
     return Toolbar
-  })(React__default.Component)
+  })(React__default.PureComponent)
 
   Toolbar.propTypes = {
     view: propTypes.string.isRequired,

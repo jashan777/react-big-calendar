@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import React from 'react'
 import EventRowMixin from './EventRowMixin'
 
-class EventRow extends React.Component {
+class EventRow extends React.PureComponent {
   render() {
     let {
       segments,

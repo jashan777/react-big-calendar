@@ -9,7 +9,7 @@ import Header from './Header'
 import ResourceHeader from './ResourceHeader'
 import { notify } from './utils/helpers'
 
-class TimeGridHeader extends React.Component {
+class TimeGridHeader extends React.PureComponent {
   handleHeaderClick = (date, view, e) => {
     e.preventDefault()
     notify(this.props.onDrillDown, [date, view])

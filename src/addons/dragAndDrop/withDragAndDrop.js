@@ -65,7 +65,7 @@ import { mergeComponents } from './common'
  * @param {*} backend
  */
 export default function withDragAndDrop(Calendar) {
-  class DragAndDropCalendar extends React.Component {
+  class DragAndDropCalendar extends React.PureComponent {
     static propTypes = {
       onEventDrop: PropTypes.func,
       onEventResize: PropTypes.func,

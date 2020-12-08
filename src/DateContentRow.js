@@ -11,7 +11,7 @@ import EventRow from './EventRow'
 import EventEndingRow from './EventEndingRow'
 import * as DateSlotMetrics from './utils/DateSlotMetrics'
 
-class DateContentRow extends React.Component {
+class DateContentRow extends React.PureComponent {
   constructor(...args) {
     super(...args)
 

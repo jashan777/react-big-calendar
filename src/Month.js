@@ -22,7 +22,7 @@ import { inRange, sortEvents } from './utils/eventLevels'
 let eventsForWeek = (evts, start, end, accessors) =>
   evts.filter(e => inRange(e, start, end, accessors))
 
-class MonthView extends React.Component {
+class MonthView extends React.PureComponent {
   constructor(...args) {
     super(...args)
 

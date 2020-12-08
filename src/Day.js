@@ -5,7 +5,7 @@ import * as dates from './utils/dates'
 import { navigate } from './utils/constants'
 import TimeGrid from './TimeGrid'
 
-class Day extends React.Component {
+class Day extends React.PureComponent {
   render() {
     let { date, ...props } = this.props
     let range = Day.range(date)

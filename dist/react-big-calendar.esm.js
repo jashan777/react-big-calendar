@@ -496,11 +496,11 @@ function dateCellSelection(start, rowBox, box, slots, rtl) {
   }
 }
 
-var Popup = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(Popup, _React$Component)
+var Popup = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(Popup, _React$PureComponent)
 
   function Popup() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = Popup.prototype
@@ -601,7 +601,7 @@ var Popup = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return Popup
-})(React.Component)
+})(React.PureComponent)
 
 Popup.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -1208,13 +1208,13 @@ function pageOffset(dir) {
   if (dir === 'top') return window.pageYOffset || document.body.scrollTop || 0
 }
 
-var BackgroundCells = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(BackgroundCells, _React$Component)
+var BackgroundCells = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(BackgroundCells, _React$PureComponent)
 
   function BackgroundCells(props, context) {
     var _this
 
-    _this = _React$Component.call(this, props, context) || this
+    _this = _React$PureComponent.call(this, props, context) || this
     _this.state = {
       selecting: false,
     }
@@ -1415,7 +1415,7 @@ var BackgroundCells = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return BackgroundCells
-})(React.Component)
+})(React.PureComponent)
 
 BackgroundCells.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -1510,11 +1510,11 @@ var EventRowMixin = {
   },
 }
 
-var EventRow = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(EventRow, _React$Component)
+var EventRow = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(EventRow, _React$PureComponent)
 
   function EventRow() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = EventRow.prototype
@@ -1549,7 +1549,7 @@ var EventRow = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return EventRow
-})(React.Component)
+})(React.PureComponent)
 
 EventRow.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -1676,11 +1676,11 @@ var eventsInSlot = function eventsInSlot(segments, slot) {
   }).length
 }
 
-var EventEndingRow = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(EventEndingRow, _React$Component)
+var EventEndingRow = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(EventEndingRow, _React$PureComponent)
 
   function EventEndingRow() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = EventEndingRow.prototype
@@ -1783,7 +1783,7 @@ var EventEndingRow = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return EventEndingRow
-})(React.Component)
+})(React.PureComponent)
 
 EventEndingRow.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -1872,8 +1872,8 @@ function getSlotMetrics() {
   }, isEqual)
 }
 
-var DateContentRow = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(DateContentRow, _React$Component)
+var DateContentRow = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(DateContentRow, _React$PureComponent)
 
   function DateContentRow() {
     var _this
@@ -1887,7 +1887,10 @@ var DateContentRow = /*#__PURE__*/ (function(_React$Component) {
     }
 
     _this =
-      _React$Component.call.apply(_React$Component, [this].concat(args)) || this
+      _React$PureComponent.call.apply(
+        _React$PureComponent,
+        [this].concat(args)
+      ) || this
 
     _this.handleSelectSlot = function(slot) {
       var _this$props = _this.props,
@@ -2122,7 +2125,7 @@ var DateContentRow = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return DateContentRow
-})(React.Component)
+})(React.PureComponent)
 
 DateContentRow.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -2210,8 +2213,8 @@ var eventsForWeek = function eventsForWeek(evts, start, end, accessors) {
   })
 }
 
-var MonthView = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(MonthView, _React$Component)
+var MonthView = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(MonthView, _React$PureComponent)
 
   function MonthView() {
     var _this
@@ -2225,8 +2228,10 @@ var MonthView = /*#__PURE__*/ (function(_React$Component) {
     }
 
     _this =
-      _React$Component.call.apply(_React$Component, [this].concat(_args)) ||
-      this
+      _React$PureComponent.call.apply(
+        _React$PureComponent,
+        [this].concat(_args)
+      ) || this
 
     _this.getContainer = function() {
       return findDOMNode(_assertThisInitialized(_this))
@@ -2590,7 +2595,7 @@ var MonthView = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return MonthView
-})(React.Component)
+})(React.PureComponent)
 
 MonthView.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -3993,8 +3998,8 @@ ResourceHeader.propTypes =
       }
     : {}
 
-var TimeGridHeader = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(TimeGridHeader, _React$Component)
+var TimeGridHeader = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(TimeGridHeader, _React$PureComponent)
 
   function TimeGridHeader() {
     var _this
@@ -4008,7 +4013,10 @@ var TimeGridHeader = /*#__PURE__*/ (function(_React$Component) {
     }
 
     _this =
-      _React$Component.call.apply(_React$Component, [this].concat(args)) || this
+      _React$PureComponent.call.apply(
+        _React$PureComponent,
+        [this].concat(args)
+      ) || this
 
     _this.handleHeaderClick = function(date, view, e) {
       e.preventDefault()
@@ -4231,7 +4239,7 @@ var TimeGridHeader = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return TimeGridHeader
-})(React.Component)
+})(React.PureComponent)
 
 TimeGridHeader.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -4656,11 +4664,11 @@ TimeGrid.defaultProps = {
   scrollToTime: startOf(new Date(), 'day'),
 }
 
-var Day = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(Day, _React$Component)
+var Day = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(Day, _React$PureComponent)
 
   function Day() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = Day.prototype
@@ -4681,7 +4689,7 @@ var Day = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return Day
-})(React.Component)
+})(React.PureComponent)
 
 Day.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -4799,11 +4807,11 @@ function workWeekRange(date, options) {
   })
 }
 
-var WorkWeek = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(WorkWeek, _React$Component)
+var WorkWeek = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(WorkWeek, _React$PureComponent)
 
   function WorkWeek() {
-    return _React$Component.apply(this, arguments) || this
+    return _React$PureComponent.apply(this, arguments) || this
   }
 
   var _proto = WorkWeek.prototype
@@ -4824,7 +4832,7 @@ var WorkWeek = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return WorkWeek
-})(React.Component)
+})(React.PureComponent)
 
 WorkWeek.propTypes =
   process.env.NODE_ENV !== 'production'
@@ -5190,8 +5198,8 @@ function moveDate(View, _ref) {
   return date
 }
 
-var Toolbar = /*#__PURE__*/ (function(_React$Component) {
-  _inheritsLoose(Toolbar, _React$Component)
+var Toolbar = /*#__PURE__*/ (function(_React$PureComponent) {
+  _inheritsLoose(Toolbar, _React$PureComponent)
 
   function Toolbar() {
     var _this
@@ -5205,7 +5213,10 @@ var Toolbar = /*#__PURE__*/ (function(_React$Component) {
     }
 
     _this =
-      _React$Component.call.apply(_React$Component, [this].concat(args)) || this
+      _React$PureComponent.call.apply(
+        _React$PureComponent,
+        [this].concat(args)
+      ) || this
 
     _this.navigate = function(action) {
       _this.props.onNavigate(action)
@@ -5301,7 +5312,7 @@ var Toolbar = /*#__PURE__*/ (function(_React$Component) {
   }
 
   return Toolbar
-})(React.Component)
+})(React.PureComponent)
 
 Toolbar.propTypes =
   process.env.NODE_ENV !== 'production'

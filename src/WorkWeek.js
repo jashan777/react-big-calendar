@@ -10,7 +10,7 @@ function workWeekRange(date, options) {
   )
 }
 
-class WorkWeek extends React.Component {
+class WorkWeek extends React.PureComponent {
   render() {
     let { date, ...props } = this.props
     let range = workWeekRange(date, this.props)

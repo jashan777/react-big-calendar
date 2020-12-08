@@ -8,7 +8,7 @@ let isSegmentInSlot = (seg, slot) => seg.left <= slot && seg.right >= slot
 let eventsInSlot = (segments, slot) =>
   segments.filter(seg => isSegmentInSlot(seg, slot)).length
 
-class EventEndingRow extends React.Component {
+class EventEndingRow extends React.PureComponent {
   render() {
     let {
       segments,

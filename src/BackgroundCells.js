@@ -8,7 +8,7 @@ import { notify } from './utils/helpers'
 import { dateCellSelection, getSlotAtX, pointInBox } from './utils/selection'
 import Selection, { getBoundsForNode, isEvent } from './Selection'
 
-class BackgroundCells extends React.Component {
+class BackgroundCells extends React.PureComponent {
   constructor(props, context) {
     super(props, context)
 
