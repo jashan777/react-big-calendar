@@ -8,12 +8,22 @@ const isEqual = (a, b) => a.range === b.range && a.events === b.events
 
 export function getSlotMetrics() {
   return memoize(options => {
-    const { range, events, maxRows, minRows, accessors } = options
+    const {
+      range,
+      events,
+      maxRows,
+      minRows,
+      accessors,
+      truncateEvents,
+    } = options
     let { first, last } = endOfRange(range)
 
     let segments = events.map(evt => eventSegments(evt, range, accessors))
 
-    let { levels, extra } = eventLevels(segments, Math.max(maxRows - 1, 1))
+    let { levels, extra } = eventLevels(
+      segments,
+      truncateEvents ? Math.max(maxRows - 1, 1) : undefined
+    )
     while (levels.length < minRows) levels.push([])
 
     return {

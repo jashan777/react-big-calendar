@@ -211,11 +211,14 @@ DateContentRow.propTypes = {
 
   minRows: PropTypes.number.isRequired,
   maxRows: PropTypes.number.isRequired,
+
+  truncateEvents: PropTypes.bool,
 }
 
 DateContentRow.defaultProps = {
   minRows: 0,
   maxRows: Infinity,
+  truncateEvents: true,
 }
 
 export default DateContentRow

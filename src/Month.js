@@ -101,6 +101,7 @@ class MonthView extends React.Component {
       longPressThreshold,
       accessors,
       getters,
+      truncateEvents,
     } = this.props
 
     const { needLimitMeasure, rowLimit } = this.state
@@ -133,6 +134,7 @@ class MonthView extends React.Component {
         onDoubleClick={this.handleDoubleClickEvent}
         onSelectSlot={this.handleSelectSlot}
         longPressThreshold={longPressThreshold}
+        truncateEvents={truncateEvents}
         rtl={this.props.rtl}
       />
     )
@@ -274,7 +276,7 @@ class MonthView extends React.Component {
       end: slots[slots.length - 1],
       action: slotInfo.action,
       bounds: slotInfo.bounds,
-      box: slotInfo.box
+      box: slotInfo.box,
     })
   }
 
@@ -324,6 +326,7 @@ MonthView.propTypes = {
       y: PropTypes.number,
     }),
   ]),
+  truncateEvents: PropTypes.bool,
 }
 
 MonthView.range = (date, { localizer }) => {
