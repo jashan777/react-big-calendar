@@ -102,6 +102,7 @@ class MonthView extends React.PureComponent {
       longPressThreshold,
       accessors,
       getters,
+      truncateEvents,
     } = this.props
 
     const { needLimitMeasure, rowLimit } = this.state
@@ -137,6 +138,7 @@ class MonthView extends React.PureComponent {
         longPressThreshold={longPressThreshold}
         rtl={this.props.rtl}
         resizable={this.props.resizable}
+        truncateEvents={truncateEvents}
       />
     )
   }
@@ -355,6 +357,7 @@ MonthView.propTypes = {
       y: PropTypes.number,
     }),
   ]),
+  truncateEvents: PropTypes.bool,
 }
 
 MonthView.range = (date, { localizer }) => {
