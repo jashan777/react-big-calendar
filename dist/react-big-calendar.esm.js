@@ -1812,7 +1812,8 @@ function getSlotMetrics() {
       events = options.events,
       maxRows = options.maxRows,
       minRows = options.minRows,
-      accessors = options.accessors
+      accessors = options.accessors,
+      truncateEvents = options.truncateEvents
 
     var _endOfRange = endOfRange(range),
       first = _endOfRange.first,
@@ -1822,7 +1823,10 @@ function getSlotMetrics() {
       return eventSegments(evt, range, accessors)
     })
 
-    var _eventLevels = eventLevels(segments, Math.max(maxRows - 1, 1)),
+    var _eventLevels = eventLevels(
+        segments,
+        truncateEvents ? Math.max(maxRows - 1, 1) : undefined
+      ),
       levels = _eventLevels.levels,
       extra = _eventLevels.extra
 
@@ -2158,11 +2162,13 @@ DateContentRow.propTypes =
         localizer: PropTypes.object.isRequired,
         minRows: PropTypes.number.isRequired,
         maxRows: PropTypes.number.isRequired,
+        truncateEvents: PropTypes.bool,
       }
     : {}
 DateContentRow.defaultProps = {
   minRows: 0,
   maxRows: Infinity,
+  truncateEvents: true,
 }
 
 var Header = function Header(_ref) {
@@ -2248,7 +2254,8 @@ var MonthView = /*#__PURE__*/ (function(_React$PureComponent) {
         localizer = _this$props.localizer,
         longPressThreshold = _this$props.longPressThreshold,
         accessors = _this$props.accessors,
-        getters = _this$props.getters
+        getters = _this$props.getters,
+        truncateEvents = _this$props.truncateEvents
       var _this$state = _this.state,
         needLimitMeasure = _this$state.needLimitMeasure,
         rowLimit = _this$state.rowLimit
@@ -2282,6 +2289,7 @@ var MonthView = /*#__PURE__*/ (function(_React$PureComponent) {
         longPressThreshold: longPressThreshold,
         rtl: _this.props.rtl,
         resizable: _this.props.resizable,
+        truncateEvents: truncateEvents,
       })
     }
 
@@ -2634,6 +2642,7 @@ MonthView.propTypes =
             y: PropTypes.number,
           }),
         ]),
+        truncateEvents: PropTypes.bool,
       }
     : {}
 
