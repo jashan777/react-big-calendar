@@ -1438,6 +1438,41 @@
     }
   })
 
+  function _extends$1() {
+    _extends$1 =
+      Object.assign ||
+      function(target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i]
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key]
+            }
+          }
+        }
+
+        return target
+      }
+
+    return _extends$1.apply(this, arguments)
+  }
+
+  function _objectWithoutPropertiesLoose$1(source, excluded) {
+    if (source == null) return {}
+    var target = {}
+    var sourceKeys = Object.keys(source)
+    var key, i
+
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i]
+      if (excluded.indexOf(key) >= 0) continue
+      target[key] = source[key]
+    }
+
+    return target
+  }
+
   /**
    * Copyright (c) 2013-present, Facebook, Inc.
    *
@@ -1544,6 +1579,12 @@
       (typeof component !== 'function' ||
         (component.prototype && component.prototype.isReactComponent))
     )
+  }
+
+  function _inheritsLoose$1(subClass, superClass) {
+    subClass.prototype = Object.create(superClass.prototype)
+    subClass.prototype.constructor = subClass
+    subClass.__proto__ = superClass
   }
 
   /**
@@ -1735,7 +1776,7 @@
     var UncontrolledComponent =
       /*#__PURE__*/
       (function(_React$Component) {
-        _inheritsLoose(UncontrolledComponent, _React$Component)
+        _inheritsLoose$1(UncontrolledComponent, _React$Component)
 
         function UncontrolledComponent() {
           var _this
@@ -1787,7 +1828,7 @@
 
                   var values = _ref.values
                   return {
-                    values: _extends(
+                    values: _extends$1(
                       Object.create(null),
                       values,
                       ((_extends2 = {}),
@@ -1829,7 +1870,7 @@
           var values = _ref2.values,
             prevProps = _ref2.prevProps
           var nextState = {
-            values: _extends(Object.create(null), values),
+            values: _extends$1(Object.create(null), values),
             prevProps: {},
           }
           controlledProps.forEach(function(key) {
@@ -1855,7 +1896,7 @@
 
           var _this$props2 = this.props,
             innerRef = _this$props2.innerRef,
-            props = _objectWithoutPropertiesLoose(_this$props2, ['innerRef'])
+            props = _objectWithoutPropertiesLoose$1(_this$props2, ['innerRef'])
 
           PROPS_TO_OMIT.forEach(function(prop) {
             delete props[prop]
@@ -1870,7 +1911,7 @@
           })
           return React__default.createElement(
             Component,
-            _extends({}, props, newProps, this.handlers, {
+            _extends$1({}, props, newProps, this.handlers, {
               ref: innerRef || this.attachRef,
             })
           )
@@ -1881,7 +1922,7 @@
 
     polyfill(UncontrolledComponent)
     UncontrolledComponent.displayName = 'Uncontrolled(' + displayName + ')'
-    UncontrolledComponent.propTypes = _extends(
+    UncontrolledComponent.propTypes = _extends$1(
       {
         innerRef: function innerRef() {},
       },
@@ -1900,7 +1941,7 @@
       WrappedComponent = React__default.forwardRef(function(props, ref) {
         return React__default.createElement(
           UncontrolledComponent,
-          _extends({}, props, {
+          _extends$1({}, props, {
             innerRef: ref,
           })
         )
@@ -1925,7 +1966,7 @@
 
       return uncontrollable(
         newComponent,
-        _extends({}, controlledValues, additions),
+        _extends$1({}, controlledValues, additions),
         nextMethods
       )
     }
@@ -2778,7 +2819,9 @@
     return (
       !!length &&
       (type == 'number' || (type != 'symbol' && reIsUint.test(value))) &&
-      value > -1 && value % 1 == 0 && value < length
+      value > -1 &&
+      value % 1 == 0 &&
+      value < length
     )
   }
 
@@ -3043,6 +3086,26 @@
     return result
   }
 
+  function _extends$2() {
+    _extends$2 =
+      Object.assign ||
+      function(target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i]
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key]
+            }
+          }
+        }
+
+        return target
+      }
+
+    return _extends$2.apply(this, arguments)
+  }
+
   function ownerDocument(node) {
     return (node && node.ownerDocument) || document
   }
@@ -3052,7 +3115,7 @@
     return (doc && doc.defaultView) || window
   }
 
-  function getComputedStyle$1(node, psuedoElement) {
+  function getComputedStyle(node, psuedoElement) {
     return ownerWindow(node).getComputedStyle(node, psuedoElement)
   }
 
@@ -3083,7 +3146,7 @@
     if (typeof property === 'string') {
       return (
         node.style.getPropertyValue(hyphenateStyleName(property)) ||
-        getComputedStyle$1(node).getPropertyValue(hyphenateStyleName(property))
+        getComputedStyle(node).getPropertyValue(hyphenateStyleName(property))
       )
     }
 
@@ -3217,7 +3280,7 @@
     var marginTop = String(style(node, 'marginTop') || 0)
     var marginLeft = String(style(node, 'marginLeft') || 0) // Subtract parent offsets and node margins
 
-    return _extends({}, offset$1, {
+    return _extends$2({}, offset$1, {
       top: offset$1.top - parentOffset.top - (parseInt(marginTop, 10) || 0),
       left: offset$1.left - parentOffset.left - (parseInt(marginLeft, 10) || 0),
     })
@@ -3274,117 +3337,126 @@
   }
   var request = rafImpl
 
-  var EventCell = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(EventCell, _React$PureComponent)
+  var EventCell =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(EventCell, _React$PureComponent)
 
-    function EventCell() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
+      function EventCell() {
+        return _React$PureComponent.apply(this, arguments) || this
+      }
 
-    var _proto = EventCell.prototype
+      var _proto = EventCell.prototype
 
-    _proto.render = function render() {
-      var _this$props = this.props,
-        style = _this$props.style,
-        className = _this$props.className,
-        event = _this$props.event,
-        selected = _this$props.selected,
-        isAllDay = _this$props.isAllDay,
-        onSelect = _this$props.onSelect,
-        _onDoubleClick = _this$props.onDoubleClick,
-        _onKeyPress = _this$props.onKeyPress,
-        localizer = _this$props.localizer,
-        continuesPrior = _this$props.continuesPrior,
-        continuesAfter = _this$props.continuesAfter,
-        accessors = _this$props.accessors,
-        getters = _this$props.getters,
-        children = _this$props.children,
-        _this$props$component = _this$props.components,
-        Event = _this$props$component.event,
-        EventWrapper = _this$props$component.eventWrapper,
-        slotStart = _this$props.slotStart,
-        slotEnd = _this$props.slotEnd,
-        props = _objectWithoutPropertiesLoose(_this$props, [
-          'style',
-          'className',
-          'event',
-          'selected',
-          'isAllDay',
-          'onSelect',
-          'onDoubleClick',
-          'onKeyPress',
-          'localizer',
-          'continuesPrior',
-          'continuesAfter',
-          'accessors',
-          'getters',
-          'children',
-          'components',
-          'slotStart',
-          'slotEnd',
-        ])
+      _proto.render = function render() {
+        var _this$props = this.props,
+          style = _this$props.style,
+          className = _this$props.className,
+          event = _this$props.event,
+          selected = _this$props.selected,
+          isAllDay = _this$props.isAllDay,
+          onSelect = _this$props.onSelect,
+          _onDoubleClick = _this$props.onDoubleClick,
+          _onKeyPress = _this$props.onKeyPress,
+          localizer = _this$props.localizer,
+          continuesPrior = _this$props.continuesPrior,
+          continuesAfter = _this$props.continuesAfter,
+          accessors = _this$props.accessors,
+          getters = _this$props.getters,
+          children = _this$props.children,
+          _this$props$component = _this$props.components,
+          Event = _this$props$component.event,
+          EventWrapper = _this$props$component.eventWrapper,
+          slotStart = _this$props.slotStart,
+          slotEnd = _this$props.slotEnd,
+          props = _objectWithoutPropertiesLoose(_this$props, [
+            'style',
+            'className',
+            'event',
+            'selected',
+            'isAllDay',
+            'onSelect',
+            'onDoubleClick',
+            'onKeyPress',
+            'localizer',
+            'continuesPrior',
+            'continuesAfter',
+            'accessors',
+            'getters',
+            'children',
+            'components',
+            'slotStart',
+            'slotEnd',
+          ])
 
-      delete props.resizable
-      var title = accessors.title(event)
-      var tooltip = accessors.tooltip(event)
-      var end = accessors.end(event)
-      var start = accessors.start(event)
-      var allDay = accessors.allDay(event)
-      var showAsAllDay =
-        isAllDay || allDay || diff(start, ceil(end, 'day'), 'day') > 1
-      var userProps = getters.eventProp(event, start, end, selected)
-      var content = /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: 'rbc-event-content',
-          title: tooltip || undefined,
-        },
-        Event
-          ? /*#__PURE__*/ React__default.createElement(Event, {
-              event: event,
-              continuesPrior: continuesPrior,
-              continuesAfter: continuesAfter,
-              title: title,
-              isAllDay: allDay,
-              localizer: localizer,
-              slotStart: slotStart,
-              slotEnd: slotEnd,
-            })
-          : title
-      )
-      return /*#__PURE__*/ React__default.createElement(
-        EventWrapper,
-        _extends({}, this.props, {
-          type: 'date',
-        }),
-        /*#__PURE__*/ React__default.createElement(
-          'div',
-          _extends({}, props, {
-            tabIndex: 0,
-            style: _extends({}, userProps.style, style),
-            className: clsx('rbc-event', className, userProps.className, {
-              'rbc-selected': selected,
-              'rbc-event-allday': showAsAllDay,
-              'rbc-event-continues-prior': continuesPrior,
-              'rbc-event-continues-after': continuesAfter,
+        delete props.resizable
+        var title = accessors.title(event)
+        var tooltip = accessors.tooltip(event)
+        var end = accessors.end(event)
+        var start = accessors.start(event)
+        var allDay = accessors.allDay(event)
+        var showAsAllDay =
+          isAllDay || allDay || diff(start, ceil(end, 'day'), 'day') > 1
+        var userProps = getters.eventProp(event, start, end, selected)
+        var content =
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              className: 'rbc-event-content',
+              title: tooltip || undefined,
+            },
+            Event
+              ? /*#__PURE__*/
+                React__default.createElement(Event, {
+                  event: event,
+                  continuesPrior: continuesPrior,
+                  continuesAfter: continuesAfter,
+                  title: title,
+                  isAllDay: allDay,
+                  localizer: localizer,
+                  slotStart: slotStart,
+                  slotEnd: slotEnd,
+                })
+              : title
+          )
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            EventWrapper,
+            _extends({}, this.props, {
+              type: 'date',
             }),
-            onClick: function onClick(e) {
-              return onSelect && onSelect(event, e)
-            },
-            onDoubleClick: function onDoubleClick(e) {
-              return _onDoubleClick && _onDoubleClick(event, e)
-            },
-            onKeyPress: function onKeyPress(e) {
-              return _onKeyPress && _onKeyPress(event, e)
-            },
-          }),
-          typeof children === 'function' ? children(content) : content
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              _extends({}, props, {
+                tabIndex: 0,
+                style: _extends({}, userProps.style, style),
+                className: clsx('rbc-event', className, userProps.className, {
+                  'rbc-selected': selected,
+                  'rbc-event-allday': showAsAllDay,
+                  'rbc-event-continues-prior': continuesPrior,
+                  'rbc-event-continues-after': continuesAfter,
+                }),
+                onClick: function onClick(e) {
+                  return onSelect && onSelect(event, e)
+                },
+                onDoubleClick: function onDoubleClick(e) {
+                  return _onDoubleClick && _onDoubleClick(event, e)
+                },
+                onKeyPress: function onKeyPress(e) {
+                  return _onKeyPress && _onKeyPress(event, e)
+                },
+              }),
+              typeof children === 'function' ? children(content) : content
+            )
+          )
         )
-      )
-    }
+      }
 
-    return EventCell
-  })(React__default.PureComponent)
+      return EventCell
+    })(React__default.PureComponent)
 
   EventCell.propTypes = {
     event: propTypes.object.isRequired,
@@ -3480,112 +3552,123 @@
     }
   }
 
-  var Popup = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(Popup, _React$PureComponent)
+  var Popup =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(Popup, _React$PureComponent)
 
-    function Popup() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
-
-    var _proto = Popup.prototype
-
-    _proto.componentDidMount = function componentDidMount() {
-      var _this$props = this.props,
-        _this$props$popupOffs = _this$props.popupOffset,
-        popupOffset =
-          _this$props$popupOffs === void 0 ? 5 : _this$props$popupOffs,
-        popperRef = _this$props.popperRef,
-        _getOffset = offset(popperRef.current),
-        top = _getOffset.top,
-        left = _getOffset.left,
-        width = _getOffset.width,
-        height = _getOffset.height,
-        viewBottom = window.innerHeight + getScrollTop(window),
-        viewRight = window.innerWidth + getScrollLeft(window),
-        bottom = top + height,
-        right = left + width
-
-      if (bottom > viewBottom || right > viewRight) {
-        var topOffset, leftOffset
-        if (bottom > viewBottom)
-          topOffset = bottom - viewBottom + (popupOffset.y || +popupOffset || 0)
-        if (right > viewRight)
-          leftOffset = right - viewRight + (popupOffset.x || +popupOffset || 0)
-        this.setState({
-          topOffset: topOffset,
-          leftOffset: leftOffset,
-        }) //eslint-disable-line
+      function Popup() {
+        return _React$PureComponent.apply(this, arguments) || this
       }
-    }
 
-    _proto.render = function render() {
-      var _this = this
+      var _proto = Popup.prototype
 
-      var _this$props2 = this.props,
-        events = _this$props2.events,
-        selected = _this$props2.selected,
-        getters = _this$props2.getters,
-        accessors = _this$props2.accessors,
-        components = _this$props2.components,
-        onSelect = _this$props2.onSelect,
-        onDoubleClick = _this$props2.onDoubleClick,
-        onKeyPress = _this$props2.onKeyPress,
-        slotStart = _this$props2.slotStart,
-        slotEnd = _this$props2.slotEnd,
-        localizer = _this$props2.localizer,
-        popperRef = _this$props2.popperRef
-      var width = this.props.position.width,
-        topOffset = (this.state || {}).topOffset || 0,
-        leftOffset = (this.state || {}).leftOffset || 0
-      var style = {
-        top: -topOffset,
-        left: -leftOffset,
-        minWidth: width + width / 2,
+      _proto.componentDidMount = function componentDidMount() {
+        var _this$props = this.props,
+          _this$props$popupOffs = _this$props.popupOffset,
+          popupOffset =
+            _this$props$popupOffs === void 0 ? 5 : _this$props$popupOffs,
+          popperRef = _this$props.popperRef,
+          _getOffset = offset(popperRef.current),
+          top = _getOffset.top,
+          left = _getOffset.left,
+          width = _getOffset.width,
+          height = _getOffset.height,
+          viewBottom = window.innerHeight + getScrollTop(window),
+          viewRight = window.innerWidth + getScrollLeft(window),
+          bottom = top + height,
+          right = left + width
+
+        if (bottom > viewBottom || right > viewRight) {
+          var topOffset, leftOffset
+          if (bottom > viewBottom)
+            topOffset =
+              bottom - viewBottom + (popupOffset.y || +popupOffset || 0)
+          if (right > viewRight)
+            leftOffset =
+              right - viewRight + (popupOffset.x || +popupOffset || 0)
+          this.setState({
+            topOffset: topOffset,
+            leftOffset: leftOffset,
+          }) //eslint-disable-line
+        }
       }
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          style: _extends({}, this.props.style, style),
-          className: 'rbc-overlay',
-          ref: popperRef,
-        },
-        /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            className: 'rbc-overlay-header',
-          },
-          localizer.format(slotStart, 'dayHeaderFormat')
-        ),
-        events.map(function(event, idx) {
-          return /*#__PURE__*/ React__default.createElement(EventCell, {
-            key: idx,
-            type: 'popup',
-            event: event,
-            getters: getters,
-            onSelect: onSelect,
-            accessors: accessors,
-            components: components,
-            onDoubleClick: onDoubleClick,
-            onKeyPress: onKeyPress,
-            continuesPrior: lt(accessors.end(event), slotStart, 'day'),
-            continuesAfter: gte(accessors.start(event), slotEnd, 'day'),
-            slotStart: slotStart,
-            slotEnd: slotEnd,
-            selected: isSelected(event, selected),
-            draggable: true,
-            onDragStart: function onDragStart() {
-              return _this.props.handleDragStart(event)
-            },
-            onDragEnd: function onDragEnd() {
-              return _this.props.show()
-            },
-          })
-        })
-      )
-    }
 
-    return Popup
-  })(React__default.PureComponent)
+      _proto.render = function render() {
+        var _this = this
+
+        var _this$props2 = this.props,
+          events = _this$props2.events,
+          selected = _this$props2.selected,
+          getters = _this$props2.getters,
+          accessors = _this$props2.accessors,
+          components = _this$props2.components,
+          onSelect = _this$props2.onSelect,
+          onDoubleClick = _this$props2.onDoubleClick,
+          onKeyPress = _this$props2.onKeyPress,
+          slotStart = _this$props2.slotStart,
+          slotEnd = _this$props2.slotEnd,
+          localizer = _this$props2.localizer,
+          popperRef = _this$props2.popperRef
+        var width = this.props.position.width,
+          topOffset = (this.state || {}).topOffset || 0,
+          leftOffset = (this.state || {}).leftOffset || 0
+        var style = {
+          top: -topOffset,
+          left: -leftOffset,
+          minWidth: width + width / 2,
+        }
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              style: _extends({}, this.props.style, style),
+              className: 'rbc-overlay',
+              ref: popperRef,
+            },
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                className: 'rbc-overlay-header',
+              },
+              localizer.format(slotStart, 'dayHeaderFormat')
+            ),
+            events.map(function(event, idx) {
+              return (
+                /*#__PURE__*/
+                React__default.createElement(EventCell, {
+                  key: idx,
+                  type: 'popup',
+                  event: event,
+                  getters: getters,
+                  onSelect: onSelect,
+                  accessors: accessors,
+                  components: components,
+                  onDoubleClick: onDoubleClick,
+                  onKeyPress: onKeyPress,
+                  continuesPrior: lt(accessors.end(event), slotStart, 'day'),
+                  continuesAfter: gte(accessors.start(event), slotEnd, 'day'),
+                  slotStart: slotStart,
+                  slotEnd: slotEnd,
+                  selected: isSelected(event, selected),
+                  draggable: true,
+                  onDragStart: function onDragStart() {
+                    return _this.props.handleDragStart(event)
+                  },
+                  onDragEnd: function onDragEnd() {
+                    return _this.props.show()
+                  },
+                })
+              )
+            })
+          )
+        )
+      }
+
+      return Popup
+    })(React__default.PureComponent)
 
   Popup.propTypes = {
     position: propTypes.object,
@@ -3615,2965 +3698,60 @@
         current: propTypes.Element,
       }),
     ]),
+    /**
+     * The Overlay component, of react-overlays, creates a ref that is passed to the Popup, and
+     * requires proper ref forwarding to be used without error
+     */
   }
-  /**
-   * The Overlay component, of react-overlays, creates a ref that is passed to the Popup, and
-   * requires proper ref forwarding to be used without error
-   */
-
-  var Popup$1 = /*#__PURE__*/ React__default.forwardRef(function(props, ref) {
-    return /*#__PURE__*/ React__default.createElement(
-      Popup,
-      _extends(
-        {
-          popperRef: ref,
-        },
-        props
+  var Popup$1 /*#__PURE__*/ = React__default.forwardRef(function(props, ref) {
+    return (
+      /*#__PURE__*/
+      React__default.createElement(
+        Popup,
+        _extends(
+          {
+            popperRef: ref,
+          },
+          props
+        )
       )
     )
   })
 
-  /**!
-   * @fileOverview Kickass library to create and place poppers near their reference elements.
-   * @version 1.16.1
-   * @license
-   * Copyright (c) 2016 Federico Zivolo and contributors
-   *
-   * Permission is hereby granted, free of charge, to any person obtaining a copy
-   * of this software and associated documentation files (the "Software"), to deal
-   * in the Software without restriction, including without limitation the rights
-   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   * copies of the Software, and to permit persons to whom the Software is
-   * furnished to do so, subject to the following conditions:
-   *
-   * The above copyright notice and this permission notice shall be included in all
-   * copies or substantial portions of the Software.
-   *
-   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-   * SOFTWARE.
-   */
-  var isBrowser =
-    typeof window !== 'undefined' &&
-    typeof document !== 'undefined' &&
-    typeof navigator !== 'undefined'
-
-  var timeoutDuration = (function() {
-    var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox']
-    for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-      if (
-        isBrowser &&
-        navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0
-      ) {
-        return 1
-      }
-    }
-    return 0
-  })()
-
-  function microtaskDebounce(fn) {
-    var called = false
-    return function() {
-      if (called) {
-        return
-      }
-      called = true
-      window.Promise.resolve().then(function() {
-        called = false
-        fn()
-      })
-    }
-  }
-
-  function taskDebounce(fn) {
-    var scheduled = false
-    return function() {
-      if (!scheduled) {
-        scheduled = true
-        setTimeout(function() {
-          scheduled = false
-          fn()
-        }, timeoutDuration)
-      }
-    }
-  }
-
-  var supportsMicroTasks = isBrowser && window.Promise
-
-  /**
-   * Create a debounced version of a method, that's asynchronously deferred
-   * but called in the minimum time possible.
-   *
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Function} fn
-   * @returns {Function}
-   */
-  var debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce
-
-  /**
-   * Check if the given variable is a function
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Any} functionToCheck - variable to check
-   * @returns {Boolean} answer to: is a function?
-   */
-  function isFunction$1(functionToCheck) {
-    var getType = {}
-    return (
-      functionToCheck &&
-      getType.toString.call(functionToCheck) === '[object Function]'
-    )
-  }
-
-  /**
-   * Get CSS computed property of the given element
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Eement} element
-   * @argument {String} property
-   */
-  function getStyleComputedProperty(element, property) {
-    if (element.nodeType !== 1) {
-      return []
-    }
-    // NOTE: 1 DOM access here
-    var window = element.ownerDocument.defaultView
-    var css = window.getComputedStyle(element, null)
-    return property ? css[property] : css
-  }
-
-  /**
-   * Returns the parentNode or the host of the element
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @returns {Element} parent
-   */
-  function getParentNode(element) {
-    if (element.nodeName === 'HTML') {
-      return element
-    }
-    return element.parentNode || element.host
-  }
-
-  /**
-   * Returns the scrolling parent of the given element
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @returns {Element} scroll parent
-   */
-  function getScrollParent(element) {
-    // Return body, `getScroll` will take care to get the correct `scrollTop` from it
-    if (!element) {
-      return document.body
-    }
-
-    switch (element.nodeName) {
-      case 'HTML':
-      case 'BODY':
-        return element.ownerDocument.body
-      case '#document':
-        return element.body
-    }
-
-    // Firefox want us to check `-x` and `-y` variations as well
-
-    var _getStyleComputedProp = getStyleComputedProperty(element),
-      overflow = _getStyleComputedProp.overflow,
-      overflowX = _getStyleComputedProp.overflowX,
-      overflowY = _getStyleComputedProp.overflowY
-
-    if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {
-      return element
-    }
-
-    return getScrollParent(getParentNode(element))
-  }
-
-  /**
-   * Returns the reference node of the reference object, or the reference object itself.
-   * @method
-   * @memberof Popper.Utils
-   * @param {Element|Object} reference - the reference element (the popper will be relative to this)
-   * @returns {Element} parent
-   */
-  function getReferenceNode(reference) {
-    return reference && reference.referenceNode
-      ? reference.referenceNode
-      : reference
-  }
-
-  var isIE11 =
-    isBrowser && !!(window.MSInputMethodContext && document.documentMode)
-  var isIE10 = isBrowser && /MSIE 10/.test(navigator.userAgent)
-
-  /**
-   * Determines if the browser is Internet Explorer
-   * @method
-   * @memberof Popper.Utils
-   * @param {Number} version to check
-   * @returns {Boolean} isIE
-   */
-  function isIE(version) {
-    if (version === 11) {
-      return isIE11
-    }
-    if (version === 10) {
-      return isIE10
-    }
-    return isIE11 || isIE10
-  }
-
-  /**
-   * Returns the offset parent of the given element
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @returns {Element} offset parent
-   */
-  function getOffsetParent(element) {
-    if (!element) {
-      return document.documentElement
-    }
-
-    var noOffsetParent = isIE(10) ? document.body : null
-
-    // NOTE: 1 DOM access here
-    var offsetParent = element.offsetParent || null
-    // Skip hidden elements which don't have an offsetParent
-    while (offsetParent === noOffsetParent && element.nextElementSibling) {
-      offsetParent = (element = element.nextElementSibling).offsetParent
-    }
-
-    var nodeName = offsetParent && offsetParent.nodeName
-
-    if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {
-      return element
-        ? element.ownerDocument.documentElement
-        : document.documentElement
-    }
-
-    // .offsetParent will return the closest TH, TD or TABLE in case
-    // no offsetParent is present, I hate this job...
-    if (
-      ['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 &&
-      getStyleComputedProperty(offsetParent, 'position') === 'static'
-    ) {
-      return getOffsetParent(offsetParent)
-    }
-
-    return offsetParent
-  }
-
-  function isOffsetContainer(element) {
-    var nodeName = element.nodeName
-
-    if (nodeName === 'BODY') {
-      return false
-    }
-    return (
-      nodeName === 'HTML' ||
-      getOffsetParent(element.firstElementChild) === element
-    )
-  }
-
-  /**
-   * Finds the root node (document, shadowDOM root) of the given element
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} node
-   * @returns {Element} root node
-   */
-  function getRoot(node) {
-    if (node.parentNode !== null) {
-      return getRoot(node.parentNode)
-    }
-
-    return node
-  }
-
-  /**
-   * Finds the offset parent common to the two provided nodes
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element1
-   * @argument {Element} element2
-   * @returns {Element} common offset parent
-   */
-  function findCommonOffsetParent(element1, element2) {
-    // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-    if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {
-      return document.documentElement
-    }
-
-    // Here we make sure to give as "start" the element that comes first in the DOM
-    var order =
-      element1.compareDocumentPosition(element2) &
-      Node.DOCUMENT_POSITION_FOLLOWING
-    var start = order ? element1 : element2
-    var end = order ? element2 : element1
-
-    // Get common ancestor container
-    var range = document.createRange()
-    range.setStart(start, 0)
-    range.setEnd(end, 0)
-    var commonAncestorContainer = range.commonAncestorContainer
-
-    // Both nodes are inside #document
-
-    if (
-      (element1 !== commonAncestorContainer &&
-        element2 !== commonAncestorContainer) ||
-      start.contains(end)
-    ) {
-      if (isOffsetContainer(commonAncestorContainer)) {
-        return commonAncestorContainer
-      }
-
-      return getOffsetParent(commonAncestorContainer)
-    }
-
-    // one of the nodes is inside shadowDOM, find which one
-    var element1root = getRoot(element1)
-    if (element1root.host) {
-      return findCommonOffsetParent(element1root.host, element2)
-    } else {
-      return findCommonOffsetParent(element1, getRoot(element2).host)
-    }
-  }
-
-  /**
-   * Gets the scroll value of the given element in the given side (top and left)
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @argument {String} side `top` or `left`
-   * @returns {number} amount of scrolled pixels
-   */
-  function getScroll(element) {
-    var side =
-      arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top'
-
-    var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft'
-    var nodeName = element.nodeName
-
-    if (nodeName === 'BODY' || nodeName === 'HTML') {
-      var html = element.ownerDocument.documentElement
-      var scrollingElement = element.ownerDocument.scrollingElement || html
-      return scrollingElement[upperSide]
-    }
-
-    return element[upperSide]
-  }
-
-  /*
-   * Sum or subtract the element scroll values (left and top) from a given rect object
-   * @method
-   * @memberof Popper.Utils
-   * @param {Object} rect - Rect object you want to change
-   * @param {HTMLElement} element - The element from the function reads the scroll values
-   * @param {Boolean} subtract - set to true if you want to subtract the scroll values
-   * @return {Object} rect - The modifier rect object
-   */
-  function includeScroll(rect, element) {
-    var subtract =
-      arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
-
-    var scrollTop = getScroll(element, 'top')
-    var scrollLeft = getScroll(element, 'left')
-    var modifier = subtract ? -1 : 1
-    rect.top += scrollTop * modifier
-    rect.bottom += scrollTop * modifier
-    rect.left += scrollLeft * modifier
-    rect.right += scrollLeft * modifier
-    return rect
-  }
-
-  /*
-   * Helper to detect borders of a given element
-   * @method
-   * @memberof Popper.Utils
-   * @param {CSSStyleDeclaration} styles
-   * Result of `getStyleComputedProperty` on the given element
-   * @param {String} axis - `x` or `y`
-   * @return {number} borders - The borders size of the given axis
-   */
-
-  function getBordersSize(styles, axis) {
-    var sideA = axis === 'x' ? 'Left' : 'Top'
-    var sideB = sideA === 'Left' ? 'Right' : 'Bottom'
-
-    return (
-      parseFloat(styles['border' + sideA + 'Width']) +
-      parseFloat(styles['border' + sideB + 'Width'])
-    )
-  }
-
-  function getSize(axis, body, html, computedStyle) {
-    return Math.max(
-      body['offset' + axis],
-      body['scroll' + axis],
-      html['client' + axis],
-      html['offset' + axis],
-      html['scroll' + axis],
-      isIE(10)
-        ? parseInt(html['offset' + axis]) +
-            parseInt(
-              computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]
-            ) +
-            parseInt(
-              computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]
-            )
-        : 0
-    )
-  }
-
-  function getWindowSizes(document) {
-    var body = document.body
-    var html = document.documentElement
-    var computedStyle = isIE(10) && getComputedStyle(html)
-
-    return {
-      height: getSize('Height', body, html, computedStyle),
-      width: getSize('Width', body, html, computedStyle),
-    }
-  }
-
-  var classCallCheck = function(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-      throw new TypeError('Cannot call a class as a function')
-    }
-  }
-
-  var createClass = (function() {
-    function defineProperties(target, props) {
-      for (var i = 0; i < props.length; i++) {
-        var descriptor = props[i]
-        descriptor.enumerable = descriptor.enumerable || false
-        descriptor.configurable = true
-        if ('value' in descriptor) descriptor.writable = true
-        Object.defineProperty(target, descriptor.key, descriptor)
-      }
-    }
-
-    return function(Constructor, protoProps, staticProps) {
-      if (protoProps) defineProperties(Constructor.prototype, protoProps)
-      if (staticProps) defineProperties(Constructor, staticProps)
-      return Constructor
-    }
-  })()
-
-  var defineProperty = function(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true,
-      })
-    } else {
-      obj[key] = value
-    }
-
-    return obj
-  }
-
-  var _extends$1 =
-    Object.assign ||
-    function(target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i]
-
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key]
-          }
-        }
-      }
-
-      return target
-    }
-
-  /**
-   * Given element offsets, generate an output similar to getBoundingClientRect
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Object} offsets
-   * @returns {Object} ClientRect like output
-   */
-  function getClientRect(offsets) {
-    return _extends$1({}, offsets, {
-      right: offsets.left + offsets.width,
-      bottom: offsets.top + offsets.height,
-    })
-  }
-
-  /**
-   * Get bounding client rect of given element
-   * @method
-   * @memberof Popper.Utils
-   * @param {HTMLElement} element
-   * @return {Object} client rect
-   */
-  function getBoundingClientRect(element) {
-    var rect = {}
-
-    // IE10 10 FIX: Please, don't ask, the element isn't
-    // considered in DOM in some circumstances...
-    // This isn't reproducible in IE10 compatibility mode of IE11
-    try {
-      if (isIE(10)) {
-        rect = element.getBoundingClientRect()
-        var scrollTop = getScroll(element, 'top')
-        var scrollLeft = getScroll(element, 'left')
-        rect.top += scrollTop
-        rect.left += scrollLeft
-        rect.bottom += scrollTop
-        rect.right += scrollLeft
-      } else {
-        rect = element.getBoundingClientRect()
-      }
-    } catch (e) {}
-
-    var result = {
-      left: rect.left,
-      top: rect.top,
-      width: rect.right - rect.left,
-      height: rect.bottom - rect.top,
-    }
-
-    // subtract scrollbar size from sizes
-    var sizes =
-      element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {}
-    var width = sizes.width || element.clientWidth || result.width
-    var height = sizes.height || element.clientHeight || result.height
-
-    var horizScrollbar = element.offsetWidth - width
-    var vertScrollbar = element.offsetHeight - height
-
-    // if an hypothetical scrollbar is detected, we must be sure it's not a `border`
-    // we make this check conditional for performance reasons
-    if (horizScrollbar || vertScrollbar) {
-      var styles = getStyleComputedProperty(element)
-      horizScrollbar -= getBordersSize(styles, 'x')
-      vertScrollbar -= getBordersSize(styles, 'y')
-
-      result.width -= horizScrollbar
-      result.height -= vertScrollbar
-    }
-
-    return getClientRect(result)
-  }
-
-  function getOffsetRectRelativeToArbitraryNode(children, parent) {
-    var fixedPosition =
-      arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false
-
-    var isIE10 = isIE(10)
-    var isHTML = parent.nodeName === 'HTML'
-    var childrenRect = getBoundingClientRect(children)
-    var parentRect = getBoundingClientRect(parent)
-    var scrollParent = getScrollParent(children)
-
-    var styles = getStyleComputedProperty(parent)
-    var borderTopWidth = parseFloat(styles.borderTopWidth)
-    var borderLeftWidth = parseFloat(styles.borderLeftWidth)
-
-    // In cases where the parent is fixed, we must ignore negative scroll in offset calc
-    if (fixedPosition && isHTML) {
-      parentRect.top = Math.max(parentRect.top, 0)
-      parentRect.left = Math.max(parentRect.left, 0)
-    }
-    var offsets = getClientRect({
-      top: childrenRect.top - parentRect.top - borderTopWidth,
-      left: childrenRect.left - parentRect.left - borderLeftWidth,
-      width: childrenRect.width,
-      height: childrenRect.height,
-    })
-    offsets.marginTop = 0
-    offsets.marginLeft = 0
-
-    // Subtract margins of documentElement in case it's being used as parent
-    // we do this only on HTML because it's the only element that behaves
-    // differently when margins are applied to it. The margins are included in
-    // the box of the documentElement, in the other cases not.
-    if (!isIE10 && isHTML) {
-      var marginTop = parseFloat(styles.marginTop)
-      var marginLeft = parseFloat(styles.marginLeft)
-
-      offsets.top -= borderTopWidth - marginTop
-      offsets.bottom -= borderTopWidth - marginTop
-      offsets.left -= borderLeftWidth - marginLeft
-      offsets.right -= borderLeftWidth - marginLeft
-
-      // Attach marginTop and marginLeft because in some circumstances we may need them
-      offsets.marginTop = marginTop
-      offsets.marginLeft = marginLeft
-    }
-
-    if (
-      isIE10 && !fixedPosition
-        ? parent.contains(scrollParent)
-        : parent === scrollParent && scrollParent.nodeName !== 'BODY'
-    ) {
-      offsets = includeScroll(offsets, parent)
-    }
-
-    return offsets
-  }
-
-  function getViewportOffsetRectRelativeToArtbitraryNode(element) {
-    var excludeScroll =
-      arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false
-
-    var html = element.ownerDocument.documentElement
-    var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html)
-    var width = Math.max(html.clientWidth, window.innerWidth || 0)
-    var height = Math.max(html.clientHeight, window.innerHeight || 0)
-
-    var scrollTop = !excludeScroll ? getScroll(html) : 0
-    var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0
-
-    var offset = {
-      top: scrollTop - relativeOffset.top + relativeOffset.marginTop,
-      left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,
-      width: width,
-      height: height,
-    }
-
-    return getClientRect(offset)
-  }
-
-  /**
-   * Check if the given element is fixed or is inside a fixed parent
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @argument {Element} customContainer
-   * @returns {Boolean} answer to "isFixed?"
-   */
-  function isFixed(element) {
-    var nodeName = element.nodeName
-    if (nodeName === 'BODY' || nodeName === 'HTML') {
-      return false
-    }
-    if (getStyleComputedProperty(element, 'position') === 'fixed') {
-      return true
-    }
-    var parentNode = getParentNode(element)
-    if (!parentNode) {
-      return false
-    }
-    return isFixed(parentNode)
-  }
-
-  /**
-   * Finds the first parent of an element that has a transformed property defined
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @returns {Element} first transformed parent or documentElement
-   */
-
-  function getFixedPositionOffsetParent(element) {
-    // This check is needed to avoid errors in case one of the elements isn't defined for any reason
-    if (!element || !element.parentElement || isIE()) {
-      return document.documentElement
-    }
-    var el = element.parentElement
-    while (el && getStyleComputedProperty(el, 'transform') === 'none') {
-      el = el.parentElement
-    }
-    return el || document.documentElement
-  }
-
-  /**
-   * Computed the boundaries limits and return them
-   * @method
-   * @memberof Popper.Utils
-   * @param {HTMLElement} popper
-   * @param {HTMLElement} reference
-   * @param {number} padding
-   * @param {HTMLElement} boundariesElement - Element used to define the boundaries
-   * @param {Boolean} fixedPosition - Is in fixed position mode
-   * @returns {Object} Coordinates of the boundaries
-   */
-  function getBoundaries(popper, reference, padding, boundariesElement) {
-    var fixedPosition =
-      arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false
-
-    // NOTE: 1 DOM access here
-
-    var boundaries = { top: 0, left: 0 }
-    var offsetParent = fixedPosition
-      ? getFixedPositionOffsetParent(popper)
-      : findCommonOffsetParent(popper, getReferenceNode(reference))
-
-    // Handle viewport case
-    if (boundariesElement === 'viewport') {
-      boundaries = getViewportOffsetRectRelativeToArtbitraryNode(
-        offsetParent,
-        fixedPosition
-      )
-    } else {
-      // Handle other cases based on DOM element used as boundaries
-      var boundariesNode = void 0
-      if (boundariesElement === 'scrollParent') {
-        boundariesNode = getScrollParent(getParentNode(reference))
-        if (boundariesNode.nodeName === 'BODY') {
-          boundariesNode = popper.ownerDocument.documentElement
-        }
-      } else if (boundariesElement === 'window') {
-        boundariesNode = popper.ownerDocument.documentElement
-      } else {
-        boundariesNode = boundariesElement
-      }
-
-      var offsets = getOffsetRectRelativeToArbitraryNode(
-        boundariesNode,
-        offsetParent,
-        fixedPosition
-      )
-
-      // In case of HTML, we need a different computation
-      if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {
-        var _getWindowSizes = getWindowSizes(popper.ownerDocument),
-          height = _getWindowSizes.height,
-          width = _getWindowSizes.width
-
-        boundaries.top += offsets.top - offsets.marginTop
-        boundaries.bottom = height + offsets.top
-        boundaries.left += offsets.left - offsets.marginLeft
-        boundaries.right = width + offsets.left
-      } else {
-        // for all the other DOM elements, this one is good
-        boundaries = offsets
-      }
-    }
-
-    // Add paddings
-    padding = padding || 0
-    var isPaddingNumber = typeof padding === 'number'
-    boundaries.left += isPaddingNumber ? padding : padding.left || 0
-    boundaries.top += isPaddingNumber ? padding : padding.top || 0
-    boundaries.right -= isPaddingNumber ? padding : padding.right || 0
-    boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0
-
-    return boundaries
-  }
-
-  function getArea(_ref) {
-    var width = _ref.width,
-      height = _ref.height
-
-    return width * height
-  }
-
-  /**
-   * Utility used to transform the `auto` placement to the placement with more
-   * available space.
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Object} data - The data object generated by update method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function computeAutoPlacement(
-    placement,
-    refRect,
-    popper,
-    reference,
-    boundariesElement
-  ) {
-    var padding =
-      arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0
-
-    if (placement.indexOf('auto') === -1) {
-      return placement
-    }
-
-    var boundaries = getBoundaries(
-      popper,
-      reference,
-      padding,
-      boundariesElement
-    )
-
-    var rects = {
-      top: {
-        width: boundaries.width,
-        height: refRect.top - boundaries.top,
-      },
-      right: {
-        width: boundaries.right - refRect.right,
-        height: boundaries.height,
-      },
-      bottom: {
-        width: boundaries.width,
-        height: boundaries.bottom - refRect.bottom,
-      },
-      left: {
-        width: refRect.left - boundaries.left,
-        height: boundaries.height,
-      },
-    }
-
-    var sortedAreas = Object.keys(rects)
-      .map(function(key) {
-        return _extends$1(
-          {
-            key: key,
-          },
-          rects[key],
-          {
-            area: getArea(rects[key]),
-          }
-        )
-      })
-      .sort(function(a, b) {
-        return b.area - a.area
-      })
-
-    var filteredAreas = sortedAreas.filter(function(_ref2) {
-      var width = _ref2.width,
-        height = _ref2.height
-      return width >= popper.clientWidth && height >= popper.clientHeight
-    })
-
-    var computedPlacement =
-      filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key
-
-    var variation = placement.split('-')[1]
-
-    return computedPlacement + (variation ? '-' + variation : '')
-  }
-
-  /**
-   * Get offsets to the reference element
-   * @method
-   * @memberof Popper.Utils
-   * @param {Object} state
-   * @param {Element} popper - the popper element
-   * @param {Element} reference - the reference element (the popper will be relative to this)
-   * @param {Element} fixedPosition - is in fixed position mode
-   * @returns {Object} An object containing the offsets which will be applied to the popper
-   */
-  function getReferenceOffsets(state, popper, reference) {
-    var fixedPosition =
-      arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null
-
-    var commonOffsetParent = fixedPosition
-      ? getFixedPositionOffsetParent(popper)
-      : findCommonOffsetParent(popper, getReferenceNode(reference))
-    return getOffsetRectRelativeToArbitraryNode(
-      reference,
-      commonOffsetParent,
-      fixedPosition
-    )
-  }
-
-  /**
-   * Get the outer sizes of the given element (offset size + margins)
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element
-   * @returns {Object} object containing width and height properties
-   */
-  function getOuterSizes(element) {
-    var window = element.ownerDocument.defaultView
-    var styles = window.getComputedStyle(element)
-    var x =
-      parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0)
-    var y =
-      parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0)
-    var result = {
-      width: element.offsetWidth + y,
-      height: element.offsetHeight + x,
-    }
-    return result
-  }
-
-  /**
-   * Get the opposite placement of the given one
-   * @method
-   * @memberof Popper.Utils
-   * @argument {String} placement
-   * @returns {String} flipped placement
-   */
-  function getOppositePlacement(placement) {
-    var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' }
-    return placement.replace(/left|right|bottom|top/g, function(matched) {
-      return hash[matched]
-    })
-  }
-
-  /**
-   * Get offsets to the popper
-   * @method
-   * @memberof Popper.Utils
-   * @param {Object} position - CSS position the Popper will get applied
-   * @param {HTMLElement} popper - the popper element
-   * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)
-   * @param {String} placement - one of the valid placement options
-   * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper
-   */
-  function getPopperOffsets(popper, referenceOffsets, placement) {
-    placement = placement.split('-')[0]
-
-    // Get popper node sizes
-    var popperRect = getOuterSizes(popper)
-
-    // Add position, width and height to our offsets object
-    var popperOffsets = {
-      width: popperRect.width,
-      height: popperRect.height,
-    }
-
-    // depending by the popper placement we have to compute its offsets slightly differently
-    var isHoriz = ['right', 'left'].indexOf(placement) !== -1
-    var mainSide = isHoriz ? 'top' : 'left'
-    var secondarySide = isHoriz ? 'left' : 'top'
-    var measurement = isHoriz ? 'height' : 'width'
-    var secondaryMeasurement = !isHoriz ? 'height' : 'width'
-
-    popperOffsets[mainSide] =
-      referenceOffsets[mainSide] +
-      referenceOffsets[measurement] / 2 -
-      popperRect[measurement] / 2
-    if (placement === secondarySide) {
-      popperOffsets[secondarySide] =
-        referenceOffsets[secondarySide] - popperRect[secondaryMeasurement]
-    } else {
-      popperOffsets[secondarySide] =
-        referenceOffsets[getOppositePlacement(secondarySide)]
-    }
-
-    return popperOffsets
-  }
-
-  /**
-   * Mimics the `find` method of Array
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Array} arr
-   * @argument prop
-   * @argument value
-   * @returns index or -1
-   */
-  function find(arr, check) {
-    // use native find if supported
-    if (Array.prototype.find) {
-      return arr.find(check)
-    }
-
-    // use `filter` to obtain the same behavior of `find`
-    return arr.filter(check)[0]
-  }
-
-  /**
-   * Return the index of the matching object
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Array} arr
-   * @argument prop
-   * @argument value
-   * @returns index or -1
-   */
-  function findIndex(arr, prop, value) {
-    // use native findIndex if supported
-    if (Array.prototype.findIndex) {
-      return arr.findIndex(function(cur) {
-        return cur[prop] === value
-      })
-    }
-
-    // use `find` + `indexOf` if `findIndex` isn't supported
-    var match = find(arr, function(obj) {
-      return obj[prop] === value
-    })
-    return arr.indexOf(match)
-  }
-
-  /**
-   * Loop trough the list of modifiers and run them in order,
-   * each of them will then edit the data object.
-   * @method
-   * @memberof Popper.Utils
-   * @param {dataObject} data
-   * @param {Array} modifiers
-   * @param {String} ends - Optional modifier name used as stopper
-   * @returns {dataObject}
-   */
-  function runModifiers(modifiers, data, ends) {
-    var modifiersToRun =
-      ends === undefined
-        ? modifiers
-        : modifiers.slice(0, findIndex(modifiers, 'name', ends))
-
-    modifiersToRun.forEach(function(modifier) {
-      if (modifier['function']) {
-        // eslint-disable-line dot-notation
-        console.warn('`modifier.function` is deprecated, use `modifier.fn`!')
-      }
-      var fn = modifier['function'] || modifier.fn // eslint-disable-line dot-notation
-      if (modifier.enabled && isFunction$1(fn)) {
-        // Add properties to offsets to make them a complete clientRect object
-        // we do this before each modifier to make sure the previous one doesn't
-        // mess with these values
-        data.offsets.popper = getClientRect(data.offsets.popper)
-        data.offsets.reference = getClientRect(data.offsets.reference)
-
-        data = fn(data, modifier)
-      }
-    })
-
-    return data
-  }
-
-  /**
-   * Updates the position of the popper, computing the new offsets and applying
-   * the new style.<br />
-   * Prefer `scheduleUpdate` over `update` because of performance reasons.
-   * @method
-   * @memberof Popper
-   */
-  function update() {
-    // if popper is destroyed, don't perform any further update
-    if (this.state.isDestroyed) {
-      return
-    }
-
-    var data = {
-      instance: this,
-      styles: {},
-      arrowStyles: {},
-      attributes: {},
-      flipped: false,
-      offsets: {},
-    }
-
-    // compute reference element offsets
-    data.offsets.reference = getReferenceOffsets(
-      this.state,
-      this.popper,
-      this.reference,
-      this.options.positionFixed
-    )
-
-    // compute auto placement, store placement inside the data object,
-    // modifiers will be able to edit `placement` if needed
-    // and refer to originalPlacement to know the original value
-    data.placement = computeAutoPlacement(
-      this.options.placement,
-      data.offsets.reference,
-      this.popper,
-      this.reference,
-      this.options.modifiers.flip.boundariesElement,
-      this.options.modifiers.flip.padding
-    )
-
-    // store the computed placement inside `originalPlacement`
-    data.originalPlacement = data.placement
-
-    data.positionFixed = this.options.positionFixed
-
-    // compute the popper offsets
-    data.offsets.popper = getPopperOffsets(
-      this.popper,
-      data.offsets.reference,
-      data.placement
-    )
-
-    data.offsets.popper.position = this.options.positionFixed
-      ? 'fixed'
-      : 'absolute'
-
-    // run the modifiers
-    data = runModifiers(this.modifiers, data)
-
-    // the first `update` will call `onCreate` callback
-    // the other ones will call `onUpdate` callback
-    if (!this.state.isCreated) {
-      this.state.isCreated = true
-      this.options.onCreate(data)
-    } else {
-      this.options.onUpdate(data)
-    }
-  }
-
-  /**
-   * Helper used to know if the given modifier is enabled.
-   * @method
-   * @memberof Popper.Utils
-   * @returns {Boolean}
-   */
-  function isModifierEnabled(modifiers, modifierName) {
-    return modifiers.some(function(_ref) {
-      var name = _ref.name,
-        enabled = _ref.enabled
-      return enabled && name === modifierName
-    })
-  }
-
-  /**
-   * Get the prefixed supported property name
-   * @method
-   * @memberof Popper.Utils
-   * @argument {String} property (camelCase)
-   * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)
-   */
-  function getSupportedPropertyName(property) {
-    var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O']
-    var upperProp = property.charAt(0).toUpperCase() + property.slice(1)
-
-    for (var i = 0; i < prefixes.length; i++) {
-      var prefix = prefixes[i]
-      var toCheck = prefix ? '' + prefix + upperProp : property
-      if (typeof document.body.style[toCheck] !== 'undefined') {
-        return toCheck
-      }
-    }
-    return null
-  }
-
-  /**
-   * Destroys the popper.
-   * @method
-   * @memberof Popper
-   */
-  function destroy() {
-    this.state.isDestroyed = true
-
-    // touch DOM only if `applyStyle` modifier is enabled
-    if (isModifierEnabled(this.modifiers, 'applyStyle')) {
-      this.popper.removeAttribute('x-placement')
-      this.popper.style.position = ''
-      this.popper.style.top = ''
-      this.popper.style.left = ''
-      this.popper.style.right = ''
-      this.popper.style.bottom = ''
-      this.popper.style.willChange = ''
-      this.popper.style[getSupportedPropertyName('transform')] = ''
-    }
-
-    this.disableEventListeners()
-
-    // remove the popper if user explicitly asked for the deletion on destroy
-    // do not use `remove` because IE11 doesn't support it
-    if (this.options.removeOnDestroy) {
-      this.popper.parentNode.removeChild(this.popper)
-    }
-    return this
-  }
-
-  /**
-   * Get the window associated with the element
-   * @argument {Element} element
-   * @returns {Window}
-   */
-  function getWindow(element) {
-    var ownerDocument = element.ownerDocument
-    return ownerDocument ? ownerDocument.defaultView : window
-  }
-
-  function attachToScrollParents(scrollParent, event, callback, scrollParents) {
-    var isBody = scrollParent.nodeName === 'BODY'
-    var target = isBody ? scrollParent.ownerDocument.defaultView : scrollParent
-    target.addEventListener(event, callback, { passive: true })
-
-    if (!isBody) {
-      attachToScrollParents(
-        getScrollParent(target.parentNode),
-        event,
-        callback,
-        scrollParents
-      )
-    }
-    scrollParents.push(target)
-  }
-
-  /**
-   * Setup needed event listeners used to update the popper position
-   * @method
-   * @memberof Popper.Utils
-   * @private
-   */
-  function setupEventListeners(reference, options, state, updateBound) {
-    // Resize event listener on window
-    state.updateBound = updateBound
-    getWindow(reference).addEventListener('resize', state.updateBound, {
-      passive: true,
-    })
-
-    // Scroll event listener on scroll parents
-    var scrollElement = getScrollParent(reference)
-    attachToScrollParents(
-      scrollElement,
-      'scroll',
-      state.updateBound,
-      state.scrollParents
-    )
-    state.scrollElement = scrollElement
-    state.eventsEnabled = true
-
-    return state
-  }
-
-  /**
-   * It will add resize/scroll events and start recalculating
-   * position of the popper element when they are triggered.
-   * @method
-   * @memberof Popper
-   */
-  function enableEventListeners() {
-    if (!this.state.eventsEnabled) {
-      this.state = setupEventListeners(
-        this.reference,
-        this.options,
-        this.state,
-        this.scheduleUpdate
-      )
-    }
-  }
-
-  /**
-   * Remove event listeners used to update the popper position
-   * @method
-   * @memberof Popper.Utils
-   * @private
-   */
-  function removeEventListeners(reference, state) {
-    // Remove resize event listener on window
-    getWindow(reference).removeEventListener('resize', state.updateBound)
-
-    // Remove scroll event listener on scroll parents
-    state.scrollParents.forEach(function(target) {
-      target.removeEventListener('scroll', state.updateBound)
-    })
-
-    // Reset state
-    state.updateBound = null
-    state.scrollParents = []
-    state.scrollElement = null
-    state.eventsEnabled = false
-    return state
-  }
-
-  /**
-   * It will remove resize/scroll events and won't recalculate popper position
-   * when they are triggered. It also won't trigger `onUpdate` callback anymore,
-   * unless you call `update` method manually.
-   * @method
-   * @memberof Popper
-   */
-  function disableEventListeners() {
-    if (this.state.eventsEnabled) {
-      cancelAnimationFrame(this.scheduleUpdate)
-      this.state = removeEventListeners(this.reference, this.state)
-    }
-  }
-
-  /**
-   * Tells if a given input is a number
-   * @method
-   * @memberof Popper.Utils
-   * @param {*} input to check
-   * @return {Boolean}
-   */
-  function isNumeric(n) {
-    return n !== '' && !isNaN(parseFloat(n)) && isFinite(n)
-  }
-
-  /**
-   * Set the style to the given popper
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element - Element to apply the style to
-   * @argument {Object} styles
-   * Object with a list of properties and values which will be applied to the element
-   */
-  function setStyles(element, styles) {
-    Object.keys(styles).forEach(function(prop) {
-      var unit = ''
-      // add unit if the value is numeric and is one of the following
-      if (
-        ['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !==
-          -1 &&
-        isNumeric(styles[prop])
-      ) {
-        unit = 'px'
-      }
-      element.style[prop] = styles[prop] + unit
-    })
-  }
-
-  /**
-   * Set the attributes to the given popper
-   * @method
-   * @memberof Popper.Utils
-   * @argument {Element} element - Element to apply the attributes to
-   * @argument {Object} styles
-   * Object with a list of properties and values which will be applied to the element
-   */
-  function setAttributes(element, attributes) {
-    Object.keys(attributes).forEach(function(prop) {
-      var value = attributes[prop]
-      if (value !== false) {
-        element.setAttribute(prop, attributes[prop])
-      } else {
-        element.removeAttribute(prop)
-      }
-    })
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Object} data.styles - List of style properties - values to apply to popper element
-   * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The same data object
-   */
-  function applyStyle(data) {
-    // any property present in `data.styles` will be applied to the popper,
-    // in this way we can make the 3rd party modifiers add custom styles to it
-    // Be aware, modifiers could override the properties defined in the previous
-    // lines of this modifier!
-    setStyles(data.instance.popper, data.styles)
-
-    // any property present in `data.attributes` will be applied to the popper,
-    // they will be set as HTML attributes of the element
-    setAttributes(data.instance.popper, data.attributes)
-
-    // if arrowElement is defined and arrowStyles has some properties
-    if (data.arrowElement && Object.keys(data.arrowStyles).length) {
-      setStyles(data.arrowElement, data.arrowStyles)
-    }
-
-    return data
-  }
-
-  /**
-   * Set the x-placement attribute before everything else because it could be used
-   * to add margins to the popper margins needs to be calculated to get the
-   * correct popper offsets.
-   * @method
-   * @memberof Popper.modifiers
-   * @param {HTMLElement} reference - The reference element used to position the popper
-   * @param {HTMLElement} popper - The HTML element used as popper
-   * @param {Object} options - Popper.js options
-   */
-  function applyStyleOnLoad(
-    reference,
-    popper,
-    options,
-    modifierOptions,
-    state
-  ) {
-    // compute reference element offsets
-    var referenceOffsets = getReferenceOffsets(
-      state,
-      popper,
-      reference,
-      options.positionFixed
-    )
-
-    // compute auto placement, store placement inside the data object,
-    // modifiers will be able to edit `placement` if needed
-    // and refer to originalPlacement to know the original value
-    var placement = computeAutoPlacement(
-      options.placement,
-      referenceOffsets,
-      popper,
-      reference,
-      options.modifiers.flip.boundariesElement,
-      options.modifiers.flip.padding
-    )
-
-    popper.setAttribute('x-placement', placement)
-
-    // Apply `position` to popper before anything else because
-    // without the position applied we can't guarantee correct computations
-    setStyles(popper, {
-      position: options.positionFixed ? 'fixed' : 'absolute',
-    })
-
-    return options
-  }
-
-  /**
-   * @function
-   * @memberof Popper.Utils
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Boolean} shouldRound - If the offsets should be rounded at all
-   * @returns {Object} The popper's position offsets rounded
-   *
-   * The tale of pixel-perfect positioning. It's still not 100% perfect, but as
-   * good as it can be within reason.
-   * Discussion here: https://github.com/FezVrasta/popper.js/pull/715
-   *
-   * Low DPI screens cause a popper to be blurry if not using full pixels (Safari
-   * as well on High DPI screens).
-   *
-   * Firefox prefers no rounding for positioning and does not have blurriness on
-   * high DPI screens.
-   *
-   * Only horizontal placement and left/right values need to be considered.
-   */
-  function getRoundedOffsets(data, shouldRound) {
-    var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference
-    var round = Math.round,
-      floor = Math.floor
-
-    var noRound = function noRound(v) {
-      return v
-    }
-
-    var referenceWidth = round(reference.width)
-    var popperWidth = round(popper.width)
-
-    var isVertical = ['left', 'right'].indexOf(data.placement) !== -1
-    var isVariation = data.placement.indexOf('-') !== -1
-    var sameWidthParity = referenceWidth % 2 === popperWidth % 2
-    var bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1
-
-    var horizontalToInteger = !shouldRound
-      ? noRound
-      : isVertical || isVariation || sameWidthParity
-      ? round
-      : floor
-    var verticalToInteger = !shouldRound ? noRound : round
-
-    return {
-      left: horizontalToInteger(
-        bothOddWidth && !isVariation && shouldRound
-          ? popper.left - 1
-          : popper.left
-      ),
-      top: verticalToInteger(popper.top),
-      bottom: verticalToInteger(popper.bottom),
-      right: horizontalToInteger(popper.right),
-    }
-  }
-
-  var isFirefox = isBrowser && /Firefox/i.test(navigator.userAgent)
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function computeStyle(data, options) {
-    var x = options.x,
-      y = options.y
-    var popper = data.offsets.popper
-
-    // Remove this legacy support in Popper.js v2
-
-    var legacyGpuAccelerationOption = find(data.instance.modifiers, function(
-      modifier
-    ) {
-      return modifier.name === 'applyStyle'
-    }).gpuAcceleration
-    if (legacyGpuAccelerationOption !== undefined) {
-      console.warn(
-        'WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!'
-      )
-    }
-    var gpuAcceleration =
-      legacyGpuAccelerationOption !== undefined
-        ? legacyGpuAccelerationOption
-        : options.gpuAcceleration
-
-    var offsetParent = getOffsetParent(data.instance.popper)
-    var offsetParentRect = getBoundingClientRect(offsetParent)
-
-    // Styles
-    var styles = {
-      position: popper.position,
-    }
-
-    var offsets = getRoundedOffsets(
-      data,
-      window.devicePixelRatio < 2 || !isFirefox
-    )
-
-    var sideA = x === 'bottom' ? 'top' : 'bottom'
-    var sideB = y === 'right' ? 'left' : 'right'
-
-    // if gpuAcceleration is set to `true` and transform is supported,
-    //  we use `translate3d` to apply the position to the popper we
-    // automatically use the supported prefixed version if needed
-    var prefixedProperty = getSupportedPropertyName('transform')
-
-    // now, let's make a step back and look at this code closely (wtf?)
-    // If the content of the popper grows once it's been positioned, it
-    // may happen that the popper gets misplaced because of the new content
-    // overflowing its reference element
-    // To avoid this problem, we provide two options (x and y), which allow
-    // the consumer to define the offset origin.
-    // If we position a popper on top of a reference element, we can set
-    // `x` to `top` to make the popper grow towards its top instead of
-    // its bottom.
-    var left = void 0,
-      top = void 0
-    if (sideA === 'bottom') {
-      // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)
-      // and not the bottom of the html element
-      if (offsetParent.nodeName === 'HTML') {
-        top = -offsetParent.clientHeight + offsets.bottom
-      } else {
-        top = -offsetParentRect.height + offsets.bottom
-      }
-    } else {
-      top = offsets.top
-    }
-    if (sideB === 'right') {
-      if (offsetParent.nodeName === 'HTML') {
-        left = -offsetParent.clientWidth + offsets.right
-      } else {
-        left = -offsetParentRect.width + offsets.right
-      }
-    } else {
-      left = offsets.left
-    }
-    if (gpuAcceleration && prefixedProperty) {
-      styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)'
-      styles[sideA] = 0
-      styles[sideB] = 0
-      styles.willChange = 'transform'
-    } else {
-      // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties
-      var invertTop = sideA === 'bottom' ? -1 : 1
-      var invertLeft = sideB === 'right' ? -1 : 1
-      styles[sideA] = top * invertTop
-      styles[sideB] = left * invertLeft
-      styles.willChange = sideA + ', ' + sideB
-    }
-
-    // Attributes
-    var attributes = {
-      'x-placement': data.placement,
-    }
-
-    // Update `data` attributes, styles and arrowStyles
-    data.attributes = _extends$1({}, attributes, data.attributes)
-    data.styles = _extends$1({}, styles, data.styles)
-    data.arrowStyles = _extends$1({}, data.offsets.arrow, data.arrowStyles)
-
-    return data
-  }
-
-  /**
-   * Helper used to know if the given modifier depends from another one.<br />
-   * It checks if the needed modifier is listed and enabled.
-   * @method
-   * @memberof Popper.Utils
-   * @param {Array} modifiers - list of modifiers
-   * @param {String} requestingName - name of requesting modifier
-   * @param {String} requestedName - name of requested modifier
-   * @returns {Boolean}
-   */
-  function isModifierRequired(modifiers, requestingName, requestedName) {
-    var requesting = find(modifiers, function(_ref) {
-      var name = _ref.name
-      return name === requestingName
-    })
-
-    var isRequired =
-      !!requesting &&
-      modifiers.some(function(modifier) {
-        return (
-          modifier.name === requestedName &&
-          modifier.enabled &&
-          modifier.order < requesting.order
-        )
-      })
-
-    if (!isRequired) {
-      var _requesting = '`' + requestingName + '`'
-      var requested = '`' + requestedName + '`'
-      console.warn(
-        requested +
-          ' modifier is required by ' +
-          _requesting +
-          ' modifier in order to work, be sure to include it before ' +
-          _requesting +
-          '!'
-      )
-    }
-    return isRequired
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function arrow(data, options) {
-    var _data$offsets$arrow
-
-    // arrow depends on keepTogether in order to work
-    if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {
-      return data
-    }
-
-    var arrowElement = options.element
-
-    // if arrowElement is a string, suppose it's a CSS selector
-    if (typeof arrowElement === 'string') {
-      arrowElement = data.instance.popper.querySelector(arrowElement)
-
-      // if arrowElement is not found, don't run the modifier
-      if (!arrowElement) {
-        return data
-      }
-    } else {
-      // if the arrowElement isn't a query selector we must check that the
-      // provided DOM node is child of its popper node
-      if (!data.instance.popper.contains(arrowElement)) {
-        console.warn(
-          'WARNING: `arrow.element` must be child of its popper element!'
-        )
-        return data
-      }
-    }
-
-    var placement = data.placement.split('-')[0]
-    var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference
-
-    var isVertical = ['left', 'right'].indexOf(placement) !== -1
-
-    var len = isVertical ? 'height' : 'width'
-    var sideCapitalized = isVertical ? 'Top' : 'Left'
-    var side = sideCapitalized.toLowerCase()
-    var altSide = isVertical ? 'left' : 'top'
-    var opSide = isVertical ? 'bottom' : 'right'
-    var arrowElementSize = getOuterSizes(arrowElement)[len]
-
-    //
-    // extends keepTogether behavior making sure the popper and its
-    // reference have enough pixels in conjunction
-    //
-
-    // top/left side
-    if (reference[opSide] - arrowElementSize < popper[side]) {
-      data.offsets.popper[side] -=
-        popper[side] - (reference[opSide] - arrowElementSize)
-    }
-    // bottom/right side
-    if (reference[side] + arrowElementSize > popper[opSide]) {
-      data.offsets.popper[side] +=
-        reference[side] + arrowElementSize - popper[opSide]
-    }
-    data.offsets.popper = getClientRect(data.offsets.popper)
-
-    // compute center of the popper
-    var center = reference[side] + reference[len] / 2 - arrowElementSize / 2
-
-    // Compute the sideValue using the updated popper offsets
-    // take popper margin in account because we don't have this info available
-    var css = getStyleComputedProperty(data.instance.popper)
-    var popperMarginSide = parseFloat(css['margin' + sideCapitalized])
-    var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width'])
-    var sideValue =
-      center - data.offsets.popper[side] - popperMarginSide - popperBorderSide
-
-    // prevent arrowElement from being placed not contiguously to its popper
-    sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0)
-
-    data.arrowElement = arrowElement
-    data.offsets.arrow =
-      ((_data$offsets$arrow = {}),
-      defineProperty(_data$offsets$arrow, side, Math.round(sideValue)),
-      defineProperty(_data$offsets$arrow, altSide, ''),
-      _data$offsets$arrow)
-
-    return data
-  }
-
-  /**
-   * Get the opposite placement variation of the given one
-   * @method
-   * @memberof Popper.Utils
-   * @argument {String} placement variation
-   * @returns {String} flipped placement variation
-   */
-  function getOppositeVariation(variation) {
-    if (variation === 'end') {
-      return 'start'
-    } else if (variation === 'start') {
-      return 'end'
-    }
-    return variation
-  }
-
-  /**
-   * List of accepted placements to use as values of the `placement` option.<br />
-   * Valid placements are:
-   * - `auto`
-   * - `top`
-   * - `right`
-   * - `bottom`
-   * - `left`
-   *
-   * Each placement can have a variation from this list:
-   * - `-start`
-   * - `-end`
-   *
-   * Variations are interpreted easily if you think of them as the left to right
-   * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`
-   * is right.<br />
-   * Vertically (`left` and `right`), `start` is top and `end` is bottom.
-   *
-   * Some valid examples are:
-   * - `top-end` (on top of reference, right aligned)
-   * - `right-start` (on right of reference, top aligned)
-   * - `bottom` (on bottom, centered)
-   * - `auto-end` (on the side with more space available, alignment depends by placement)
-   *
-   * @static
-   * @type {Array}
-   * @enum {String}
-   * @readonly
-   * @method placements
-   * @memberof Popper
-   */
-  var placements = [
-    'auto-start',
-    'auto',
-    'auto-end',
-    'top-start',
-    'top',
-    'top-end',
-    'right-start',
-    'right',
-    'right-end',
-    'bottom-end',
-    'bottom',
-    'bottom-start',
-    'left-end',
-    'left',
-    'left-start',
-  ]
-
-  // Get rid of `auto` `auto-start` and `auto-end`
-  var validPlacements = placements.slice(3)
-
-  /**
-   * Given an initial placement, returns all the subsequent placements
-   * clockwise (or counter-clockwise).
-   *
-   * @method
-   * @memberof Popper.Utils
-   * @argument {String} placement - A valid placement (it accepts variations)
-   * @argument {Boolean} counter - Set to true to walk the placements counterclockwise
-   * @returns {Array} placements including their variations
-   */
-  function clockwise(placement) {
-    var counter =
-      arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false
-
-    var index = validPlacements.indexOf(placement)
-    var arr = validPlacements
-      .slice(index + 1)
-      .concat(validPlacements.slice(0, index))
-    return counter ? arr.reverse() : arr
-  }
-
-  var BEHAVIORS = {
-    FLIP: 'flip',
-    CLOCKWISE: 'clockwise',
-    COUNTERCLOCKWISE: 'counterclockwise',
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function flip(data, options) {
-    // if `inner` modifier is enabled, we can't use the `flip` modifier
-    if (isModifierEnabled(data.instance.modifiers, 'inner')) {
-      return data
-    }
-
-    if (data.flipped && data.placement === data.originalPlacement) {
-      // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides
-      return data
-    }
-
-    var boundaries = getBoundaries(
-      data.instance.popper,
-      data.instance.reference,
-      options.padding,
-      options.boundariesElement,
-      data.positionFixed
-    )
-
-    var placement = data.placement.split('-')[0]
-    var placementOpposite = getOppositePlacement(placement)
-    var variation = data.placement.split('-')[1] || ''
-
-    var flipOrder = []
-
-    switch (options.behavior) {
-      case BEHAVIORS.FLIP:
-        flipOrder = [placement, placementOpposite]
-        break
-      case BEHAVIORS.CLOCKWISE:
-        flipOrder = clockwise(placement)
-        break
-      case BEHAVIORS.COUNTERCLOCKWISE:
-        flipOrder = clockwise(placement, true)
-        break
-      default:
-        flipOrder = options.behavior
-    }
-
-    flipOrder.forEach(function(step, index) {
-      if (placement !== step || flipOrder.length === index + 1) {
-        return data
-      }
-
-      placement = data.placement.split('-')[0]
-      placementOpposite = getOppositePlacement(placement)
-
-      var popperOffsets = data.offsets.popper
-      var refOffsets = data.offsets.reference
-
-      // using floor because the reference offsets may contain decimals we are not going to consider here
-      var floor = Math.floor
-      var overlapsRef =
-        (placement === 'left' &&
-          floor(popperOffsets.right) > floor(refOffsets.left)) ||
-        (placement === 'right' &&
-          floor(popperOffsets.left) < floor(refOffsets.right)) ||
-        (placement === 'top' &&
-          floor(popperOffsets.bottom) > floor(refOffsets.top)) ||
-        (placement === 'bottom' &&
-          floor(popperOffsets.top) < floor(refOffsets.bottom))
-
-      var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left)
-      var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right)
-      var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top)
-      var overflowsBottom =
-        floor(popperOffsets.bottom) > floor(boundaries.bottom)
-
-      var overflowsBoundaries =
-        (placement === 'left' && overflowsLeft) ||
-        (placement === 'right' && overflowsRight) ||
-        (placement === 'top' && overflowsTop) ||
-        (placement === 'bottom' && overflowsBottom)
-
-      // flip the variation if required
-      var isVertical = ['top', 'bottom'].indexOf(placement) !== -1
-
-      // flips variation if reference element overflows boundaries
-      var flippedVariationByRef =
-        !!options.flipVariations &&
-        ((isVertical && variation === 'start' && overflowsLeft) ||
-          (isVertical && variation === 'end' && overflowsRight) ||
-          (!isVertical && variation === 'start' && overflowsTop) ||
-          (!isVertical && variation === 'end' && overflowsBottom))
-
-      // flips variation if popper content overflows boundaries
-      var flippedVariationByContent =
-        !!options.flipVariationsByContent &&
-        ((isVertical && variation === 'start' && overflowsRight) ||
-          (isVertical && variation === 'end' && overflowsLeft) ||
-          (!isVertical && variation === 'start' && overflowsBottom) ||
-          (!isVertical && variation === 'end' && overflowsTop))
-
-      var flippedVariation = flippedVariationByRef || flippedVariationByContent
-
-      if (overlapsRef || overflowsBoundaries || flippedVariation) {
-        // this boolean to detect any flip loop
-        data.flipped = true
-
-        if (overlapsRef || overflowsBoundaries) {
-          placement = flipOrder[index + 1]
-        }
-
-        if (flippedVariation) {
-          variation = getOppositeVariation(variation)
-        }
-
-        data.placement = placement + (variation ? '-' + variation : '')
-
-        // this object contains `position`, we want to preserve it along with
-        // any additional property we may add in the future
-        data.offsets.popper = _extends$1(
-          {},
-          data.offsets.popper,
-          getPopperOffsets(
-            data.instance.popper,
-            data.offsets.reference,
-            data.placement
-          )
-        )
-
-        data = runModifiers(data.instance.modifiers, data, 'flip')
-      }
-    })
-    return data
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function keepTogether(data) {
-    var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference
-
-    var placement = data.placement.split('-')[0]
-    var floor = Math.floor
-    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1
-    var side = isVertical ? 'right' : 'bottom'
-    var opSide = isVertical ? 'left' : 'top'
-    var measurement = isVertical ? 'width' : 'height'
-
-    if (popper[side] < floor(reference[opSide])) {
-      data.offsets.popper[opSide] =
-        floor(reference[opSide]) - popper[measurement]
-    }
-    if (popper[opSide] > floor(reference[side])) {
-      data.offsets.popper[opSide] = floor(reference[side])
-    }
-
-    return data
-  }
-
-  /**
-   * Converts a string containing value + unit into a px value number
-   * @function
-   * @memberof {modifiers~offset}
-   * @private
-   * @argument {String} str - Value + unit string
-   * @argument {String} measurement - `height` or `width`
-   * @argument {Object} popperOffsets
-   * @argument {Object} referenceOffsets
-   * @returns {Number|String}
-   * Value in pixels, or original string if no values were extracted
-   */
-  function toValue(str, measurement, popperOffsets, referenceOffsets) {
-    // separate value from unit
-    var split = str.match(/((?:\-|\+)?\d*\.?\d*)(.*)/)
-    var value = +split[1]
-    var unit = split[2]
-
-    // If it's not a number it's an operator, I guess
-    if (!value) {
-      return str
-    }
-
-    if (unit.indexOf('%') === 0) {
-      var element = void 0
-      switch (unit) {
-        case '%p':
-          element = popperOffsets
-          break
-        case '%':
-        case '%r':
-        default:
-          element = referenceOffsets
-      }
-
-      var rect = getClientRect(element)
-      return (rect[measurement] / 100) * value
-    } else if (unit === 'vh' || unit === 'vw') {
-      // if is a vh or vw, we calculate the size based on the viewport
-      var size = void 0
-      if (unit === 'vh') {
-        size = Math.max(
-          document.documentElement.clientHeight,
-          window.innerHeight || 0
-        )
-      } else {
-        size = Math.max(
-          document.documentElement.clientWidth,
-          window.innerWidth || 0
-        )
-      }
-      return (size / 100) * value
-    } else {
-      // if is an explicit pixel unit, we get rid of the unit and keep the value
-      // if is an implicit unit, it's px, and we return just the value
-      return value
-    }
-  }
-
-  /**
-   * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.
-   * @function
-   * @memberof {modifiers~offset}
-   * @private
-   * @argument {String} offset
-   * @argument {Object} popperOffsets
-   * @argument {Object} referenceOffsets
-   * @argument {String} basePlacement
-   * @returns {Array} a two cells array with x and y offsets in numbers
-   */
-  function parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {
-    var offsets = [0, 0]
-
-    // Use height if placement is left or right and index is 0 otherwise use width
-    // in this way the first offset will use an axis and the second one
-    // will use the other one
-    var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1
-
-    // Split the offset string to obtain a list of values and operands
-    // The regex addresses values with the plus or minus sign in front (+10, -20, etc)
-    var fragments = offset.split(/(\+|\-)/).map(function(frag) {
-      return frag.trim()
-    })
-
-    // Detect if the offset string contains a pair of values or a single one
-    // they could be separated by comma or space
-    var divider = fragments.indexOf(
-      find(fragments, function(frag) {
-        return frag.search(/,|\s/) !== -1
-      })
-    )
-
-    if (fragments[divider] && fragments[divider].indexOf(',') === -1) {
-      console.warn(
-        'Offsets separated by white space(s) are deprecated, use a comma (,) instead.'
-      )
-    }
-
-    // If divider is found, we divide the list of values and operands to divide
-    // them by ofset X and Y.
-    var splitRegex = /\s*,\s*|\s+/
-    var ops =
-      divider !== -1
-        ? [
-            fragments
-              .slice(0, divider)
-              .concat([fragments[divider].split(splitRegex)[0]]),
-            [fragments[divider].split(splitRegex)[1]].concat(
-              fragments.slice(divider + 1)
-            ),
-          ]
-        : [fragments]
-
-    // Convert the values with units to absolute pixels to allow our computations
-    ops = ops.map(function(op, index) {
-      // Most of the units rely on the orientation of the popper
-      var measurement = (index === 1
-      ? !useHeight
-      : useHeight)
-        ? 'height'
-        : 'width'
-      var mergeWithPrevious = false
-      return (
-        op
-          // This aggregates any `+` or `-` sign that aren't considered operators
-          // e.g.: 10 + +5 => [10, +, +5]
-          .reduce(function(a, b) {
-            if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {
-              a[a.length - 1] = b
-              mergeWithPrevious = true
-              return a
-            } else if (mergeWithPrevious) {
-              a[a.length - 1] += b
-              mergeWithPrevious = false
-              return a
-            } else {
-              return a.concat(b)
+  function _extends$3() {
+    _extends$3 =
+      Object.assign ||
+      function(target) {
+        for (var i = 1; i < arguments.length; i++) {
+          var source = arguments[i]
+
+          for (var key in source) {
+            if (Object.prototype.hasOwnProperty.call(source, key)) {
+              target[key] = source[key]
             }
-          }, [])
-          // Here we convert the string values into number values (in px)
-          .map(function(str) {
-            return toValue(str, measurement, popperOffsets, referenceOffsets)
-          })
-      )
-    })
-
-    // Loop trough the offsets arrays and execute the operations
-    ops.forEach(function(op, index) {
-      op.forEach(function(frag, index2) {
-        if (isNumeric(frag)) {
-          offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1)
+          }
         }
-      })
-    })
-    return offsets
-  }
 
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
-   * @argument {Object} options - Modifiers configuration and options
-   * @argument {Number|String} options.offset=0
-   * The offset value as described in the modifier description
-   * @returns {Object} The data object, properly modified
-   */
-  function offset$1(data, _ref) {
-    var offset = _ref.offset
-    var placement = data.placement,
-      _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference
-
-    var basePlacement = placement.split('-')[0]
-
-    var offsets = void 0
-    if (isNumeric(+offset)) {
-      offsets = [+offset, 0]
-    } else {
-      offsets = parseOffset(offset, popper, reference, basePlacement)
-    }
-
-    if (basePlacement === 'left') {
-      popper.top += offsets[0]
-      popper.left -= offsets[1]
-    } else if (basePlacement === 'right') {
-      popper.top += offsets[0]
-      popper.left += offsets[1]
-    } else if (basePlacement === 'top') {
-      popper.left += offsets[0]
-      popper.top -= offsets[1]
-    } else if (basePlacement === 'bottom') {
-      popper.left += offsets[0]
-      popper.top += offsets[1]
-    }
-
-    data.popper = popper
-    return data
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function preventOverflow(data, options) {
-    var boundariesElement =
-      options.boundariesElement || getOffsetParent(data.instance.popper)
-
-    // If offsetParent is the reference element, we really want to
-    // go one step up and use the next offsetParent as reference to
-    // avoid to make this modifier completely useless and look like broken
-    if (data.instance.reference === boundariesElement) {
-      boundariesElement = getOffsetParent(boundariesElement)
-    }
-
-    // NOTE: DOM access here
-    // resets the popper's position so that the document size can be calculated excluding
-    // the size of the popper element itself
-    var transformProp = getSupportedPropertyName('transform')
-    var popperStyles = data.instance.popper.style // assignment to help minification
-    var top = popperStyles.top,
-      left = popperStyles.left,
-      transform = popperStyles[transformProp]
-
-    popperStyles.top = ''
-    popperStyles.left = ''
-    popperStyles[transformProp] = ''
-
-    var boundaries = getBoundaries(
-      data.instance.popper,
-      data.instance.reference,
-      options.padding,
-      boundariesElement,
-      data.positionFixed
-    )
-
-    // NOTE: DOM access here
-    // restores the original style properties after the offsets have been computed
-    popperStyles.top = top
-    popperStyles.left = left
-    popperStyles[transformProp] = transform
-
-    options.boundaries = boundaries
-
-    var order = options.priority
-    var popper = data.offsets.popper
-
-    var check = {
-      primary: function primary(placement) {
-        var value = popper[placement]
-        if (
-          popper[placement] < boundaries[placement] &&
-          !options.escapeWithReference
-        ) {
-          value = Math.max(popper[placement], boundaries[placement])
-        }
-        return defineProperty({}, placement, value)
-      },
-      secondary: function secondary(placement) {
-        var mainSide = placement === 'right' ? 'left' : 'top'
-        var value = popper[mainSide]
-        if (
-          popper[placement] > boundaries[placement] &&
-          !options.escapeWithReference
-        ) {
-          value = Math.min(
-            popper[mainSide],
-            boundaries[placement] -
-              (placement === 'right' ? popper.width : popper.height)
-          )
-        }
-        return defineProperty({}, mainSide, value)
-      },
-    }
-
-    order.forEach(function(placement) {
-      var side =
-        ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary'
-      popper = _extends$1({}, popper, check[side](placement))
-    })
-
-    data.offsets.popper = popper
-
-    return data
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function shift(data) {
-    var placement = data.placement
-    var basePlacement = placement.split('-')[0]
-    var shiftvariation = placement.split('-')[1]
-
-    // if shift shiftvariation is specified, run the modifier
-    if (shiftvariation) {
-      var _data$offsets = data.offsets,
-        reference = _data$offsets.reference,
-        popper = _data$offsets.popper
-
-      var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1
-      var side = isVertical ? 'left' : 'top'
-      var measurement = isVertical ? 'width' : 'height'
-
-      var shiftOffsets = {
-        start: defineProperty({}, side, reference[side]),
-        end: defineProperty(
-          {},
-          side,
-          reference[side] + reference[measurement] - popper[measurement]
-        ),
+        return target
       }
 
-      data.offsets.popper = _extends$1({}, popper, shiftOffsets[shiftvariation])
+    return _extends$3.apply(this, arguments)
+  }
+
+  function _objectWithoutPropertiesLoose$2(source, excluded) {
+    if (source == null) return {}
+    var target = {}
+    var sourceKeys = Object.keys(source)
+    var key, i
+
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i]
+      if (excluded.indexOf(key) >= 0) continue
+      target[key] = source[key]
     }
 
-    return data
+    return target
   }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by update method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function hide(data) {
-    if (
-      !isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')
-    ) {
-      return data
-    }
-
-    var refRect = data.offsets.reference
-    var bound = find(data.instance.modifiers, function(modifier) {
-      return modifier.name === 'preventOverflow'
-    }).boundaries
-
-    if (
-      refRect.bottom < bound.top ||
-      refRect.left > bound.right ||
-      refRect.top > bound.bottom ||
-      refRect.right < bound.left
-    ) {
-      // Avoid unnecessary DOM access if visibility hasn't changed
-      if (data.hide === true) {
-        return data
-      }
-
-      data.hide = true
-      data.attributes['x-out-of-boundaries'] = ''
-    } else {
-      // Avoid unnecessary DOM access if visibility hasn't changed
-      if (data.hide === false) {
-        return data
-      }
-
-      data.hide = false
-      data.attributes['x-out-of-boundaries'] = false
-    }
-
-    return data
-  }
-
-  /**
-   * @function
-   * @memberof Modifiers
-   * @argument {Object} data - The data object generated by `update` method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {Object} The data object, properly modified
-   */
-  function inner(data) {
-    var placement = data.placement
-    var basePlacement = placement.split('-')[0]
-    var _data$offsets = data.offsets,
-      popper = _data$offsets.popper,
-      reference = _data$offsets.reference
-
-    var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1
-
-    var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1
-
-    popper[isHoriz ? 'left' : 'top'] =
-      reference[basePlacement] -
-      (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0)
-
-    data.placement = getOppositePlacement(placement)
-    data.offsets.popper = getClientRect(popper)
-
-    return data
-  }
-
-  /**
-   * Modifier function, each modifier can have a function of this type assigned
-   * to its `fn` property.<br />
-   * These functions will be called on each update, this means that you must
-   * make sure they are performant enough to avoid performance bottlenecks.
-   *
-   * @function ModifierFn
-   * @argument {dataObject} data - The data object generated by `update` method
-   * @argument {Object} options - Modifiers configuration and options
-   * @returns {dataObject} The data object, properly modified
-   */
-
-  /**
-   * Modifiers are plugins used to alter the behavior of your poppers.<br />
-   * Popper.js uses a set of 9 modifiers to provide all the basic functionalities
-   * needed by the library.
-   *
-   * Usually you don't want to override the `order`, `fn` and `onLoad` props.
-   * All the other properties are configurations that could be tweaked.
-   * @namespace modifiers
-   */
-  var modifiers = {
-    /**
-     * Modifier used to shift the popper on the start or end of its reference
-     * element.<br />
-     * It will read the variation of the `placement` property.<br />
-     * It can be one either `-end` or `-start`.
-     * @memberof modifiers
-     * @inner
-     */
-    shift: {
-      /** @prop {number} order=100 - Index used to define the order of execution */
-      order: 100,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: shift,
-    },
-
-    /**
-     * The `offset` modifier can shift your popper on both its axis.
-     *
-     * It accepts the following units:
-     * - `px` or unit-less, interpreted as pixels
-     * - `%` or `%r`, percentage relative to the length of the reference element
-     * - `%p`, percentage relative to the length of the popper element
-     * - `vw`, CSS viewport width unit
-     * - `vh`, CSS viewport height unit
-     *
-     * For length is intended the main axis relative to the placement of the popper.<br />
-     * This means that if the placement is `top` or `bottom`, the length will be the
-     * `width`. In case of `left` or `right`, it will be the `height`.
-     *
-     * You can provide a single value (as `Number` or `String`), or a pair of values
-     * as `String` divided by a comma or one (or more) white spaces.<br />
-     * The latter is a deprecated method because it leads to confusion and will be
-     * removed in v2.<br />
-     * Additionally, it accepts additions and subtractions between different units.
-     * Note that multiplications and divisions aren't supported.
-     *
-     * Valid examples are:
-     * ```
-     * 10
-     * '10%'
-     * '10, 10'
-     * '10%, 10'
-     * '10 + 10%'
-     * '10 - 5vh + 3%'
-     * '-10px + 5vh, 5px - 6%'
-     * ```
-     * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap
-     * > with their reference element, unfortunately, you will have to disable the `flip` modifier.
-     * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).
-     *
-     * @memberof modifiers
-     * @inner
-     */
-    offset: {
-      /** @prop {number} order=200 - Index used to define the order of execution */
-      order: 200,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: offset$1,
-      /** @prop {Number|String} offset=0
-       * The offset value as described in the modifier description
-       */
-      offset: 0,
-    },
-
-    /**
-     * Modifier used to prevent the popper from being positioned outside the boundary.
-     *
-     * A scenario exists where the reference itself is not within the boundaries.<br />
-     * We can say it has "escaped the boundaries" — or just "escaped".<br />
-     * In this case we need to decide whether the popper should either:
-     *
-     * - detach from the reference and remain "trapped" in the boundaries, or
-     * - if it should ignore the boundary and "escape with its reference"
-     *
-     * When `escapeWithReference` is set to`true` and reference is completely
-     * outside its boundaries, the popper will overflow (or completely leave)
-     * the boundaries in order to remain attached to the edge of the reference.
-     *
-     * @memberof modifiers
-     * @inner
-     */
-    preventOverflow: {
-      /** @prop {number} order=300 - Index used to define the order of execution */
-      order: 300,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: preventOverflow,
-      /**
-       * @prop {Array} [priority=['left','right','top','bottom']]
-       * Popper will try to prevent overflow following these priorities by default,
-       * then, it could overflow on the left and on top of the `boundariesElement`
-       */
-      priority: ['left', 'right', 'top', 'bottom'],
-      /**
-       * @prop {number} padding=5
-       * Amount of pixel used to define a minimum distance between the boundaries
-       * and the popper. This makes sure the popper always has a little padding
-       * between the edges of its container
-       */
-      padding: 5,
-      /**
-       * @prop {String|HTMLElement} boundariesElement='scrollParent'
-       * Boundaries used by the modifier. Can be `scrollParent`, `window`,
-       * `viewport` or any DOM element.
-       */
-      boundariesElement: 'scrollParent',
-    },
-
-    /**
-     * Modifier used to make sure the reference and its popper stay near each other
-     * without leaving any gap between the two. Especially useful when the arrow is
-     * enabled and you want to ensure that it points to its reference element.
-     * It cares only about the first axis. You can still have poppers with margin
-     * between the popper and its reference element.
-     * @memberof modifiers
-     * @inner
-     */
-    keepTogether: {
-      /** @prop {number} order=400 - Index used to define the order of execution */
-      order: 400,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: keepTogether,
-    },
-
-    /**
-     * This modifier is used to move the `arrowElement` of the popper to make
-     * sure it is positioned between the reference element and its popper element.
-     * It will read the outer size of the `arrowElement` node to detect how many
-     * pixels of conjunction are needed.
-     *
-     * It has no effect if no `arrowElement` is provided.
-     * @memberof modifiers
-     * @inner
-     */
-    arrow: {
-      /** @prop {number} order=500 - Index used to define the order of execution */
-      order: 500,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: arrow,
-      /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */
-      element: '[x-arrow]',
-    },
-
-    /**
-     * Modifier used to flip the popper's placement when it starts to overlap its
-     * reference element.
-     *
-     * Requires the `preventOverflow` modifier before it in order to work.
-     *
-     * **NOTE:** this modifier will interrupt the current update cycle and will
-     * restart it if it detects the need to flip the placement.
-     * @memberof modifiers
-     * @inner
-     */
-    flip: {
-      /** @prop {number} order=600 - Index used to define the order of execution */
-      order: 600,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: flip,
-      /**
-       * @prop {String|Array} behavior='flip'
-       * The behavior used to change the popper's placement. It can be one of
-       * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid
-       * placements (with optional variations)
-       */
-      behavior: 'flip',
-      /**
-       * @prop {number} padding=5
-       * The popper will flip if it hits the edges of the `boundariesElement`
-       */
-      padding: 5,
-      /**
-       * @prop {String|HTMLElement} boundariesElement='viewport'
-       * The element which will define the boundaries of the popper position.
-       * The popper will never be placed outside of the defined boundaries
-       * (except if `keepTogether` is enabled)
-       */
-      boundariesElement: 'viewport',
-      /**
-       * @prop {Boolean} flipVariations=false
-       * The popper will switch placement variation between `-start` and `-end` when
-       * the reference element overlaps its boundaries.
-       *
-       * The original placement should have a set variation.
-       */
-      flipVariations: false,
-      /**
-       * @prop {Boolean} flipVariationsByContent=false
-       * The popper will switch placement variation between `-start` and `-end` when
-       * the popper element overlaps its reference boundaries.
-       *
-       * The original placement should have a set variation.
-       */
-      flipVariationsByContent: false,
-    },
-
-    /**
-     * Modifier used to make the popper flow toward the inner of the reference element.
-     * By default, when this modifier is disabled, the popper will be placed outside
-     * the reference element.
-     * @memberof modifiers
-     * @inner
-     */
-    inner: {
-      /** @prop {number} order=700 - Index used to define the order of execution */
-      order: 700,
-      /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */
-      enabled: false,
-      /** @prop {ModifierFn} */
-      fn: inner,
-    },
-
-    /**
-     * Modifier used to hide the popper when its reference element is outside of the
-     * popper boundaries. It will set a `x-out-of-boundaries` attribute which can
-     * be used to hide with a CSS selector the popper when its reference is
-     * out of boundaries.
-     *
-     * Requires the `preventOverflow` modifier before it in order to work.
-     * @memberof modifiers
-     * @inner
-     */
-    hide: {
-      /** @prop {number} order=800 - Index used to define the order of execution */
-      order: 800,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: hide,
-    },
-
-    /**
-     * Computes the style that will be applied to the popper element to gets
-     * properly positioned.
-     *
-     * Note that this modifier will not touch the DOM, it just prepares the styles
-     * so that `applyStyle` modifier can apply it. This separation is useful
-     * in case you need to replace `applyStyle` with a custom implementation.
-     *
-     * This modifier has `850` as `order` value to maintain backward compatibility
-     * with previous versions of Popper.js. Expect the modifiers ordering method
-     * to change in future major versions of the library.
-     *
-     * @memberof modifiers
-     * @inner
-     */
-    computeStyle: {
-      /** @prop {number} order=850 - Index used to define the order of execution */
-      order: 850,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: computeStyle,
-      /**
-       * @prop {Boolean} gpuAcceleration=true
-       * If true, it uses the CSS 3D transformation to position the popper.
-       * Otherwise, it will use the `top` and `left` properties
-       */
-      gpuAcceleration: true,
-      /**
-       * @prop {string} [x='bottom']
-       * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.
-       * Change this if your popper should grow in a direction different from `bottom`
-       */
-      x: 'bottom',
-      /**
-       * @prop {string} [x='left']
-       * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.
-       * Change this if your popper should grow in a direction different from `right`
-       */
-      y: 'right',
-    },
-
-    /**
-     * Applies the computed styles to the popper element.
-     *
-     * All the DOM manipulations are limited to this modifier. This is useful in case
-     * you want to integrate Popper.js inside a framework or view library and you
-     * want to delegate all the DOM manipulations to it.
-     *
-     * Note that if you disable this modifier, you must make sure the popper element
-     * has its position set to `absolute` before Popper.js can do its work!
-     *
-     * Just disable this modifier and define your own to achieve the desired effect.
-     *
-     * @memberof modifiers
-     * @inner
-     */
-    applyStyle: {
-      /** @prop {number} order=900 - Index used to define the order of execution */
-      order: 900,
-      /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */
-      enabled: true,
-      /** @prop {ModifierFn} */
-      fn: applyStyle,
-      /** @prop {Function} */
-      onLoad: applyStyleOnLoad,
-      /**
-       * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier
-       * @prop {Boolean} gpuAcceleration=true
-       * If true, it uses the CSS 3D transformation to position the popper.
-       * Otherwise, it will use the `top` and `left` properties
-       */
-      gpuAcceleration: undefined,
-    },
-  }
-
-  /**
-   * The `dataObject` is an object containing all the information used by Popper.js.
-   * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.
-   * @name dataObject
-   * @property {Object} data.instance The Popper.js instance
-   * @property {String} data.placement Placement applied to popper
-   * @property {String} data.originalPlacement Placement originally defined on init
-   * @property {Boolean} data.flipped True if popper has been flipped by flip modifier
-   * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper
-   * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier
-   * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)
-   * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)
-   * @property {Object} data.boundaries Offsets of the popper boundaries
-   * @property {Object} data.offsets The measurements of popper, reference and arrow elements
-   * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values
-   * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values
-   * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0
-   */
-
-  /**
-   * Default options provided to Popper.js constructor.<br />
-   * These can be overridden using the `options` argument of Popper.js.<br />
-   * To override an option, simply pass an object with the same
-   * structure of the `options` object, as the 3rd argument. For example:
-   * ```
-   * new Popper(ref, pop, {
-   *   modifiers: {
-   *     preventOverflow: { enabled: false }
-   *   }
-   * })
-   * ```
-   * @type {Object}
-   * @static
-   * @memberof Popper
-   */
-  var Defaults = {
-    /**
-     * Popper's placement.
-     * @prop {Popper.placements} placement='bottom'
-     */
-    placement: 'bottom',
-
-    /**
-     * Set this to true if you want popper to position it self in 'fixed' mode
-     * @prop {Boolean} positionFixed=false
-     */
-    positionFixed: false,
-
-    /**
-     * Whether events (resize, scroll) are initially enabled.
-     * @prop {Boolean} eventsEnabled=true
-     */
-    eventsEnabled: true,
-
-    /**
-     * Set to true if you want to automatically remove the popper when
-     * you call the `destroy` method.
-     * @prop {Boolean} removeOnDestroy=false
-     */
-    removeOnDestroy: false,
-
-    /**
-     * Callback called when the popper is created.<br />
-     * By default, it is set to no-op.<br />
-     * Access Popper.js instance with `data.instance`.
-     * @prop {onCreate}
-     */
-    onCreate: function onCreate() {},
-
-    /**
-     * Callback called when the popper is updated. This callback is not called
-     * on the initialization/creation of the popper, but only on subsequent
-     * updates.<br />
-     * By default, it is set to no-op.<br />
-     * Access Popper.js instance with `data.instance`.
-     * @prop {onUpdate}
-     */
-    onUpdate: function onUpdate() {},
-
-    /**
-     * List of modifiers used to modify the offsets before they are applied to the popper.
-     * They provide most of the functionalities of Popper.js.
-     * @prop {modifiers}
-     */
-    modifiers: modifiers,
-  }
-
-  /**
-   * @callback onCreate
-   * @param {dataObject} data
-   */
-
-  /**
-   * @callback onUpdate
-   * @param {dataObject} data
-   */
-
-  // Utils
-  // Methods
-  var Popper = (function() {
-    /**
-     * Creates a new Popper.js instance.
-     * @class Popper
-     * @param {Element|referenceObject} reference - The reference element used to position the popper
-     * @param {Element} popper - The HTML / XML element used as the popper
-     * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
-     * @return {Object} instance - The generated Popper.js instance
-     */
-    function Popper(reference, popper) {
-      var _this = this
-
-      var options =
-        arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {}
-      classCallCheck(this, Popper)
-
-      this.scheduleUpdate = function() {
-        return requestAnimationFrame(_this.update)
-      }
-
-      // make update() debounced, so that it only runs at most once-per-tick
-      this.update = debounce(this.update.bind(this))
-
-      // with {} we create a new object with the options inside it
-      this.options = _extends$1({}, Popper.Defaults, options)
-
-      // init state
-      this.state = {
-        isDestroyed: false,
-        isCreated: false,
-        scrollParents: [],
-      }
-
-      // get reference and popper elements (allow jQuery wrappers)
-      this.reference = reference && reference.jquery ? reference[0] : reference
-      this.popper = popper && popper.jquery ? popper[0] : popper
-
-      // Deep merge modifiers options
-      this.options.modifiers = {}
-      Object.keys(
-        _extends$1({}, Popper.Defaults.modifiers, options.modifiers)
-      ).forEach(function(name) {
-        _this.options.modifiers[name] = _extends$1(
-          {},
-          Popper.Defaults.modifiers[name] || {},
-          options.modifiers ? options.modifiers[name] : {}
-        )
-      })
-
-      // Refactoring modifiers' list (Object => Array)
-      this.modifiers = Object.keys(this.options.modifiers)
-        .map(function(name) {
-          return _extends$1(
-            {
-              name: name,
-            },
-            _this.options.modifiers[name]
-          )
-        })
-        // sort the modifiers by order
-        .sort(function(a, b) {
-          return a.order - b.order
-        })
-
-      // modifiers have the ability to execute arbitrary code when Popper.js get inited
-      // such code is executed in the same order of its modifier
-      // they could add new properties to their options configuration
-      // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!
-      this.modifiers.forEach(function(modifierOptions) {
-        if (modifierOptions.enabled && isFunction$1(modifierOptions.onLoad)) {
-          modifierOptions.onLoad(
-            _this.reference,
-            _this.popper,
-            _this.options,
-            modifierOptions,
-            _this.state
-          )
-        }
-      })
-
-      // fire the first update to position the popper in the right place
-      this.update()
-
-      var eventsEnabled = this.options.eventsEnabled
-      if (eventsEnabled) {
-        // setup event listeners, they will take care of update the position in specific situations
-        this.enableEventListeners()
-      }
-
-      this.state.eventsEnabled = eventsEnabled
-    }
-
-    // We can't use class properties because they don't get listed in the
-    // class prototype and break stuff like Sinon stubs
-
-    createClass(Popper, [
-      {
-        key: 'update',
-        value: function update$$1() {
-          return update.call(this)
-        },
-      },
-      {
-        key: 'destroy',
-        value: function destroy$$1() {
-          return destroy.call(this)
-        },
-      },
-      {
-        key: 'enableEventListeners',
-        value: function enableEventListeners$$1() {
-          return enableEventListeners.call(this)
-        },
-      },
-      {
-        key: 'disableEventListeners',
-        value: function disableEventListeners$$1() {
-          return disableEventListeners.call(this)
-        },
-
-        /**
-         * Schedules an update. It will run on the next UI update available.
-         * @method scheduleUpdate
-         * @memberof Popper
-         */
-
-        /**
-         * Collection of utilities useful when writing custom modifiers.
-         * Starting from version 1.7, this method is available only if you
-         * include `popper-utils.js` before `popper.js`.
-         *
-         * **DEPRECATION**: This way to access PopperUtils is deprecated
-         * and will be removed in v2! Use the PopperUtils module directly instead.
-         * Due to the high instability of the methods contained in Utils, we can't
-         * guarantee them to follow semver. Use them at your own risk!
-         * @static
-         * @private
-         * @type {Object}
-         * @deprecated since version 1.8
-         * @member Utils
-         * @memberof Popper
-         */
-      },
-    ])
-    return Popper
-  })()
-
-  /**
-   * The `referenceObject` is an object that provides an interface compatible with Popper.js
-   * and lets you use it as replacement of a real DOM node.<br />
-   * You can use this method to position a popper relatively to a set of coordinates
-   * in case you don't have a DOM node to use as reference.
-   *
-   * ```
-   * new Popper(referenceObject, popperNode);
-   * ```
-   *
-   * NB: This feature isn't supported in Internet Explorer 10.
-   * @name referenceObject
-   * @property {Function} data.getBoundingClientRect
-   * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.
-   * @property {number} data.clientWidth
-   * An ES6 getter that will return the width of the virtual reference element.
-   * @property {number} data.clientHeight
-   * An ES6 getter that will return the height of the virtual reference element.
-   */
-
-  Popper.Utils = (typeof window !== 'undefined' ? window : global).PopperUtils
-  Popper.placements = placements
-  Popper.Defaults = Defaults
 
   /**
    * A convenience hook around `useState` designed to be paired with
@@ -6646,80 +3824,2445 @@
     )
   }
 
-  var initialPopperStyles = {
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    opacity: '0',
-    pointerEvents: 'none',
+  var top = 'top'
+  var bottom = 'bottom'
+  var right = 'right'
+  var left = 'left'
+  var auto = 'auto'
+  var basePlacements = [top, bottom, right, left]
+  var start = 'start'
+  var end = 'end'
+  var clippingParents = 'clippingParents'
+  var viewport = 'viewport'
+  var popper = 'popper'
+  var reference = 'reference'
+  var variationPlacements = /*#__PURE__*/ basePlacements.reduce(function(
+    acc,
+    placement
+  ) {
+    return acc.concat([placement + '-' + start, placement + '-' + end])
+  },
+  [])
+  var placements = /*#__PURE__*/ []
+    .concat(basePlacements, [auto])
+    .reduce(function(acc, placement) {
+      return acc.concat([
+        placement,
+        placement + '-' + start,
+        placement + '-' + end,
+      ])
+    }, []) // modifiers that need to read the DOM
+
+  var beforeRead = 'beforeRead'
+  var read = 'read'
+  var afterRead = 'afterRead' // pure-logic modifiers
+
+  var beforeMain = 'beforeMain'
+  var main = 'main'
+  var afterMain = 'afterMain' // modifier with the purpose to write to the DOM (or write into a framework state)
+
+  var beforeWrite = 'beforeWrite'
+  var write = 'write'
+  var afterWrite = 'afterWrite'
+  var modifierPhases = [
+    beforeRead,
+    read,
+    afterRead,
+    beforeMain,
+    main,
+    afterMain,
+    beforeWrite,
+    write,
+    afterWrite,
+  ]
+
+  function getBasePlacement(placement) {
+    return placement.split('-')[0]
   }
-  var initialArrowStyles = {}
+
+  // Returns the layout rect of an element relative to its offsetParent. Layout
+  // means it doesn't take into account transforms.
+  function getLayoutRect(element) {
+    return {
+      x: element.offsetLeft,
+      y: element.offsetTop,
+      width: element.offsetWidth,
+      height: element.offsetHeight,
+    }
+  }
+
+  /*:: import type { Window } from '../types'; */
+
+  /*:: declare function getWindow(node: Node | Window): Window; */
+  function getWindow(node) {
+    if (node.toString() !== '[object Window]') {
+      var ownerDocument = node.ownerDocument
+      return ownerDocument ? ownerDocument.defaultView || window : window
+    }
+
+    return node
+  }
+
+  /*:: declare function isElement(node: mixed): boolean %checks(node instanceof
+    Element); */
+
+  function isElement(node) {
+    var OwnElement = getWindow(node).Element
+    return node instanceof OwnElement || node instanceof Element
+  }
+  /*:: declare function isHTMLElement(node: mixed): boolean %checks(node instanceof
+    HTMLElement); */
+
+  function isHTMLElement$1(node) {
+    var OwnElement = getWindow(node).HTMLElement
+    return node instanceof OwnElement || node instanceof HTMLElement
+  }
+  /*:: declare function isShadowRoot(node: mixed): boolean %checks(node instanceof
+    ShadowRoot); */
+
+  function isShadowRoot(node) {
+    var OwnElement = getWindow(node).ShadowRoot
+    return node instanceof OwnElement || node instanceof ShadowRoot
+  }
+
+  function contains$1(parent, child) {
+    var rootNode = child.getRootNode && child.getRootNode() // First, attempt with faster native method
+
+    if (parent.contains(child)) {
+      return true
+    } // then fallback to custom implementation with Shadow DOM support
+    else if (rootNode && isShadowRoot(rootNode)) {
+      var next = child
+
+      do {
+        if (next && parent.isSameNode(next)) {
+          return true
+        } // $FlowFixMe[prop-missing]: need a better way to handle this...
+
+        next = next.parentNode || next.host
+      } while (next)
+    } // Give up, the result is false
+
+    return false
+  }
+
+  function getNodeName(element) {
+    return element ? (element.nodeName || '').toLowerCase() : null
+  }
+
+  function getComputedStyle$1(element) {
+    return getWindow(element).getComputedStyle(element)
+  }
+
+  function isTableElement(element) {
+    return ['table', 'td', 'th'].indexOf(getNodeName(element)) >= 0
+  }
+
+  function getDocumentElement(element) {
+    // $FlowFixMe[incompatible-return]: assume body is always available
+    return (
+      (isElement(element)
+        ? element.ownerDocument // $FlowFixMe[prop-missing]
+        : element.document) || window.document
+    ).documentElement
+  }
+
+  function getParentNode(element) {
+    if (getNodeName(element) === 'html') {
+      return element
+    }
+
+    return (
+      // this is a quicker (but less type safe) way to save quite some bytes from the bundle
+      // $FlowFixMe[incompatible-return]
+      // $FlowFixMe[prop-missing]
+      element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
+      element.parentNode || // DOM Element detected
+      // $FlowFixMe[incompatible-return]: need a better way to handle this...
+      element.host || // ShadowRoot detected
+      // $FlowFixMe[incompatible-call]: HTMLElement is a Node
+      getDocumentElement(element) // fallback
+    )
+  }
+
+  function getTrueOffsetParent(element) {
+    if (
+      !isHTMLElement$1(element) || // https://github.com/popperjs/popper-core/issues/837
+      getComputedStyle$1(element).position === 'fixed'
+    ) {
+      return null
+    }
+
+    var offsetParent = element.offsetParent
+
+    if (offsetParent) {
+      var html = getDocumentElement(offsetParent)
+
+      if (
+        getNodeName(offsetParent) === 'body' &&
+        getComputedStyle$1(offsetParent).position === 'static' &&
+        getComputedStyle$1(html).position !== 'static'
+      ) {
+        return html
+      }
+    }
+
+    return offsetParent
+  } // `.offsetParent` reports `null` for fixed elements, while absolute elements
+  // return the containing block
+
+  function getContainingBlock(element) {
+    var currentNode = getParentNode(element)
+
+    while (
+      isHTMLElement$1(currentNode) &&
+      ['html', 'body'].indexOf(getNodeName(currentNode)) < 0
+    ) {
+      var css = getComputedStyle$1(currentNode) // This is non-exhaustive but covers the most common CSS properties that
+      // create a containing block.
+
+      if (
+        css.transform !== 'none' ||
+        css.perspective !== 'none' ||
+        (css.willChange && css.willChange !== 'auto')
+      ) {
+        return currentNode
+      } else {
+        currentNode = currentNode.parentNode
+      }
+    }
+
+    return null
+  } // Gets the closest ancestor positioned element. Handles some edge cases,
+  // such as table ancestors and cross browser bugs.
+
+  function getOffsetParent(element) {
+    var window = getWindow(element)
+    var offsetParent = getTrueOffsetParent(element)
+
+    while (
+      offsetParent &&
+      isTableElement(offsetParent) &&
+      getComputedStyle$1(offsetParent).position === 'static'
+    ) {
+      offsetParent = getTrueOffsetParent(offsetParent)
+    }
+
+    if (
+      offsetParent &&
+      getNodeName(offsetParent) === 'body' &&
+      getComputedStyle$1(offsetParent).position === 'static'
+    ) {
+      return window
+    }
+
+    return offsetParent || getContainingBlock(element) || window
+  }
+
+  function getMainAxisFromPlacement(placement) {
+    return ['top', 'bottom'].indexOf(placement) >= 0 ? 'x' : 'y'
+  }
+
+  function within(min, value, max) {
+    return Math.max(min, Math.min(value, max))
+  }
+
+  function getFreshSideObject() {
+    return {
+      top: 0,
+      right: 0,
+      bottom: 0,
+      left: 0,
+    }
+  }
+
+  function mergePaddingObject(paddingObject) {
+    return Object.assign(Object.assign({}, getFreshSideObject()), paddingObject)
+  }
+
+  function expandToHashMap(value, keys) {
+    return keys.reduce(function(hashMap, key) {
+      hashMap[key] = value
+      return hashMap
+    }, {})
+  }
+
+  function arrow(_ref) {
+    var _state$modifiersData$
+
+    var state = _ref.state,
+      name = _ref.name
+    var arrowElement = state.elements.arrow
+    var popperOffsets = state.modifiersData.popperOffsets
+    var basePlacement = getBasePlacement(state.placement)
+    var axis = getMainAxisFromPlacement(basePlacement)
+    var isVertical = [left, right].indexOf(basePlacement) >= 0
+    var len = isVertical ? 'height' : 'width'
+
+    if (!arrowElement || !popperOffsets) {
+      return
+    }
+
+    var paddingObject = state.modifiersData[name + '#persistent'].padding
+    var arrowRect = getLayoutRect(arrowElement)
+    var minProp = axis === 'y' ? top : left
+    var maxProp = axis === 'y' ? bottom : right
+    var endDiff =
+      state.rects.reference[len] +
+      state.rects.reference[axis] -
+      popperOffsets[axis] -
+      state.rects.popper[len]
+    var startDiff = popperOffsets[axis] - state.rects.reference[axis]
+    var arrowOffsetParent = getOffsetParent(arrowElement)
+    var clientSize = arrowOffsetParent
+      ? axis === 'y'
+        ? arrowOffsetParent.clientHeight || 0
+        : arrowOffsetParent.clientWidth || 0
+      : 0
+    var centerToReference = endDiff / 2 - startDiff / 2 // Make sure the arrow doesn't overflow the popper if the center point is
+    // outside of the popper bounds
+
+    var min = paddingObject[minProp]
+    var max = clientSize - arrowRect[len] - paddingObject[maxProp]
+    var center = clientSize / 2 - arrowRect[len] / 2 + centerToReference
+    var offset = within(min, center, max) // Prevents breaking syntax highlighting...
+
+    var axisProp = axis
+    state.modifiersData[name] =
+      ((_state$modifiersData$ = {}),
+      (_state$modifiersData$[axisProp] = offset),
+      (_state$modifiersData$.centerOffset = offset - center),
+      _state$modifiersData$)
+  }
+
+  function effect(_ref2) {
+    var state = _ref2.state,
+      options = _ref2.options,
+      name = _ref2.name
+    var _options$element = options.element,
+      arrowElement =
+        _options$element === void 0 ? '[data-popper-arrow]' : _options$element,
+      _options$padding = options.padding,
+      padding = _options$padding === void 0 ? 0 : _options$padding
+
+    if (arrowElement == null) {
+      return
+    } // CSS selector
+
+    if (typeof arrowElement === 'string') {
+      arrowElement = state.elements.popper.querySelector(arrowElement)
+
+      if (!arrowElement) {
+        return
+      }
+    }
+
+    {
+      if (!isHTMLElement$1(arrowElement)) {
+        console.error(
+          [
+            'Popper: "arrow" element must be an HTMLElement (not an SVGElement).',
+            'To use an SVG arrow, wrap it in an HTMLElement that will be used as',
+            'the arrow.',
+          ].join(' ')
+        )
+      }
+    }
+
+    if (!contains$1(state.elements.popper, arrowElement)) {
+      {
+        console.error(
+          [
+            'Popper: "arrow" modifier\'s `element` must be a child of the popper',
+            'element.',
+          ].join(' ')
+        )
+      }
+
+      return
+    }
+
+    state.elements.arrow = arrowElement
+    state.modifiersData[name + '#persistent'] = {
+      padding: mergePaddingObject(
+        typeof padding !== 'number'
+          ? padding
+          : expandToHashMap(padding, basePlacements)
+      ),
+    }
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var arrow$1 = {
+    name: 'arrow',
+    enabled: true,
+    phase: 'main',
+    fn: arrow,
+    effect: effect,
+    requires: ['popperOffsets'],
+    requiresIfExists: ['preventOverflow'],
+  }
+
+  var unsetSides = {
+    top: 'auto',
+    right: 'auto',
+    bottom: 'auto',
+    left: 'auto',
+  } // Round the offsets to the nearest suitable subpixel based on the DPR.
+  // Zooming can change the DPR, but it seems to report a value that will
+  // cleanly divide the values into the appropriate subpixels.
+
+  function roundOffsetsByDPR(_ref) {
+    var x = _ref.x,
+      y = _ref.y
+    var win = window
+    var dpr = win.devicePixelRatio || 1
+    return {
+      x: Math.round(x * dpr) / dpr || 0,
+      y: Math.round(y * dpr) / dpr || 0,
+    }
+  }
+
+  function mapToStyles(_ref2) {
+    var _Object$assign2
+
+    var popper = _ref2.popper,
+      popperRect = _ref2.popperRect,
+      placement = _ref2.placement,
+      offsets = _ref2.offsets,
+      position = _ref2.position,
+      gpuAcceleration = _ref2.gpuAcceleration,
+      adaptive = _ref2.adaptive,
+      roundOffsets = _ref2.roundOffsets
+
+    var _ref3 = roundOffsets ? roundOffsetsByDPR(offsets) : offsets,
+      _ref3$x = _ref3.x,
+      x = _ref3$x === void 0 ? 0 : _ref3$x,
+      _ref3$y = _ref3.y,
+      y = _ref3$y === void 0 ? 0 : _ref3$y
+
+    var hasX = offsets.hasOwnProperty('x')
+    var hasY = offsets.hasOwnProperty('y')
+    var sideX = left
+    var sideY = top
+    var win = window
+
+    if (adaptive) {
+      var offsetParent = getOffsetParent(popper)
+
+      if (offsetParent === getWindow(popper)) {
+        offsetParent = getDocumentElement(popper)
+      } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
+
+      /*:: offsetParent = (offsetParent: Element); */
+
+      if (placement === top) {
+        sideY = bottom
+        y -= offsetParent.clientHeight - popperRect.height
+        y *= gpuAcceleration ? 1 : -1
+      }
+
+      if (placement === left) {
+        sideX = right
+        x -= offsetParent.clientWidth - popperRect.width
+        x *= gpuAcceleration ? 1 : -1
+      }
+    }
+
+    var commonStyles = Object.assign(
+      {
+        position: position,
+      },
+      adaptive && unsetSides
+    )
+
+    if (gpuAcceleration) {
+      var _Object$assign
+
+      return Object.assign(
+        Object.assign({}, commonStyles),
+        {},
+        ((_Object$assign = {}),
+        (_Object$assign[sideY] = hasY ? '0' : ''),
+        (_Object$assign[sideX] = hasX ? '0' : ''),
+        (_Object$assign.transform =
+          (win.devicePixelRatio || 1) < 2
+            ? 'translate(' + x + 'px, ' + y + 'px)'
+            : 'translate3d(' + x + 'px, ' + y + 'px, 0)'),
+        _Object$assign)
+      )
+    }
+
+    return Object.assign(
+      Object.assign({}, commonStyles),
+      {},
+      ((_Object$assign2 = {}),
+      (_Object$assign2[sideY] = hasY ? y + 'px' : ''),
+      (_Object$assign2[sideX] = hasX ? x + 'px' : ''),
+      (_Object$assign2.transform = ''),
+      _Object$assign2)
+    )
+  }
+
+  function computeStyles(_ref4) {
+    var state = _ref4.state,
+      options = _ref4.options
+    var _options$gpuAccelerat = options.gpuAcceleration,
+      gpuAcceleration =
+        _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
+      _options$adaptive = options.adaptive,
+      adaptive = _options$adaptive === void 0 ? true : _options$adaptive,
+      _options$roundOffsets = options.roundOffsets,
+      roundOffsets =
+        _options$roundOffsets === void 0 ? true : _options$roundOffsets
+
+    {
+      var transitionProperty =
+        getComputedStyle$1(state.elements.popper).transitionProperty || ''
+
+      if (
+        adaptive &&
+        ['transform', 'top', 'right', 'bottom', 'left'].some(function(
+          property
+        ) {
+          return transitionProperty.indexOf(property) >= 0
+        })
+      ) {
+        console.warn(
+          [
+            'Popper: Detected CSS transitions on at least one of the following',
+            'CSS properties: "transform", "top", "right", "bottom", "left".',
+            '\n\n',
+            'Disable the "computeStyles" modifier\'s `adaptive` option to allow',
+            'for smooth transitions, or remove these properties from the CSS',
+            'transition declaration on the popper element if only transitioning',
+            'opacity or background-color for example.',
+            '\n\n',
+            'We recommend using the popper element as a wrapper around an inner',
+            'element that can have any CSS property transitioned for animations.',
+          ].join(' ')
+        )
+      }
+    }
+
+    var commonStyles = {
+      placement: getBasePlacement(state.placement),
+      popper: state.elements.popper,
+      popperRect: state.rects.popper,
+      gpuAcceleration: gpuAcceleration,
+    }
+
+    if (state.modifiersData.popperOffsets != null) {
+      state.styles.popper = Object.assign(
+        Object.assign({}, state.styles.popper),
+        mapToStyles(
+          Object.assign(
+            Object.assign({}, commonStyles),
+            {},
+            {
+              offsets: state.modifiersData.popperOffsets,
+              position: state.options.strategy,
+              adaptive: adaptive,
+              roundOffsets: roundOffsets,
+            }
+          )
+        )
+      )
+    }
+
+    if (state.modifiersData.arrow != null) {
+      state.styles.arrow = Object.assign(
+        Object.assign({}, state.styles.arrow),
+        mapToStyles(
+          Object.assign(
+            Object.assign({}, commonStyles),
+            {},
+            {
+              offsets: state.modifiersData.arrow,
+              position: 'absolute',
+              adaptive: false,
+              roundOffsets: roundOffsets,
+            }
+          )
+        )
+      )
+    }
+
+    state.attributes.popper = Object.assign(
+      Object.assign({}, state.attributes.popper),
+      {},
+      {
+        'data-popper-placement': state.placement,
+      }
+    )
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var computeStyles$1 = {
+    name: 'computeStyles',
+    enabled: true,
+    phase: 'beforeWrite',
+    fn: computeStyles,
+    data: {},
+  }
+
+  var passive = {
+    passive: true,
+  }
+
+  function effect$1(_ref) {
+    var state = _ref.state,
+      instance = _ref.instance,
+      options = _ref.options
+    var _options$scroll = options.scroll,
+      scroll = _options$scroll === void 0 ? true : _options$scroll,
+      _options$resize = options.resize,
+      resize = _options$resize === void 0 ? true : _options$resize
+    var window = getWindow(state.elements.popper)
+    var scrollParents = [].concat(
+      state.scrollParents.reference,
+      state.scrollParents.popper
+    )
+
+    if (scroll) {
+      scrollParents.forEach(function(scrollParent) {
+        scrollParent.addEventListener('scroll', instance.update, passive)
+      })
+    }
+
+    if (resize) {
+      window.addEventListener('resize', instance.update, passive)
+    }
+
+    return function() {
+      if (scroll) {
+        scrollParents.forEach(function(scrollParent) {
+          scrollParent.removeEventListener('scroll', instance.update, passive)
+        })
+      }
+
+      if (resize) {
+        window.removeEventListener('resize', instance.update, passive)
+      }
+    }
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var eventListeners = {
+    name: 'eventListeners',
+    enabled: true,
+    phase: 'write',
+    fn: function fn() {},
+    effect: effect$1,
+    data: {},
+  }
+
+  var hash = {
+    left: 'right',
+    right: 'left',
+    bottom: 'top',
+    top: 'bottom',
+  }
+  function getOppositePlacement(placement) {
+    return placement.replace(/left|right|bottom|top/g, function(matched) {
+      return hash[matched]
+    })
+  }
+
+  var hash$1 = {
+    start: 'end',
+    end: 'start',
+  }
+  function getOppositeVariationPlacement(placement) {
+    return placement.replace(/start|end/g, function(matched) {
+      return hash$1[matched]
+    })
+  }
+
+  function getBoundingClientRect(element) {
+    var rect = element.getBoundingClientRect()
+    return {
+      width: rect.width,
+      height: rect.height,
+      top: rect.top,
+      right: rect.right,
+      bottom: rect.bottom,
+      left: rect.left,
+      x: rect.left,
+      y: rect.top,
+    }
+  }
+
+  function getWindowScroll(node) {
+    var win = getWindow(node)
+    var scrollLeft = win.pageXOffset
+    var scrollTop = win.pageYOffset
+    return {
+      scrollLeft: scrollLeft,
+      scrollTop: scrollTop,
+    }
+  }
+
+  function getWindowScrollBarX(element) {
+    // If <html> has a CSS width greater than the viewport, then this will be
+    // incorrect for RTL.
+    // Popper 1 is broken in this case and never had a bug report so let's assume
+    // it's not an issue. I don't think anyone ever specifies width on <html>
+    // anyway.
+    // Browsers where the left scrollbar doesn't cause an issue report `0` for
+    // this (e.g. Edge 2019, IE11, Safari)
+    return (
+      getBoundingClientRect(getDocumentElement(element)).left +
+      getWindowScroll(element).scrollLeft
+    )
+  }
+
+  function getViewportRect(element) {
+    var win = getWindow(element)
+    var html = getDocumentElement(element)
+    var visualViewport = win.visualViewport
+    var width = html.clientWidth
+    var height = html.clientHeight
+    var x = 0
+    var y = 0 // NB: This isn't supported on iOS <= 12. If the keyboard is open, the popper
+    // can be obscured underneath it.
+    // Also, `html.clientHeight` adds the bottom bar height in Safari iOS, even
+    // if it isn't open, so if this isn't available, the popper will be detected
+    // to overflow the bottom of the screen too early.
+
+    if (visualViewport) {
+      width = visualViewport.width
+      height = visualViewport.height // Uses Layout Viewport (like Chrome; Safari does not currently)
+      // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
+      // errors due to floating point numbers, so we need to check precision.
+      // Safari returns a number <= 0, usually < -1 when pinch-zoomed
+      // Feature detection fails in mobile emulation mode in Chrome.
+      // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
+      // 0.001
+      // Fallback here: "Not Safari" userAgent
+
+      if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+        x = visualViewport.offsetLeft
+        y = visualViewport.offsetTop
+      }
+    }
+
+    return {
+      width: width,
+      height: height,
+      x: x + getWindowScrollBarX(element),
+      y: y,
+    }
+  }
+
+  // of the `<html>` and `<body>` rect bounds if horizontally scrollable
+
+  function getDocumentRect(element) {
+    var html = getDocumentElement(element)
+    var winScroll = getWindowScroll(element)
+    var body = element.ownerDocument.body
+    var width = Math.max(
+      html.scrollWidth,
+      html.clientWidth,
+      body ? body.scrollWidth : 0,
+      body ? body.clientWidth : 0
+    )
+    var height = Math.max(
+      html.scrollHeight,
+      html.clientHeight,
+      body ? body.scrollHeight : 0,
+      body ? body.clientHeight : 0
+    )
+    var x = -winScroll.scrollLeft + getWindowScrollBarX(element)
+    var y = -winScroll.scrollTop
+
+    if (getComputedStyle$1(body || html).direction === 'rtl') {
+      x += Math.max(html.clientWidth, body ? body.clientWidth : 0) - width
+    }
+
+    return {
+      width: width,
+      height: height,
+      x: x,
+      y: y,
+    }
+  }
+
+  function isScrollParent(element) {
+    // Firefox wants us to check `-x` and `-y` variations as well
+    var _getComputedStyle = getComputedStyle$1(element),
+      overflow = _getComputedStyle.overflow,
+      overflowX = _getComputedStyle.overflowX,
+      overflowY = _getComputedStyle.overflowY
+
+    return /auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX)
+  }
+
+  function getScrollParent(node) {
+    if (['html', 'body', '#document'].indexOf(getNodeName(node)) >= 0) {
+      // $FlowFixMe[incompatible-return]: assume body is always available
+      return node.ownerDocument.body
+    }
+
+    if (isHTMLElement$1(node) && isScrollParent(node)) {
+      return node
+    }
+
+    return getScrollParent(getParentNode(node))
+  }
+
+  /*
+  given a DOM element, return the list of all scroll parents, up the list of ancesors
+  until we get to the top window object. This list is what we attach scroll listeners
+  to, because if any of these parent elements scroll, we'll need to re-calculate the
+  reference element's position.
+  */
+
+  function listScrollParents(element, list) {
+    if (list === void 0) {
+      list = []
+    }
+
+    var scrollParent = getScrollParent(element)
+    var isBody = getNodeName(scrollParent) === 'body'
+    var win = getWindow(scrollParent)
+    var target = isBody
+      ? [win].concat(
+          win.visualViewport || [],
+          isScrollParent(scrollParent) ? scrollParent : []
+        )
+      : scrollParent
+    var updatedList = list.concat(target)
+    return isBody
+      ? updatedList // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
+      : updatedList.concat(listScrollParents(getParentNode(target)))
+  }
+
+  function rectToClientRect(rect) {
+    return Object.assign(
+      Object.assign({}, rect),
+      {},
+      {
+        left: rect.x,
+        top: rect.y,
+        right: rect.x + rect.width,
+        bottom: rect.y + rect.height,
+      }
+    )
+  }
+
+  function getInnerBoundingClientRect(element) {
+    var rect = getBoundingClientRect(element)
+    rect.top = rect.top + element.clientTop
+    rect.left = rect.left + element.clientLeft
+    rect.bottom = rect.top + element.clientHeight
+    rect.right = rect.left + element.clientWidth
+    rect.width = element.clientWidth
+    rect.height = element.clientHeight
+    rect.x = rect.left
+    rect.y = rect.top
+    return rect
+  }
+
+  function getClientRectFromMixedType(element, clippingParent) {
+    return clippingParent === viewport
+      ? rectToClientRect(getViewportRect(element))
+      : isHTMLElement$1(clippingParent)
+      ? getInnerBoundingClientRect(clippingParent)
+      : rectToClientRect(getDocumentRect(getDocumentElement(element)))
+  } // A "clipping parent" is an overflowable container with the characteristic of
+  // clipping (or hiding) overflowing elements with a position different from
+  // `initial`
+
+  function getClippingParents(element) {
+    var clippingParents = listScrollParents(getParentNode(element))
+    var canEscapeClipping =
+      ['absolute', 'fixed'].indexOf(getComputedStyle$1(element).position) >= 0
+    var clipperElement =
+      canEscapeClipping && isHTMLElement$1(element)
+        ? getOffsetParent(element)
+        : element
+
+    if (!isElement(clipperElement)) {
+      return []
+    } // $FlowFixMe[incompatible-return]: https://github.com/facebook/flow/issues/1414
+
+    return clippingParents.filter(function(clippingParent) {
+      return (
+        isElement(clippingParent) &&
+        contains$1(clippingParent, clipperElement) &&
+        getNodeName(clippingParent) !== 'body'
+      )
+    })
+  } // Gets the maximum area that the element is visible in due to any number of
+  // clipping parents
+
+  function getClippingRect(element, boundary, rootBoundary) {
+    var mainClippingParents =
+      boundary === 'clippingParents'
+        ? getClippingParents(element)
+        : [].concat(boundary)
+    var clippingParents = [].concat(mainClippingParents, [rootBoundary])
+    var firstClippingParent = clippingParents[0]
+    var clippingRect = clippingParents.reduce(function(
+      accRect,
+      clippingParent
+    ) {
+      var rect = getClientRectFromMixedType(element, clippingParent)
+      accRect.top = Math.max(rect.top, accRect.top)
+      accRect.right = Math.min(rect.right, accRect.right)
+      accRect.bottom = Math.min(rect.bottom, accRect.bottom)
+      accRect.left = Math.max(rect.left, accRect.left)
+      return accRect
+    },
+    getClientRectFromMixedType(element, firstClippingParent))
+    clippingRect.width = clippingRect.right - clippingRect.left
+    clippingRect.height = clippingRect.bottom - clippingRect.top
+    clippingRect.x = clippingRect.left
+    clippingRect.y = clippingRect.top
+    return clippingRect
+  }
+
+  function getVariation(placement) {
+    return placement.split('-')[1]
+  }
+
+  function computeOffsets(_ref) {
+    var reference = _ref.reference,
+      element = _ref.element,
+      placement = _ref.placement
+    var basePlacement = placement ? getBasePlacement(placement) : null
+    var variation = placement ? getVariation(placement) : null
+    var commonX = reference.x + reference.width / 2 - element.width / 2
+    var commonY = reference.y + reference.height / 2 - element.height / 2
+    var offsets
+
+    switch (basePlacement) {
+      case top:
+        offsets = {
+          x: commonX,
+          y: reference.y - element.height,
+        }
+        break
+
+      case bottom:
+        offsets = {
+          x: commonX,
+          y: reference.y + reference.height,
+        }
+        break
+
+      case right:
+        offsets = {
+          x: reference.x + reference.width,
+          y: commonY,
+        }
+        break
+
+      case left:
+        offsets = {
+          x: reference.x - element.width,
+          y: commonY,
+        }
+        break
+
+      default:
+        offsets = {
+          x: reference.x,
+          y: reference.y,
+        }
+    }
+
+    var mainAxis = basePlacement
+      ? getMainAxisFromPlacement(basePlacement)
+      : null
+
+    if (mainAxis != null) {
+      var len = mainAxis === 'y' ? 'height' : 'width'
+
+      switch (variation) {
+        case start:
+          offsets[mainAxis] =
+            offsets[mainAxis] - (reference[len] / 2 - element[len] / 2)
+          break
+
+        case end:
+          offsets[mainAxis] =
+            offsets[mainAxis] + (reference[len] / 2 - element[len] / 2)
+          break
+      }
+    }
+
+    return offsets
+  }
+
+  function detectOverflow(state, options) {
+    if (options === void 0) {
+      options = {}
+    }
+
+    var _options = options,
+      _options$placement = _options.placement,
+      placement =
+        _options$placement === void 0 ? state.placement : _options$placement,
+      _options$boundary = _options.boundary,
+      boundary =
+        _options$boundary === void 0 ? clippingParents : _options$boundary,
+      _options$rootBoundary = _options.rootBoundary,
+      rootBoundary =
+        _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
+      _options$elementConte = _options.elementContext,
+      elementContext =
+        _options$elementConte === void 0 ? popper : _options$elementConte,
+      _options$altBoundary = _options.altBoundary,
+      altBoundary =
+        _options$altBoundary === void 0 ? false : _options$altBoundary,
+      _options$padding = _options.padding,
+      padding = _options$padding === void 0 ? 0 : _options$padding
+    var paddingObject = mergePaddingObject(
+      typeof padding !== 'number'
+        ? padding
+        : expandToHashMap(padding, basePlacements)
+    )
+    var altContext = elementContext === popper ? reference : popper
+    var referenceElement = state.elements.reference
+    var popperRect = state.rects.popper
+    var element = state.elements[altBoundary ? altContext : elementContext]
+    var clippingClientRect = getClippingRect(
+      isElement(element)
+        ? element
+        : element.contextElement || getDocumentElement(state.elements.popper),
+      boundary,
+      rootBoundary
+    )
+    var referenceClientRect = getBoundingClientRect(referenceElement)
+    var popperOffsets = computeOffsets({
+      reference: referenceClientRect,
+      element: popperRect,
+      strategy: 'absolute',
+      placement: placement,
+    })
+    var popperClientRect = rectToClientRect(
+      Object.assign(Object.assign({}, popperRect), popperOffsets)
+    )
+    var elementClientRect =
+      elementContext === popper ? popperClientRect : referenceClientRect // positive = overflowing the clipping rect
+    // 0 or negative = within the clipping rect
+
+    var overflowOffsets = {
+      top: clippingClientRect.top - elementClientRect.top + paddingObject.top,
+      bottom:
+        elementClientRect.bottom -
+        clippingClientRect.bottom +
+        paddingObject.bottom,
+      left:
+        clippingClientRect.left - elementClientRect.left + paddingObject.left,
+      right:
+        elementClientRect.right -
+        clippingClientRect.right +
+        paddingObject.right,
+    }
+    var offsetData = state.modifiersData.offset // Offsets can be applied only to the popper element
+
+    if (elementContext === popper && offsetData) {
+      var offset = offsetData[placement]
+      Object.keys(overflowOffsets).forEach(function(key) {
+        var multiply = [right, bottom].indexOf(key) >= 0 ? 1 : -1
+        var axis = [top, bottom].indexOf(key) >= 0 ? 'y' : 'x'
+        overflowOffsets[key] += offset[axis] * multiply
+      })
+    }
+
+    return overflowOffsets
+  }
+
+  /*:: type OverflowsMap = { [ComputedPlacement]: number }; */
+
+  /*;; type OverflowsMap = { [key in ComputedPlacement]: number }; */
+  function computeAutoPlacement(state, options) {
+    if (options === void 0) {
+      options = {}
+    }
+
+    var _options = options,
+      placement = _options.placement,
+      boundary = _options.boundary,
+      rootBoundary = _options.rootBoundary,
+      padding = _options.padding,
+      flipVariations = _options.flipVariations,
+      _options$allowedAutoP = _options.allowedAutoPlacements,
+      allowedAutoPlacements =
+        _options$allowedAutoP === void 0 ? placements : _options$allowedAutoP
+    var variation = getVariation(placement)
+    var placements$1 = variation
+      ? flipVariations
+        ? variationPlacements
+        : variationPlacements.filter(function(placement) {
+            return getVariation(placement) === variation
+          })
+      : basePlacements
+    var allowedPlacements = placements$1.filter(function(placement) {
+      return allowedAutoPlacements.indexOf(placement) >= 0
+    })
+
+    if (allowedPlacements.length === 0) {
+      allowedPlacements = placements$1
+
+      {
+        console.error(
+          [
+            'Popper: The `allowedAutoPlacements` option did not allow any',
+            'placements. Ensure the `placement` option matches the variation',
+            'of the allowed placements.',
+            'For example, "auto" cannot be used to allow "bottom-start".',
+            'Use "auto-start" instead.',
+          ].join(' ')
+        )
+      }
+    } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
+
+    var overflows = allowedPlacements.reduce(function(acc, placement) {
+      acc[placement] = detectOverflow(state, {
+        placement: placement,
+        boundary: boundary,
+        rootBoundary: rootBoundary,
+        padding: padding,
+      })[getBasePlacement(placement)]
+      return acc
+    }, {})
+    return Object.keys(overflows).sort(function(a, b) {
+      return overflows[a] - overflows[b]
+    })
+  }
+
+  function getExpandedFallbackPlacements(placement) {
+    if (getBasePlacement(placement) === auto) {
+      return []
+    }
+
+    var oppositePlacement = getOppositePlacement(placement)
+    return [
+      getOppositeVariationPlacement(placement),
+      oppositePlacement,
+      getOppositeVariationPlacement(oppositePlacement),
+    ]
+  }
+
+  function flip(_ref) {
+    var state = _ref.state,
+      options = _ref.options,
+      name = _ref.name
+
+    if (state.modifiersData[name]._skip) {
+      return
+    }
+
+    var _options$mainAxis = options.mainAxis,
+      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
+      _options$altAxis = options.altAxis,
+      checkAltAxis = _options$altAxis === void 0 ? true : _options$altAxis,
+      specifiedFallbackPlacements = options.fallbackPlacements,
+      padding = options.padding,
+      boundary = options.boundary,
+      rootBoundary = options.rootBoundary,
+      altBoundary = options.altBoundary,
+      _options$flipVariatio = options.flipVariations,
+      flipVariations =
+        _options$flipVariatio === void 0 ? true : _options$flipVariatio,
+      allowedAutoPlacements = options.allowedAutoPlacements
+    var preferredPlacement = state.options.placement
+    var basePlacement = getBasePlacement(preferredPlacement)
+    var isBasePlacement = basePlacement === preferredPlacement
+    var fallbackPlacements =
+      specifiedFallbackPlacements ||
+      (isBasePlacement || !flipVariations
+        ? [getOppositePlacement(preferredPlacement)]
+        : getExpandedFallbackPlacements(preferredPlacement))
+    var placements = [preferredPlacement]
+      .concat(fallbackPlacements)
+      .reduce(function(acc, placement) {
+        return acc.concat(
+          getBasePlacement(placement) === auto
+            ? computeAutoPlacement(state, {
+                placement: placement,
+                boundary: boundary,
+                rootBoundary: rootBoundary,
+                padding: padding,
+                flipVariations: flipVariations,
+                allowedAutoPlacements: allowedAutoPlacements,
+              })
+            : placement
+        )
+      }, [])
+    var referenceRect = state.rects.reference
+    var popperRect = state.rects.popper
+    var checksMap = new Map()
+    var makeFallbackChecks = true
+    var firstFittingPlacement = placements[0]
+
+    for (var i = 0; i < placements.length; i++) {
+      var placement = placements[i]
+
+      var _basePlacement = getBasePlacement(placement)
+
+      var isStartVariation = getVariation(placement) === start
+      var isVertical = [top, bottom].indexOf(_basePlacement) >= 0
+      var len = isVertical ? 'width' : 'height'
+      var overflow = detectOverflow(state, {
+        placement: placement,
+        boundary: boundary,
+        rootBoundary: rootBoundary,
+        altBoundary: altBoundary,
+        padding: padding,
+      })
+      var mainVariationSide = isVertical
+        ? isStartVariation
+          ? right
+          : left
+        : isStartVariation
+        ? bottom
+        : top
+
+      if (referenceRect[len] > popperRect[len]) {
+        mainVariationSide = getOppositePlacement(mainVariationSide)
+      }
+
+      var altVariationSide = getOppositePlacement(mainVariationSide)
+      var checks = []
+
+      if (checkMainAxis) {
+        checks.push(overflow[_basePlacement] <= 0)
+      }
+
+      if (checkAltAxis) {
+        checks.push(
+          overflow[mainVariationSide] <= 0,
+          overflow[altVariationSide] <= 0
+        )
+      }
+
+      if (
+        checks.every(function(check) {
+          return check
+        })
+      ) {
+        firstFittingPlacement = placement
+        makeFallbackChecks = false
+        break
+      }
+
+      checksMap.set(placement, checks)
+    }
+
+    if (makeFallbackChecks) {
+      // `2` may be desired in some cases – research later
+      var numberOfChecks = flipVariations ? 3 : 1
+
+      var _loop = function _loop(_i) {
+        var fittingPlacement = placements.find(function(placement) {
+          var checks = checksMap.get(placement)
+
+          if (checks) {
+            return checks.slice(0, _i).every(function(check) {
+              return check
+            })
+          }
+        })
+
+        if (fittingPlacement) {
+          firstFittingPlacement = fittingPlacement
+          return 'break'
+        }
+      }
+
+      for (var _i = numberOfChecks; _i > 0; _i--) {
+        var _ret = _loop(_i)
+
+        if (_ret === 'break') break
+      }
+    }
+
+    if (state.placement !== firstFittingPlacement) {
+      state.modifiersData[name]._skip = true
+      state.placement = firstFittingPlacement
+      state.reset = true
+    }
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var flip$1 = {
+    name: 'flip',
+    enabled: true,
+    phase: 'main',
+    fn: flip,
+    requiresIfExists: ['offset'],
+    data: {
+      _skip: false,
+    },
+  }
+
+  function getSideOffsets(overflow, rect, preventedOffsets) {
+    if (preventedOffsets === void 0) {
+      preventedOffsets = {
+        x: 0,
+        y: 0,
+      }
+    }
+
+    return {
+      top: overflow.top - rect.height - preventedOffsets.y,
+      right: overflow.right - rect.width + preventedOffsets.x,
+      bottom: overflow.bottom - rect.height + preventedOffsets.y,
+      left: overflow.left - rect.width - preventedOffsets.x,
+    }
+  }
+
+  function isAnySideFullyClipped(overflow) {
+    return [top, right, bottom, left].some(function(side) {
+      return overflow[side] >= 0
+    })
+  }
+
+  function hide(_ref) {
+    var state = _ref.state,
+      name = _ref.name
+    var referenceRect = state.rects.reference
+    var popperRect = state.rects.popper
+    var preventedOffsets = state.modifiersData.preventOverflow
+    var referenceOverflow = detectOverflow(state, {
+      elementContext: 'reference',
+    })
+    var popperAltOverflow = detectOverflow(state, {
+      altBoundary: true,
+    })
+    var referenceClippingOffsets = getSideOffsets(
+      referenceOverflow,
+      referenceRect
+    )
+    var popperEscapeOffsets = getSideOffsets(
+      popperAltOverflow,
+      popperRect,
+      preventedOffsets
+    )
+    var isReferenceHidden = isAnySideFullyClipped(referenceClippingOffsets)
+    var hasPopperEscaped = isAnySideFullyClipped(popperEscapeOffsets)
+    state.modifiersData[name] = {
+      referenceClippingOffsets: referenceClippingOffsets,
+      popperEscapeOffsets: popperEscapeOffsets,
+      isReferenceHidden: isReferenceHidden,
+      hasPopperEscaped: hasPopperEscaped,
+    }
+    state.attributes.popper = Object.assign(
+      Object.assign({}, state.attributes.popper),
+      {},
+      {
+        'data-popper-reference-hidden': isReferenceHidden,
+        'data-popper-escaped': hasPopperEscaped,
+      }
+    )
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var hide$1 = {
+    name: 'hide',
+    enabled: true,
+    phase: 'main',
+    requiresIfExists: ['preventOverflow'],
+    fn: hide,
+  }
+
+  function distanceAndSkiddingToXY(placement, rects, offset) {
+    var basePlacement = getBasePlacement(placement)
+    var invertDistance = [left, top].indexOf(basePlacement) >= 0 ? -1 : 1
+
+    var _ref =
+        typeof offset === 'function'
+          ? offset(
+              Object.assign(
+                Object.assign({}, rects),
+                {},
+                {
+                  placement: placement,
+                }
+              )
+            )
+          : offset,
+      skidding = _ref[0],
+      distance = _ref[1]
+
+    skidding = skidding || 0
+    distance = (distance || 0) * invertDistance
+    return [left, right].indexOf(basePlacement) >= 0
+      ? {
+          x: distance,
+          y: skidding,
+        }
+      : {
+          x: skidding,
+          y: distance,
+        }
+  }
+
+  function offset$1(_ref2) {
+    var state = _ref2.state,
+      options = _ref2.options,
+      name = _ref2.name
+    var _options$offset = options.offset,
+      offset = _options$offset === void 0 ? [0, 0] : _options$offset
+    var data = placements.reduce(function(acc, placement) {
+      acc[placement] = distanceAndSkiddingToXY(placement, state.rects, offset)
+      return acc
+    }, {})
+    var _data$state$placement = data[state.placement],
+      x = _data$state$placement.x,
+      y = _data$state$placement.y
+
+    if (state.modifiersData.popperOffsets != null) {
+      state.modifiersData.popperOffsets.x += x
+      state.modifiersData.popperOffsets.y += y
+    }
+
+    state.modifiersData[name] = data
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var offset$2 = {
+    name: 'offset',
+    enabled: true,
+    phase: 'main',
+    requires: ['popperOffsets'],
+    fn: offset$1,
+  }
+
+  function popperOffsets(_ref) {
+    var state = _ref.state,
+      name = _ref.name
+    // Offsets are the actual position the popper needs to have to be
+    // properly positioned near its reference element
+    // This is the most basic placement, and will be adjusted by
+    // the modifiers in the next step
+    state.modifiersData[name] = computeOffsets({
+      reference: state.rects.reference,
+      element: state.rects.popper,
+      strategy: 'absolute',
+      placement: state.placement,
+    })
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var popperOffsets$1 = {
+    name: 'popperOffsets',
+    enabled: true,
+    phase: 'read',
+    fn: popperOffsets,
+    data: {},
+  }
+
+  function getAltAxis(axis) {
+    return axis === 'x' ? 'y' : 'x'
+  }
+
+  function preventOverflow(_ref) {
+    var state = _ref.state,
+      options = _ref.options,
+      name = _ref.name
+    var _options$mainAxis = options.mainAxis,
+      checkMainAxis = _options$mainAxis === void 0 ? true : _options$mainAxis,
+      _options$altAxis = options.altAxis,
+      checkAltAxis = _options$altAxis === void 0 ? false : _options$altAxis,
+      boundary = options.boundary,
+      rootBoundary = options.rootBoundary,
+      altBoundary = options.altBoundary,
+      padding = options.padding,
+      _options$tether = options.tether,
+      tether = _options$tether === void 0 ? true : _options$tether,
+      _options$tetherOffset = options.tetherOffset,
+      tetherOffset =
+        _options$tetherOffset === void 0 ? 0 : _options$tetherOffset
+    var overflow = detectOverflow(state, {
+      boundary: boundary,
+      rootBoundary: rootBoundary,
+      padding: padding,
+      altBoundary: altBoundary,
+    })
+    var basePlacement = getBasePlacement(state.placement)
+    var variation = getVariation(state.placement)
+    var isBasePlacement = !variation
+    var mainAxis = getMainAxisFromPlacement(basePlacement)
+    var altAxis = getAltAxis(mainAxis)
+    var popperOffsets = state.modifiersData.popperOffsets
+    var referenceRect = state.rects.reference
+    var popperRect = state.rects.popper
+    var tetherOffsetValue =
+      typeof tetherOffset === 'function'
+        ? tetherOffset(
+            Object.assign(
+              Object.assign({}, state.rects),
+              {},
+              {
+                placement: state.placement,
+              }
+            )
+          )
+        : tetherOffset
+    var data = {
+      x: 0,
+      y: 0,
+    }
+
+    if (!popperOffsets) {
+      return
+    }
+
+    if (checkMainAxis) {
+      var mainSide = mainAxis === 'y' ? top : left
+      var altSide = mainAxis === 'y' ? bottom : right
+      var len = mainAxis === 'y' ? 'height' : 'width'
+      var offset = popperOffsets[mainAxis]
+      var min = popperOffsets[mainAxis] + overflow[mainSide]
+      var max = popperOffsets[mainAxis] - overflow[altSide]
+      var additive = tether ? -popperRect[len] / 2 : 0
+      var minLen = variation === start ? referenceRect[len] : popperRect[len]
+      var maxLen = variation === start ? -popperRect[len] : -referenceRect[len] // We need to include the arrow in the calculation so the arrow doesn't go
+      // outside the reference bounds
+
+      var arrowElement = state.elements.arrow
+      var arrowRect =
+        tether && arrowElement
+          ? getLayoutRect(arrowElement)
+          : {
+              width: 0,
+              height: 0,
+            }
+      var arrowPaddingObject = state.modifiersData['arrow#persistent']
+        ? state.modifiersData['arrow#persistent'].padding
+        : getFreshSideObject()
+      var arrowPaddingMin = arrowPaddingObject[mainSide]
+      var arrowPaddingMax = arrowPaddingObject[altSide] // If the reference length is smaller than the arrow length, we don't want
+      // to include its full size in the calculation. If the reference is small
+      // and near the edge of a boundary, the popper can overflow even if the
+      // reference is not overflowing as well (e.g. virtual elements with no
+      // width or height)
+
+      var arrowLen = within(0, referenceRect[len], arrowRect[len])
+      var minOffset = isBasePlacement
+        ? referenceRect[len] / 2 -
+          additive -
+          arrowLen -
+          arrowPaddingMin -
+          tetherOffsetValue
+        : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue
+      var maxOffset = isBasePlacement
+        ? -referenceRect[len] / 2 +
+          additive +
+          arrowLen +
+          arrowPaddingMax +
+          tetherOffsetValue
+        : maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue
+      var arrowOffsetParent =
+        state.elements.arrow && getOffsetParent(state.elements.arrow)
+      var clientOffset = arrowOffsetParent
+        ? mainAxis === 'y'
+          ? arrowOffsetParent.clientTop || 0
+          : arrowOffsetParent.clientLeft || 0
+        : 0
+      var offsetModifierValue = state.modifiersData.offset
+        ? state.modifiersData.offset[state.placement][mainAxis]
+        : 0
+      var tetherMin =
+        popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset
+      var tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue
+      var preventedOffset = within(
+        tether ? Math.min(min, tetherMin) : min,
+        offset,
+        tether ? Math.max(max, tetherMax) : max
+      )
+      popperOffsets[mainAxis] = preventedOffset
+      data[mainAxis] = preventedOffset - offset
+    }
+
+    if (checkAltAxis) {
+      var _mainSide = mainAxis === 'x' ? top : left
+
+      var _altSide = mainAxis === 'x' ? bottom : right
+
+      var _offset = popperOffsets[altAxis]
+
+      var _min = _offset + overflow[_mainSide]
+
+      var _max = _offset - overflow[_altSide]
+
+      var _preventedOffset = within(_min, _offset, _max)
+
+      popperOffsets[altAxis] = _preventedOffset
+      data[altAxis] = _preventedOffset - _offset
+    }
+
+    state.modifiersData[name] = data
+  } // eslint-disable-next-line import/no-unused-modules
+
+  var preventOverflow$1 = {
+    name: 'preventOverflow',
+    enabled: true,
+    phase: 'main',
+    fn: preventOverflow,
+    requiresIfExists: ['offset'],
+  }
+
+  function getHTMLElementScroll(element) {
+    return {
+      scrollLeft: element.scrollLeft,
+      scrollTop: element.scrollTop,
+    }
+  }
+
+  function getNodeScroll(node) {
+    if (node === getWindow(node) || !isHTMLElement$1(node)) {
+      return getWindowScroll(node)
+    } else {
+      return getHTMLElementScroll(node)
+    }
+  }
+
+  // Composite means it takes into account transforms as well as layout.
+
+  function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
+    if (isFixed === void 0) {
+      isFixed = false
+    }
+
+    var documentElement = getDocumentElement(offsetParent)
+    var rect = getBoundingClientRect(elementOrVirtualElement)
+    var isOffsetParentAnElement = isHTMLElement$1(offsetParent)
+    var scroll = {
+      scrollLeft: 0,
+      scrollTop: 0,
+    }
+    var offsets = {
+      x: 0,
+      y: 0,
+    }
+
+    if (isOffsetParentAnElement || (!isOffsetParentAnElement && !isFixed)) {
+      if (
+        getNodeName(offsetParent) !== 'body' || // https://github.com/popperjs/popper-core/issues/1078
+        isScrollParent(documentElement)
+      ) {
+        scroll = getNodeScroll(offsetParent)
+      }
+
+      if (isHTMLElement$1(offsetParent)) {
+        offsets = getBoundingClientRect(offsetParent)
+        offsets.x += offsetParent.clientLeft
+        offsets.y += offsetParent.clientTop
+      } else if (documentElement) {
+        offsets.x = getWindowScrollBarX(documentElement)
+      }
+    }
+
+    return {
+      x: rect.left + scroll.scrollLeft - offsets.x,
+      y: rect.top + scroll.scrollTop - offsets.y,
+      width: rect.width,
+      height: rect.height,
+    }
+  }
+
+  function order(modifiers) {
+    var map = new Map()
+    var visited = new Set()
+    var result = []
+    modifiers.forEach(function(modifier) {
+      map.set(modifier.name, modifier)
+    }) // On visiting object, check for its dependencies and visit them recursively
+
+    function sort(modifier) {
+      visited.add(modifier.name)
+      var requires = [].concat(
+        modifier.requires || [],
+        modifier.requiresIfExists || []
+      )
+      requires.forEach(function(dep) {
+        if (!visited.has(dep)) {
+          var depModifier = map.get(dep)
+
+          if (depModifier) {
+            sort(depModifier)
+          }
+        }
+      })
+      result.push(modifier)
+    }
+
+    modifiers.forEach(function(modifier) {
+      if (!visited.has(modifier.name)) {
+        // check for visited object
+        sort(modifier)
+      }
+    })
+    return result
+  }
+
+  function orderModifiers(modifiers) {
+    // order based on dependencies
+    var orderedModifiers = order(modifiers) // order based on phase
+
+    return modifierPhases.reduce(function(acc, phase) {
+      return acc.concat(
+        orderedModifiers.filter(function(modifier) {
+          return modifier.phase === phase
+        })
+      )
+    }, [])
+  }
+
+  function debounce(fn) {
+    var pending
+    return function() {
+      if (!pending) {
+        pending = new Promise(function(resolve) {
+          Promise.resolve().then(function() {
+            pending = undefined
+            resolve(fn())
+          })
+        })
+      }
+
+      return pending
+    }
+  }
+
+  function format(str) {
+    for (
+      var _len = arguments.length,
+        args = new Array(_len > 1 ? _len - 1 : 0),
+        _key = 1;
+      _key < _len;
+      _key++
+    ) {
+      args[_key - 1] = arguments[_key]
+    }
+
+    return [].concat(args).reduce(function(p, c) {
+      return p.replace(/%s/, c)
+    }, str)
+  }
+
+  var INVALID_MODIFIER_ERROR =
+    'Popper: modifier "%s" provided an invalid %s property, expected %s but got %s'
+  var MISSING_DEPENDENCY_ERROR =
+    'Popper: modifier "%s" requires "%s", but "%s" modifier is not available'
+  var VALID_PROPERTIES = [
+    'name',
+    'enabled',
+    'phase',
+    'fn',
+    'effect',
+    'requires',
+    'options',
+  ]
+  function validateModifiers(modifiers) {
+    modifiers.forEach(function(modifier) {
+      Object.keys(modifier).forEach(function(key) {
+        switch (key) {
+          case 'name':
+            if (typeof modifier.name !== 'string') {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  String(modifier.name),
+                  '"name"',
+                  '"string"',
+                  '"' + String(modifier.name) + '"'
+                )
+              )
+            }
+
+            break
+
+          case 'enabled':
+            if (typeof modifier.enabled !== 'boolean') {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  modifier.name,
+                  '"enabled"',
+                  '"boolean"',
+                  '"' + String(modifier.enabled) + '"'
+                )
+              )
+            }
+
+          case 'phase':
+            if (modifierPhases.indexOf(modifier.phase) < 0) {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  modifier.name,
+                  '"phase"',
+                  'either ' + modifierPhases.join(', '),
+                  '"' + String(modifier.phase) + '"'
+                )
+              )
+            }
+
+            break
+
+          case 'fn':
+            if (typeof modifier.fn !== 'function') {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  modifier.name,
+                  '"fn"',
+                  '"function"',
+                  '"' + String(modifier.fn) + '"'
+                )
+              )
+            }
+
+            break
+
+          case 'effect':
+            if (typeof modifier.effect !== 'function') {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  modifier.name,
+                  '"effect"',
+                  '"function"',
+                  '"' + String(modifier.fn) + '"'
+                )
+              )
+            }
+
+            break
+
+          case 'requires':
+            if (!Array.isArray(modifier.requires)) {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  modifier.name,
+                  '"requires"',
+                  '"array"',
+                  '"' + String(modifier.requires) + '"'
+                )
+              )
+            }
+
+            break
+
+          case 'requiresIfExists':
+            if (!Array.isArray(modifier.requiresIfExists)) {
+              console.error(
+                format(
+                  INVALID_MODIFIER_ERROR,
+                  modifier.name,
+                  '"requiresIfExists"',
+                  '"array"',
+                  '"' + String(modifier.requiresIfExists) + '"'
+                )
+              )
+            }
+
+            break
+
+          case 'options':
+          case 'data':
+            break
+
+          default:
+            console.error(
+              'PopperJS: an invalid property has been provided to the "' +
+                modifier.name +
+                '" modifier, valid properties are ' +
+                VALID_PROPERTIES.map(function(s) {
+                  return '"' + s + '"'
+                }).join(', ') +
+                '; but "' +
+                key +
+                '" was provided.'
+            )
+        }
+
+        modifier.requires &&
+          modifier.requires.forEach(function(requirement) {
+            if (
+              modifiers.find(function(mod) {
+                return mod.name === requirement
+              }) == null
+            ) {
+              console.error(
+                format(
+                  MISSING_DEPENDENCY_ERROR,
+                  String(modifier.name),
+                  requirement,
+                  requirement
+                )
+              )
+            }
+          })
+      })
+    })
+  }
+
+  function uniqueBy(arr, fn) {
+    var identifiers = new Set()
+    return arr.filter(function(item) {
+      var identifier = fn(item)
+
+      if (!identifiers.has(identifier)) {
+        identifiers.add(identifier)
+        return true
+      }
+    })
+  }
+
+  function mergeByName(modifiers) {
+    var merged = modifiers.reduce(function(merged, current) {
+      var existing = merged[current.name]
+      merged[current.name] = existing
+        ? Object.assign(
+            Object.assign(Object.assign({}, existing), current),
+            {},
+            {
+              options: Object.assign(
+                Object.assign({}, existing.options),
+                current.options
+              ),
+              data: Object.assign(
+                Object.assign({}, existing.data),
+                current.data
+              ),
+            }
+          )
+        : current
+      return merged
+    }, {}) // IE11 does not support Object.values
+
+    return Object.keys(merged).map(function(key) {
+      return merged[key]
+    })
+  }
+
+  var INVALID_ELEMENT_ERROR =
+    'Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.'
+  var INFINITE_LOOP_ERROR =
+    'Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.'
+  var DEFAULT_OPTIONS = {
+    placement: 'bottom',
+    modifiers: [],
+    strategy: 'absolute',
+  }
+
+  function areValidElements() {
+    for (
+      var _len = arguments.length, args = new Array(_len), _key = 0;
+      _key < _len;
+      _key++
+    ) {
+      args[_key] = arguments[_key]
+    }
+
+    return !args.some(function(element) {
+      return !(element && typeof element.getBoundingClientRect === 'function')
+    })
+  }
+
+  function popperGenerator(generatorOptions) {
+    if (generatorOptions === void 0) {
+      generatorOptions = {}
+    }
+
+    var _generatorOptions = generatorOptions,
+      _generatorOptions$def = _generatorOptions.defaultModifiers,
+      defaultModifiers =
+        _generatorOptions$def === void 0 ? [] : _generatorOptions$def,
+      _generatorOptions$def2 = _generatorOptions.defaultOptions,
+      defaultOptions =
+        _generatorOptions$def2 === void 0
+          ? DEFAULT_OPTIONS
+          : _generatorOptions$def2
+    return function createPopper(reference, popper, options) {
+      if (options === void 0) {
+        options = defaultOptions
+      }
+
+      var state = {
+        placement: 'bottom',
+        orderedModifiers: [],
+        options: Object.assign(
+          Object.assign({}, DEFAULT_OPTIONS),
+          defaultOptions
+        ),
+        modifiersData: {},
+        elements: {
+          reference: reference,
+          popper: popper,
+        },
+        attributes: {},
+        styles: {},
+      }
+      var effectCleanupFns = []
+      var isDestroyed = false
+      var instance = {
+        state: state,
+        setOptions: function setOptions(options) {
+          cleanupModifierEffects()
+          state.options = Object.assign(
+            Object.assign(Object.assign({}, defaultOptions), state.options),
+            options
+          )
+          state.scrollParents = {
+            reference: isElement(reference)
+              ? listScrollParents(reference)
+              : reference.contextElement
+              ? listScrollParents(reference.contextElement)
+              : [],
+            popper: listScrollParents(popper),
+          } // Orders the modifiers based on their dependencies and `phase`
+          // properties
+
+          var orderedModifiers = orderModifiers(
+            mergeByName([].concat(defaultModifiers, state.options.modifiers))
+          ) // Strip out disabled modifiers
+
+          state.orderedModifiers = orderedModifiers.filter(function(m) {
+            return m.enabled
+          }) // Validate the provided modifiers so that the consumer will get warned
+          // if one of the modifiers is invalid for any reason
+
+          {
+            var modifiers = uniqueBy(
+              [].concat(orderedModifiers, state.options.modifiers),
+              function(_ref) {
+                var name = _ref.name
+                return name
+              }
+            )
+            validateModifiers(modifiers)
+
+            if (getBasePlacement(state.options.placement) === auto) {
+              var flipModifier = state.orderedModifiers.find(function(_ref2) {
+                var name = _ref2.name
+                return name === 'flip'
+              })
+
+              if (!flipModifier) {
+                console.error(
+                  [
+                    'Popper: "auto" placements require the "flip" modifier be',
+                    'present and enabled to work.',
+                  ].join(' ')
+                )
+              }
+            }
+
+            var _getComputedStyle = getComputedStyle$1(popper),
+              marginTop = _getComputedStyle.marginTop,
+              marginRight = _getComputedStyle.marginRight,
+              marginBottom = _getComputedStyle.marginBottom,
+              marginLeft = _getComputedStyle.marginLeft // We no longer take into account `margins` on the popper, and it can
+            // cause bugs with positioning, so we'll warn the consumer
+
+            if (
+              [marginTop, marginRight, marginBottom, marginLeft].some(function(
+                margin
+              ) {
+                return parseFloat(margin)
+              })
+            ) {
+              console.warn(
+                [
+                  'Popper: CSS "margin" styles cannot be used to apply padding',
+                  'between the popper and its reference element or boundary.',
+                  'To replicate margin, use the `offset` modifier, as well as',
+                  'the `padding` option in the `preventOverflow` and `flip`',
+                  'modifiers.',
+                ].join(' ')
+              )
+            }
+          }
+
+          runModifierEffects()
+          return instance.update()
+        },
+        // Sync update – it will always be executed, even if not necessary. This
+        // is useful for low frequency updates where sync behavior simplifies the
+        // logic.
+        // For high frequency updates (e.g. `resize` and `scroll` events), always
+        // prefer the async Popper#update method
+        forceUpdate: function forceUpdate() {
+          if (isDestroyed) {
+            return
+          }
+
+          var _state$elements = state.elements,
+            reference = _state$elements.reference,
+            popper = _state$elements.popper // Don't proceed if `reference` or `popper` are not valid elements
+          // anymore
+
+          if (!areValidElements(reference, popper)) {
+            {
+              console.error(INVALID_ELEMENT_ERROR)
+            }
+
+            return
+          } // Store the reference and popper rects to be read by modifiers
+
+          state.rects = {
+            reference: getCompositeRect(
+              reference,
+              getOffsetParent(popper),
+              state.options.strategy === 'fixed'
+            ),
+            popper: getLayoutRect(popper),
+          } // Modifiers have the ability to reset the current update cycle. The
+          // most common use case for this is the `flip` modifier changing the
+          // placement, which then needs to re-run all the modifiers, because the
+          // logic was previously ran for the previous placement and is therefore
+          // stale/incorrect
+
+          state.reset = false
+          state.placement = state.options.placement // On each update cycle, the `modifiersData` property for each modifier
+          // is filled with the initial data specified by the modifier. This means
+          // it doesn't persist and is fresh on each update.
+          // To ensure persistent data, use `${name}#persistent`
+
+          state.orderedModifiers.forEach(function(modifier) {
+            return (state.modifiersData[modifier.name] = Object.assign(
+              {},
+              modifier.data
+            ))
+          })
+          var __debug_loops__ = 0
+
+          for (var index = 0; index < state.orderedModifiers.length; index++) {
+            {
+              __debug_loops__ += 1
+
+              if (__debug_loops__ > 100) {
+                console.error(INFINITE_LOOP_ERROR)
+                break
+              }
+            }
+
+            if (state.reset === true) {
+              state.reset = false
+              index = -1
+              continue
+            }
+
+            var _state$orderedModifie = state.orderedModifiers[index],
+              fn = _state$orderedModifie.fn,
+              _state$orderedModifie2 = _state$orderedModifie.options,
+              _options =
+                _state$orderedModifie2 === void 0 ? {} : _state$orderedModifie2,
+              name = _state$orderedModifie.name
+
+            if (typeof fn === 'function') {
+              state =
+                fn({
+                  state: state,
+                  options: _options,
+                  name: name,
+                  instance: instance,
+                }) || state
+            }
+          }
+        },
+        // Async and optimistically optimized update – it will not be executed if
+        // not necessary (debounced to run at most once-per-tick)
+        update: debounce(function() {
+          return new Promise(function(resolve) {
+            instance.forceUpdate()
+            resolve(state)
+          })
+        }),
+        destroy: function destroy() {
+          cleanupModifierEffects()
+          isDestroyed = true
+        },
+      }
+
+      if (!areValidElements(reference, popper)) {
+        {
+          console.error(INVALID_ELEMENT_ERROR)
+        }
+
+        return instance
+      }
+
+      instance.setOptions(options).then(function(state) {
+        if (!isDestroyed && options.onFirstUpdate) {
+          options.onFirstUpdate(state)
+        }
+      }) // Modifiers have the ability to execute arbitrary code before the first
+      // update cycle runs. They will be executed in the same order as the update
+      // cycle. This is useful when a modifier adds some persistent data that
+      // other modifiers need to use, but the modifier is run after the dependent
+      // one.
+
+      function runModifierEffects() {
+        state.orderedModifiers.forEach(function(_ref3) {
+          var name = _ref3.name,
+            _ref3$options = _ref3.options,
+            options = _ref3$options === void 0 ? {} : _ref3$options,
+            effect = _ref3.effect
+
+          if (typeof effect === 'function') {
+            var cleanupFn = effect({
+              state: state,
+              name: name,
+              instance: instance,
+              options: options,
+            })
+
+            var noopFn = function noopFn() {}
+
+            effectCleanupFns.push(cleanupFn || noopFn)
+          }
+        })
+      }
+
+      function cleanupModifierEffects() {
+        effectCleanupFns.forEach(function(fn) {
+          return fn()
+        })
+        effectCleanupFns = []
+      }
+
+      return instance
+    }
+  }
+
+  // This is b/c the Popper lib is all esm files, and would break in a common js only environment
+
+  var createPopper = popperGenerator({
+    defaultModifiers: [
+      hide$1,
+      popperOffsets$1,
+      computeStyles$1,
+      eventListeners,
+      offset$2,
+      flip$1,
+      preventOverflow$1,
+      arrow$1,
+    ],
+  })
+
+  /**
+   * Track whether a component is current mounted. Generally less preferable than
+   * properlly canceling effects so they don't run after a component is unmounted,
+   * but helpful in cases where that isn't feasible, such as a `Promise` resolution.
+   *
+   * @returns a function that returns the current isMounted state of the component
+   *
+   * ```ts
+   * const [data, setData] = useState(null)
+   * const isMounted = useMounted()
+   *
+   * useEffect(() => {
+   *   fetchdata().then((newData) => {
+   *      if (isMounted()) {
+   *        setData(newData);
+   *      }
+   *   })
+   * })
+   * ```
+   */
+
+  function useMounted() {
+    var mounted = React.useRef(true)
+    var isMounted = React.useRef(function() {
+      return mounted.current
+    })
+    React.useEffect(function() {
+      return function() {
+        mounted.current = false
+      }
+    }, [])
+    return isMounted.current
+  }
+
+  function useSafeState(state) {
+    var isMounted = useMounted()
+    return [
+      state[0],
+      React.useCallback(
+        function(nextState) {
+          if (!isMounted()) return
+          return state[1](nextState)
+        },
+        [isMounted, state[1]]
+      ),
+    ]
+  }
+
+  var initialPopperStyles = function initialPopperStyles(position) {
+    return {
+      position: position,
+      top: '0',
+      left: '0',
+      opacity: '0',
+      pointerEvents: 'none',
+    }
+  }
+
+  var disabledApplyStylesModifier = {
+    name: 'applyStyles',
+    enabled: false,
+  } // until docjs supports type exports...
+
+  var ariaDescribedByModifier = {
+    name: 'ariaDescribedBy',
+    enabled: true,
+    phase: 'afterWrite',
+    effect: function effect(_ref) {
+      var state = _ref.state
+      return function() {
+        var _state$elements = state.elements,
+          reference = _state$elements.reference,
+          popper = _state$elements.popper
+
+        if ('removeAttribute' in reference) {
+          var ids = (reference.getAttribute('aria-describedby') || '')
+            .split(',')
+            .filter(function(id) {
+              return id.trim() !== popper.id
+            })
+          if (!ids.length) reference.removeAttribute('aria-describedby')
+          else reference.setAttribute('aria-describedby', ids.join(','))
+        }
+      }
+    },
+    fn: function fn(_ref2) {
+      var _popper$getAttribute
+
+      var state = _ref2.state
+      var _state$elements2 = state.elements,
+        popper = _state$elements2.popper,
+        reference = _state$elements2.reference
+      var role =
+        (_popper$getAttribute = popper.getAttribute('role')) == null
+          ? void 0
+          : _popper$getAttribute.toLowerCase()
+
+      if (popper.id && role === 'tooltip' && 'setAttribute' in reference) {
+        var ids = reference.getAttribute('aria-describedby')
+
+        if (ids && ids.split(',').indexOf(popper.id) !== -1) {
+          return
+        }
+
+        reference.setAttribute(
+          'aria-describedby',
+          ids ? ids + ',' + popper.id : popper.id
+        )
+      }
+    },
+  }
+  var EMPTY_MODIFIERS = []
   /**
    * Position an element relative some reference element using Popper.js
    *
-   * @param {HTMLElement} referenceElement The element
-   * @param {HTMLElement} popperElement
-   * @param {Object}      options
-   * @param {Object}      options.modifiers Popper.js modifiers
-   * @param {Boolean}     options.enabled toggle the popper functionality on/off
-   * @param {String}      options.placement The popper element placement relative to the reference element
-   * @param {Boolean}     options.positionFixed use fixed positioning
-   * @param {Boolean}     options.eventsEnabled have Popper listen on window resize events to reposition the element
+   * @param referenceElement
+   * @param popperElement
+   * @param {object}      options
+   * @param {object=}     options.modifiers Popper.js modifiers
+   * @param {boolean=}    options.enabled toggle the popper functionality on/off
+   * @param {string=}     options.placement The popper element placement relative to the reference element
+   * @param {string=}     options.strategy the positioning strategy
+   * @param {boolean=}    options.eventsEnabled have Popper listen on window resize events to reposition the element
+   * @param {function=}   options.onCreate called when the popper is created
+   * @param {function=}   options.onUpdate called when the popper is updated
+   *
+   * @returns {UsePopperState} The popper state
    */
 
   function usePopper(referenceElement, popperElement, _temp) {
-    var _ref = _temp === void 0 ? {} : _temp,
-      _ref$enabled = _ref.enabled,
-      enabled = _ref$enabled === void 0 ? true : _ref$enabled,
-      _ref$placement = _ref.placement,
-      placement = _ref$placement === void 0 ? 'bottom' : _ref$placement,
-      _ref$positionFixed = _ref.positionFixed,
-      positionFixed =
-        _ref$positionFixed === void 0 ? false : _ref$positionFixed,
-      _ref$eventsEnabled = _ref.eventsEnabled,
-      eventsEnabled = _ref$eventsEnabled === void 0 ? true : _ref$eventsEnabled,
-      _ref$modifiers = _ref.modifiers,
-      modifiers = _ref$modifiers === void 0 ? {} : _ref$modifiers
+    var _ref3 = _temp === void 0 ? {} : _temp,
+      _ref3$enabled = _ref3.enabled,
+      enabled = _ref3$enabled === void 0 ? true : _ref3$enabled,
+      _ref3$placement = _ref3.placement,
+      placement = _ref3$placement === void 0 ? 'bottom' : _ref3$placement,
+      _ref3$strategy = _ref3.strategy,
+      strategy = _ref3$strategy === void 0 ? 'absolute' : _ref3$strategy,
+      _ref3$modifiers = _ref3.modifiers,
+      modifiers =
+        _ref3$modifiers === void 0 ? EMPTY_MODIFIERS : _ref3$modifiers,
+      config = _objectWithoutPropertiesLoose$2(_ref3, [
+        'enabled',
+        'placement',
+        'strategy',
+        'modifiers',
+      ])
 
     var popperInstanceRef = React.useRef()
-    var hasArrow = !!(modifiers.arrow && modifiers.arrow.element)
-    var scheduleUpdate = React.useCallback(function() {
-      if (popperInstanceRef.current) {
-        popperInstanceRef.current.scheduleUpdate()
-      }
+    var update = React.useCallback(function() {
+      var _popperInstanceRef$cu
+      ;(_popperInstanceRef$cu = popperInstanceRef.current) == null
+        ? void 0
+        : _popperInstanceRef$cu.update()
+    }, [])
+    var forceUpdate = React.useCallback(function() {
+      var _popperInstanceRef$cu2
+      ;(_popperInstanceRef$cu2 = popperInstanceRef.current) == null
+        ? void 0
+        : _popperInstanceRef$cu2.forceUpdate()
     }, [])
 
-    var _useState = React.useState({
-        placement: placement,
-        scheduleUpdate: scheduleUpdate,
-        outOfBoundaries: false,
-        styles: initialPopperStyles,
-        arrowStyles: initialArrowStyles,
-      }),
-      state = _useState[0],
-      setState = _useState[1] // A placement difference in state means popper determined a new placement
-    // apart from the props value. By the time the popper element is rendered with
-    // the new position Popper has already measured it, if the place change triggers
-    // a size change it will result in a misaligned popper. So we schedule an update to be sure.
+    var _useSafeState = useSafeState(
+        React.useState({
+          placement: placement,
+          update: update,
+          forceUpdate: forceUpdate,
+          attributes: {},
+          styles: {
+            popper: initialPopperStyles(strategy),
+            arrow: {},
+          },
+        })
+      ),
+      popperState = _useSafeState[0],
+      setState = _useSafeState[1]
 
-    React.useEffect(
+    var updateModifier = React.useMemo(
       function() {
-        scheduleUpdate()
-      },
-      [state.placement, scheduleUpdate]
-    )
-    /** Toggle Events */
-
-    React.useEffect(
-      function() {
-        if (popperInstanceRef.current) {
-          // eslint-disable-next-line no-unused-expressions
-          eventsEnabled
-            ? popperInstanceRef.current.enableEventListeners()
-            : popperInstanceRef.current.disableEventListeners()
+        return {
+          name: 'updateStateModifier',
+          enabled: true,
+          phase: 'write',
+          requires: ['computeStyles'],
+          fn: function fn(_ref4) {
+            var state = _ref4.state
+            var styles = {}
+            var attributes = {}
+            Object.keys(state.elements).forEach(function(element) {
+              styles[element] = state.styles[element]
+              attributes[element] = state.attributes[element]
+            })
+            setState({
+              state: state,
+              styles: styles,
+              attributes: attributes,
+              update: update,
+              forceUpdate: forceUpdate,
+              placement: state.placement,
+            })
+          },
         }
       },
-      [eventsEnabled]
+      [update, forceUpdate, setState]
+    )
+    React.useEffect(
+      function() {
+        if (!popperInstanceRef.current || !enabled) return
+        popperInstanceRef.current.setOptions({
+          placement: placement,
+          strategy: strategy,
+          modifiers: [].concat(modifiers, [
+            updateModifier,
+            disabledApplyStylesModifier,
+          ]),
+        }) // intentionally NOT re-running on new modifiers
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      },
+      [strategy, placement, updateModifier, enabled]
     )
     React.useEffect(
       function() {
@@ -6727,62 +6270,37 @@
           return undefined
         }
 
-        var arrow =
-          modifiers.arrow &&
-          _extends({}, modifiers.arrow, {
-            element: modifiers.arrow.element,
-          })
-
-        popperInstanceRef.current = new Popper(
+        popperInstanceRef.current = createPopper(
           referenceElement,
           popperElement,
-          {
+          _extends$3({}, config, {
             placement: placement,
-            positionFixed: positionFixed,
-            modifiers: _extends({}, modifiers, {
-              arrow: arrow,
-              applyStyle: {
-                enabled: false,
-              },
-              updateStateModifier: {
-                enabled: true,
-                order: 900,
-                fn: function fn(data) {
-                  setState({
-                    scheduleUpdate: scheduleUpdate,
-                    styles: _extends(
-                      {
-                        position: data.offsets.popper.position,
-                      },
-                      data.styles
-                    ),
-                    arrowStyles: data.arrowStyles,
-                    outOfBoundaries: data.hide,
-                    placement: data.placement,
-                  })
-                },
-              },
-            }),
-          }
+            strategy: strategy,
+            modifiers: [].concat(modifiers, [
+              ariaDescribedByModifier,
+              updateModifier,
+            ]),
+          })
         )
         return function() {
-          if (popperInstanceRef.current !== null) {
+          if (popperInstanceRef.current != null) {
             popperInstanceRef.current.destroy()
-            popperInstanceRef.current = null
+            popperInstanceRef.current = undefined
+            setState(function(s) {
+              return _extends$3({}, s, {
+                attributes: {},
+                styles: {
+                  popper: initialPopperStyles(strategy),
+                },
+              })
+            })
           }
-        } // intentionally NOT re-running on new modifiers
+        } // This is only run once to _create_ the popper
         // eslint-disable-next-line react-hooks/exhaustive-deps
       },
-      [
-        enabled,
-        placement,
-        positionFixed,
-        referenceElement,
-        popperElement,
-        hasArrow,
-      ]
+      [enabled, referenceElement, popperElement]
     )
-    return state
+    return popperState
   }
 
   /* eslint-disable no-return-assign */
@@ -6940,8 +6458,16 @@
 
   var warning_1 = warning
 
-  function ownerDocument$1(componentOrElement) {
-    return ownerDocument(ReactDOM__default.findDOMNode(componentOrElement))
+  function safeFindDOMNode(componentOrElement) {
+    if (componentOrElement && 'setState' in componentOrElement) {
+      return ReactDOM__default.findDOMNode(componentOrElement)
+    }
+
+    return componentOrElement != null ? componentOrElement : null
+  }
+
+  var ownerDocument$1 = function(componentOrElement) {
+    return ownerDocument(safeFindDOMNode(componentOrElement))
   }
 
   var escapeKeyCode = 27
@@ -6955,19 +6481,23 @@
   function isModifiedEvent(event) {
     return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
   }
+
+  var getRefTarget = function getRefTarget(ref) {
+    return ref && ('current' in ref ? ref.current : ref)
+  }
+
   /**
    * The `useRootClose` hook registers your callback on the document
    * when rendered. Powers the `<Overlay/>` component. This is used achieve modal
    * style behavior where your callback is triggered when the user tries to
    * interact with the rest of the document or hits the `esc` key.
    *
-   * @param {Ref<HTMLElement>|HTMLElement} ref  The element boundary
+   * @param {Ref<HTMLElement>| HTMLElement} ref  The element boundary
    * @param {function} onRootClose
-   * @param {object}  options
-   * @param {boolean} options.disabled
-   * @param {string}  options.clickTrigger The DOM event name (click, mousedown, etc) to attach listeners on
+   * @param {object=}  options
+   * @param {boolean=} options.disabled
+   * @param {string=}  options.clickTrigger The DOM event name (click, mousedown, etc) to attach listeners on
    */
-
   function useRootClose(ref, onRootClose, _temp) {
     var _ref = _temp === void 0 ? {} : _temp,
       disabled = _ref.disabled,
@@ -6978,7 +6508,7 @@
     var onClose = onRootClose || noop$1
     var handleMouseCapture = React.useCallback(
       function(e) {
-        var currentTarget = ref && ('current' in ref ? ref.current : ref)
+        var currentTarget = getRefTarget(ref)
         warning_1(
           !!currentTarget,
           'RootClose captured a close event but does not have a ref to compare it to. ' +
@@ -6988,7 +6518,7 @@
           !currentTarget ||
           isModifiedEvent(e) ||
           !isLeftClickEvent(e) ||
-          contains(currentTarget, e.target)
+          !!contains(currentTarget, e.target)
       },
       [ref]
     )
@@ -7004,8 +6534,11 @@
     })
     React.useEffect(
       function() {
-        if (disabled || ref == null) return undefined
-        var doc = ownerDocument$1(ref.current) // Use capture for this listener so it fires before React's listener, to
+        if (disabled || ref == null) return undefined // Store the current event to avoid triggering handlers immediately
+        // https://github.com/facebook/react/issues/20074
+
+        var currentEvent = window.event
+        var doc = ownerDocument$1(getRefTarget(ref)) // Use capture for this listener so it fires before React's listener, to
         // avoid false positives in the contains() check below if the target DOM
         // element is removed in the React mouse callback.
 
@@ -7015,8 +6548,24 @@
           handleMouseCapture,
           true
         )
-        var removeMouseListener = listen(doc, clickTrigger, handleMouse)
-        var removeKeyupListener = listen(doc, 'keyup', handleKeyUp)
+        var removeMouseListener = listen(doc, clickTrigger, function(e) {
+          // skip if this event is the same as the one running when we added the handlers
+          if (e === currentEvent) {
+            currentEvent = undefined
+            return
+          }
+
+          handleMouse(e)
+        })
+        var removeKeyupListener = listen(doc, 'keyup', function(e) {
+          // skip if this event is the same as the one running when we added the handlers
+          if (e === currentEvent) {
+            currentEvent = undefined
+            return
+          }
+
+          handleKeyUp(e)
+        })
         var mobileSafariHackListeners = []
 
         if ('ontouchstart' in doc.documentElement) {
@@ -7047,24 +6596,25 @@
     )
   }
 
-  var resolveRef = function resolveRef(ref) {
-    if (typeof document === 'undefined') return undefined
+  var resolveContainerRef = function resolveContainerRef(ref) {
+    var _ref
+
+    if (typeof document === 'undefined') return null
     if (ref == null) return ownerDocument().body
     if (typeof ref === 'function') ref = ref()
-    if (ref && ref.current) ref = ref.current
-    if (ref && ref.nodeType) return ref
+    if (ref && 'current' in ref) ref = ref.current
+    if ((_ref = ref) == null ? void 0 : _ref.nodeType) return ref || null
     return null
   }
-
   function useWaitForDOMRef(ref, onResolved) {
     var _useState = React.useState(function() {
-        return resolveRef(ref)
+        return resolveContainerRef(ref)
       }),
       resolvedRef = _useState[0],
       setRef = _useState[1]
 
     if (!resolvedRef) {
-      var earlyRef = resolveRef(ref)
+      var earlyRef = resolveContainerRef(ref)
       if (earlyRef) setRef(earlyRef)
     }
 
@@ -7078,7 +6628,7 @@
     )
     React.useEffect(
       function() {
-        var nextRef = resolveRef(ref)
+        var nextRef = resolveContainerRef(ref)
 
         if (nextRef !== resolvedRef) {
           setRef(nextRef)
@@ -7089,15 +6639,116 @@
     return resolvedRef
   }
 
+  function toModifierMap(modifiers) {
+    var result = {}
+
+    if (!Array.isArray(modifiers)) {
+      return modifiers || result
+    } // eslint-disable-next-line no-unused-expressions
+
+    modifiers == null
+      ? void 0
+      : modifiers.forEach(function(m) {
+          result[m.name] = m
+        })
+    return result
+  }
+  function toModifierArray(map) {
+    if (map === void 0) {
+      map = {}
+    }
+
+    if (Array.isArray(map)) return map
+    return Object.keys(map).map(function(k) {
+      map[k].name = k
+      return map[k]
+    })
+  }
+  function mergeOptionsWithPopperConfig(_ref) {
+    var _modifiers$preventOve,
+      _modifiers$preventOve2,
+      _modifiers$offset,
+      _modifiers$arrow
+
+    var enabled = _ref.enabled,
+      enableEvents = _ref.enableEvents,
+      placement = _ref.placement,
+      flip = _ref.flip,
+      offset = _ref.offset,
+      containerPadding = _ref.containerPadding,
+      arrowElement = _ref.arrowElement,
+      _ref$popperConfig = _ref.popperConfig,
+      popperConfig = _ref$popperConfig === void 0 ? {} : _ref$popperConfig
+    var modifiers = toModifierMap(popperConfig.modifiers)
+    return _extends$3({}, popperConfig, {
+      placement: placement,
+      enabled: enabled,
+      modifiers: toModifierArray(
+        _extends$3({}, modifiers, {
+          eventListeners: {
+            enabled: enableEvents,
+          },
+          preventOverflow: _extends$3({}, modifiers.preventOverflow, {
+            options: containerPadding
+              ? _extends$3(
+                  {
+                    padding: containerPadding,
+                  },
+                  (_modifiers$preventOve = modifiers.preventOverflow) == null
+                    ? void 0
+                    : _modifiers$preventOve.options
+                )
+              : (_modifiers$preventOve2 = modifiers.preventOverflow) == null
+              ? void 0
+              : _modifiers$preventOve2.options,
+          }),
+          offset: {
+            options: _extends$3(
+              {
+                offset: offset,
+              },
+              (_modifiers$offset = modifiers.offset) == null
+                ? void 0
+                : _modifiers$offset.options
+            ),
+          },
+          arrow: _extends$3({}, modifiers.arrow, {
+            enabled: !!arrowElement,
+            options: _extends$3(
+              {},
+              (_modifiers$arrow = modifiers.arrow) == null
+                ? void 0
+                : _modifiers$arrow.options,
+              {
+                element: arrowElement,
+              }
+            ),
+          }),
+          flip: _extends$3(
+            {
+              enabled: !!flip,
+            },
+            modifiers.flip
+          ),
+        })
+      ),
+    })
+  }
+
   /**
    * Built on top of `Popper.js`, the overlay component is
    * great for custom tooltip overlays.
    */
-
-  var Overlay = React__default.forwardRef(function(props, outerRef) {
+  var Overlay = /*#__PURE__*/ React__default.forwardRef(function(
+    props,
+    outerRef
+  ) {
     var flip = props.flip,
+      offset = props.offset,
       placement = props.placement,
-      containerPadding = props.containerPadding,
+      _props$containerPaddi = props.containerPadding,
+      containerPadding =
+        _props$containerPaddi === void 0 ? 5 : _props$containerPaddi,
       _props$popperConfig = props.popperConfig,
       popperConfig = _props$popperConfig === void 0 ? {} : _props$popperConfig,
       Transition = props.transition
@@ -7118,40 +6769,24 @@
       exited = _useState[0],
       setExited = _useState[1]
 
-    var _popperConfig$modifie = popperConfig.modifiers,
-      modifiers = _popperConfig$modifie === void 0 ? {} : _popperConfig$modifie
-
     var _usePopper = usePopper(
         target,
         rootElement,
-        _extends({}, popperConfig, {
-          placement: placement || 'bottom',
-          enableEvents: props.show,
-          modifiers: _extends({}, modifiers, {
-            preventOverflow: _extends(
-              {
-                padding: containerPadding || 5,
-              },
-              modifiers.preventOverflow
-            ),
-            arrow: _extends({}, modifiers.arrow, {
-              enabled: !!arrowElement,
-              element: arrowElement,
-            }),
-            flip: _extends(
-              {
-                enabled: !!flip,
-              },
-              modifiers.preventOverflow
-            ),
-          }),
+        mergeOptionsWithPopperConfig({
+          placement: placement,
+          enableEvents: !!props.show,
+          containerPadding: containerPadding || 5,
+          flip: flip,
+          offset: offset,
+          arrowElement: arrowElement,
+          popperConfig: popperConfig,
         })
       ),
       styles = _usePopper.styles,
-      arrowStyles = _usePopper.arrowStyles,
-      popper = _objectWithoutPropertiesLoose(_usePopper, [
+      attributes = _usePopper.attributes,
+      popper = _objectWithoutPropertiesLoose$2(_usePopper, [
         'styles',
-        'arrowStyles',
+        'attributes',
       ])
 
     if (props.show) {
@@ -7180,16 +6815,16 @@
     }
 
     var child = props.children(
-      _extends({}, popper, {
-        show: props.show,
-        props: {
-          style: styles,
+      _extends$3({}, popper, {
+        show: !!props.show,
+        props: _extends$3({}, attributes.popper, {
+          style: styles.popper,
           ref: mergedRef,
-        },
-        arrowProps: {
-          style: arrowStyles,
+        }),
+        arrowProps: _extends$3({}, attributes.arrow, {
+          style: styles.arrow,
           ref: attachArrowRef,
-        },
+        }),
       })
     )
 
@@ -7199,7 +6834,7 @@
         onEnter = props.onEnter,
         onEntering = props.onEntering,
         onEntered = props.onEntered
-      child = React__default.createElement(
+      child = /*#__PURE__*/ React__default.createElement(
         Transition,
         {
           in: props.show,
@@ -7215,7 +6850,9 @@
       )
     }
 
-    return container ? ReactDOM__default.createPortal(child, container) : null
+    return container
+      ? /*#__PURE__*/ ReactDOM__default.createPortal(child, container)
+      : null
   })
   Overlay.displayName = 'Overlay'
   Overlay.propTypes = {
@@ -7225,7 +6862,7 @@
     show: propTypes.bool,
 
     /** Specify where the overlay element is positioned in relation to the target element */
-    placement: propTypes.oneOf(Popper.placements),
+    placement: propTypes.oneOf(placements),
 
     /**
      * A DOM Element, Ref to an element, or function that returns either. The `target` element is where
@@ -7253,16 +6890,18 @@
      * @type {Function ({
      *   show: boolean,
      *   placement: Placement,
-     *   outOfBoundaries: ?boolean,
-     *   scheduleUpdate: () => void,
+     *   update: () => void,
+     *   forceUpdate: () => void,
      *   props: {
      *     ref: (?HTMLElement) => void,
      *     style: { [string]: string | number },
      *     aria-labelledby: ?string
+     *     [string]: string | number,
      *   },
      *   arrowProps: {
      *     ref: (?HTMLElement) => void,
      *     style: { [string]: string | number },
+     *     [string]: string | number,
      *   },
      * }) => React.Element}
      */
@@ -7302,12 +6941,6 @@
      * @type func
      */
     onHide: function onHide(props) {
-      var propType = propTypes.func
-
-      if (props.rootClose) {
-        propType = propType.isRequired
-      }
-
       for (
         var _len = arguments.length,
           args = new Array(_len > 1 ? _len - 1 : 0),
@@ -7318,13 +6951,23 @@
         args[_key - 1] = arguments[_key]
       }
 
-      return propType.apply(void 0, [props].concat(args))
+      if (props.rootClose) {
+        var _PropTypes$func
+
+        return (_PropTypes$func = propTypes.func).isRequired.apply(
+          _PropTypes$func,
+          [props].concat(args)
+        )
+      }
+
+      return propTypes.func.apply(propTypes, [props].concat(args))
     },
 
     /**
      * A `react-transition-group@2.0.0` `<Transition/>` component
      * used to animate the overlay as it changes visibility.
      */
+    // @ts-ignore
     transition: propTypes.elementType,
 
     /**
@@ -7356,9 +6999,6 @@
      * Callback fired after the Overlay finishes transitioning out
      */
     onExited: propTypes.func,
-  }
-  Overlay.defaultProps = {
-    containerPadding: 5,
   }
 
   function height(node, client) {
@@ -7448,447 +7088,456 @@
   var clickTolerance = 5
   var clickInterval = 250
 
-  var Selection = /*#__PURE__*/ (function() {
-    function Selection(node, _temp) {
-      var _ref2 = _temp === void 0 ? {} : _temp,
-        _ref2$global = _ref2.global,
-        global = _ref2$global === void 0 ? false : _ref2$global,
-        _ref2$longPressThresh = _ref2.longPressThreshold,
-        longPressThreshold =
-          _ref2$longPressThresh === void 0 ? 250 : _ref2$longPressThresh
+  var Selection =
+    /*#__PURE__*/
+    (function() {
+      function Selection(node, _temp) {
+        var _ref2 = _temp === void 0 ? {} : _temp,
+          _ref2$global = _ref2.global,
+          global = _ref2$global === void 0 ? false : _ref2$global,
+          _ref2$longPressThresh = _ref2.longPressThreshold,
+          longPressThreshold =
+            _ref2$longPressThresh === void 0 ? 250 : _ref2$longPressThresh
 
-      this.isDetached = false
-      this.container = node
-      this.globalMouse = !node || global
-      this.longPressThreshold = longPressThreshold
-      this._listeners = Object.create(null)
-      this._handleInitialEvent = this._handleInitialEvent.bind(this)
-      this._handleMoveEvent = this._handleMoveEvent.bind(this)
-      this._handleTerminatingEvent = this._handleTerminatingEvent.bind(this)
-      this._keyListener = this._keyListener.bind(this)
-      this._dropFromOutsideListener = this._dropFromOutsideListener.bind(this)
-      this._dragOverFromOutsideListener = this._dragOverFromOutsideListener.bind(
-        this
-      ) // Fixes an iOS 10 bug where scrolling could not be prevented on the window.
-      // https://github.com/metafizzy/flickity/issues/457#issuecomment-254501356
+        this.isDetached = false
+        this.container = node
+        this.globalMouse = !node || global
+        this.longPressThreshold = longPressThreshold
+        this._listeners = Object.create(null)
+        this._handleInitialEvent = this._handleInitialEvent.bind(this)
+        this._handleMoveEvent = this._handleMoveEvent.bind(this)
+        this._handleTerminatingEvent = this._handleTerminatingEvent.bind(this)
+        this._keyListener = this._keyListener.bind(this)
+        this._dropFromOutsideListener = this._dropFromOutsideListener.bind(this)
+        this._dragOverFromOutsideListener = this._dragOverFromOutsideListener.bind(
+          this
+        ) // Fixes an iOS 10 bug where scrolling could not be prevented on the window.
+        // https://github.com/metafizzy/flickity/issues/457#issuecomment-254501356
 
-      this._removeTouchMoveWindowListener = addEventListener$1(
-        'touchmove',
-        function() {},
-        window
-      )
-      this._removeKeyDownListener = addEventListener$1(
-        'keydown',
-        this._keyListener
-      )
-      this._removeKeyUpListener = addEventListener$1('keyup', this._keyListener)
-      this._removeDropFromOutsideListener = addEventListener$1(
-        'drop',
-        this._dropFromOutsideListener
-      )
-      this._onDragOverfromOutisde = addEventListener$1(
-        'dragover',
-        this._dragOverFromOutsideListener
-      )
-
-      this._addInitialEventListener()
-    }
-
-    var _proto = Selection.prototype
-
-    _proto.on = function on(type, handler) {
-      var handlers = this._listeners[type] || (this._listeners[type] = [])
-      handlers.push(handler)
-      return {
-        remove: function remove() {
-          var idx = handlers.indexOf(handler)
-          if (idx !== -1) handlers.splice(idx, 1)
-        },
-      }
-    }
-
-    _proto.emit = function emit(type) {
-      for (
-        var _len = arguments.length,
-          args = new Array(_len > 1 ? _len - 1 : 0),
-          _key = 1;
-        _key < _len;
-        _key++
-      ) {
-        args[_key - 1] = arguments[_key]
-      }
-
-      var result
-      var handlers = this._listeners[type] || []
-      handlers.forEach(function(fn) {
-        if (result === undefined) result = fn.apply(void 0, args)
-      })
-      return result
-    }
-
-    _proto.teardown = function teardown() {
-      this.isDetached = true
-      this.listeners = Object.create(null)
-      this._removeTouchMoveWindowListener &&
-        this._removeTouchMoveWindowListener()
-      this._removeInitialEventListener && this._removeInitialEventListener()
-      this._removeEndListener && this._removeEndListener()
-      this._onEscListener && this._onEscListener()
-      this._removeMoveListener && this._removeMoveListener()
-      this._removeKeyUpListener && this._removeKeyUpListener()
-      this._removeKeyDownListener && this._removeKeyDownListener()
-      this._removeDropFromOutsideListener &&
-        this._removeDropFromOutsideListener()
-    }
-
-    _proto.isSelected = function isSelected(node) {
-      var box = this._selectRect
-      if (!box || !this.selecting) return false
-      return objectsCollide(box, getBoundsForNode(node))
-    }
-
-    _proto.filter = function filter(items) {
-      var box = this._selectRect //not selecting
-
-      if (!box || !this.selecting) return []
-      return items.filter(this.isSelected, this)
-    } // Adds a listener that will call the handler only after the user has pressed on the screen
-    // without moving their finger for 250ms.
-
-    _proto._addLongPressListener = function _addLongPressListener(
-      handler,
-      initialEvent
-    ) {
-      var _this = this
-
-      var timer = null
-      var removeTouchMoveListener = null
-      var removeTouchEndListener = null
-
-      var handleTouchStart = function handleTouchStart(initialEvent) {
-        timer = setTimeout(function() {
-          cleanup()
-          handler(initialEvent)
-        }, _this.longPressThreshold)
-        removeTouchMoveListener = addEventListener$1('touchmove', function() {
-          return cleanup()
-        })
-        removeTouchEndListener = addEventListener$1('touchend', function() {
-          return cleanup()
-        })
-      }
-
-      var removeTouchStartListener = addEventListener$1(
-        'touchstart',
-        handleTouchStart
-      )
-
-      var cleanup = function cleanup() {
-        if (timer) {
-          clearTimeout(timer)
-        }
-
-        if (removeTouchMoveListener) {
-          removeTouchMoveListener()
-        }
-
-        if (removeTouchEndListener) {
-          removeTouchEndListener()
-        }
-
-        timer = null
-        removeTouchMoveListener = null
-        removeTouchEndListener = null
-      }
-
-      if (initialEvent) {
-        handleTouchStart(initialEvent)
-      }
-
-      return function() {
-        cleanup()
-        removeTouchStartListener()
-      }
-    } // Listen for mousedown and touchstart events. When one is received, disable the other and setup
-    // future event handling based on the type of event.
-
-    _proto._addInitialEventListener = function _addInitialEventListener() {
-      var _this2 = this
-
-      var removeMouseDownListener = addEventListener$1('mousedown', function(
-        e
-      ) {
-        _this2._removeInitialEventListener()
-
-        _this2._handleInitialEvent(e)
-
-        _this2._removeInitialEventListener = addEventListener$1(
-          'mousedown',
-          _this2._handleInitialEvent
+        this._removeTouchMoveWindowListener = addEventListener$1(
+          'touchmove',
+          function() {},
+          window
         )
-      })
-      var removeTouchStartListener = addEventListener$1('touchstart', function(
-        e
-      ) {
-        _this2._removeInitialEventListener()
-
-        _this2._removeInitialEventListener = _this2._addLongPressListener(
-          _this2._handleInitialEvent,
-          e
+        this._removeKeyDownListener = addEventListener$1(
+          'keydown',
+          this._keyListener
         )
-      })
+        this._removeKeyUpListener = addEventListener$1(
+          'keyup',
+          this._keyListener
+        )
+        this._removeDropFromOutsideListener = addEventListener$1(
+          'drop',
+          this._dropFromOutsideListener
+        )
+        this._removeDragOverFromOutsideListener = addEventListener$1(
+          'dragover',
+          this._dragOverFromOutsideListener
+        )
 
-      this._removeInitialEventListener = function() {
-        removeMouseDownListener()
-        removeTouchStartListener()
-      }
-    }
-
-    _proto._dropFromOutsideListener = function _dropFromOutsideListener(e) {
-      var _getEventCoordinates = getEventCoordinates(e),
-        pageX = _getEventCoordinates.pageX,
-        pageY = _getEventCoordinates.pageY,
-        clientX = _getEventCoordinates.clientX,
-        clientY = _getEventCoordinates.clientY
-
-      this.emit('dropFromOutside', {
-        x: pageX,
-        y: pageY,
-        clientX: clientX,
-        clientY: clientY,
-      })
-      e.preventDefault()
-    }
-
-    _proto._dragOverFromOutsideListener = function _dragOverFromOutsideListener(
-      e
-    ) {
-      var _getEventCoordinates2 = getEventCoordinates(e),
-        pageX = _getEventCoordinates2.pageX,
-        pageY = _getEventCoordinates2.pageY,
-        clientX = _getEventCoordinates2.clientX,
-        clientY = _getEventCoordinates2.clientY
-
-      this.emit('dragOverFromOutside', {
-        x: pageX,
-        y: pageY,
-        clientX: clientX,
-        clientY: clientY,
-      })
-      e.preventDefault()
-    }
-
-    _proto._handleInitialEvent = function _handleInitialEvent(e) {
-      if (this.isDetached) {
-        return
+        this._addInitialEventListener()
       }
 
-      var _getEventCoordinates3 = getEventCoordinates(e),
-        clientX = _getEventCoordinates3.clientX,
-        clientY = _getEventCoordinates3.clientY,
-        pageX = _getEventCoordinates3.pageX,
-        pageY = _getEventCoordinates3.pageY
+      var _proto = Selection.prototype
 
-      var node = this.container(),
-        collides,
-        offsetData // Right clicks
-
-      if (
-        e.which === 3 ||
-        e.button === 2 ||
-        !isOverContainer(node, clientX, clientY)
-      )
-        return
-
-      if (!this.globalMouse && node && !contains(node, e.target)) {
-        var _normalizeDistance = normalizeDistance(0),
-          top = _normalizeDistance.top,
-          left = _normalizeDistance.left,
-          bottom = _normalizeDistance.bottom,
-          right = _normalizeDistance.right
-
-        offsetData = getBoundsForNode(node)
-        collides = objectsCollide(
-          {
-            top: offsetData.top - top,
-            left: offsetData.left - left,
-            bottom: offsetData.bottom + bottom,
-            right: offsetData.right + right,
+      _proto.on = function on(type, handler) {
+        var handlers = this._listeners[type] || (this._listeners[type] = [])
+        handlers.push(handler)
+        return {
+          remove: function remove() {
+            var idx = handlers.indexOf(handler)
+            if (idx !== -1) handlers.splice(idx, 1)
           },
-          {
-            top: pageY,
-            left: pageX,
+        }
+      }
+
+      _proto.emit = function emit(type) {
+        for (
+          var _len = arguments.length,
+            args = new Array(_len > 1 ? _len - 1 : 0),
+            _key = 1;
+          _key < _len;
+          _key++
+        ) {
+          args[_key - 1] = arguments[_key]
+        }
+
+        var result
+        var handlers = this._listeners[type] || []
+        handlers.forEach(function(fn) {
+          if (result === undefined) result = fn.apply(void 0, args)
+        })
+        return result
+      }
+
+      _proto.teardown = function teardown() {
+        this.isDetached = true
+        this.listeners = Object.create(null)
+        this._removeTouchMoveWindowListener &&
+          this._removeTouchMoveWindowListener()
+        this._removeInitialEventListener && this._removeInitialEventListener()
+        this._removeEndListener && this._removeEndListener()
+        this._onEscListener && this._onEscListener()
+        this._removeMoveListener && this._removeMoveListener()
+        this._removeKeyUpListener && this._removeKeyUpListener()
+        this._removeKeyDownListener && this._removeKeyDownListener()
+        this._removeDropFromOutsideListener &&
+          this._removeDropFromOutsideListener()
+        this._removeDragOverFromOutsideListener &&
+          this._removeDragOverFromOutsideListener()
+      }
+
+      _proto.isSelected = function isSelected(node) {
+        var box = this._selectRect
+        if (!box || !this.selecting) return false
+        return objectsCollide(box, getBoundsForNode(node))
+      }
+
+      _proto.filter = function filter(items) {
+        var box = this._selectRect //not selecting
+
+        if (!box || !this.selecting) return []
+        return items.filter(this.isSelected, this)
+      } // Adds a listener that will call the handler only after the user has pressed on the screen
+      // without moving their finger for 250ms.
+
+      _proto._addLongPressListener = function _addLongPressListener(
+        handler,
+        initialEvent
+      ) {
+        var _this = this
+
+        var timer = null
+        var removeTouchMoveListener = null
+        var removeTouchEndListener = null
+
+        var handleTouchStart = function handleTouchStart(initialEvent) {
+          timer = setTimeout(function() {
+            cleanup()
+            handler(initialEvent)
+          }, _this.longPressThreshold)
+          removeTouchMoveListener = addEventListener$1('touchmove', function() {
+            return cleanup()
+          })
+          removeTouchEndListener = addEventListener$1('touchend', function() {
+            return cleanup()
+          })
+        }
+
+        var removeTouchStartListener = addEventListener$1(
+          'touchstart',
+          handleTouchStart
+        )
+
+        var cleanup = function cleanup() {
+          if (timer) {
+            clearTimeout(timer)
+          }
+
+          if (removeTouchMoveListener) {
+            removeTouchMoveListener()
+          }
+
+          if (removeTouchEndListener) {
+            removeTouchEndListener()
+          }
+
+          timer = null
+          removeTouchMoveListener = null
+          removeTouchEndListener = null
+        }
+
+        if (initialEvent) {
+          handleTouchStart(initialEvent)
+        }
+
+        return function() {
+          cleanup()
+          removeTouchStartListener()
+        }
+      } // Listen for mousedown and touchstart events. When one is received, disable the other and setup
+      // future event handling based on the type of event.
+
+      _proto._addInitialEventListener = function _addInitialEventListener() {
+        var _this2 = this
+
+        var removeMouseDownListener = addEventListener$1('mousedown', function(
+          e
+        ) {
+          _this2._removeInitialEventListener()
+
+          _this2._handleInitialEvent(e)
+
+          _this2._removeInitialEventListener = addEventListener$1(
+            'mousedown',
+            _this2._handleInitialEvent
+          )
+        })
+        var removeTouchStartListener = addEventListener$1(
+          'touchstart',
+          function(e) {
+            _this2._removeInitialEventListener()
+
+            _this2._removeInitialEventListener = _this2._addLongPressListener(
+              _this2._handleInitialEvent,
+              e
+            )
           }
         )
-        if (!collides) return
+
+        this._removeInitialEventListener = function() {
+          removeMouseDownListener()
+          removeTouchStartListener()
+        }
       }
 
-      var result = this.emit(
-        'beforeSelect',
-        (this._initialEventData = {
-          isTouch: /^touch/.test(e.type),
+      _proto._dropFromOutsideListener = function _dropFromOutsideListener(e) {
+        var _getEventCoordinates = getEventCoordinates(e),
+          pageX = _getEventCoordinates.pageX,
+          pageY = _getEventCoordinates.pageY,
+          clientX = _getEventCoordinates.clientX,
+          clientY = _getEventCoordinates.clientY
+
+        this.emit('dropFromOutside', {
           x: pageX,
           y: pageY,
           clientX: clientX,
           clientY: clientY,
         })
-      )
-      if (result === false) return
-
-      switch (e.type) {
-        case 'mousedown':
-          this._removeEndListener = addEventListener$1(
-            'mouseup',
-            this._handleTerminatingEvent
-          )
-          this._onEscListener = addEventListener$1(
-            'keydown',
-            this._handleTerminatingEvent
-          )
-          this._removeMoveListener = addEventListener$1(
-            'mousemove',
-            this._handleMoveEvent
-          )
-          break
-
-        case 'touchstart':
-          this._handleMoveEvent(e)
-
-          this._removeEndListener = addEventListener$1(
-            'touchend',
-            this._handleTerminatingEvent
-          )
-          this._removeMoveListener = addEventListener$1(
-            'touchmove',
-            this._handleMoveEvent
-          )
-          break
-      }
-    }
-
-    _proto._handleTerminatingEvent = function _handleTerminatingEvent(e) {
-      var _getEventCoordinates4 = getEventCoordinates(e),
-        pageX = _getEventCoordinates4.pageX,
-        pageY = _getEventCoordinates4.pageY
-
-      this.selecting = false
-      this._removeEndListener && this._removeEndListener()
-      this._removeMoveListener && this._removeMoveListener()
-      if (!this._initialEventData) return
-      var inRoot = !this.container || contains(this.container(), e.target)
-      var bounds = this._selectRect
-      var click = this.isClick(pageX, pageY)
-      this._initialEventData = null
-
-      if (e.key === 'Escape') {
-        return this.emit('reset')
+        e.preventDefault()
       }
 
-      if (!inRoot) {
-        return this.emit('reset')
-      }
-
-      if (click && inRoot) {
-        return this._handleClickEvent(e)
-      } // User drag-clicked in the Selectable area
-
-      if (!click) return this.emit('select', bounds)
-    }
-
-    _proto._handleClickEvent = function _handleClickEvent(e) {
-      var _getEventCoordinates5 = getEventCoordinates(e),
-        pageX = _getEventCoordinates5.pageX,
-        pageY = _getEventCoordinates5.pageY,
-        clientX = _getEventCoordinates5.clientX,
-        clientY = _getEventCoordinates5.clientY
-
-      var now = new Date().getTime()
-
-      if (
-        this._lastClickData &&
-        now - this._lastClickData.timestamp < clickInterval
+      _proto._dragOverFromOutsideListener = function _dragOverFromOutsideListener(
+        e
       ) {
-        // Double click event
-        this._lastClickData = null
-        return this.emit('doubleClick', {
+        var _getEventCoordinates2 = getEventCoordinates(e),
+          pageX = _getEventCoordinates2.pageX,
+          pageY = _getEventCoordinates2.pageY,
+          clientX = _getEventCoordinates2.clientX,
+          clientY = _getEventCoordinates2.clientY
+
+        this.emit('dragOverFromOutside', {
           x: pageX,
           y: pageY,
           clientX: clientX,
           clientY: clientY,
         })
-      } // Click event
-
-      this._lastClickData = {
-        timestamp: now,
-      }
-      return this.emit('click', {
-        x: pageX,
-        y: pageY,
-        clientX: clientX,
-        clientY: clientY,
-      })
-    }
-
-    _proto._handleMoveEvent = function _handleMoveEvent(e) {
-      if (this._initialEventData === null || this.isDetached) {
-        return
+        e.preventDefault()
       }
 
-      var _this$_initialEventDa = this._initialEventData,
-        x = _this$_initialEventDa.x,
-        y = _this$_initialEventDa.y
+      _proto._handleInitialEvent = function _handleInitialEvent(e) {
+        if (this.isDetached) {
+          return
+        }
 
-      var _getEventCoordinates6 = getEventCoordinates(e),
-        pageX = _getEventCoordinates6.pageX,
-        pageY = _getEventCoordinates6.pageY
+        var _getEventCoordinates3 = getEventCoordinates(e),
+          clientX = _getEventCoordinates3.clientX,
+          clientY = _getEventCoordinates3.clientY,
+          pageX = _getEventCoordinates3.pageX,
+          pageY = _getEventCoordinates3.pageY
 
-      var w = Math.abs(x - pageX)
-      var h = Math.abs(y - pageY)
-      var left = Math.min(pageX, x),
-        top = Math.min(pageY, y),
-        old = this.selecting // Prevent emitting selectStart event until mouse is moved.
-      // in Chrome on Windows, mouseMove event may be fired just after mouseDown event.
+        var node = this.container(),
+          collides,
+          offsetData // Right clicks
 
-      if (this.isClick(pageX, pageY) && !old && !(w || h)) {
-        return
+        if (
+          e.which === 3 ||
+          e.button === 2 ||
+          !isOverContainer(node, clientX, clientY)
+        )
+          return
+
+        if (!this.globalMouse && node && !contains(node, e.target)) {
+          var _normalizeDistance = normalizeDistance(0),
+            top = _normalizeDistance.top,
+            left = _normalizeDistance.left,
+            bottom = _normalizeDistance.bottom,
+            right = _normalizeDistance.right
+
+          offsetData = getBoundsForNode(node)
+          collides = objectsCollide(
+            {
+              top: offsetData.top - top,
+              left: offsetData.left - left,
+              bottom: offsetData.bottom + bottom,
+              right: offsetData.right + right,
+            },
+            {
+              top: pageY,
+              left: pageX,
+            }
+          )
+          if (!collides) return
+        }
+
+        var result = this.emit(
+          'beforeSelect',
+          (this._initialEventData = {
+            isTouch: /^touch/.test(e.type),
+            x: pageX,
+            y: pageY,
+            clientX: clientX,
+            clientY: clientY,
+          })
+        )
+        if (result === false) return
+
+        switch (e.type) {
+          case 'mousedown':
+            this._removeEndListener = addEventListener$1(
+              'mouseup',
+              this._handleTerminatingEvent
+            )
+            this._onEscListener = addEventListener$1(
+              'keydown',
+              this._handleTerminatingEvent
+            )
+            this._removeMoveListener = addEventListener$1(
+              'mousemove',
+              this._handleMoveEvent
+            )
+            break
+
+          case 'touchstart':
+            this._handleMoveEvent(e)
+
+            this._removeEndListener = addEventListener$1(
+              'touchend',
+              this._handleTerminatingEvent
+            )
+            this._removeMoveListener = addEventListener$1(
+              'touchmove',
+              this._handleMoveEvent
+            )
+            break
+        }
       }
 
-      this.selecting = true
-      this._selectRect = {
-        top: top,
-        left: left,
-        x: pageX,
-        y: pageY,
-        right: left + w,
-        bottom: top + h,
+      _proto._handleTerminatingEvent = function _handleTerminatingEvent(e) {
+        var _getEventCoordinates4 = getEventCoordinates(e),
+          pageX = _getEventCoordinates4.pageX,
+          pageY = _getEventCoordinates4.pageY
+
+        this.selecting = false
+        this._removeEndListener && this._removeEndListener()
+        this._removeMoveListener && this._removeMoveListener()
+        if (!this._initialEventData) return
+        var inRoot = !this.container || contains(this.container(), e.target)
+        var bounds = this._selectRect
+        var click = this.isClick(pageX, pageY)
+        this._initialEventData = null
+
+        if (e.key === 'Escape') {
+          return this.emit('reset')
+        }
+
+        if (!inRoot) {
+          return this.emit('reset')
+        }
+
+        if (click && inRoot) {
+          return this._handleClickEvent(e)
+        } // User drag-clicked in the Selectable area
+
+        if (!click) return this.emit('select', bounds)
       }
 
-      if (!old) {
-        this.emit('selectStart', this._initialEventData)
+      _proto._handleClickEvent = function _handleClickEvent(e) {
+        var _getEventCoordinates5 = getEventCoordinates(e),
+          pageX = _getEventCoordinates5.pageX,
+          pageY = _getEventCoordinates5.pageY,
+          clientX = _getEventCoordinates5.clientX,
+          clientY = _getEventCoordinates5.clientY
+
+        var now = new Date().getTime()
+
+        if (
+          this._lastClickData &&
+          now - this._lastClickData.timestamp < clickInterval
+        ) {
+          // Double click event
+          this._lastClickData = null
+          return this.emit('doubleClick', {
+            x: pageX,
+            y: pageY,
+            clientX: clientX,
+            clientY: clientY,
+          })
+        } // Click event
+
+        this._lastClickData = {
+          timestamp: now,
+        }
+        return this.emit('click', {
+          x: pageX,
+          y: pageY,
+          clientX: clientX,
+          clientY: clientY,
+        })
       }
 
-      if (!this.isClick(pageX, pageY)) this.emit('selecting', this._selectRect)
-      e.preventDefault()
-    }
+      _proto._handleMoveEvent = function _handleMoveEvent(e) {
+        if (this._initialEventData === null || this.isDetached) {
+          return
+        }
 
-    _proto._keyListener = function _keyListener(e) {
-      this.ctrl = e.metaKey || e.ctrlKey
-    }
+        var _this$_initialEventDa = this._initialEventData,
+          x = _this$_initialEventDa.x,
+          y = _this$_initialEventDa.y
 
-    _proto.isClick = function isClick(pageX, pageY) {
-      var _this$_initialEventDa2 = this._initialEventData,
-        x = _this$_initialEventDa2.x,
-        y = _this$_initialEventDa2.y,
-        isTouch = _this$_initialEventDa2.isTouch
-      return (
-        !isTouch &&
-        Math.abs(pageX - x) <= clickTolerance &&
-        Math.abs(pageY - y) <= clickTolerance
-      )
-    }
+        var _getEventCoordinates6 = getEventCoordinates(e),
+          pageX = _getEventCoordinates6.pageX,
+          pageY = _getEventCoordinates6.pageY
 
-    return Selection
-  })()
+        var w = Math.abs(x - pageX)
+        var h = Math.abs(y - pageY)
+        var left = Math.min(pageX, x),
+          top = Math.min(pageY, y),
+          old = this.selecting // Prevent emitting selectStart event until mouse is moved.
+        // in Chrome on Windows, mouseMove event may be fired just after mouseDown event.
+
+        if (this.isClick(pageX, pageY) && !old && !(w || h)) {
+          return
+        }
+
+        this.selecting = true
+        this._selectRect = {
+          top: top,
+          left: left,
+          x: pageX,
+          y: pageY,
+          right: left + w,
+          bottom: top + h,
+        }
+
+        if (!old) {
+          this.emit('selectStart', this._initialEventData)
+        }
+
+        if (!this.isClick(pageX, pageY))
+          this.emit('selecting', this._selectRect)
+        e.preventDefault()
+      }
+
+      _proto._keyListener = function _keyListener(e) {
+        this.ctrl = e.metaKey || e.ctrlKey
+      }
+
+      _proto.isClick = function isClick(pageX, pageY) {
+        var _this$_initialEventDa2 = this._initialEventData,
+          x = _this$_initialEventDa2.x,
+          y = _this$_initialEventDa2.y,
+          isTouch = _this$_initialEventDa2.isTouch
+        return (
+          !isTouch &&
+          Math.abs(pageX - x) <= clickTolerance &&
+          Math.abs(pageY - y) <= clickTolerance
+        )
+      }
+
+      return Selection
+    })()
   /**
    * Resolve the disance prop from either an Int or an Object
    * @return {Object}
@@ -7972,214 +7621,223 @@
     if (dir === 'top') return window.pageYOffset || document.body.scrollTop || 0
   }
 
-  var BackgroundCells = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(BackgroundCells, _React$PureComponent)
+  var BackgroundCells =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(BackgroundCells, _React$PureComponent)
 
-    function BackgroundCells(props, context) {
-      var _this
+      function BackgroundCells(props, context) {
+        var _this
 
-      _this = _React$PureComponent.call(this, props, context) || this
-      _this.state = {
-        selecting: false,
+        _this = _React$PureComponent.call(this, props, context) || this
+        _this.state = {
+          selecting: false,
+        }
+        return _this
       }
-      return _this
-    }
 
-    var _proto = BackgroundCells.prototype
+      var _proto = BackgroundCells.prototype
 
-    _proto.componentDidMount = function componentDidMount() {
-      this.props.selectable && this._selectable()
-    }
+      _proto.componentDidMount = function componentDidMount() {
+        this.props.selectable && this._selectable()
+      }
 
-    _proto.componentWillUnmount = function componentWillUnmount() {
-      this._teardownSelectable()
-    }
-
-    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-      nextProps
-    ) {
-      if (nextProps.selectable && !this.props.selectable) this._selectable()
-      if (!nextProps.selectable && this.props.selectable)
+      _proto.componentWillUnmount = function componentWillUnmount() {
         this._teardownSelectable()
-    }
+      }
 
-    _proto.render = function render() {
-      var _this$props = this.props,
-        range = _this$props.range,
-        getNow = _this$props.getNow,
-        getters = _this$props.getters,
-        currentDate = _this$props.date,
-        Wrapper = _this$props.components.dateCellWrapper
-      var _this$state = this.state,
-        selecting = _this$state.selecting,
-        startIdx = _this$state.startIdx,
-        endIdx = _this$state.endIdx
-      var current = getNow()
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: 'rbc-row-bg',
-        },
-        range.map(function(date, index) {
-          var selected = selecting && index >= startIdx && index <= endIdx
+      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+        nextProps
+      ) {
+        if (nextProps.selectable && !this.props.selectable) this._selectable()
+        if (!nextProps.selectable && this.props.selectable)
+          this._teardownSelectable()
+      }
 
-          var _getters$dayProp = getters.dayProp(date),
-            className = _getters$dayProp.className,
-            style = _getters$dayProp.style
-
-          return /*#__PURE__*/ React__default.createElement(
-            Wrapper,
+      _proto.render = function render() {
+        var _this$props = this.props,
+          range = _this$props.range,
+          getNow = _this$props.getNow,
+          getters = _this$props.getters,
+          currentDate = _this$props.date,
+          Wrapper = _this$props.components.dateCellWrapper
+        var _this$state = this.state,
+          selecting = _this$state.selecting,
+          startIdx = _this$state.startIdx,
+          endIdx = _this$state.endIdx
+        var current = getNow()
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
             {
-              key: index,
-              value: date,
-              range: range,
+              className: 'rbc-row-bg',
             },
-            /*#__PURE__*/ React__default.createElement('div', {
-              style: style,
-              className: clsx(
-                'rbc-day-bg',
-                className,
-                selected && 'rbc-selected-cell',
-                eq(date, current, 'day') && 'rbc-today',
-                currentDate &&
-                  month(currentDate) !== month(date) &&
-                  'rbc-off-range-bg'
-              ),
+            range.map(function(date, index) {
+              var selected = selecting && index >= startIdx && index <= endIdx
+
+              var _getters$dayProp = getters.dayProp(date),
+                className = _getters$dayProp.className,
+                style = _getters$dayProp.style
+
+              return (
+                /*#__PURE__*/
+                React__default.createElement(
+                  Wrapper,
+                  {
+                    key: index,
+                    value: date,
+                    range: range,
+                  },
+                  /*#__PURE__*/
+                  React__default.createElement('div', {
+                    style: style,
+                    className: clsx(
+                      'rbc-day-bg',
+                      className,
+                      selected && 'rbc-selected-cell',
+                      eq(date, current, 'day') && 'rbc-today',
+                      currentDate &&
+                        month(currentDate) !== month(date) &&
+                        'rbc-off-range-bg'
+                    ),
+                  })
+                )
+              )
             })
           )
-        })
-      )
-    }
+        )
+      }
 
-    _proto._selectable = function _selectable() {
-      var _this2 = this
+      _proto._selectable = function _selectable() {
+        var _this2 = this
 
-      var node = ReactDOM.findDOMNode(this)
-      var selector = (this._selector = new Selection(this.props.container, {
-        longPressThreshold: this.props.longPressThreshold,
-      }))
+        var node = ReactDOM.findDOMNode(this)
+        var selector = (this._selector = new Selection(this.props.container, {
+          longPressThreshold: this.props.longPressThreshold,
+        }))
 
-      var selectorClicksHandler = function selectorClicksHandler(
-        point,
-        actionType
-      ) {
-        if (!isEvent(ReactDOM.findDOMNode(_this2), point)) {
-          var rowBox = getBoundsForNode(node)
-          var _this2$props = _this2.props,
-            range = _this2$props.range,
-            rtl = _this2$props.rtl
+        var selectorClicksHandler = function selectorClicksHandler(
+          point,
+          actionType
+        ) {
+          if (!isEvent(ReactDOM.findDOMNode(_this2), point)) {
+            var rowBox = getBoundsForNode(node)
+            var _this2$props = _this2.props,
+              range = _this2$props.range,
+              rtl = _this2$props.rtl
 
-          if (pointInBox(rowBox, point)) {
-            var currentCell = getSlotAtX(rowBox, point.x, rtl, range.length)
+            if (pointInBox(rowBox, point)) {
+              var currentCell = getSlotAtX(rowBox, point.x, rtl, range.length)
 
-            _this2._selectSlot({
-              startIdx: currentCell,
-              endIdx: currentCell,
-              action: actionType,
-              box: point,
-            })
+              _this2._selectSlot({
+                startIdx: currentCell,
+                endIdx: currentCell,
+                action: actionType,
+                box: point,
+              })
+            }
           }
+
+          _this2._initial = {}
+
+          _this2.setState({
+            selecting: false,
+          })
         }
 
-        _this2._initial = {}
+        selector.on('selecting', function(box) {
+          var _this2$props2 = _this2.props,
+            range = _this2$props2.range,
+            rtl = _this2$props2.rtl
+          var startIdx = -1
+          var endIdx = -1
 
-        _this2.setState({
-          selecting: false,
+          if (!_this2.state.selecting) {
+            notify(_this2.props.onSelectStart, [box])
+            _this2._initial = {
+              x: box.x,
+              y: box.y,
+            }
+          }
+
+          if (selector.isSelected(node)) {
+            var nodeBox = getBoundsForNode(node)
+
+            var _dateCellSelection = dateCellSelection(
+              _this2._initial,
+              nodeBox,
+              box,
+              range.length,
+              rtl
+            )
+
+            startIdx = _dateCellSelection.startIdx
+            endIdx = _dateCellSelection.endIdx
+          }
+
+          _this2.setState({
+            selecting: true,
+            startIdx: startIdx,
+            endIdx: endIdx,
+          })
+        })
+        selector.on('beforeSelect', function(box) {
+          if (_this2.props.selectable !== 'ignoreEvents') return
+          return !isEvent(ReactDOM.findDOMNode(_this2), box)
+        })
+        selector.on('click', function(point) {
+          return selectorClicksHandler(point, 'click')
+        })
+        selector.on('doubleClick', function(point) {
+          return selectorClicksHandler(point, 'doubleClick')
+        })
+        selector.on('select', function(bounds) {
+          _this2._selectSlot(
+            _extends({}, _this2.state, {
+              action: 'select',
+              bounds: bounds,
+            })
+          )
+
+          _this2._initial = {}
+
+          _this2.setState({
+            selecting: false,
+          })
+
+          notify(_this2.props.onSelectEnd, [_this2.state])
         })
       }
 
-      selector.on('selecting', function(box) {
-        var _this2$props2 = _this2.props,
-          range = _this2$props2.range,
-          rtl = _this2$props2.rtl
-        var startIdx = -1
-        var endIdx = -1
+      _proto._teardownSelectable = function _teardownSelectable() {
+        if (!this._selector) return
 
-        if (!_this2.state.selecting) {
-          notify(_this2.props.onSelectStart, [box])
-          _this2._initial = {
-            x: box.x,
-            y: box.y,
-          }
-        }
+        this._selector.teardown()
 
-        if (selector.isSelected(node)) {
-          var nodeBox = getBoundsForNode(node)
+        this._selector = null
+      }
 
-          var _dateCellSelection = dateCellSelection(
-            _this2._initial,
-            nodeBox,
-            box,
-            range.length,
-            rtl
-          )
+      _proto._selectSlot = function _selectSlot(_ref) {
+        var endIdx = _ref.endIdx,
+          startIdx = _ref.startIdx,
+          action = _ref.action,
+          bounds = _ref.bounds,
+          box = _ref.box
+        if (endIdx !== -1 && startIdx !== -1)
+          this.props.onSelectSlot &&
+            this.props.onSelectSlot({
+              start: startIdx,
+              end: endIdx,
+              action: action,
+              bounds: bounds,
+              box: box,
+              resourceId: this.props.resourceId,
+            })
+      }
 
-          startIdx = _dateCellSelection.startIdx
-          endIdx = _dateCellSelection.endIdx
-        }
-
-        _this2.setState({
-          selecting: true,
-          startIdx: startIdx,
-          endIdx: endIdx,
-        })
-      })
-      selector.on('beforeSelect', function(box) {
-        if (_this2.props.selectable !== 'ignoreEvents') return
-        return !isEvent(ReactDOM.findDOMNode(_this2), box)
-      })
-      selector.on('click', function(point) {
-        return selectorClicksHandler(point, 'click')
-      })
-      selector.on('doubleClick', function(point) {
-        return selectorClicksHandler(point, 'doubleClick')
-      })
-      selector.on('select', function(bounds) {
-        _this2._selectSlot(
-          _extends({}, _this2.state, {
-            action: 'select',
-            bounds: bounds,
-          })
-        )
-
-        _this2._initial = {}
-
-        _this2.setState({
-          selecting: false,
-        })
-
-        notify(_this2.props.onSelectEnd, [_this2.state])
-      })
-    }
-
-    _proto._teardownSelectable = function _teardownSelectable() {
-      if (!this._selector) return
-
-      this._selector.teardown()
-
-      this._selector = null
-    }
-
-    _proto._selectSlot = function _selectSlot(_ref) {
-      var endIdx = _ref.endIdx,
-        startIdx = _ref.startIdx,
-        action = _ref.action,
-        bounds = _ref.bounds,
-        box = _ref.box
-      if (endIdx !== -1 && startIdx !== -1)
-        this.props.onSelectSlot &&
-          this.props.onSelectSlot({
-            start: startIdx,
-            end: endIdx,
-            action: action,
-            bounds: bounds,
-            box: box,
-            resourceId: this.props.resourceId,
-          })
-    }
-
-    return BackgroundCells
-  })(React__default.PureComponent)
+      return BackgroundCells
+    })(React__default.PureComponent)
 
   BackgroundCells.propTypes = {
     date: propTypes.instanceOf(Date),
@@ -8232,22 +7890,25 @@
         resizable = props.resizable
       var continuesPrior = slotMetrics.continuesPrior(event)
       var continuesAfter = slotMetrics.continuesAfter(event)
-      return /*#__PURE__*/ React__default.createElement(EventCell, {
-        event: event,
-        getters: getters,
-        localizer: localizer,
-        accessors: accessors,
-        components: components,
-        onSelect: onSelect,
-        onDoubleClick: onDoubleClick,
-        onKeyPress: onKeyPress,
-        continuesPrior: continuesPrior,
-        continuesAfter: continuesAfter,
-        slotStart: slotMetrics.first,
-        slotEnd: slotMetrics.last,
-        selected: isSelected(event, selected),
-        resizable: resizable,
-      })
+      return (
+        /*#__PURE__*/
+        React__default.createElement(EventCell, {
+          event: event,
+          getters: getters,
+          localizer: localizer,
+          accessors: accessors,
+          components: components,
+          onSelect: onSelect,
+          onDoubleClick: onDoubleClick,
+          onKeyPress: onKeyPress,
+          continuesPrior: continuesPrior,
+          continuesAfter: continuesAfter,
+          slotStart: slotMetrics.first,
+          slotEnd: slotMetrics.last,
+          selected: isSelected(event, selected),
+          resizable: resizable,
+        })
+      )
     },
     renderSpan: function renderSpan(slots, len, key, content) {
       if (content === void 0) {
@@ -8255,62 +7916,71 @@
       }
 
       var per = (Math.abs(len) / slots) * 100 + '%'
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          key: key,
-          className: 'rbc-row-segment', // IE10/11 need max-width. flex-basis doesn't respect box-sizing
-          style: {
-            WebkitFlexBasis: per,
-            flexBasis: per,
-            maxWidth: per,
+      return (
+        /*#__PURE__*/
+        React__default.createElement(
+          'div',
+          {
+            key: key,
+            className: 'rbc-row-segment', // IE10/11 need max-width. flex-basis doesn't respect box-sizing
+            style: {
+              WebkitFlexBasis: per,
+              flexBasis: per,
+              maxWidth: per,
+            },
           },
-        },
-        content
+          content
+        )
       )
     },
   }
 
-  var EventRow = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(EventRow, _React$PureComponent)
+  var EventRow =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(EventRow, _React$PureComponent)
 
-    function EventRow() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
+      function EventRow() {
+        return _React$PureComponent.apply(this, arguments) || this
+      }
 
-    var _proto = EventRow.prototype
+      var _proto = EventRow.prototype
 
-    _proto.render = function render() {
-      var _this = this
+      _proto.render = function render() {
+        var _this = this
 
-      var _this$props = this.props,
-        segments = _this$props.segments,
-        slots = _this$props.slotMetrics.slots,
-        className = _this$props.className
-      var lastEnd = 1
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: clsx(className, 'rbc-row'),
-        },
-        segments.reduce(function(row, _ref, li) {
-          var event = _ref.event,
-            left = _ref.left,
-            right = _ref.right,
-            span = _ref.span
-          var key = '_lvl_' + li
-          var gap = left - lastEnd
-          var content = EventRowMixin.renderEvent(_this.props, event)
-          if (gap) row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
-          row.push(EventRowMixin.renderSpan(slots, span, key, content))
-          lastEnd = right + 1
-          return row
-        }, [])
-      )
-    }
+        var _this$props = this.props,
+          segments = _this$props.segments,
+          slots = _this$props.slotMetrics.slots,
+          className = _this$props.className
+        var lastEnd = 1
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              className: clsx(className, 'rbc-row'),
+            },
+            segments.reduce(function(row, _ref, li) {
+              var event = _ref.event,
+                left = _ref.left,
+                right = _ref.right,
+                span = _ref.span
+              var key = '_lvl_' + li
+              var gap = left - lastEnd
+              var content = EventRowMixin.renderEvent(_this.props, event)
+              if (gap)
+                row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
+              row.push(EventRowMixin.renderSpan(slots, span, key, content))
+              lastEnd = right + 1
+              return row
+            }, [])
+          )
+        )
+      }
 
-    return EventRow
-  })(React__default.PureComponent)
+      return EventRow
+    })(React__default.PureComponent)
 
   EventRow.propTypes = _extends(
     {
@@ -9927,7 +9597,8 @@
       // Non `Object` object instances with different constructors are not equal.
       if (
         objCtor != othCtor &&
-        'constructor' in object && 'constructor' in other &&
+        'constructor' in object &&
+        'constructor' in other &&
         !(
           typeof objCtor == 'function' &&
           objCtor instanceof objCtor &&
@@ -9947,10 +9618,10 @@
   var DataView = getNative(root, 'DataView')
 
   /* Built-in method references that are verified to be native. */
-  var Promise = getNative(root, 'Promise')
+  var Promise$1 = getNative(root, 'Promise')
 
   /* Built-in method references that are verified to be native. */
-  var Set = getNative(root, 'Set')
+  var Set$1 = getNative(root, 'Set')
 
   /* Built-in method references that are verified to be native. */
   var WeakMap = getNative(root, 'WeakMap')
@@ -9967,8 +9638,8 @@
   /** Used to detect maps, sets, and weakmaps. */
   var dataViewCtorString = toSource(DataView),
     mapCtorString = toSource(Map$1),
-    promiseCtorString = toSource(Promise),
-    setCtorString = toSource(Set),
+    promiseCtorString = toSource(Promise$1),
+    setCtorString = toSource(Set$1),
     weakMapCtorString = toSource(WeakMap)
 
   /**
@@ -9984,8 +9655,8 @@
   if (
     (DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag$2) ||
     (Map$1 && getTag(new Map$1()) != mapTag$2) ||
-    (Promise && getTag(Promise.resolve()) != promiseTag) ||
-    (Set && getTag(new Set()) != setTag$2) ||
+    (Promise$1 && getTag(Promise$1.resolve()) != promiseTag) ||
+    (Set$1 && getTag(new Set$1()) != setTag$2) ||
     (WeakMap && getTag(new WeakMap()) != weakMapTag$1)
   ) {
     getTag = function(value) {
@@ -10833,7 +10504,7 @@
    * _.findIndex(users, 'active');
    * // => 2
    */
-  function findIndex$1(array, predicate, fromIndex) {
+  function findIndex(array, predicate, fromIndex) {
     var length = array == null ? 0 : array.length
     if (!length) {
       return -1
@@ -10863,7 +10534,7 @@
     var slots = diff(first, last, 'day')
     var start = max(startOf(accessors.start(event), 'day'), first)
     var end = min(ceil(accessors.end(event), 'day'), last)
-    var padding = findIndex$1(range, function(x) {
+    var padding = findIndex(range, function(x) {
       return eq(x, start, 'day')
     })
     var span = diff(start, end, 'day')
@@ -11054,114 +10725,120 @@
     }).length
   }
 
-  var EventEndingRow = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(EventEndingRow, _React$PureComponent)
+  var EventEndingRow =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(EventEndingRow, _React$PureComponent)
 
-    function EventEndingRow() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
-
-    var _proto = EventEndingRow.prototype
-
-    _proto.render = function render() {
-      var _this$props = this.props,
-        segments = _this$props.segments,
-        slots = _this$props.slotMetrics.slots
-      var rowSegments = eventLevels(segments).levels[0]
-      var current = 1,
-        lastEnd = 1,
-        row = []
-
-      while (current <= slots) {
-        var key = '_lvl_' + current
-
-        var _ref =
-            rowSegments.filter(function(seg) {
-              return isSegmentInSlot(seg, current)
-            })[0] || {},
-          event = _ref.event,
-          left = _ref.left,
-          right = _ref.right,
-          span = _ref.span //eslint-disable-line
-
-        if (!event) {
-          current++
-          continue
-        }
-
-        var gap = Math.max(0, left - lastEnd)
-
-        if (this.canRenderSlotEvent(left, span)) {
-          var content = EventRowMixin.renderEvent(this.props, event)
-
-          if (gap) {
-            row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
-          }
-
-          row.push(EventRowMixin.renderSpan(slots, span, key, content))
-          lastEnd = current = right + 1
-        } else {
-          if (gap) {
-            row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
-          }
-
-          row.push(
-            EventRowMixin.renderSpan(
-              slots,
-              1,
-              key,
-              this.renderShowMore(segments, current)
-            )
-          )
-          lastEnd = current = current + 1
-        }
+      function EventEndingRow() {
+        return _React$PureComponent.apply(this, arguments) || this
       }
 
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: 'rbc-row',
-        },
-        row
-      )
-    }
+      var _proto = EventEndingRow.prototype
 
-    _proto.canRenderSlotEvent = function canRenderSlotEvent(slot, span) {
-      var segments = this.props.segments
-      return range$1(slot, slot + span).every(function(s) {
-        var count = eventsInSlot(segments, s)
-        return count === 1
-      })
-    }
+      _proto.render = function render() {
+        var _this$props = this.props,
+          segments = _this$props.segments,
+          slots = _this$props.slotMetrics.slots
+        var rowSegments = eventLevels(segments).levels[0]
+        var current = 1,
+          lastEnd = 1,
+          row = []
 
-    _proto.renderShowMore = function renderShowMore(segments, slot) {
-      var _this = this
+        while (current <= slots) {
+          var key = '_lvl_' + current
 
-      var localizer = this.props.localizer
-      var count = eventsInSlot(segments, slot)
-      return count
-        ? /*#__PURE__*/ React__default.createElement(
-            'a',
+          var _ref =
+              rowSegments.filter(function(seg) {
+                return isSegmentInSlot(seg, current)
+              })[0] || {},
+            event = _ref.event,
+            left = _ref.left,
+            right = _ref.right,
+            span = _ref.span //eslint-disable-line
+
+          if (!event) {
+            current++
+            continue
+          }
+
+          var gap = Math.max(0, left - lastEnd)
+
+          if (this.canRenderSlotEvent(left, span)) {
+            var content = EventRowMixin.renderEvent(this.props, event)
+
+            if (gap) {
+              row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
+            }
+
+            row.push(EventRowMixin.renderSpan(slots, span, key, content))
+            lastEnd = current = right + 1
+          } else {
+            if (gap) {
+              row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
+            }
+
+            row.push(
+              EventRowMixin.renderSpan(
+                slots,
+                1,
+                key,
+                this.renderShowMore(segments, current)
+              )
+            )
+            lastEnd = current = current + 1
+          }
+        }
+
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
             {
-              key: 'sm_' + slot,
-              href: '#',
-              className: 'rbc-show-more',
-              onClick: function onClick(e) {
-                return _this.showMore(slot, e)
-              },
+              className: 'rbc-row',
             },
-            localizer.messages.showMore(count)
+            row
           )
-        : false
-    }
+        )
+      }
 
-    _proto.showMore = function showMore(slot, e) {
-      e.preventDefault()
-      this.props.onShowMore(slot, e.target)
-    }
+      _proto.canRenderSlotEvent = function canRenderSlotEvent(slot, span) {
+        var segments = this.props.segments
+        return range$1(slot, slot + span).every(function(s) {
+          var count = eventsInSlot(segments, s)
+          return count === 1
+        })
+      }
 
-    return EventEndingRow
-  })(React__default.PureComponent)
+      _proto.renderShowMore = function renderShowMore(segments, slot) {
+        var _this = this
+
+        var localizer = this.props.localizer
+        var count = eventsInSlot(segments, slot)
+        return count
+          ? /*#__PURE__*/
+            React__default.createElement(
+              'a',
+              {
+                key: 'sm_' + slot,
+                href: '#',
+                className: 'rbc-show-more',
+                onClick: function onClick(e) {
+                  return _this.showMore(slot, e)
+                },
+              },
+              localizer.messages.showMore(count)
+            )
+          : false
+      }
+
+      _proto.showMore = function showMore(slot, e) {
+        e.preventDefault()
+        this.props.onShowMore(slot, e.target)
+      }
+
+      return EventEndingRow
+    })(React__default.PureComponent)
 
   EventEndingRow.propTypes = _extends(
     {
@@ -11172,6 +10849,20 @@
     EventRowMixin.propTypes
   )
   EventEndingRow.defaultProps = _extends({}, EventRowMixin.defaultProps)
+
+  var ScrollableWeekWrapper = function ScrollableWeekWrapper(_ref) {
+    var children = _ref.children
+    return (
+      /*#__PURE__*/
+      React__default.createElement(
+        'div',
+        {
+          className: 'rbc-row-content-scroll-container',
+        },
+        children
+      )
+    )
+  }
 
   function areInputsEqual(newInputs, lastInputs) {
     if (newInputs.length !== lastInputs.length) {
@@ -11292,126 +10983,291 @@
     }, isEqual)
   }
 
-  var DateContentRow = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(DateContentRow, _React$PureComponent)
+  var DateContentRow =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(DateContentRow, _React$PureComponent)
 
-    function DateContentRow() {
-      var _this
+      function DateContentRow() {
+        var _this
 
-      for (
-        var _len = arguments.length, args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        args[_key] = arguments[_key]
-      }
+        for (
+          var _len = arguments.length, args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
+          args[_key] = arguments[_key]
+        }
 
-      _this =
-        _React$PureComponent.call.apply(
-          _React$PureComponent,
-          [this].concat(args)
-        ) || this
+        _this =
+          _React$PureComponent.call.apply(
+            _React$PureComponent,
+            [this].concat(args)
+          ) || this
 
-      _this.handleSelectSlot = function(slot) {
-        var _this$props = _this.props,
-          range = _this$props.range,
-          onSelectSlot = _this$props.onSelectSlot
-        onSelectSlot(range.slice(slot.start, slot.end + 1), slot)
-      }
+        _this.handleSelectSlot = function(slot) {
+          var _this$props = _this.props,
+            range = _this$props.range,
+            onSelectSlot = _this$props.onSelectSlot
+          onSelectSlot(range.slice(slot.start, slot.end + 1), slot)
+        }
 
-      _this.handleShowMore = function(slot, target) {
-        var _this$props2 = _this.props,
-          range = _this$props2.range,
-          onShowMore = _this$props2.onShowMore
+        _this.handleShowMore = function(slot, target) {
+          var _this$props2 = _this.props,
+            range = _this$props2.range,
+            onShowMore = _this$props2.onShowMore
 
-        var metrics = _this.slotMetrics(_this.props)
+          var metrics = _this.slotMetrics(_this.props)
 
-        var row = qsa(
-          ReactDOM.findDOMNode(_assertThisInitialized(_this)),
-          '.rbc-row-bg'
-        )[0]
-        var cell
-        if (row) cell = row.children[slot - 1]
-        var events = metrics.getEventsForSlot(slot)
-        onShowMore(events, range[slot - 1], cell, slot, target)
-      }
+          var row = qsa(
+            ReactDOM.findDOMNode(_assertThisInitialized(_this)),
+            '.rbc-row-bg'
+          )[0]
+          var cell
+          if (row) cell = row.children[slot - 1]
+          var events = metrics.getEventsForSlot(slot)
+          onShowMore(events, range[slot - 1], cell, slot, target)
+        }
 
-      _this.createHeadingRef = function(r) {
-        _this.headingRow = r
-      }
+        _this.createHeadingRef = function(r) {
+          _this.headingRow = r
+        }
 
-      _this.createEventRef = function(r) {
-        _this.eventRow = r
-      }
+        _this.createEventRef = function(r) {
+          _this.eventRow = r
+        }
 
-      _this.getContainer = function() {
-        var container = _this.props.container
-        return container
-          ? container()
-          : ReactDOM.findDOMNode(_assertThisInitialized(_this))
-      }
+        _this.getContainer = function() {
+          var container = _this.props.container
+          return container
+            ? container()
+            : ReactDOM.findDOMNode(_assertThisInitialized(_this))
+        }
 
-      _this.renderHeadingCell = function(date, index) {
-        var _this$props3 = _this.props,
-          renderHeader = _this$props3.renderHeader,
-          getNow = _this$props3.getNow
-        return renderHeader({
-          date: date,
-          key: 'header_' + index,
-          className: clsx(
-            'rbc-date-cell',
-            eq(date, getNow(), 'day') && 'rbc-now'
-          ),
-        })
-      }
+        _this.renderHeadingCell = function(date, index) {
+          var _this$props3 = _this.props,
+            renderHeader = _this$props3.renderHeader,
+            getNow = _this$props3.getNow
+          return renderHeader({
+            date: date,
+            key: 'header_' + index,
+            className: clsx(
+              'rbc-date-cell',
+              eq(date, getNow(), 'day') && 'rbc-now'
+            ),
+          })
+        }
 
-      _this.renderDummy = function() {
-        var _this$props4 = _this.props,
-          className = _this$props4.className,
-          range = _this$props4.range,
-          renderHeader = _this$props4.renderHeader
-        return /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            className: className,
-          },
-          /*#__PURE__*/ React__default.createElement(
-            'div',
-            {
-              className: 'rbc-row-content',
-            },
-            renderHeader &&
-              /*#__PURE__*/ React__default.createElement(
-                'div',
-                {
-                  className: 'rbc-row',
-                  ref: _this.createHeadingRef,
-                },
-                range.map(_this.renderHeadingCell)
-              ),
-            /*#__PURE__*/ React__default.createElement(
+        _this.renderDummy = function() {
+          var _this$props4 = _this.props,
+            className = _this$props4.className,
+            range = _this$props4.range,
+            renderHeader = _this$props4.renderHeader,
+            showAllEvents = _this$props4.showAllEvents
+          return (
+            /*#__PURE__*/
+            React__default.createElement(
               'div',
               {
-                className: 'rbc-row',
-                ref: _this.createEventRef,
+                className: className,
               },
-              /*#__PURE__*/ React__default.createElement(
+              /*#__PURE__*/
+              React__default.createElement(
                 'div',
                 {
-                  className: 'rbc-row-segment',
+                  className: clsx(
+                    'rbc-row-content',
+                    showAllEvents && 'rbc-row-content-scrollable'
+                  ),
                 },
-                /*#__PURE__*/ React__default.createElement(
-                  'div',
-                  {
-                    className: 'rbc-event',
-                  },
-                  /*#__PURE__*/ React__default.createElement(
+                renderHeader &&
+                  /*#__PURE__*/
+                  React__default.createElement(
                     'div',
                     {
-                      className: 'rbc-event-content',
+                      className: 'rbc-row',
+                      ref: _this.createHeadingRef,
                     },
-                    '\xA0'
+                    range.map(_this.renderHeadingCell)
+                  ),
+                /*#__PURE__*/
+                React__default.createElement(
+                  'div',
+                  {
+                    className: 'rbc-row',
+                    ref: _this.createEventRef,
+                  },
+                  /*#__PURE__*/
+                  React__default.createElement(
+                    'div',
+                    {
+                      className: 'rbc-row-segment',
+                    },
+                    /*#__PURE__*/
+                    React__default.createElement(
+                      'div',
+                      {
+                        className: 'rbc-event',
+                      },
+                      /*#__PURE__*/
+                      React__default.createElement(
+                        'div',
+                        {
+                          className: 'rbc-event-content',
+                        },
+                        '\xA0'
+                      )
+                    )
                   )
+                )
+              )
+            )
+          )
+        }
+
+        _this.slotMetrics = getSlotMetrics()
+        return _this
+      }
+
+      var _proto = DateContentRow.prototype
+
+      _proto.getRowLimit = function getRowLimit() {
+        var eventHeight = height(this.eventRow)
+        var headingHeight = this.headingRow ? height(this.headingRow) : 0
+        var eventSpace = height(ReactDOM.findDOMNode(this)) - headingHeight
+        return Math.max(Math.floor(eventSpace / eventHeight), 1)
+      }
+
+      _proto.render = function render() {
+        var _this$props5 = this.props,
+          date = _this$props5.date,
+          rtl = _this$props5.rtl,
+          range = _this$props5.range,
+          className = _this$props5.className,
+          selected = _this$props5.selected,
+          selectable = _this$props5.selectable,
+          renderForMeasure = _this$props5.renderForMeasure,
+          accessors = _this$props5.accessors,
+          getters = _this$props5.getters,
+          components = _this$props5.components,
+          getNow = _this$props5.getNow,
+          renderHeader = _this$props5.renderHeader,
+          onSelect = _this$props5.onSelect,
+          localizer = _this$props5.localizer,
+          onSelectStart = _this$props5.onSelectStart,
+          onSelectEnd = _this$props5.onSelectEnd,
+          onDoubleClick = _this$props5.onDoubleClick,
+          onKeyPress = _this$props5.onKeyPress,
+          resourceId = _this$props5.resourceId,
+          longPressThreshold = _this$props5.longPressThreshold,
+          isAllDay = _this$props5.isAllDay,
+          resizable = _this$props5.resizable,
+          showAllEvents = _this$props5.showAllEvents
+        if (renderForMeasure) return this.renderDummy()
+        var metrics = this.slotMetrics(this.props)
+        var levels = metrics.levels,
+          extra = metrics.extra
+        var ScrollableWeekComponent = showAllEvents
+          ? ScrollableWeekWrapper
+          : NoopWrapper
+        var WeekWrapper = components.weekWrapper
+        var eventRowProps = {
+          selected: selected,
+          accessors: accessors,
+          getters: getters,
+          localizer: localizer,
+          components: components,
+          onSelect: onSelect,
+          onDoubleClick: onDoubleClick,
+          onKeyPress: onKeyPress,
+          resourceId: resourceId,
+          slotMetrics: metrics,
+          resizable: resizable,
+        }
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              className: className,
+              role: 'rowgroup',
+            },
+            /*#__PURE__*/
+            React__default.createElement(BackgroundCells, {
+              date: date,
+              getNow: getNow,
+              rtl: rtl,
+              range: range,
+              selectable: selectable,
+              container: this.getContainer,
+              getters: getters,
+              onSelectStart: onSelectStart,
+              onSelectEnd: onSelectEnd,
+              onSelectSlot: this.handleSelectSlot,
+              components: components,
+              longPressThreshold: longPressThreshold,
+              resourceId: resourceId,
+            }),
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                className: clsx(
+                  'rbc-row-content',
+                  showAllEvents && 'rbc-row-content-scrollable'
+                ),
+                role: 'row',
+              },
+              renderHeader &&
+                /*#__PURE__*/
+                React__default.createElement(
+                  'div',
+                  {
+                    className: 'rbc-row ',
+                    ref: this.createHeadingRef,
+                  },
+                  range.map(this.renderHeadingCell)
+                ),
+              /*#__PURE__*/
+              React__default.createElement(
+                ScrollableWeekComponent,
+                null,
+                /*#__PURE__*/
+                React__default.createElement(
+                  WeekWrapper,
+                  _extends(
+                    {
+                      isAllDay: isAllDay,
+                    },
+                    eventRowProps
+                  ),
+                  levels.map(function(segs, idx) {
+                    return (
+                      /*#__PURE__*/
+                      React__default.createElement(
+                        EventRow,
+                        _extends(
+                          {
+                            key: idx,
+                            segments: segs,
+                          },
+                          eventRowProps
+                        )
+                      )
+                    )
+                  }),
+                  !!extra.length &&
+                    /*#__PURE__*/
+                    React__default.createElement(
+                      EventEndingRow,
+                      _extends(
+                        {
+                          segments: extra,
+                          onShowMore: this.handleShowMore,
+                        },
+                        eventRowProps
+                      )
+                    )
                 )
               )
             )
@@ -11419,133 +11275,8 @@
         )
       }
 
-      _this.slotMetrics = getSlotMetrics()
-      return _this
-    }
-
-    var _proto = DateContentRow.prototype
-
-    _proto.getRowLimit = function getRowLimit() {
-      var eventHeight = height(this.eventRow)
-      var headingHeight = this.headingRow ? height(this.headingRow) : 0
-      var eventSpace = height(ReactDOM.findDOMNode(this)) - headingHeight
-      return Math.max(Math.floor(eventSpace / eventHeight), 1)
-    }
-
-    _proto.render = function render() {
-      var _this$props5 = this.props,
-        date = _this$props5.date,
-        rtl = _this$props5.rtl,
-        range = _this$props5.range,
-        className = _this$props5.className,
-        selected = _this$props5.selected,
-        selectable = _this$props5.selectable,
-        renderForMeasure = _this$props5.renderForMeasure,
-        accessors = _this$props5.accessors,
-        getters = _this$props5.getters,
-        components = _this$props5.components,
-        getNow = _this$props5.getNow,
-        renderHeader = _this$props5.renderHeader,
-        onSelect = _this$props5.onSelect,
-        localizer = _this$props5.localizer,
-        onSelectStart = _this$props5.onSelectStart,
-        onSelectEnd = _this$props5.onSelectEnd,
-        onDoubleClick = _this$props5.onDoubleClick,
-        onKeyPress = _this$props5.onKeyPress,
-        resourceId = _this$props5.resourceId,
-        longPressThreshold = _this$props5.longPressThreshold,
-        isAllDay = _this$props5.isAllDay,
-        resizable = _this$props5.resizable
-      if (renderForMeasure) return this.renderDummy()
-      var metrics = this.slotMetrics(this.props)
-      var levels = metrics.levels,
-        extra = metrics.extra
-      var WeekWrapper = components.weekWrapper
-      var eventRowProps = {
-        selected: selected,
-        accessors: accessors,
-        getters: getters,
-        localizer: localizer,
-        components: components,
-        onSelect: onSelect,
-        onDoubleClick: onDoubleClick,
-        onKeyPress: onKeyPress,
-        resourceId: resourceId,
-        slotMetrics: metrics,
-        resizable: resizable,
-      }
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: className,
-        },
-        /*#__PURE__*/ React__default.createElement(BackgroundCells, {
-          date: date,
-          getNow: getNow,
-          rtl: rtl,
-          range: range,
-          selectable: selectable,
-          container: this.getContainer,
-          getters: getters,
-          onSelectStart: onSelectStart,
-          onSelectEnd: onSelectEnd,
-          onSelectSlot: this.handleSelectSlot,
-          components: components,
-          longPressThreshold: longPressThreshold,
-          resourceId: resourceId,
-        }),
-        /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            className: 'rbc-row-content',
-          },
-          renderHeader &&
-            /*#__PURE__*/ React__default.createElement(
-              'div',
-              {
-                className: 'rbc-row ',
-                ref: this.createHeadingRef,
-              },
-              range.map(this.renderHeadingCell)
-            ),
-          /*#__PURE__*/ React__default.createElement(
-            WeekWrapper,
-            _extends(
-              {
-                isAllDay: isAllDay,
-              },
-              eventRowProps
-            ),
-            levels.map(function(segs, idx) {
-              return /*#__PURE__*/ React__default.createElement(
-                EventRow,
-                _extends(
-                  {
-                    key: idx,
-                    segments: segs,
-                  },
-                  eventRowProps
-                )
-              )
-            }),
-            !!extra.length &&
-              /*#__PURE__*/ React__default.createElement(
-                EventEndingRow,
-                _extends(
-                  {
-                    segments: extra,
-                    onShowMore: this.handleShowMore,
-                  },
-                  eventRowProps
-                )
-              )
-          )
-        )
-      )
-    }
-
-    return DateContentRow
-  })(React__default.PureComponent)
+      return DateContentRow
+    })(React__default.PureComponent)
 
   DateContentRow.propTypes = {
     date: propTypes.instanceOf(Date),
@@ -11561,6 +11292,7 @@
     selectable: propTypes.oneOf([true, false, 'ignoreEvents']),
     longPressThreshold: propTypes.number,
     onShowMore: propTypes.func,
+    showAllEvents: propTypes.bool,
     onSelectSlot: propTypes.func,
     onSelect: propTypes.func,
     onSelectEnd: propTypes.func,
@@ -11586,7 +11318,17 @@
 
   var Header = function Header(_ref) {
     var label = _ref.label
-    return /*#__PURE__*/ React__default.createElement('span', null, label)
+    return (
+      /*#__PURE__*/
+      React__default.createElement(
+        'span',
+        {
+          role: 'columnheader',
+          'aria-sort': 'none',
+        },
+        label
+      )
+    )
   }
 
   Header.propTypes = {
@@ -11599,16 +11341,23 @@
       onDrillDown = _ref.onDrillDown
 
     if (!drilldownView) {
-      return /*#__PURE__*/ React__default.createElement('span', null, label)
+      return (
+        /*#__PURE__*/
+        React__default.createElement('span', null, label)
+      )
     }
 
-    return /*#__PURE__*/ React__default.createElement(
-      'a',
-      {
-        href: '#',
-        onClick: onDrillDown,
-      },
-      label
+    return (
+      /*#__PURE__*/
+      React__default.createElement(
+        'a',
+        {
+          href: '#',
+          onClick: onDrillDown,
+          role: 'cell',
+        },
+        label
+      )
     )
   }
 
@@ -11626,397 +11375,432 @@
     })
   }
 
-  var MonthView = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(MonthView, _React$PureComponent)
+  var MonthView =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(MonthView, _React$PureComponent)
 
-    function MonthView() {
-      var _this
-
-      for (
-        var _len = arguments.length, _args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        _args[_key] = arguments[_key]
-      }
-
-      _this =
-        _React$PureComponent.call.apply(
-          _React$PureComponent,
-          [this].concat(_args)
-        ) || this
-
-      _this.getContainer = function() {
-        return ReactDOM.findDOMNode(_assertThisInitialized(_this))
-      }
-
-      _this.renderWeek = function(week, weekIdx) {
-        var _this$props = _this.props,
-          events = _this$props.events,
-          components = _this$props.components,
-          selectable = _this$props.selectable,
-          getNow = _this$props.getNow,
-          selected = _this$props.selected,
-          date = _this$props.date,
-          localizer = _this$props.localizer,
-          longPressThreshold = _this$props.longPressThreshold,
-          accessors = _this$props.accessors,
-          getters = _this$props.getters,
-          truncateEvents = _this$props.truncateEvents
-        var _this$state = _this.state,
-          needLimitMeasure = _this$state.needLimitMeasure,
-          rowLimit = _this$state.rowLimit
-        events = eventsForWeek(
-          events,
-          week[0],
-          week[week.length - 1],
-          accessors
-        )
-        events.sort(function(a, b) {
-          return sortEvents(a, b, accessors)
-        })
-        return /*#__PURE__*/ React__default.createElement(DateContentRow, {
-          key: weekIdx,
-          ref: weekIdx === 0 ? _this.slotRowRef : undefined,
-          container: _this.getContainer,
-          className: 'rbc-month-row',
-          getNow: getNow,
-          date: date,
-          range: week,
-          events: events,
-          maxRows: rowLimit,
-          selected: selected,
-          selectable: selectable,
-          components: components,
-          accessors: accessors,
-          getters: getters,
-          localizer: localizer,
-          renderHeader: _this.readerDateHeading,
-          renderForMeasure: needLimitMeasure,
-          onShowMore: _this.handleShowMore,
-          onSelect: _this.handleSelectEvent,
-          onDoubleClick: _this.handleDoubleClickEvent,
-          onKeyPress: _this.handleKeyPressEvent,
-          onSelectSlot: _this.handleSelectSlot,
-          longPressThreshold: longPressThreshold,
-          rtl: _this.props.rtl,
-          resizable: _this.props.resizable,
-          truncateEvents: truncateEvents,
-        })
-      }
-
-      _this.readerDateHeading = function(_ref) {
-        var date = _ref.date,
-          className = _ref.className,
-          props = _objectWithoutPropertiesLoose(_ref, ['date', 'className'])
-
-        var _this$props2 = _this.props,
-          currentDate = _this$props2.date,
-          getDrilldownView = _this$props2.getDrilldownView,
-          localizer = _this$props2.localizer
-        var isOffRange = month(date) !== month(currentDate)
-        var isCurrent = eq(date, currentDate, 'day')
-        var drilldownView = getDrilldownView(date)
-        var label = localizer.format(date, 'dateFormat')
-        var DateHeaderComponent =
-          _this.props.components.dateHeader || DateHeader
-        return /*#__PURE__*/ React__default.createElement(
-          'div',
-          _extends({}, props, {
-            className: clsx(
-              className,
-              isOffRange && 'rbc-off-range',
-              isCurrent && 'rbc-current'
-            ),
-          }),
-          /*#__PURE__*/ React__default.createElement(DateHeaderComponent, {
-            label: label,
-            date: date,
-            drilldownView: drilldownView,
-            isOffRange: isOffRange,
-            onDrillDown: function onDrillDown(e) {
-              return _this.handleHeadingClick(date, drilldownView, e)
-            },
-          })
-        )
-      }
-
-      _this.handleSelectSlot = function(range, slotInfo) {
-        _this._pendingSelection = _this._pendingSelection.concat(range)
-        clearTimeout(_this._selectTimer)
-        _this._selectTimer = setTimeout(function() {
-          return _this.selectDates(slotInfo)
-        })
-      }
-
-      _this.handleHeadingClick = function(date, view, e) {
-        e.preventDefault()
-
-        _this.clearSelection()
-
-        notify(_this.props.onDrillDown, [date, view])
-      }
-
-      _this.handleSelectEvent = function() {
-        _this.clearSelection()
+      function MonthView() {
+        var _this
 
         for (
-          var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
-          _key2 < _len2;
-          _key2++
+          var _len = arguments.length, _args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
         ) {
-          args[_key2] = arguments[_key2]
+          _args[_key] = arguments[_key]
         }
 
-        notify(_this.props.onSelectEvent, args)
-      }
+        _this =
+          _React$PureComponent.call.apply(
+            _React$PureComponent,
+            [this].concat(_args)
+          ) || this
 
-      _this.handleDoubleClickEvent = function() {
-        _this.clearSelection()
-
-        for (
-          var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
-          _key3 < _len3;
-          _key3++
-        ) {
-          args[_key3] = arguments[_key3]
+        _this.getContainer = function() {
+          return ReactDOM.findDOMNode(_assertThisInitialized(_this))
         }
 
-        notify(_this.props.onDoubleClickEvent, args)
-      }
-
-      _this.handleKeyPressEvent = function() {
-        _this.clearSelection()
-
-        for (
-          var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
-          _key4 < _len4;
-          _key4++
-        ) {
-          args[_key4] = arguments[_key4]
-        }
-
-        notify(_this.props.onKeyPressEvent, args)
-      }
-
-      _this.handleShowMore = function(events, date, cell, slot, target) {
-        var _this$props3 = _this.props,
-          popup = _this$props3.popup,
-          onDrillDown = _this$props3.onDrillDown,
-          onShowMore = _this$props3.onShowMore,
-          getDrilldownView = _this$props3.getDrilldownView //cancel any pending selections so only the event click goes through.
-
-        _this.clearSelection()
-
-        if (popup) {
-          var position$1 = position(
-            cell,
-            ReactDOM.findDOMNode(_assertThisInitialized(_this))
+        _this.renderWeek = function(week, weekIdx) {
+          var _this$props = _this.props,
+            events = _this$props.events,
+            components = _this$props.components,
+            selectable = _this$props.selectable,
+            getNow = _this$props.getNow,
+            selected = _this$props.selected,
+            date = _this$props.date,
+            localizer = _this$props.localizer,
+            longPressThreshold = _this$props.longPressThreshold,
+            accessors = _this$props.accessors,
+            getters = _this$props.getters,
+            truncateEvents = _this$props.truncateEvents,
+            showAllEvents = _this$props.showAllEvents
+          var _this$state = _this.state,
+            needLimitMeasure = _this$state.needLimitMeasure,
+            rowLimit = _this$state.rowLimit
+          events = eventsForWeek(
+            events,
+            week[0],
+            week[week.length - 1],
+            accessors
           )
-
-          _this.setState({
-            overlay: {
+          events.sort(function(a, b) {
+            return sortEvents(a, b, accessors)
+          })
+          return (
+            /*#__PURE__*/
+            React__default.createElement(DateContentRow, {
+              key: weekIdx,
+              ref: weekIdx === 0 ? _this.slotRowRef : undefined,
+              container: _this.getContainer,
+              className: 'rbc-month-row',
+              getNow: getNow,
               date: date,
+              range: week,
               events: events,
-              position: position$1,
-              target: target,
-            },
-          })
-        } else {
-          notify(onDrillDown, [date, getDrilldownView(date) || views.DAY])
-        }
-
-        notify(onShowMore, [events, date, slot])
-      }
-
-      _this.overlayDisplay = function() {
-        _this.setState({
-          overlay: null,
-        })
-      }
-
-      _this._bgRows = []
-      _this._pendingSelection = []
-      _this.slotRowRef = /*#__PURE__*/ React__default.createRef()
-      _this.state = {
-        rowLimit: 5,
-        needLimitMeasure: true,
-      }
-      return _this
-    }
-
-    var _proto = MonthView.prototype
-
-    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-      _ref2
-    ) {
-      var date = _ref2.date
-      this.setState({
-        needLimitMeasure: !eq(date, this.props.date, 'month'),
-      })
-    }
-
-    _proto.componentDidMount = function componentDidMount() {
-      var _this2 = this
-
-      var running
-      if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
-      window.addEventListener(
-        'resize',
-        (this._resizeListener = function() {
-          if (!running) {
-            request(function() {
-              running = false
-
-              _this2.setState({
-                needLimitMeasure: true,
-              }) //eslint-disable-line
-            })
-          }
-        }),
-        false
-      )
-    }
-
-    _proto.componentDidUpdate = function componentDidUpdate() {
-      if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
-    }
-
-    _proto.componentWillUnmount = function componentWillUnmount() {
-      window.removeEventListener('resize', this._resizeListener, false)
-    }
-
-    _proto.render = function render() {
-      var _this$props4 = this.props,
-        date = _this$props4.date,
-        localizer = _this$props4.localizer,
-        className = _this$props4.className,
-        month = visibleDays(date, localizer),
-        weeks = chunk(month, 7)
-      this._weekCount = weeks.length
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: clsx('rbc-month-view', className),
-        },
-        /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            className: 'rbc-row rbc-month-header',
-          },
-          this.renderHeaders(weeks[0])
-        ),
-        weeks.map(this.renderWeek),
-        this.props.popup && this.renderOverlay()
-      )
-    }
-
-    _proto.renderHeaders = function renderHeaders(row) {
-      var _this$props5 = this.props,
-        localizer = _this$props5.localizer,
-        components = _this$props5.components
-      var first = row[0]
-      var last = row[row.length - 1]
-      var HeaderComponent = components.header || Header
-      return range(first, last, 'day').map(function(day, idx) {
-        return /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            key: 'header_' + idx,
-            className: 'rbc-header',
-          },
-          /*#__PURE__*/ React__default.createElement(HeaderComponent, {
-            date: day,
-            localizer: localizer,
-            label: localizer.format(day, 'weekdayFormat'),
-          })
-        )
-      })
-    }
-
-    _proto.renderOverlay = function renderOverlay() {
-      var _this3 = this
-
-      var overlay = (this.state && this.state.overlay) || {}
-      var _this$props6 = this.props,
-        accessors = _this$props6.accessors,
-        localizer = _this$props6.localizer,
-        components = _this$props6.components,
-        getters = _this$props6.getters,
-        selected = _this$props6.selected,
-        popupOffset = _this$props6.popupOffset
-      return /*#__PURE__*/ React__default.createElement(
-        Overlay,
-        {
-          rootClose: true,
-          placement: 'bottom',
-          show: !!overlay.position,
-          onHide: function onHide() {
-            return _this3.setState({
-              overlay: null,
-            })
-          },
-          target: function target() {
-            return overlay.target
-          },
-        },
-        function(_ref3) {
-          var props = _ref3.props
-          return /*#__PURE__*/ React__default.createElement(
-            Popup$1,
-            _extends({}, props, {
-              popupOffset: popupOffset,
+              maxRows: showAllEvents ? Infinity : rowLimit,
+              selected: selected,
+              selectable: selectable,
+              components: components,
               accessors: accessors,
               getters: getters,
-              selected: selected,
-              components: components,
               localizer: localizer,
-              position: overlay.position,
-              show: _this3.overlayDisplay,
-              events: overlay.events,
-              slotStart: overlay.date,
-              slotEnd: overlay.end,
-              onSelect: _this3.handleSelectEvent,
-              onDoubleClick: _this3.handleDoubleClickEvent,
-              onKeyPress: _this3.handleKeyPressEvent,
-              handleDragStart: _this3.props.handleDragStart,
+              renderHeader: _this.readerDateHeading,
+              renderForMeasure: needLimitMeasure,
+              onShowMore: _this.handleShowMore,
+              onSelect: _this.handleSelectEvent,
+              onDoubleClick: _this.handleDoubleClickEvent,
+              onKeyPress: _this.handleKeyPressEvent,
+              onSelectSlot: _this.handleSelectSlot,
+              longPressThreshold: longPressThreshold,
+              rtl: _this.props.rtl,
+              resizable: _this.props.resizable,
+              truncateEvents: truncateEvents,
+              showAllEvents: showAllEvents,
             })
           )
         }
-      )
-    }
 
-    _proto.measureRowLimit = function measureRowLimit() {
-      this.setState({
-        needLimitMeasure: false,
-        rowLimit: this.slotRowRef.current.getRowLimit(),
-      })
-    }
+        _this.readerDateHeading = function(_ref) {
+          var date = _ref.date,
+            className = _ref.className,
+            props = _objectWithoutPropertiesLoose(_ref, ['date', 'className'])
 
-    _proto.selectDates = function selectDates(slotInfo) {
-      var slots = this._pendingSelection.slice()
+          var _this$props2 = _this.props,
+            currentDate = _this$props2.date,
+            getDrilldownView = _this$props2.getDrilldownView,
+            localizer = _this$props2.localizer
+          var isOffRange = month(date) !== month(currentDate)
+          var isCurrent = eq(date, currentDate, 'day')
+          var drilldownView = getDrilldownView(date)
+          var label = localizer.format(date, 'dateFormat')
+          var DateHeaderComponent =
+            _this.props.components.dateHeader || DateHeader
+          return (
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              _extends({}, props, {
+                className: clsx(
+                  className,
+                  isOffRange && 'rbc-off-range',
+                  isCurrent && 'rbc-current'
+                ),
+                role: 'cell',
+              }),
+              /*#__PURE__*/
+              React__default.createElement(DateHeaderComponent, {
+                label: label,
+                date: date,
+                drilldownView: drilldownView,
+                isOffRange: isOffRange,
+                onDrillDown: function onDrillDown(e) {
+                  return _this.handleHeadingClick(date, drilldownView, e)
+                },
+              })
+            )
+          )
+        }
 
-      this._pendingSelection = []
-      slots.sort(function(a, b) {
-        return +a - +b
-      })
-      notify(this.props.onSelectSlot, {
-        slots: slots,
-        start: slots[0],
-        end: slots[slots.length - 1],
-        action: slotInfo.action,
-        bounds: slotInfo.bounds,
-        box: slotInfo.box,
-      })
-    }
+        _this.handleSelectSlot = function(range, slotInfo) {
+          _this._pendingSelection = _this._pendingSelection.concat(range)
+          clearTimeout(_this._selectTimer)
+          _this._selectTimer = setTimeout(function() {
+            return _this.selectDates(slotInfo)
+          })
+        }
 
-    _proto.clearSelection = function clearSelection() {
-      clearTimeout(this._selectTimer)
-      this._pendingSelection = []
-    }
+        _this.handleHeadingClick = function(date, view, e) {
+          e.preventDefault()
 
-    return MonthView
-  })(React__default.PureComponent)
+          _this.clearSelection()
+
+          notify(_this.props.onDrillDown, [date, view])
+        }
+
+        _this.handleSelectEvent = function() {
+          _this.clearSelection()
+
+          for (
+            var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+            _key2 < _len2;
+            _key2++
+          ) {
+            args[_key2] = arguments[_key2]
+          }
+
+          notify(_this.props.onSelectEvent, args)
+        }
+
+        _this.handleDoubleClickEvent = function() {
+          _this.clearSelection()
+
+          for (
+            var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
+            _key3 < _len3;
+            _key3++
+          ) {
+            args[_key3] = arguments[_key3]
+          }
+
+          notify(_this.props.onDoubleClickEvent, args)
+        }
+
+        _this.handleKeyPressEvent = function() {
+          _this.clearSelection()
+
+          for (
+            var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
+            _key4 < _len4;
+            _key4++
+          ) {
+            args[_key4] = arguments[_key4]
+          }
+
+          notify(_this.props.onKeyPressEvent, args)
+        }
+
+        _this.handleShowMore = function(events, date, cell, slot, target) {
+          var _this$props3 = _this.props,
+            popup = _this$props3.popup,
+            onDrillDown = _this$props3.onDrillDown,
+            onShowMore = _this$props3.onShowMore,
+            getDrilldownView = _this$props3.getDrilldownView,
+            doShowMoreDrillDown = _this$props3.doShowMoreDrillDown //cancel any pending selections so only the event click goes through.
+
+          _this.clearSelection()
+
+          if (popup) {
+            var position$1 = position(
+              cell,
+              ReactDOM.findDOMNode(_assertThisInitialized(_this))
+            )
+
+            _this.setState({
+              overlay: {
+                date: date,
+                events: events,
+                position: position$1,
+                target: target,
+              },
+            })
+          } else if (doShowMoreDrillDown) {
+            notify(onDrillDown, [date, getDrilldownView(date) || views.DAY])
+          }
+
+          notify(onShowMore, [events, date, slot])
+        }
+
+        _this.overlayDisplay = function() {
+          _this.setState({
+            overlay: null,
+          })
+        }
+
+        _this._bgRows = []
+        _this._pendingSelection = []
+        _this.slotRowRef =
+          /*#__PURE__*/
+          React__default.createRef()
+        _this.state = {
+          rowLimit: 5,
+          needLimitMeasure: true,
+        }
+        return _this
+      }
+
+      var _proto = MonthView.prototype
+
+      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+        _ref2
+      ) {
+        var date = _ref2.date
+        this.setState({
+          needLimitMeasure: !eq(date, this.props.date, 'month'),
+        })
+      }
+
+      _proto.componentDidMount = function componentDidMount() {
+        var _this2 = this
+
+        var running
+        if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
+        window.addEventListener(
+          'resize',
+          (this._resizeListener = function() {
+            if (!running) {
+              request(function() {
+                running = false
+
+                _this2.setState({
+                  needLimitMeasure: true,
+                }) //eslint-disable-line
+              })
+            }
+          }),
+          false
+        )
+      }
+
+      _proto.componentDidUpdate = function componentDidUpdate() {
+        if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
+      }
+
+      _proto.componentWillUnmount = function componentWillUnmount() {
+        window.removeEventListener('resize', this._resizeListener, false)
+      }
+
+      _proto.render = function render() {
+        var _this$props4 = this.props,
+          date = _this$props4.date,
+          localizer = _this$props4.localizer,
+          className = _this$props4.className,
+          month = visibleDays(date, localizer),
+          weeks = chunk(month, 7)
+        this._weekCount = weeks.length
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              className: clsx('rbc-month-view', className),
+              role: 'table',
+              'aria-label': 'Month View',
+            },
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                className: 'rbc-row rbc-month-header',
+                role: 'row',
+              },
+              this.renderHeaders(weeks[0])
+            ),
+            weeks.map(this.renderWeek),
+            this.props.popup && this.renderOverlay()
+          )
+        )
+      }
+
+      _proto.renderHeaders = function renderHeaders(row) {
+        var _this$props5 = this.props,
+          localizer = _this$props5.localizer,
+          components = _this$props5.components
+        var first = row[0]
+        var last = row[row.length - 1]
+        var HeaderComponent = components.header || Header
+        return range(first, last, 'day').map(function(day, idx) {
+          return (
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                key: 'header_' + idx,
+                className: 'rbc-header',
+              },
+              /*#__PURE__*/
+              React__default.createElement(HeaderComponent, {
+                date: day,
+                localizer: localizer,
+                label: localizer.format(day, 'weekdayFormat'),
+              })
+            )
+          )
+        })
+      }
+
+      _proto.renderOverlay = function renderOverlay() {
+        var _this3 = this
+
+        var overlay = (this.state && this.state.overlay) || {}
+        var _this$props6 = this.props,
+          accessors = _this$props6.accessors,
+          localizer = _this$props6.localizer,
+          components = _this$props6.components,
+          getters = _this$props6.getters,
+          selected = _this$props6.selected,
+          popupOffset = _this$props6.popupOffset
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            Overlay,
+            {
+              rootClose: true,
+              placement: 'bottom',
+              show: !!overlay.position,
+              onHide: function onHide() {
+                return _this3.setState({
+                  overlay: null,
+                })
+              },
+              target: function target() {
+                return overlay.target
+              },
+            },
+            function(_ref3) {
+              var props = _ref3.props
+              return (
+                /*#__PURE__*/
+                React__default.createElement(
+                  Popup$1,
+                  _extends({}, props, {
+                    popupOffset: popupOffset,
+                    accessors: accessors,
+                    getters: getters,
+                    selected: selected,
+                    components: components,
+                    localizer: localizer,
+                    position: overlay.position,
+                    show: _this3.overlayDisplay,
+                    events: overlay.events,
+                    slotStart: overlay.date,
+                    slotEnd: overlay.end,
+                    onSelect: _this3.handleSelectEvent,
+                    onDoubleClick: _this3.handleDoubleClickEvent,
+                    onKeyPress: _this3.handleKeyPressEvent,
+                    handleDragStart: _this3.props.handleDragStart,
+                  })
+                )
+              )
+            }
+          )
+        )
+      }
+
+      _proto.measureRowLimit = function measureRowLimit() {
+        this.setState({
+          needLimitMeasure: false,
+          rowLimit: this.slotRowRef.current.getRowLimit(),
+        })
+      }
+
+      _proto.selectDates = function selectDates(slotInfo) {
+        var slots = this._pendingSelection.slice()
+
+        this._pendingSelection = []
+        slots.sort(function(a, b) {
+          return +a - +b
+        })
+        var start = new Date(slots[0])
+        var end = new Date(slots[slots.length - 1])
+        end.setDate(slots[slots.length - 1].getDate() + 1)
+        notify(this.props.onSelectSlot, {
+          slots: slots,
+          start: start,
+          end: end,
+          action: slotInfo.action,
+          bounds: slotInfo.bounds,
+          box: slotInfo.box,
+        })
+      }
+
+      _proto.clearSelection = function clearSelection() {
+        clearTimeout(this._selectTimer)
+        this._pendingSelection = []
+      }
+
+      return MonthView
+    })(React__default.PureComponent)
 
   MonthView.propTypes = {
     events: propTypes.array.isRequired,
@@ -12042,6 +11826,8 @@
     onDoubleClickEvent: propTypes.func,
     onKeyPressEvent: propTypes.func,
     onShowMore: propTypes.func,
+    showAllEvents: propTypes.bool,
+    doShowMoreDrillDown: propTypes.bool,
     onDrillDown: propTypes.func,
     getDrilldownView: propTypes.func.isRequired,
     popup: propTypes.bool,
@@ -12110,7 +11896,7 @@
     var totalMin = 1 + diff(start, end, 'minutes') + getDstOffset(start, end)
     var minutesFromMidnight =
       diff(daystart, start, 'minutes') + daystartdstoffset
-    var numGroups = Math.ceil(totalMin / (step * timeslots))
+    var numGroups = Math.ceil((totalMin - 1) / (step * timeslots))
     var numSlots = numGroups * timeslots
     var groups = new Array(numGroups)
     var slots = new Array(numSlots) // Each slot date is created from "zero", instead of adding `step` to
@@ -12627,7 +12413,7 @@
     }
   }
 
-  var defineProperty$1 = (function() {
+  var defineProperty = (function() {
     try {
       var func = getNative(Object, 'defineProperty')
       func({}, '', {})
@@ -12643,10 +12429,10 @@
    * @param {Function} string The `toString` result.
    * @returns {Function} Returns `func`.
    */
-  var baseSetToString = !defineProperty$1
+  var baseSetToString = !defineProperty
     ? identity
     : function(func, string) {
-        return defineProperty$1(func, 'toString', {
+        return defineProperty(func, 'toString', {
           configurable: true,
           enumerable: false,
           value: constant(string),
@@ -12757,105 +12543,107 @@
     return baseOrderBy(collection, baseFlatten(iteratees, 1), [])
   })
 
-  var Event = /*#__PURE__*/ (function() {
-    function Event(data, _ref) {
-      var accessors = _ref.accessors,
-        slotMetrics = _ref.slotMetrics
+  var Event =
+    /*#__PURE__*/
+    (function() {
+      function Event(data, _ref) {
+        var accessors = _ref.accessors,
+          slotMetrics = _ref.slotMetrics
 
-      var _slotMetrics$getRange = slotMetrics.getRange(
-          accessors.start(data),
-          accessors.end(data)
-        ),
-        start = _slotMetrics$getRange.start,
-        startDate = _slotMetrics$getRange.startDate,
-        end = _slotMetrics$getRange.end,
-        endDate = _slotMetrics$getRange.endDate,
-        top = _slotMetrics$getRange.top,
-        height = _slotMetrics$getRange.height
+        var _slotMetrics$getRange = slotMetrics.getRange(
+            accessors.start(data),
+            accessors.end(data)
+          ),
+          start = _slotMetrics$getRange.start,
+          startDate = _slotMetrics$getRange.startDate,
+          end = _slotMetrics$getRange.end,
+          endDate = _slotMetrics$getRange.endDate,
+          top = _slotMetrics$getRange.top,
+          height = _slotMetrics$getRange.height
 
-      this.start = start
-      this.end = end
-      this.startMs = +startDate
-      this.endMs = +endDate
-      this.top = top
-      this.height = height
-      this.data = data
-    }
-    /**
-     * The event's width without any overlap.
-     */
+        this.start = start
+        this.end = end
+        this.startMs = +startDate
+        this.endMs = +endDate
+        this.top = top
+        this.height = height
+        this.data = data
+      }
+      /**
+       * The event's width without any overlap.
+       */
 
-    _createClass(Event, [
-      {
-        key: '_width',
-        get: function get() {
-          // The container event's width is determined by the maximum number of
-          // events in any of its rows.
-          if (this.rows) {
-            var columns =
-              this.rows.reduce(
-                function(max, row) {
-                  return Math.max(max, row.leaves.length + 1)
-                }, // add itself
-                0
-              ) + 1 // add the container
+      _createClass(Event, [
+        {
+          key: '_width',
+          get: function get() {
+            // The container event's width is determined by the maximum number of
+            // events in any of its rows.
+            if (this.rows) {
+              var columns =
+                this.rows.reduce(
+                  function(max, row) {
+                    return Math.max(max, row.leaves.length + 1)
+                  }, // add itself
+                  0
+                ) + 1 // add the container
 
-            return 100 / columns
-          }
+              return 100 / columns
+            }
 
-          var availableWidth = 100 - this.container._width // The row event's width is the space left by the container, divided
-          // among itself and its leaves.
+            var availableWidth = 100 - this.container._width // The row event's width is the space left by the container, divided
+            // among itself and its leaves.
 
-          if (this.leaves) {
-            return availableWidth / (this.leaves.length + 1)
-          } // The leaf event's width is determined by its row's width
+            if (this.leaves) {
+              return availableWidth / (this.leaves.length + 1)
+            } // The leaf event's width is determined by its row's width
 
-          return this.row._width
+            return this.row._width
+          },
+          /**
+           * The event's calculated width, possibly with extra width added for
+           * overlapping effect.
+           */
         },
-        /**
-         * The event's calculated width, possibly with extra width added for
-         * overlapping effect.
-         */
-      },
-      {
-        key: 'width',
-        get: function get() {
-          var noOverlap = this._width
-          var overlap = Math.min(100, this._width * 1.7) // Containers can always grow.
+        {
+          key: 'width',
+          get: function get() {
+            var noOverlap = this._width
+            var overlap = Math.min(100, this._width * 1.7) // Containers can always grow.
 
-          if (this.rows) {
-            return overlap
-          } // Rows can grow if they have leaves.
+            if (this.rows) {
+              return overlap
+            } // Rows can grow if they have leaves.
 
-          if (this.leaves) {
-            return this.leaves.length > 0 ? overlap : noOverlap
-          } // Leaves can grow unless they're the last item in a row.
+            if (this.leaves) {
+              return this.leaves.length > 0 ? overlap : noOverlap
+            } // Leaves can grow unless they're the last item in a row.
 
-          var leaves = this.row.leaves
-          var index = leaves.indexOf(this)
-          return index === leaves.length - 1 ? noOverlap : overlap
+            var leaves = this.row.leaves
+            var index = leaves.indexOf(this)
+            return index === leaves.length - 1 ? noOverlap : overlap
+          },
         },
-      },
-      {
-        key: 'xOffset',
-        get: function get() {
-          // Containers have no offset.
-          if (this.rows) return 0 // Rows always start where their container ends.
+        {
+          key: 'xOffset',
+          get: function get() {
+            // Containers have no offset.
+            if (this.rows) return 0 // Rows always start where their container ends.
 
-          if (this.leaves) return this.container._width // Leaves are spread out evenly on the space left by its row.
+            if (this.leaves) return this.container._width // Leaves are spread out evenly on the space left by its row.
 
-          var _this$row = this.row,
-            leaves = _this$row.leaves,
-            xOffset = _this$row.xOffset,
-            _width = _this$row._width
-          var index = leaves.indexOf(this) + 1
-          return xOffset + index * _width
+            var _this$row = this.row,
+              leaves = _this$row.leaves,
+              xOffset = _this$row.xOffset,
+              _width = _this$row._width
+            var index = leaves.indexOf(this) + 1
+            return xOffset + index * _width
+          },
         },
-      },
-    ])
+      ])
 
-    return Event
-  })()
+      return Event
+    })()
   /**
    * Return true if event a and b is considered to be on the same row.
    */
@@ -13091,7 +12879,7 @@
     'no-overlap': noOverlap,
   }
 
-  function isFunction$2(a) {
+  function isFunction$1(a) {
     return !!(a && a.constructor && a.call && a.apply)
   } //
 
@@ -13105,7 +12893,7 @@
     if (dayLayoutAlgorithm in DefaultAlgorithms)
       algorithm = DefaultAlgorithms[dayLayoutAlgorithm]
 
-    if (!isFunction$2(algorithm)) {
+    if (!isFunction$1(algorithm)) {
       // invalid algorithm
       return []
     }
@@ -13113,65 +12901,74 @@
     return algorithm.apply(this, arguments)
   }
 
-  var TimeSlotGroup = /*#__PURE__*/ (function(_PureComponent) {
-    _inheritsLoose(TimeSlotGroup, _PureComponent)
+  var TimeSlotGroup =
+    /*#__PURE__*/
+    (function(_PureComponent) {
+      _inheritsLoose(TimeSlotGroup, _PureComponent)
 
-    function TimeSlotGroup() {
-      return _PureComponent.apply(this, arguments) || this
-    }
+      function TimeSlotGroup() {
+        return _PureComponent.apply(this, arguments) || this
+      }
 
-    var _proto = TimeSlotGroup.prototype
+      var _proto = TimeSlotGroup.prototype
 
-    _proto.render = function render() {
-      var _this$props = this.props,
-        renderSlot = _this$props.renderSlot,
-        resource = _this$props.resource,
-        group = _this$props.group,
-        getters = _this$props.getters,
-        _this$props$component = _this$props.components
-      _this$props$component =
-        _this$props$component === void 0 ? {} : _this$props$component
-      var _this$props$component2 = _this$props$component.timeSlotWrapper,
-        Wrapper =
-          _this$props$component2 === void 0
-            ? NoopWrapper
-            : _this$props$component2,
-        isTimeGutter = _this$props.isTimeGutter
-      var groupProps = getters ? getters.slotGroupProp() : {}
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        _extends(
-          {
-            className: 'rbc-timeslot-group',
-          },
-          groupProps
-        ),
-        group.map(function(value, idx) {
-          var slotProps = getters ? getters.slotProp(value, resource) : {}
-          var slotPropClassName = isTimeGutter
-            ? 'gutter-' + slotProps.className
-            : slotProps.className
-          return /*#__PURE__*/ React__default.createElement(
-            Wrapper,
-            {
-              key: idx,
-              value: value,
-              resource: resource,
-            },
-            /*#__PURE__*/ React__default.createElement(
-              'div',
-              _extends({}, slotProps, {
-                className: clsx('rbc-time-slot', slotPropClassName),
-              }),
-              renderSlot && renderSlot(value, idx)
-            )
+      _proto.render = function render() {
+        var _this$props = this.props,
+          renderSlot = _this$props.renderSlot,
+          resource = _this$props.resource,
+          group = _this$props.group,
+          getters = _this$props.getters,
+          _this$props$component = _this$props.components
+        _this$props$component =
+          _this$props$component === void 0 ? {} : _this$props$component
+        var _this$props$component2 = _this$props$component.timeSlotWrapper,
+          Wrapper =
+            _this$props$component2 === void 0
+              ? NoopWrapper
+              : _this$props$component2,
+          isTimeGutter = _this$props.isTimeGutter
+        var groupProps = getters ? getters.slotGroupProp() : {}
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            _extends(
+              {
+                className: 'rbc-timeslot-group',
+              },
+              groupProps
+            ),
+            group.map(function(value, idx) {
+              var slotProps = getters ? getters.slotProp(value, resource) : {}
+              var slotPropClassName = isTimeGutter
+                ? 'gutter-' + slotProps.className
+                : slotProps.className
+              return (
+                /*#__PURE__*/
+                React__default.createElement(
+                  Wrapper,
+                  {
+                    key: idx,
+                    value: value,
+                    resource: resource,
+                  },
+                  /*#__PURE__*/
+                  React__default.createElement(
+                    'div',
+                    _extends({}, slotProps, {
+                      className: clsx('rbc-time-slot', slotPropClassName),
+                    }),
+                    renderSlot && renderSlot(value, idx)
+                  )
+                )
+              )
+            })
           )
-        })
-      )
-    }
+        )
+      }
 
-    return TimeSlotGroup
-  })(React.PureComponent)
+      return TimeSlotGroup
+    })(React.PureComponent)
   TimeSlotGroup.propTypes = {
     renderSlot: propTypes.func,
     group: propTypes.array.isRequired,
@@ -13186,610 +12983,688 @@
   }
   /* eslint-disable react/prop-types */
 
-  var TimeGridEvent = /*#__PURE__*/ React__default.memo(function(props) {
-    var _extends2
+  var TimeGridEvent =
+    /*#__PURE__*/
+    React__default.memo(function(props) {
+      var _extends2, _extends3
 
-    var style = props.style,
-      className = props.className,
-      event = props.event,
-      accessors = props.accessors,
-      rtl = props.rtl,
-      selected = props.selected,
-      label = props.label,
-      continuesEarlier = props.continuesEarlier,
-      continuesLater = props.continuesLater,
-      getters = props.getters,
-      onClick = props.onClick,
-      onDoubleClick = props.onDoubleClick,
-      onKeyPress = props.onKeyPress,
-      _props$components = props.components,
-      Event = _props$components.event,
-      EventWrapper = _props$components.eventWrapper
-    var title = accessors.title(event)
-    var tooltip = accessors.tooltip(event)
-    var end = accessors.end(event)
-    var start = accessors.start(event)
-    var userProps = getters.eventProp(event, start, end, selected)
-    var height = style.height,
-      top = style.top,
-      width = style.width,
-      xOffset = style.xOffset
-    var inner = [
-      /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          key: '1',
-          className: 'rbc-event-label',
-        },
-        label
-      ),
-      /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          key: '2',
-          className: 'rbc-event-content',
-        },
-        Event
-          ? /*#__PURE__*/ React__default.createElement(Event, {
-              event: event,
-              title: title,
-            })
-          : title
-      ),
-    ]
-    return /*#__PURE__*/ React__default.createElement(
-      EventWrapper,
-      _extends(
-        {
-          type: 'time',
-        },
-        props
-      ),
-      /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          onClick: onClick,
-          onDoubleClick: onDoubleClick,
-          onKeyPress: onKeyPress,
-          style: _extends(
+      var style = props.style,
+        className = props.className,
+        event = props.event,
+        accessors = props.accessors,
+        rtl = props.rtl,
+        selected = props.selected,
+        label = props.label,
+        continuesEarlier = props.continuesEarlier,
+        continuesLater = props.continuesLater,
+        getters = props.getters,
+        onClick = props.onClick,
+        onDoubleClick = props.onDoubleClick,
+        isBackgroundEvent = props.isBackgroundEvent,
+        onKeyPress = props.onKeyPress,
+        _props$components = props.components,
+        Event = _props$components.event,
+        EventWrapper = _props$components.eventWrapper
+      var title = accessors.title(event)
+      var tooltip = accessors.tooltip(event)
+      var end = accessors.end(event)
+      var start = accessors.start(event)
+      var userProps = getters.eventProp(event, start, end, selected)
+      var height = style.height,
+        top = style.top,
+        width = style.width,
+        xOffset = style.xOffset
+      var inner = [
+        /*#__PURE__*/
+        React__default.createElement(
+          'div',
+          {
+            key: '1',
+            className: 'rbc-event-label',
+          },
+          label
+        ),
+        /*#__PURE__*/
+        React__default.createElement(
+          'div',
+          {
+            key: '2',
+            className: 'rbc-event-content',
+          },
+          Event
+            ? /*#__PURE__*/
+              React__default.createElement(Event, {
+                event: event,
+                title: title,
+              })
+            : title
+        ),
+      ]
+      var eventStyle = isBackgroundEvent
+        ? _extends(
             {},
             userProps.style,
             ((_extends2 = {
               top: stringifyPercent(top),
+              height: stringifyPercent(height),
+              // Adding 10px to take events container right margin into account
+              width: 'calc(' + width + ' + 10px)',
             }),
-            (_extends2[rtl ? 'right' : 'left'] = stringifyPercent(xOffset)),
-            (_extends2.width = stringifyPercent(width)),
-            (_extends2.height = stringifyPercent(height)),
+            (_extends2[rtl ? 'right' : 'left'] = stringifyPercent(
+              Math.max(0, xOffset)
+            )),
             _extends2)
+          )
+        : _extends(
+            {},
+            userProps.style,
+            ((_extends3 = {
+              top: stringifyPercent(top),
+              width: stringifyPercent(width),
+              height: stringifyPercent(height),
+            }),
+            (_extends3[rtl ? 'right' : 'left'] = stringifyPercent(xOffset)),
+            _extends3)
+          )
+      return (
+        /*#__PURE__*/
+        React__default.createElement(
+          EventWrapper,
+          _extends(
+            {
+              type: 'time',
+            },
+            props
           ),
-          title: tooltip
-            ? (typeof label === 'string' ? label + ': ' : '') + tooltip
-            : undefined,
-          className: clsx('rbc-event', className, userProps.className, {
-            'rbc-selected': selected,
-            'rbc-event-continues-earlier': continuesEarlier,
-            'rbc-event-continues-later': continuesLater,
-          }),
-        },
-        inner
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              onClick: onClick,
+              onDoubleClick: onDoubleClick,
+              style: eventStyle,
+              onKeyPress: onKeyPress,
+              title: tooltip
+                ? (typeof label === 'string' ? label + ': ' : '') + tooltip
+                : undefined,
+              className: clsx(
+                isBackgroundEvent ? 'rbc-background-event' : 'rbc-event',
+                className,
+                userProps.className,
+                {
+                  'rbc-selected': selected,
+                  'rbc-event-continues-earlier': continuesEarlier,
+                  'rbc-event-continues-later': continuesLater,
+                }
+              ),
+            },
+            inner
+          )
+        )
       )
-    )
-  })
+    })
 
-  var DayColumn = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(DayColumn, _React$PureComponent)
-
-    function DayColumn() {
-      var _this
-
-      for (
-        var _len = arguments.length, _args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        _args[_key] = arguments[_key]
-      }
-
-      _this =
-        _React$PureComponent.call.apply(
-          _React$PureComponent,
-          [this].concat(_args)
-        ) || this
-      _this.state = {
-        selecting: false,
-        timeIndicatorPosition: null,
-      }
-      _this.intervalTriggered = false
-
-      _this.renderEvents = function() {
-        var _this$props = _this.props,
-          events = _this$props.events,
-          rtl = _this$props.rtl,
-          selected = _this$props.selected,
-          accessors = _this$props.accessors,
-          localizer = _this$props.localizer,
-          getters = _this$props.getters,
-          components = _this$props.components,
-          step = _this$props.step,
-          timeslots = _this$props.timeslots,
-          dayLayoutAlgorithm = _this$props.dayLayoutAlgorithm,
-          resizable = _this$props.resizable
-
-        var _assertThisInitialize = _assertThisInitialized(_this),
-          slotMetrics = _assertThisInitialize.slotMetrics
-
-        var messages = localizer.messages
-        var styledEvents = getStyledEvents$1({
-          events: events,
-          accessors: accessors,
-          slotMetrics: slotMetrics,
-          minimumStartDifference: Math.ceil((step * timeslots) / 2),
-          dayLayoutAlgorithm: dayLayoutAlgorithm,
-        })
-        return styledEvents.map(function(_ref, idx) {
-          var event = _ref.event,
-            style = _ref.style
-          var end = accessors.end(event)
-          var start = accessors.start(event)
-          var format = 'eventTimeRangeFormat'
-          var label
-          var startsBeforeDay = slotMetrics.startsBeforeDay(start)
-          var startsAfterDay = slotMetrics.startsAfterDay(end)
-          if (startsBeforeDay) format = 'eventTimeRangeEndFormat'
-          else if (startsAfterDay) format = 'eventTimeRangeStartFormat'
-          if (startsBeforeDay && startsAfterDay) label = messages.allDay
-          else
-            label = localizer.format(
-              {
-                start: start,
-                end: end,
-              },
-              format
-            )
-          var continuesEarlier =
-            startsBeforeDay || slotMetrics.startsBefore(start)
-          var continuesLater = startsAfterDay || slotMetrics.startsAfter(end)
-          return /*#__PURE__*/ React__default.createElement(TimeGridEvent, {
-            style: style,
-            event: event,
-            label: label,
-            key: 'evt_' + idx,
-            getters: getters,
-            rtl: rtl,
-            components: components,
-            continuesEarlier: continuesEarlier,
-            continuesLater: continuesLater,
-            accessors: accessors,
-            selected: isSelected(event, selected),
-            onClick: function onClick(e) {
-              return _this._select(event, e)
-            },
-            onDoubleClick: function onDoubleClick(e) {
-              return _this._doubleClick(event, e)
-            },
-            onKeyPress: function onKeyPress(e) {
-              return _this._keyPress(event, e)
-            },
-            resizable: resizable,
-          })
-        })
-      }
-
-      _this._selectable = function() {
-        var node = ReactDOM.findDOMNode(_assertThisInitialized(_this))
-        var selector = (_this._selector = new Selection(
-          function() {
-            return ReactDOM.findDOMNode(_assertThisInitialized(_this))
-          },
-          {
-            longPressThreshold: _this.props.longPressThreshold,
-          }
-        ))
-
-        var maybeSelect = function maybeSelect(box) {
-          var onSelecting = _this.props.onSelecting
-          var current = _this.state || {}
-          var state = selectionState(box)
-          var start = state.startDate,
-            end = state.endDate
-
-          if (onSelecting) {
-            if (
-              (eq(current.startDate, start, 'minutes') &&
-                eq(current.endDate, end, 'minutes')) ||
-              onSelecting({
-                start: start,
-                end: end,
-                resourceId: _this.props.resource,
-              }) === false
-            )
-              return
-          }
-
-          if (
-            _this.state.start !== state.start ||
-            _this.state.end !== state.end ||
-            _this.state.selecting !== state.selecting
-          ) {
-            _this.setState(state)
-          }
-        }
-
-        var selectionState = function selectionState(point) {
-          var currentSlot = _this.slotMetrics.closestSlotFromPoint(
-            point,
-            getBoundsForNode(node)
-          )
-
-          if (!_this.state.selecting) {
-            _this._initialSlot = currentSlot
-          }
-
-          var initialSlot = _this._initialSlot
-
-          if (lte(initialSlot, currentSlot)) {
-            currentSlot = _this.slotMetrics.nextSlot(currentSlot)
-          } else if (gt(initialSlot, currentSlot)) {
-            initialSlot = _this.slotMetrics.nextSlot(initialSlot)
-          }
-
-          var selectRange = _this.slotMetrics.getRange(
-            min(initialSlot, currentSlot),
-            max(initialSlot, currentSlot)
-          )
-
-          return _extends({}, selectRange, {
-            selecting: true,
-            top: selectRange.top + '%',
-            height: selectRange.height + '%',
-          })
-        }
-
-        var selectorClicksHandler = function selectorClicksHandler(
-          box,
-          actionType
-        ) {
-          if (
-            !isEvent(ReactDOM.findDOMNode(_assertThisInitialized(_this)), box)
-          ) {
-            var _selectionState = selectionState(box),
-              startDate = _selectionState.startDate,
-              endDate = _selectionState.endDate
-
-            _this._selectSlot({
-              startDate: startDate,
-              endDate: endDate,
-              action: actionType,
-              box: box,
-            })
-          }
-
-          _this.setState({
-            selecting: false,
-          })
-        }
-
-        selector.on('selecting', maybeSelect)
-        selector.on('selectStart', maybeSelect)
-        selector.on('beforeSelect', function(box) {
-          if (_this.props.selectable !== 'ignoreEvents') return
-          return !isEvent(
-            ReactDOM.findDOMNode(_assertThisInitialized(_this)),
-            box
-          )
-        })
-        selector.on('click', function(box) {
-          return selectorClicksHandler(box, 'click')
-        })
-        selector.on('doubleClick', function(box) {
-          return selectorClicksHandler(box, 'doubleClick')
-        })
-        selector.on('select', function(bounds) {
-          if (_this.state.selecting) {
-            _this._selectSlot(
-              _extends({}, _this.state, {
-                action: 'select',
-                bounds: bounds,
-              })
-            )
-
-            _this.setState({
-              selecting: false,
-            })
-          }
-        })
-        selector.on('reset', function() {
-          if (_this.state.selecting) {
-            _this.setState({
-              selecting: false,
-            })
-          }
-        })
-      }
-
-      _this._teardownSelectable = function() {
-        if (!_this._selector) return
-
-        _this._selector.teardown()
-
-        _this._selector = null
-      }
-
-      _this._selectSlot = function(_ref2) {
-        var startDate = _ref2.startDate,
-          endDate = _ref2.endDate,
-          action = _ref2.action,
-          bounds = _ref2.bounds,
-          box = _ref2.box
-        var current = startDate,
-          slots = []
-
-        while (lte(current, endDate)) {
-          slots.push(current)
-          current = new Date(+current + _this.props.step * 60 * 1000) // using Date ensures not to create an endless loop the day DST begins
-        }
-
-        notify(_this.props.onSelectSlot, {
-          slots: slots,
-          start: startDate,
-          end: endDate,
-          resourceId: _this.props.resource,
-          action: action,
-          bounds: bounds,
-          box: box,
-        })
-      }
-
-      _this._select = function() {
-        for (
-          var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
-          _key2 < _len2;
-          _key2++
-        ) {
-          args[_key2] = arguments[_key2]
-        }
-
-        notify(_this.props.onSelectEvent, args)
-      }
-
-      _this._doubleClick = function() {
-        for (
-          var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
-          _key3 < _len3;
-          _key3++
-        ) {
-          args[_key3] = arguments[_key3]
-        }
-
-        notify(_this.props.onDoubleClickEvent, args)
-      }
-
-      _this._keyPress = function() {
-        for (
-          var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
-          _key4 < _len4;
-          _key4++
-        ) {
-          args[_key4] = arguments[_key4]
-        }
-
-        notify(_this.props.onKeyPressEvent, args)
-      }
-
-      _this.slotMetrics = getSlotMetrics$1(_this.props)
-      return _this
-    }
-
-    var _proto = DayColumn.prototype
-
-    _proto.componentDidMount = function componentDidMount() {
-      this.props.selectable && this._selectable()
-
-      if (this.props.isNow) {
-        this.setTimeIndicatorPositionUpdateInterval()
-      }
-    }
-
-    _proto.componentWillUnmount = function componentWillUnmount() {
-      this._teardownSelectable()
-
-      this.clearTimeIndicatorInterval()
-    }
-
-    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-      nextProps
-    ) {
-      if (nextProps.selectable && !this.props.selectable) this._selectable()
-      if (!nextProps.selectable && this.props.selectable)
-        this._teardownSelectable()
-      this.slotMetrics = this.slotMetrics.update(nextProps)
-    }
-
-    _proto.componentDidUpdate = function componentDidUpdate(
-      prevProps,
-      prevState
-    ) {
-      var getNowChanged = !eq(
-        prevProps.getNow(),
-        this.props.getNow(),
-        'minutes'
-      )
-
-      if (prevProps.isNow !== this.props.isNow || getNowChanged) {
-        this.clearTimeIndicatorInterval()
-
-        if (this.props.isNow) {
-          var tail =
-            !getNowChanged &&
-            eq(prevProps.date, this.props.date, 'minutes') &&
-            prevState.timeIndicatorPosition === this.state.timeIndicatorPosition
-          this.setTimeIndicatorPositionUpdateInterval(tail)
-        }
-      } else if (
-        this.props.isNow &&
-        (!eq(prevProps.min, this.props.min, 'minutes') ||
-          !eq(prevProps.max, this.props.max, 'minutes'))
-      ) {
-        this.positionTimeIndicator()
-      }
-    }
-    /**
-     * @param tail {Boolean} - whether `positionTimeIndicator` call should be
-     *   deferred or called upon setting interval (`true` - if deferred);
-     */
-
-    _proto.setTimeIndicatorPositionUpdateInterval = function setTimeIndicatorPositionUpdateInterval(
-      tail
-    ) {
-      var _this2 = this
-
-      if (tail === void 0) {
-        tail = false
-      }
-
-      if (!this.intervalTriggered && !tail) {
-        this.positionTimeIndicator()
-      }
-
-      this._timeIndicatorTimeout = window.setTimeout(function() {
-        _this2.intervalTriggered = true
-
-        _this2.positionTimeIndicator()
-
-        _this2.setTimeIndicatorPositionUpdateInterval()
-      }, 60000)
-    }
-
-    _proto.clearTimeIndicatorInterval = function clearTimeIndicatorInterval() {
-      this.intervalTriggered = false
-      window.clearTimeout(this._timeIndicatorTimeout)
-    }
-
-    _proto.positionTimeIndicator = function positionTimeIndicator() {
-      var _this$props2 = this.props,
-        min = _this$props2.min,
-        max = _this$props2.max,
-        getNow = _this$props2.getNow
-      var current = getNow()
-
-      if (current >= min && current <= max) {
-        var top = this.slotMetrics.getCurrentTimePosition(current)
-        this.intervalTriggered = true
-        this.setState({
-          timeIndicatorPosition: top,
-        })
-      } else {
-        this.clearTimeIndicatorInterval()
-      }
-    }
-
-    _proto.render = function render() {
-      var _this$props3 = this.props,
-        max = _this$props3.max,
-        rtl = _this$props3.rtl,
-        isNow = _this$props3.isNow,
-        resource = _this$props3.resource,
-        accessors = _this$props3.accessors,
-        localizer = _this$props3.localizer,
-        _this$props3$getters = _this$props3.getters,
-        dayProp = _this$props3$getters.dayProp,
-        getters = _objectWithoutPropertiesLoose(_this$props3$getters, [
-          'dayProp',
-        ]),
-        _this$props3$componen = _this$props3.components,
-        EventContainer = _this$props3$componen.eventContainerWrapper,
-        components = _objectWithoutPropertiesLoose(_this$props3$componen, [
-          'eventContainerWrapper',
-        ])
-
-      var slotMetrics = this.slotMetrics
-      var _this$state = this.state,
-        selecting = _this$state.selecting,
-        top = _this$state.top,
-        height = _this$state.height,
-        startDate = _this$state.startDate,
-        endDate = _this$state.endDate
-      var selectDates = {
-        start: startDate,
-        end: endDate,
-      }
-
-      var _dayProp = dayProp(max),
-        className = _dayProp.className,
-        style = _dayProp.style
-
-      return /*#__PURE__*/ React__default.createElement(
+  var DayColumnWrapper = function DayColumnWrapper(_ref) {
+    var children = _ref.children,
+      className = _ref.className,
+      style = _ref.style
+    return (
+      /*#__PURE__*/
+      React__default.createElement(
         'div',
         {
+          className: className,
           style: style,
-          className: clsx(
-            className,
-            'rbc-day-slot',
-            'rbc-time-column',
-            isNow && 'rbc-now',
-            isNow && 'rbc-today', // WHY
-            selecting && 'rbc-slot-selecting'
-          ),
         },
-        slotMetrics.groups.map(function(grp, idx) {
-          return /*#__PURE__*/ React__default.createElement(TimeSlotGroup, {
-            key: idx,
-            group: grp,
-            resource: resource,
-            getters: getters,
-            components: components,
-          })
-        }),
-        /*#__PURE__*/ React__default.createElement(
-          EventContainer,
-          {
-            localizer: localizer,
-            resource: resource,
-            accessors: accessors,
-            getters: getters,
-            components: components,
-            slotMetrics: slotMetrics,
-          },
-          /*#__PURE__*/ React__default.createElement(
-            'div',
-            {
-              className: clsx('rbc-events-container', rtl && 'rtl'),
-            },
-            this.renderEvents()
-          )
-        ),
-        selecting &&
-          /*#__PURE__*/ React__default.createElement(
-            'div',
-            {
-              className: 'rbc-slot-selection',
-              style: {
-                top: top,
-                height: height,
-              },
-            },
-            /*#__PURE__*/ React__default.createElement(
-              'span',
-              null,
-              localizer.format(selectDates, 'selectRangeFormat')
-            )
-          ),
-        isNow &&
-          this.intervalTriggered &&
-          /*#__PURE__*/ React__default.createElement('div', {
-            className: 'rbc-current-time-indicator',
-            style: {
-              top: this.state.timeIndicatorPosition + '%',
-            },
-          })
+        children
       )
-    }
+    )
+  }
 
-    return DayColumn
-  })(React__default.PureComponent)
+  var DayColumn =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(DayColumn, _React$PureComponent)
+
+      function DayColumn() {
+        var _this
+
+        for (
+          var _len = arguments.length, _args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
+          _args[_key] = arguments[_key]
+        }
+
+        _this =
+          _React$PureComponent.call.apply(
+            _React$PureComponent,
+            [this].concat(_args)
+          ) || this
+        _this.state = {
+          selecting: false,
+          timeIndicatorPosition: null,
+        }
+        _this.intervalTriggered = false
+
+        _this.renderEvents = function(_ref) {
+          var events = _ref.events,
+            isBackgroundEvent = _ref.isBackgroundEvent
+          var _this$props = _this.props,
+            rtl = _this$props.rtl,
+            selected = _this$props.selected,
+            accessors = _this$props.accessors,
+            localizer = _this$props.localizer,
+            getters = _this$props.getters,
+            components = _this$props.components,
+            step = _this$props.step,
+            timeslots = _this$props.timeslots,
+            dayLayoutAlgorithm = _this$props.dayLayoutAlgorithm,
+            resizable = _this$props.resizable
+
+          var _assertThisInitialize = _assertThisInitialized(_this),
+            slotMetrics = _assertThisInitialize.slotMetrics
+
+          var messages = localizer.messages
+          var styledEvents = getStyledEvents$1({
+            events: events,
+            accessors: accessors,
+            slotMetrics: slotMetrics,
+            minimumStartDifference: Math.ceil((step * timeslots) / 2),
+            dayLayoutAlgorithm: dayLayoutAlgorithm,
+          })
+          return styledEvents.map(function(_ref2, idx) {
+            var event = _ref2.event,
+              style = _ref2.style
+            var end = accessors.end(event)
+            var start = accessors.start(event)
+            var format = 'eventTimeRangeFormat'
+            var label
+            var startsBeforeDay = slotMetrics.startsBeforeDay(start)
+            var startsAfterDay = slotMetrics.startsAfterDay(end)
+            if (startsBeforeDay) format = 'eventTimeRangeEndFormat'
+            else if (startsAfterDay) format = 'eventTimeRangeStartFormat'
+            if (startsBeforeDay && startsAfterDay) label = messages.allDay
+            else
+              label = localizer.format(
+                {
+                  start: start,
+                  end: end,
+                },
+                format
+              )
+            var continuesEarlier =
+              startsBeforeDay || slotMetrics.startsBefore(start)
+            var continuesLater = startsAfterDay || slotMetrics.startsAfter(end)
+            return (
+              /*#__PURE__*/
+              React__default.createElement(TimeGridEvent, {
+                style: style,
+                event: event,
+                label: label,
+                key: 'evt_' + idx,
+                getters: getters,
+                rtl: rtl,
+                components: components,
+                continuesEarlier: continuesEarlier,
+                continuesLater: continuesLater,
+                accessors: accessors,
+                selected: isSelected(event, selected),
+                onClick: function onClick(e) {
+                  return _this._select(event, e)
+                },
+                onDoubleClick: function onDoubleClick(e) {
+                  return _this._doubleClick(event, e)
+                },
+                isBackgroundEvent: isBackgroundEvent,
+                onKeyPress: function onKeyPress(e) {
+                  return _this._keyPress(event, e)
+                },
+                resizable: resizable,
+              })
+            )
+          })
+        }
+
+        _this._selectable = function() {
+          var node = ReactDOM.findDOMNode(_assertThisInitialized(_this))
+          var selector = (_this._selector = new Selection(
+            function() {
+              return ReactDOM.findDOMNode(_assertThisInitialized(_this))
+            },
+            {
+              longPressThreshold: _this.props.longPressThreshold,
+            }
+          ))
+
+          var maybeSelect = function maybeSelect(box) {
+            var onSelecting = _this.props.onSelecting
+            var current = _this.state || {}
+            var state = selectionState(box)
+            var start = state.startDate,
+              end = state.endDate
+
+            if (onSelecting) {
+              if (
+                (eq(current.startDate, start, 'minutes') &&
+                  eq(current.endDate, end, 'minutes')) ||
+                onSelecting({
+                  start: start,
+                  end: end,
+                  resourceId: _this.props.resource,
+                }) === false
+              )
+                return
+            }
+
+            if (
+              _this.state.start !== state.start ||
+              _this.state.end !== state.end ||
+              _this.state.selecting !== state.selecting
+            ) {
+              _this.setState(state)
+            }
+          }
+
+          var selectionState = function selectionState(point) {
+            var currentSlot = _this.slotMetrics.closestSlotFromPoint(
+              point,
+              getBoundsForNode(node)
+            )
+
+            if (!_this.state.selecting) {
+              _this._initialSlot = currentSlot
+            }
+
+            var initialSlot = _this._initialSlot
+
+            if (lte(initialSlot, currentSlot)) {
+              currentSlot = _this.slotMetrics.nextSlot(currentSlot)
+            } else if (gt(initialSlot, currentSlot)) {
+              initialSlot = _this.slotMetrics.nextSlot(initialSlot)
+            }
+
+            var selectRange = _this.slotMetrics.getRange(
+              min(initialSlot, currentSlot),
+              max(initialSlot, currentSlot)
+            )
+
+            return _extends({}, selectRange, {
+              selecting: true,
+              top: selectRange.top + '%',
+              height: selectRange.height + '%',
+            })
+          }
+
+          var selectorClicksHandler = function selectorClicksHandler(
+            box,
+            actionType
+          ) {
+            if (
+              !isEvent(ReactDOM.findDOMNode(_assertThisInitialized(_this)), box)
+            ) {
+              var _selectionState = selectionState(box),
+                startDate = _selectionState.startDate,
+                endDate = _selectionState.endDate
+
+              _this._selectSlot({
+                startDate: startDate,
+                endDate: endDate,
+                action: actionType,
+                box: box,
+              })
+            }
+
+            _this.setState({
+              selecting: false,
+            })
+          }
+
+          selector.on('selecting', maybeSelect)
+          selector.on('selectStart', maybeSelect)
+          selector.on('beforeSelect', function(box) {
+            if (_this.props.selectable !== 'ignoreEvents') return
+            return !isEvent(
+              ReactDOM.findDOMNode(_assertThisInitialized(_this)),
+              box
+            )
+          })
+          selector.on('click', function(box) {
+            return selectorClicksHandler(box, 'click')
+          })
+          selector.on('doubleClick', function(box) {
+            return selectorClicksHandler(box, 'doubleClick')
+          })
+          selector.on('select', function(bounds) {
+            if (_this.state.selecting) {
+              _this._selectSlot(
+                _extends({}, _this.state, {
+                  action: 'select',
+                  bounds: bounds,
+                })
+              )
+
+              _this.setState({
+                selecting: false,
+              })
+            }
+          })
+          selector.on('reset', function() {
+            if (_this.state.selecting) {
+              _this.setState({
+                selecting: false,
+              })
+            }
+          })
+        }
+
+        _this._teardownSelectable = function() {
+          if (!_this._selector) return
+
+          _this._selector.teardown()
+
+          _this._selector = null
+        }
+
+        _this._selectSlot = function(_ref3) {
+          var startDate = _ref3.startDate,
+            endDate = _ref3.endDate,
+            action = _ref3.action,
+            bounds = _ref3.bounds,
+            box = _ref3.box
+          var current = startDate,
+            slots = []
+
+          while (lte(current, endDate)) {
+            slots.push(current)
+            current = new Date(+current + _this.props.step * 60 * 1000) // using Date ensures not to create an endless loop the day DST begins
+          }
+
+          notify(_this.props.onSelectSlot, {
+            slots: slots,
+            start: startDate,
+            end: endDate,
+            resourceId: _this.props.resource,
+            action: action,
+            bounds: bounds,
+            box: box,
+          })
+        }
+
+        _this._select = function() {
+          for (
+            var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+            _key2 < _len2;
+            _key2++
+          ) {
+            args[_key2] = arguments[_key2]
+          }
+
+          notify(_this.props.onSelectEvent, args)
+        }
+
+        _this._doubleClick = function() {
+          for (
+            var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
+            _key3 < _len3;
+            _key3++
+          ) {
+            args[_key3] = arguments[_key3]
+          }
+
+          notify(_this.props.onDoubleClickEvent, args)
+        }
+
+        _this._keyPress = function() {
+          for (
+            var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
+            _key4 < _len4;
+            _key4++
+          ) {
+            args[_key4] = arguments[_key4]
+          }
+
+          notify(_this.props.onKeyPressEvent, args)
+        }
+
+        _this.slotMetrics = getSlotMetrics$1(_this.props)
+        return _this
+      }
+
+      var _proto = DayColumn.prototype
+
+      _proto.componentDidMount = function componentDidMount() {
+        this.props.selectable && this._selectable()
+
+        if (this.props.isNow) {
+          this.setTimeIndicatorPositionUpdateInterval()
+        }
+      }
+
+      _proto.componentWillUnmount = function componentWillUnmount() {
+        this._teardownSelectable()
+
+        this.clearTimeIndicatorInterval()
+      }
+
+      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+        nextProps
+      ) {
+        if (nextProps.selectable && !this.props.selectable) this._selectable()
+        if (!nextProps.selectable && this.props.selectable)
+          this._teardownSelectable()
+        this.slotMetrics = this.slotMetrics.update(nextProps)
+      }
+
+      _proto.componentDidUpdate = function componentDidUpdate(
+        prevProps,
+        prevState
+      ) {
+        var getNowChanged = !eq(
+          prevProps.getNow(),
+          this.props.getNow(),
+          'minutes'
+        )
+
+        if (prevProps.isNow !== this.props.isNow || getNowChanged) {
+          this.clearTimeIndicatorInterval()
+
+          if (this.props.isNow) {
+            var tail =
+              !getNowChanged &&
+              eq(prevProps.date, this.props.date, 'minutes') &&
+              prevState.timeIndicatorPosition ===
+                this.state.timeIndicatorPosition
+            this.setTimeIndicatorPositionUpdateInterval(tail)
+          }
+        } else if (
+          this.props.isNow &&
+          (!eq(prevProps.min, this.props.min, 'minutes') ||
+            !eq(prevProps.max, this.props.max, 'minutes'))
+        ) {
+          this.positionTimeIndicator()
+        }
+      }
+      /**
+       * @param tail {Boolean} - whether `positionTimeIndicator` call should be
+       *   deferred or called upon setting interval (`true` - if deferred);
+       */
+
+      _proto.setTimeIndicatorPositionUpdateInterval = function setTimeIndicatorPositionUpdateInterval(
+        tail
+      ) {
+        var _this2 = this
+
+        if (tail === void 0) {
+          tail = false
+        }
+
+        if (!this.intervalTriggered && !tail) {
+          this.positionTimeIndicator()
+        }
+
+        this._timeIndicatorTimeout = window.setTimeout(function() {
+          _this2.intervalTriggered = true
+
+          _this2.positionTimeIndicator()
+
+          _this2.setTimeIndicatorPositionUpdateInterval()
+        }, 60000)
+      }
+
+      _proto.clearTimeIndicatorInterval = function clearTimeIndicatorInterval() {
+        this.intervalTriggered = false
+        window.clearTimeout(this._timeIndicatorTimeout)
+      }
+
+      _proto.positionTimeIndicator = function positionTimeIndicator() {
+        var _this$props2 = this.props,
+          min = _this$props2.min,
+          max = _this$props2.max,
+          getNow = _this$props2.getNow
+        var current = getNow()
+
+        if (current >= min && current <= max) {
+          var top = this.slotMetrics.getCurrentTimePosition(current)
+          this.intervalTriggered = true
+          this.setState({
+            timeIndicatorPosition: top,
+          })
+        } else {
+          this.clearTimeIndicatorInterval()
+        }
+      }
+
+      _proto.render = function render() {
+        var _this$props3 = this.props,
+          date = _this$props3.date,
+          max = _this$props3.max,
+          rtl = _this$props3.rtl,
+          isNow = _this$props3.isNow,
+          resource = _this$props3.resource,
+          accessors = _this$props3.accessors,
+          localizer = _this$props3.localizer,
+          _this$props3$getters = _this$props3.getters,
+          dayProp = _this$props3$getters.dayProp,
+          getters = _objectWithoutPropertiesLoose(_this$props3$getters, [
+            'dayProp',
+          ]),
+          _this$props3$componen = _this$props3.components,
+          EventContainer = _this$props3$componen.eventContainerWrapper,
+          components = _objectWithoutPropertiesLoose(_this$props3$componen, [
+            'eventContainerWrapper',
+          ])
+
+        var slotMetrics = this.slotMetrics
+        var _this$state = this.state,
+          selecting = _this$state.selecting,
+          top = _this$state.top,
+          height = _this$state.height,
+          startDate = _this$state.startDate,
+          endDate = _this$state.endDate
+        var selectDates = {
+          start: startDate,
+          end: endDate,
+        }
+
+        var _dayProp = dayProp(max),
+          className = _dayProp.className,
+          style = _dayProp.style
+
+        var DayColumnWrapperComponent =
+          components.dayColumnWrapper || DayColumnWrapper
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            DayColumnWrapperComponent,
+            {
+              date: date,
+              style: style,
+              className: clsx(
+                className,
+                'rbc-day-slot',
+                'rbc-time-column',
+                isNow && 'rbc-now',
+                isNow && 'rbc-today', // WHY
+                selecting && 'rbc-slot-selecting'
+              ),
+            },
+            slotMetrics.groups.map(function(grp, idx) {
+              return (
+                /*#__PURE__*/
+                React__default.createElement(TimeSlotGroup, {
+                  key: idx,
+                  group: grp,
+                  resource: resource,
+                  getters: getters,
+                  components: components,
+                })
+              )
+            }),
+            /*#__PURE__*/
+            React__default.createElement(
+              EventContainer,
+              {
+                localizer: localizer,
+                resource: resource,
+                accessors: accessors,
+                getters: getters,
+                components: components,
+                slotMetrics: slotMetrics,
+              },
+              /*#__PURE__*/
+              React__default.createElement(
+                'div',
+                {
+                  className: clsx('rbc-events-container', rtl && 'rtl'),
+                },
+                this.renderEvents({
+                  events: this.props.backgroundEvents,
+                  isBackgroundEvent: true,
+                }),
+                this.renderEvents({
+                  events: this.props.events,
+                })
+              )
+            ),
+            selecting &&
+              /*#__PURE__*/
+              React__default.createElement(
+                'div',
+                {
+                  className: 'rbc-slot-selection',
+                  style: {
+                    top: top,
+                    height: height,
+                  },
+                },
+                /*#__PURE__*/
+                React__default.createElement(
+                  'span',
+                  null,
+                  localizer.format(selectDates, 'selectRangeFormat')
+                )
+              ),
+            isNow &&
+              this.intervalTriggered &&
+              /*#__PURE__*/
+              React__default.createElement('div', {
+                className: 'rbc-current-time-indicator',
+                style: {
+                  top: this.state.timeIndicatorPosition + '%',
+                },
+              })
+          )
+        )
+      }
+
+      return DayColumn
+    })(React__default.PureComponent)
 
   DayColumn.propTypes = {
     events: propTypes.array.isRequired,
+    backgroundEvents: propTypes.array.isRequired,
     step: propTypes.number.isRequired,
     date: propTypes.instanceOf(Date).isRequired,
     min: propTypes.instanceOf(Date).isRequired,
@@ -13824,99 +13699,110 @@
     timeslots: 2,
   }
 
-  var TimeGutter = /*#__PURE__*/ (function(_PureComponent) {
-    _inheritsLoose(TimeGutter, _PureComponent)
+  var TimeGutter =
+    /*#__PURE__*/
+    (function(_PureComponent) {
+      _inheritsLoose(TimeGutter, _PureComponent)
 
-    function TimeGutter() {
-      var _this
+      function TimeGutter() {
+        var _this
 
-      for (
-        var _len = arguments.length, args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        args[_key] = arguments[_key]
+        for (
+          var _len = arguments.length, args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
+          args[_key] = arguments[_key]
+        }
+
+        _this =
+          _PureComponent.call.apply(_PureComponent, [this].concat(args)) || this
+
+        _this.renderSlot = function(value, idx) {
+          if (idx !== 0) return null
+          var _this$props = _this.props,
+            localizer = _this$props.localizer,
+            getNow = _this$props.getNow
+
+          var isNow = _this.slotMetrics.dateIsInGroup(getNow(), idx)
+
+          return (
+            /*#__PURE__*/
+            React__default.createElement(
+              'span',
+              {
+                className: clsx('rbc-label', isNow && 'rbc-now'),
+              },
+              localizer.format(value, 'timeGutterFormat')
+            )
+          )
+        }
+
+        var _this$props2 = _this.props,
+          min = _this$props2.min,
+          max = _this$props2.max,
+          timeslots = _this$props2.timeslots,
+          step = _this$props2.step
+        _this.slotMetrics = getSlotMetrics$1({
+          min: min,
+          max: max,
+          timeslots: timeslots,
+          step: step,
+        })
+        return _this
       }
 
-      _this =
-        _PureComponent.call.apply(_PureComponent, [this].concat(args)) || this
+      var _proto = TimeGutter.prototype
 
-      _this.renderSlot = function(value, idx) {
-        if (idx !== 0) return null
-        var _this$props = _this.props,
-          localizer = _this$props.localizer,
-          getNow = _this$props.getNow
+      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+        nextProps
+      ) {
+        var min = nextProps.min,
+          max = nextProps.max,
+          timeslots = nextProps.timeslots,
+          step = nextProps.step
+        this.slotMetrics = this.slotMetrics.update({
+          min: min,
+          max: max,
+          timeslots: timeslots,
+          step: step,
+        })
+      }
 
-        var isNow = _this.slotMetrics.dateIsInGroup(getNow(), idx)
+      _proto.render = function render() {
+        var _this2 = this
 
-        return /*#__PURE__*/ React__default.createElement(
-          'span',
-          {
-            className: clsx('rbc-label', isNow && 'rbc-now'),
-          },
-          localizer.format(value, 'timeGutterFormat')
+        var _this$props3 = this.props,
+          resource = _this$props3.resource,
+          components = _this$props3.components,
+          getters = _this$props3.getters
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              className: 'rbc-time-gutter rbc-time-column',
+            },
+            this.slotMetrics.groups.map(function(grp, idx) {
+              return (
+                /*#__PURE__*/
+                React__default.createElement(TimeSlotGroup, {
+                  key: idx,
+                  group: grp,
+                  resource: resource,
+                  components: components,
+                  renderSlot: _this2.renderSlot,
+                  getters: getters,
+                  isTimeGutter: true,
+                })
+              )
+            })
+          )
         )
       }
 
-      var _this$props2 = _this.props,
-        min = _this$props2.min,
-        max = _this$props2.max,
-        timeslots = _this$props2.timeslots,
-        step = _this$props2.step
-      _this.slotMetrics = getSlotMetrics$1({
-        min: min,
-        max: max,
-        timeslots: timeslots,
-        step: step,
-      })
-      return _this
-    }
-
-    var _proto = TimeGutter.prototype
-
-    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-      nextProps
-    ) {
-      var min = nextProps.min,
-        max = nextProps.max,
-        timeslots = nextProps.timeslots,
-        step = nextProps.step
-      this.slotMetrics = this.slotMetrics.update({
-        min: min,
-        max: max,
-        timeslots: timeslots,
-        step: step,
-      })
-    }
-
-    _proto.render = function render() {
-      var _this2 = this
-
-      var _this$props3 = this.props,
-        resource = _this$props3.resource,
-        components = _this$props3.components,
-        getters = _this$props3.getters
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: 'rbc-time-gutter rbc-time-column',
-        },
-        this.slotMetrics.groups.map(function(grp, idx) {
-          return /*#__PURE__*/ React__default.createElement(TimeSlotGroup, {
-            key: idx,
-            group: grp,
-            resource: resource,
-            components: components,
-            renderSlot: _this2.renderSlot,
-            getters: getters,
-            isTimeGutter: true,
-          })
-        })
-      )
-    }
-
-    return TimeGutter
-  })(React.PureComponent)
+      return TimeGutter
+    })(React.PureComponent)
   TimeGutter.propTypes = {
     min: propTypes.instanceOf(Date).isRequired,
     max: propTypes.instanceOf(Date).isRequired,
@@ -13955,10 +13841,9 @@
 
   var ResourceHeader = function ResourceHeader(_ref) {
     var label = _ref.label
-    return /*#__PURE__*/ React__default.createElement(
-      React__default.Fragment,
-      null,
-      label
+    return (
+      /*#__PURE__*/
+      React__default.createElement(React__default.Fragment, null, label)
     )
   }
 
@@ -13968,257 +13853,278 @@
     resource: propTypes.object,
   }
 
-  var TimeGridHeader = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(TimeGridHeader, _React$PureComponent)
+  var TimeGridHeader =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(TimeGridHeader, _React$PureComponent)
 
-    function TimeGridHeader() {
-      var _this
+      function TimeGridHeader() {
+        var _this
 
-      for (
-        var _len = arguments.length, args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        args[_key] = arguments[_key]
-      }
+        for (
+          var _len = arguments.length, args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
+          args[_key] = arguments[_key]
+        }
 
-      _this =
-        _React$PureComponent.call.apply(
-          _React$PureComponent,
-          [this].concat(args)
-        ) || this
+        _this =
+          _React$PureComponent.call.apply(
+            _React$PureComponent,
+            [this].concat(args)
+          ) || this
 
-      _this.handleHeaderClick = function(date, view, e) {
-        e.preventDefault()
-        notify(_this.props.onDrillDown, [date, view])
-      }
+        _this.handleHeaderClick = function(date, view, e) {
+          e.preventDefault()
+          notify(_this.props.onDrillDown, [date, view])
+        }
 
-      _this.renderRow = function(resource) {
-        var _this$props = _this.props,
-          events = _this$props.events,
-          rtl = _this$props.rtl,
-          selectable = _this$props.selectable,
-          getNow = _this$props.getNow,
-          range = _this$props.range,
-          getters = _this$props.getters,
-          localizer = _this$props.localizer,
-          accessors = _this$props.accessors,
-          components = _this$props.components,
-          resizable = _this$props.resizable
-        var resourceId = accessors.resourceId(resource)
-        var eventsToDisplay = resource
-          ? events.filter(function(event) {
-              return accessors.resource(event) === resourceId
-            })
-          : events
-        return /*#__PURE__*/ React__default.createElement(DateContentRow, {
-          isAllDay: true,
-          rtl: rtl,
-          getNow: getNow,
-          minRows: 2,
-          range: range,
-          events: eventsToDisplay,
-          resourceId: resourceId,
-          className: 'rbc-allday-cell',
-          selectable: selectable,
-          selected: _this.props.selected,
-          components: components,
-          accessors: accessors,
-          getters: getters,
-          localizer: localizer,
-          onSelect: _this.props.onSelectEvent,
-          onDoubleClick: _this.props.onDoubleClickEvent,
-          onKeyPress: _this.props.onKeyPressEvent,
-          onSelectSlot: _this.props.onSelectSlot,
-          longPressThreshold: _this.props.longPressThreshold,
-          resizable: resizable,
-        })
-      }
-
-      return _this
-    }
-
-    var _proto = TimeGridHeader.prototype
-
-    _proto.renderHeaderCells = function renderHeaderCells(range) {
-      var _this2 = this
-
-      var _this$props2 = this.props,
-        localizer = _this$props2.localizer,
-        getDrilldownView = _this$props2.getDrilldownView,
-        getNow = _this$props2.getNow,
-        dayProp = _this$props2.getters.dayProp,
-        _this$props2$componen = _this$props2.components.header,
-        HeaderComponent =
-          _this$props2$componen === void 0 ? Header : _this$props2$componen
-      var today = getNow()
-      return range.map(function(date, i) {
-        var drilldownView = getDrilldownView(date)
-        var label = localizer.format(date, 'dayFormat')
-
-        var _dayProp = dayProp(date),
-          className = _dayProp.className,
-          style = _dayProp.style
-
-        var header = /*#__PURE__*/ React__default.createElement(
-          HeaderComponent,
-          {
-            date: date,
-            label: label,
-            localizer: localizer,
-          }
-        )
-        return /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            key: i,
-            style: style,
-            className: clsx(
-              'rbc-header',
-              className,
-              eq(date, today, 'day') && 'rbc-today'
-            ),
-          },
-          drilldownView
-            ? /*#__PURE__*/ React__default.createElement(
-                'a',
-                {
-                  href: '#',
-                  onClick: function onClick(e) {
-                    return _this2.handleHeaderClick(date, drilldownView, e)
-                  },
-                },
-                header
-              )
-            : /*#__PURE__*/ React__default.createElement('span', null, header)
-        )
-      })
-    }
-
-    _proto.render = function render() {
-      var _this3 = this
-
-      var _this$props3 = this.props,
-        width = _this$props3.width,
-        rtl = _this$props3.rtl,
-        resources = _this$props3.resources,
-        range = _this$props3.range,
-        events = _this$props3.events,
-        getNow = _this$props3.getNow,
-        accessors = _this$props3.accessors,
-        selectable = _this$props3.selectable,
-        components = _this$props3.components,
-        getters = _this$props3.getters,
-        scrollRef = _this$props3.scrollRef,
-        localizer = _this$props3.localizer,
-        isOverflowing = _this$props3.isOverflowing,
-        _this$props3$componen = _this$props3.components,
-        TimeGutterHeader = _this$props3$componen.timeGutterHeader,
-        _this$props3$componen2 = _this$props3$componen.resourceHeader,
-        ResourceHeaderComponent =
-          _this$props3$componen2 === void 0
-            ? ResourceHeader
-            : _this$props3$componen2,
-        resizable = _this$props3.resizable
-      var style = {}
-
-      if (isOverflowing) {
-        style[rtl ? 'marginLeft' : 'marginRight'] = scrollbarSize() + 'px'
-      }
-
-      var groupedEvents = resources.groupEvents(events)
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          style: style,
-          ref: scrollRef,
-          className: clsx(
-            'rbc-time-header',
-            isOverflowing && 'rbc-overflowing'
-          ),
-        },
-        /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            className: 'rbc-label rbc-time-header-gutter',
-            style: {
-              width: width,
-              minWidth: width,
-              maxWidth: width,
-            },
-          },
-          TimeGutterHeader &&
-            /*#__PURE__*/ React__default.createElement(TimeGutterHeader, null)
-        ),
-        resources.map(function(_ref, idx) {
-          var id = _ref[0],
-            resource = _ref[1]
-          return /*#__PURE__*/ React__default.createElement(
-            'div',
-            {
-              className: 'rbc-time-header-content',
-              key: id || idx,
-            },
-            resource &&
-              /*#__PURE__*/ React__default.createElement(
-                'div',
-                {
-                  className: 'rbc-row rbc-row-resource',
-                  key: 'resource_' + idx,
-                },
-                /*#__PURE__*/ React__default.createElement(
-                  'div',
-                  {
-                    className: 'rbc-header',
-                  },
-                  /*#__PURE__*/ React__default.createElement(
-                    ResourceHeaderComponent,
-                    {
-                      index: idx,
-                      label: accessors.resourceTitle(resource),
-                      resource: resource,
-                    }
-                  )
-                )
-              ),
-            /*#__PURE__*/ React__default.createElement(
-              'div',
-              {
-                className:
-                  'rbc-row rbc-time-header-cell' +
-                  (range.length <= 1 ? ' rbc-time-header-cell-single-day' : ''),
-              },
-              _this3.renderHeaderCells(range)
-            ),
-            /*#__PURE__*/ React__default.createElement(DateContentRow, {
+        _this.renderRow = function(resource) {
+          var _this$props = _this.props,
+            events = _this$props.events,
+            rtl = _this$props.rtl,
+            selectable = _this$props.selectable,
+            getNow = _this$props.getNow,
+            range = _this$props.range,
+            getters = _this$props.getters,
+            localizer = _this$props.localizer,
+            accessors = _this$props.accessors,
+            components = _this$props.components,
+            resizable = _this$props.resizable
+          var resourceId = accessors.resourceId(resource)
+          var eventsToDisplay = resource
+            ? events.filter(function(event) {
+                return accessors.resource(event) === resourceId
+              })
+            : events
+          return (
+            /*#__PURE__*/
+            React__default.createElement(DateContentRow, {
               isAllDay: true,
               rtl: rtl,
               getNow: getNow,
               minRows: 2,
               range: range,
-              events: groupedEvents.get(id) || [],
-              resourceId: resource && id,
+              events: eventsToDisplay,
+              resourceId: resourceId,
               className: 'rbc-allday-cell',
               selectable: selectable,
-              selected: _this3.props.selected,
+              selected: _this.props.selected,
               components: components,
               accessors: accessors,
               getters: getters,
               localizer: localizer,
-              onSelect: _this3.props.onSelectEvent,
-              onDoubleClick: _this3.props.onDoubleClickEvent,
-              onKeyPress: _this3.props.onKeyPressEvent,
-              onSelectSlot: _this3.props.onSelectSlot,
-              longPressThreshold: _this3.props.longPressThreshold,
+              onSelect: _this.props.onSelectEvent,
+              onDoubleClick: _this.props.onDoubleClickEvent,
+              onKeyPress: _this.props.onKeyPressEvent,
+              onSelectSlot: _this.props.onSelectSlot,
+              longPressThreshold: _this.props.longPressThreshold,
               resizable: resizable,
             })
           )
-        })
-      )
-    }
+        }
 
-    return TimeGridHeader
-  })(React__default.PureComponent)
+        return _this
+      }
+
+      var _proto = TimeGridHeader.prototype
+
+      _proto.renderHeaderCells = function renderHeaderCells(range) {
+        var _this2 = this
+
+        var _this$props2 = this.props,
+          localizer = _this$props2.localizer,
+          getDrilldownView = _this$props2.getDrilldownView,
+          getNow = _this$props2.getNow,
+          dayProp = _this$props2.getters.dayProp,
+          _this$props2$componen = _this$props2.components.header,
+          HeaderComponent =
+            _this$props2$componen === void 0 ? Header : _this$props2$componen
+        var today = getNow()
+        return range.map(function(date, i) {
+          var drilldownView = getDrilldownView(date)
+          var label = localizer.format(date, 'dayFormat')
+
+          var _dayProp = dayProp(date),
+            className = _dayProp.className,
+            style = _dayProp.style
+
+          var header =
+            /*#__PURE__*/
+            React__default.createElement(HeaderComponent, {
+              date: date,
+              label: label,
+              localizer: localizer,
+            })
+          return (
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                key: i,
+                style: style,
+                className: clsx(
+                  'rbc-header',
+                  className,
+                  eq(date, today, 'day') && 'rbc-today'
+                ),
+              },
+              drilldownView
+                ? /*#__PURE__*/
+                  React__default.createElement(
+                    'a',
+                    {
+                      href: '#',
+                      onClick: function onClick(e) {
+                        return _this2.handleHeaderClick(date, drilldownView, e)
+                      },
+                    },
+                    header
+                  )
+                : /*#__PURE__*/
+                  React__default.createElement('span', null, header)
+            )
+          )
+        })
+      }
+
+      _proto.render = function render() {
+        var _this3 = this
+
+        var _this$props3 = this.props,
+          width = _this$props3.width,
+          rtl = _this$props3.rtl,
+          resources = _this$props3.resources,
+          range = _this$props3.range,
+          events = _this$props3.events,
+          getNow = _this$props3.getNow,
+          accessors = _this$props3.accessors,
+          selectable = _this$props3.selectable,
+          components = _this$props3.components,
+          getters = _this$props3.getters,
+          scrollRef = _this$props3.scrollRef,
+          localizer = _this$props3.localizer,
+          isOverflowing = _this$props3.isOverflowing,
+          _this$props3$componen = _this$props3.components,
+          TimeGutterHeader = _this$props3$componen.timeGutterHeader,
+          _this$props3$componen2 = _this$props3$componen.resourceHeader,
+          ResourceHeaderComponent =
+            _this$props3$componen2 === void 0
+              ? ResourceHeader
+              : _this$props3$componen2,
+          resizable = _this$props3.resizable
+        var style = {}
+
+        if (isOverflowing) {
+          style[rtl ? 'marginLeft' : 'marginRight'] = scrollbarSize() + 'px'
+        }
+
+        var groupedEvents = resources.groupEvents(events)
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              style: style,
+              ref: scrollRef,
+              className: clsx(
+                'rbc-time-header',
+                isOverflowing && 'rbc-overflowing'
+              ),
+            },
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                className: 'rbc-label rbc-time-header-gutter',
+                style: {
+                  width: width,
+                  minWidth: width,
+                  maxWidth: width,
+                },
+              },
+              TimeGutterHeader &&
+                /*#__PURE__*/
+                React__default.createElement(TimeGutterHeader, null)
+            ),
+            resources.map(function(_ref, idx) {
+              var id = _ref[0],
+                resource = _ref[1]
+              return (
+                /*#__PURE__*/
+                React__default.createElement(
+                  'div',
+                  {
+                    className: 'rbc-time-header-content',
+                    key: id || idx,
+                  },
+                  resource &&
+                    /*#__PURE__*/
+                    React__default.createElement(
+                      'div',
+                      {
+                        className: 'rbc-row rbc-row-resource',
+                        key: 'resource_' + idx,
+                      },
+                      /*#__PURE__*/
+                      React__default.createElement(
+                        'div',
+                        {
+                          className: 'rbc-header',
+                        },
+                        /*#__PURE__*/
+                        React__default.createElement(ResourceHeaderComponent, {
+                          index: idx,
+                          label: accessors.resourceTitle(resource),
+                          resource: resource,
+                        })
+                      )
+                    ),
+                  /*#__PURE__*/
+                  React__default.createElement(
+                    'div',
+                    {
+                      className:
+                        'rbc-row rbc-time-header-cell' +
+                        (range.length <= 1
+                          ? ' rbc-time-header-cell-single-day'
+                          : ''),
+                    },
+                    _this3.renderHeaderCells(range)
+                  ),
+                  /*#__PURE__*/
+                  React__default.createElement(DateContentRow, {
+                    isAllDay: true,
+                    rtl: rtl,
+                    getNow: getNow,
+                    minRows: 2,
+                    range: range,
+                    events: groupedEvents.get(id) || [],
+                    resourceId: resource && id,
+                    className: 'rbc-allday-cell',
+                    selectable: selectable,
+                    selected: _this3.props.selected,
+                    components: components,
+                    accessors: accessors,
+                    getters: getters,
+                    localizer: localizer,
+                    onSelect: _this3.props.onSelectEvent,
+                    onDoubleClick: _this3.props.onDoubleClickEvent,
+                    onKeyPress: _this3.props.onKeyPressEvent,
+                    onSelectSlot: _this3.props.onSelectSlot,
+                    longPressThreshold: _this3.props.longPressThreshold,
+                    resizable: resizable,
+                  })
+                )
+              )
+            })
+          )
+        )
+      }
+
+      return TimeGridHeader
+    })(React__default.PureComponent)
 
   TimeGridHeader.propTypes = {
     range: propTypes.array.isRequired,
@@ -14274,333 +14180,381 @@
     }
   }
 
-  var TimeGrid = /*#__PURE__*/ (function(_PureComponent) {
-    _inheritsLoose(TimeGrid, _PureComponent)
+  var TimeGrid =
+    /*#__PURE__*/
+    (function(_PureComponent) {
+      _inheritsLoose(TimeGrid, _PureComponent)
 
-    function TimeGrid(props) {
-      var _this
+      function TimeGrid(props) {
+        var _this
 
-      _this = _PureComponent.call(this, props) || this
+        _this = _PureComponent.call(this, props) || this
 
-      _this.handleScroll = function(e) {
-        if (_this.scrollRef.current) {
-          _this.scrollRef.current.scrollLeft = e.target.scrollLeft
-        }
-      }
-
-      _this.handleResize = function() {
-        cancel(_this.rafHandle)
-        _this.rafHandle = request(_this.checkOverflow)
-      }
-
-      _this.gutterRef = function(ref) {
-        _this.gutter = ref && ReactDOM.findDOMNode(ref)
-      }
-
-      _this.handleSelectAlldayEvent = function() {
-        //cancel any pending selections so only the event click goes through.
-        _this.clearSelection()
-
-        for (
-          var _len = arguments.length, args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          args[_key] = arguments[_key]
+        _this.handleScroll = function(e) {
+          if (_this.scrollRef.current) {
+            _this.scrollRef.current.scrollLeft = e.target.scrollLeft
+          }
         }
 
-        notify(_this.props.onSelectEvent, args)
-      }
-
-      _this.handleSelectAllDaySlot = function(slots, slotInfo) {
-        var onSelectSlot = _this.props.onSelectSlot
-        notify(onSelectSlot, {
-          slots: slots,
-          start: slots[0],
-          end: slots[slots.length - 1],
-          action: slotInfo.action,
-          resourceId: slotInfo.resourceId,
-        })
-      }
-
-      _this.checkOverflow = function() {
-        if (_this._updatingOverflow) return
-        var content = _this.contentRef.current
-        var isOverflowing = content.scrollHeight > content.clientHeight
-
-        if (_this.state.isOverflowing !== isOverflowing) {
-          _this._updatingOverflow = true
-
-          _this.setState(
-            {
-              isOverflowing: isOverflowing,
-            },
-            function() {
-              _this._updatingOverflow = false
-            }
-          )
+        _this.handleResize = function() {
+          cancel(_this.rafHandle)
+          _this.rafHandle = request(_this.checkOverflow)
         }
-      }
 
-      _this.memoizedResources = memoizeOne(function(resources, accessors) {
-        return Resources(resources, accessors)
-      })
-      _this.state = {
-        gutterWidth: undefined,
-        isOverflowing: null,
-      }
-      _this.scrollRef = /*#__PURE__*/ React__default.createRef()
-      _this.contentRef = /*#__PURE__*/ React__default.createRef()
-      _this._scrollRatio = null
-      return _this
-    }
+        _this.gutterRef = function(ref) {
+          _this.gutter = ref && ReactDOM.findDOMNode(ref)
+        }
 
-    var _proto = TimeGrid.prototype
+        _this.handleSelectAlldayEvent = function() {
+          //cancel any pending selections so only the event click goes through.
+          _this.clearSelection()
 
-    _proto.UNSAFE_componentWillMount = function UNSAFE_componentWillMount() {
-      this.calculateScroll()
-    }
-
-    _proto.componentDidMount = function componentDidMount() {
-      this.checkOverflow()
-
-      if (this.props.width == null) {
-        this.measureGutter()
-      }
-
-      this.applyScroll()
-      window.addEventListener('resize', this.handleResize)
-    }
-
-    _proto.componentWillUnmount = function componentWillUnmount() {
-      window.removeEventListener('resize', this.handleResize)
-      cancel(this.rafHandle)
-
-      if (this.measureGutterAnimationFrameRequest) {
-        window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
-      }
-    }
-
-    _proto.componentDidUpdate = function componentDidUpdate() {
-      if (this.props.width == null) {
-        this.measureGutter()
-      }
-
-      this.applyScroll() //this.checkOverflow()
-    }
-
-    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-      nextProps
-    ) {
-      var _this$props = this.props,
-        range = _this$props.range,
-        scrollToTime = _this$props.scrollToTime // When paginating, reset scroll
-
-      if (
-        !eq(nextProps.range[0], range[0], 'minute') ||
-        !eq(nextProps.scrollToTime, scrollToTime, 'minute')
-      ) {
-        this.calculateScroll(nextProps)
-      }
-    }
-
-    _proto.renderEvents = function renderEvents(range, events, now) {
-      var _this2 = this
-
-      var _this$props2 = this.props,
-        min = _this$props2.min,
-        max = _this$props2.max,
-        components = _this$props2.components,
-        accessors = _this$props2.accessors,
-        localizer = _this$props2.localizer,
-        dayLayoutAlgorithm = _this$props2.dayLayoutAlgorithm
-      var resources = this.memoizedResources(this.props.resources, accessors)
-      var groupedEvents = resources.groupEvents(events)
-      return resources.map(function(_ref, i) {
-        var id = _ref[0],
-          resource = _ref[1]
-        return range.map(function(date, jj) {
-          var daysEvents = (groupedEvents.get(id) || []).filter(function(
-            event
+          for (
+            var _len = arguments.length, args = new Array(_len), _key = 0;
+            _key < _len;
+            _key++
           ) {
-            return inRange(
-              date,
-              accessors.start(event),
-              accessors.end(event),
-              'day'
+            args[_key] = arguments[_key]
+          }
+
+          notify(_this.props.onSelectEvent, args)
+        }
+
+        _this.handleSelectAllDaySlot = function(slots, slotInfo) {
+          var onSelectSlot = _this.props.onSelectSlot
+          var start = new Date(slots[0])
+          var end = new Date(slots[slots.length - 1])
+          end.setDate(slots[slots.length - 1].getDate() + 1)
+          notify(onSelectSlot, {
+            slots: slots,
+            start: start,
+            end: end,
+            action: slotInfo.action,
+            resourceId: slotInfo.resourceId,
+          })
+        }
+
+        _this.checkOverflow = function() {
+          if (_this._updatingOverflow) return
+          var content = _this.contentRef.current
+          var isOverflowing = content.scrollHeight > content.clientHeight
+
+          if (_this.state.isOverflowing !== isOverflowing) {
+            _this._updatingOverflow = true
+
+            _this.setState(
+              {
+                isOverflowing: isOverflowing,
+              },
+              function() {
+                _this._updatingOverflow = false
+              }
+            )
+          }
+        }
+
+        _this.memoizedResources = memoizeOne(function(resources, accessors) {
+          return Resources(resources, accessors)
+        })
+        _this.state = {
+          gutterWidth: undefined,
+          isOverflowing: null,
+        }
+        _this.scrollRef =
+          /*#__PURE__*/
+          React__default.createRef()
+        _this.contentRef =
+          /*#__PURE__*/
+          React__default.createRef()
+        _this._scrollRatio = null
+        return _this
+      }
+
+      var _proto = TimeGrid.prototype
+
+      _proto.UNSAFE_componentWillMount = function UNSAFE_componentWillMount() {
+        this.calculateScroll()
+      }
+
+      _proto.componentDidMount = function componentDidMount() {
+        this.checkOverflow()
+
+        if (this.props.width == null) {
+          this.measureGutter()
+        }
+
+        this.applyScroll()
+        window.addEventListener('resize', this.handleResize)
+      }
+
+      _proto.componentWillUnmount = function componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize)
+        cancel(this.rafHandle)
+
+        if (this.measureGutterAnimationFrameRequest) {
+          window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
+        }
+      }
+
+      _proto.componentDidUpdate = function componentDidUpdate() {
+        if (this.props.width == null) {
+          this.measureGutter()
+        }
+
+        this.applyScroll() //this.checkOverflow()
+      }
+
+      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+        nextProps
+      ) {
+        var _this$props = this.props,
+          range = _this$props.range,
+          scrollToTime = _this$props.scrollToTime // When paginating, reset scroll
+
+        if (
+          !eq(nextProps.range[0], range[0], 'minute') ||
+          !eq(nextProps.scrollToTime, scrollToTime, 'minute')
+        ) {
+          this.calculateScroll(nextProps)
+        }
+      }
+
+      _proto.renderEvents = function renderEvents(
+        range,
+        events,
+        backgroundEvents,
+        now
+      ) {
+        var _this2 = this
+
+        var _this$props2 = this.props,
+          min = _this$props2.min,
+          max = _this$props2.max,
+          components = _this$props2.components,
+          accessors = _this$props2.accessors,
+          localizer = _this$props2.localizer,
+          dayLayoutAlgorithm = _this$props2.dayLayoutAlgorithm
+        var resources = this.memoizedResources(this.props.resources, accessors)
+        var groupedEvents = resources.groupEvents(events)
+        var groupedBackgroundEvents = resources.groupEvents(backgroundEvents)
+        return resources.map(function(_ref, i) {
+          var id = _ref[0],
+            resource = _ref[1]
+          return range.map(function(date, jj) {
+            var daysEvents = (groupedEvents.get(id) || []).filter(function(
+              event
+            ) {
+              return inRange(
+                date,
+                accessors.start(event),
+                accessors.end(event),
+                'day'
+              )
+            })
+            var daysBackgroundEvents = (
+              groupedBackgroundEvents.get(id) || []
+            ).filter(function(event) {
+              return inRange(
+                date,
+                accessors.start(event),
+                accessors.end(event),
+                'day'
+              )
+            })
+            return (
+              /*#__PURE__*/
+              React__default.createElement(
+                DayColumn,
+                _extends({}, _this2.props, {
+                  localizer: localizer,
+                  min: merge(date, min),
+                  max: merge(date, max),
+                  resource: resource && id,
+                  components: components,
+                  isNow: eq(date, now, 'day'),
+                  key: i + '-' + jj,
+                  date: date,
+                  events: daysEvents,
+                  backgroundEvents: daysBackgroundEvents,
+                  dayLayoutAlgorithm: dayLayoutAlgorithm,
+                })
+              )
             )
           })
-          return /*#__PURE__*/ React__default.createElement(
-            DayColumn,
-            _extends({}, _this2.props, {
-              localizer: localizer,
-              min: merge(date, min),
-              max: merge(date, max),
-              resource: resource && id,
-              components: components,
-              isNow: eq(date, now, 'day'),
-              key: i + '-' + jj,
-              date: date,
-              events: daysEvents,
-              dayLayoutAlgorithm: dayLayoutAlgorithm,
-            })
-          )
         })
-      })
-    }
+      }
 
-    _proto.render = function render() {
-      var _this$props3 = this.props,
-        events = _this$props3.events,
-        range = _this$props3.range,
-        width = _this$props3.width,
-        rtl = _this$props3.rtl,
-        selected = _this$props3.selected,
-        getNow = _this$props3.getNow,
-        resources = _this$props3.resources,
-        components = _this$props3.components,
-        accessors = _this$props3.accessors,
-        getters = _this$props3.getters,
-        localizer = _this$props3.localizer,
-        min = _this$props3.min,
-        max = _this$props3.max,
-        showMultiDayTimes = _this$props3.showMultiDayTimes,
-        longPressThreshold = _this$props3.longPressThreshold,
-        resizable = _this$props3.resizable
-      width = width || this.state.gutterWidth
-      var start = range[0],
-        end = range[range.length - 1]
-      this.slots = range.length
-      var allDayEvents = [],
-        rangeEvents = []
-      events.forEach(function(event) {
-        if (inRange$1(event, start, end, accessors)) {
-          var eStart = accessors.start(event),
-            eEnd = accessors.end(event)
+      _proto.render = function render() {
+        var _this$props3 = this.props,
+          events = _this$props3.events,
+          backgroundEvents = _this$props3.backgroundEvents,
+          range = _this$props3.range,
+          width = _this$props3.width,
+          rtl = _this$props3.rtl,
+          selected = _this$props3.selected,
+          getNow = _this$props3.getNow,
+          resources = _this$props3.resources,
+          components = _this$props3.components,
+          accessors = _this$props3.accessors,
+          getters = _this$props3.getters,
+          localizer = _this$props3.localizer,
+          min = _this$props3.min,
+          max = _this$props3.max,
+          showMultiDayTimes = _this$props3.showMultiDayTimes,
+          longPressThreshold = _this$props3.longPressThreshold,
+          resizable = _this$props3.resizable
+        width = width || this.state.gutterWidth
+        var start = range[0],
+          end = range[range.length - 1]
+        this.slots = range.length
+        var allDayEvents = [],
+          rangeEvents = [],
+          rangeBackgroundEvents = []
+        events.forEach(function(event) {
+          if (inRange$1(event, start, end, accessors)) {
+            var eStart = accessors.start(event),
+              eEnd = accessors.end(event)
 
-          if (
-            accessors.allDay(event) ||
-            (isJustDate(eStart) && isJustDate(eEnd)) ||
-            (!showMultiDayTimes && !eq(eStart, eEnd, 'day'))
-          ) {
-            allDayEvents.push(event)
-          } else {
-            rangeEvents.push(event)
+            if (
+              accessors.allDay(event) ||
+              (isJustDate(eStart) && isJustDate(eEnd)) ||
+              (!showMultiDayTimes && !eq(eStart, eEnd, 'day'))
+            ) {
+              allDayEvents.push(event)
+            } else {
+              rangeEvents.push(event)
+            }
           }
-        }
-      })
-      allDayEvents.sort(function(a, b) {
-        return sortEvents(a, b, accessors)
-      })
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: clsx(
-            'rbc-time-view',
-            resources && 'rbc-time-view-resources'
-          ),
-        },
-        /*#__PURE__*/ React__default.createElement(TimeGridHeader, {
-          range: range,
-          events: allDayEvents,
-          width: width,
-          rtl: rtl,
-          getNow: getNow,
-          localizer: localizer,
-          selected: selected,
-          resources: this.memoizedResources(resources, accessors),
-          selectable: this.props.selectable,
-          accessors: accessors,
-          getters: getters,
-          components: components,
-          scrollRef: this.scrollRef,
-          isOverflowing: this.state.isOverflowing,
-          longPressThreshold: longPressThreshold,
-          onSelectSlot: this.handleSelectAllDaySlot,
-          onSelectEvent: this.handleSelectAlldayEvent,
-          onDoubleClickEvent: this.props.onDoubleClickEvent,
-          onKeyPressEvent: this.props.onKeyPressEvent,
-          onDrillDown: this.props.onDrillDown,
-          getDrilldownView: this.props.getDrilldownView,
-          resizable: resizable,
-        }),
-        /*#__PURE__*/ React__default.createElement(
-          'div',
-          {
-            ref: this.contentRef,
-            className: 'rbc-time-content',
-            onScroll: this.handleScroll,
-          },
-          /*#__PURE__*/ React__default.createElement(TimeGutter, {
-            date: start,
-            ref: this.gutterRef,
-            localizer: localizer,
-            min: merge(start, min),
-            max: merge(start, max),
-            step: this.props.step,
-            getNow: this.props.getNow,
-            timeslots: this.props.timeslots,
-            components: components,
-            className: 'rbc-time-gutter',
-            getters: getters,
-          }),
-          this.renderEvents(range, rangeEvents, getNow())
+        })
+        backgroundEvents.forEach(function(event) {
+          if (inRange$1(event, start, end, accessors)) {
+            rangeBackgroundEvents.push(event)
+          }
+        })
+        allDayEvents.sort(function(a, b) {
+          return sortEvents(a, b, accessors)
+        })
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            {
+              className: clsx(
+                'rbc-time-view',
+                resources && 'rbc-time-view-resources'
+              ),
+            },
+            /*#__PURE__*/
+            React__default.createElement(TimeGridHeader, {
+              range: range,
+              events: allDayEvents,
+              width: width,
+              rtl: rtl,
+              getNow: getNow,
+              localizer: localizer,
+              selected: selected,
+              resources: this.memoizedResources(resources, accessors),
+              selectable: this.props.selectable,
+              accessors: accessors,
+              getters: getters,
+              components: components,
+              scrollRef: this.scrollRef,
+              isOverflowing: this.state.isOverflowing,
+              longPressThreshold: longPressThreshold,
+              onSelectSlot: this.handleSelectAllDaySlot,
+              onSelectEvent: this.handleSelectAlldayEvent,
+              onDoubleClickEvent: this.props.onDoubleClickEvent,
+              onKeyPressEvent: this.props.onKeyPressEvent,
+              onDrillDown: this.props.onDrillDown,
+              getDrilldownView: this.props.getDrilldownView,
+              resizable: resizable,
+            }),
+            /*#__PURE__*/
+            React__default.createElement(
+              'div',
+              {
+                ref: this.contentRef,
+                className: 'rbc-time-content',
+                onScroll: this.handleScroll,
+              },
+              /*#__PURE__*/
+              React__default.createElement(TimeGutter, {
+                date: start,
+                ref: this.gutterRef,
+                localizer: localizer,
+                min: merge(start, min),
+                max: merge(start, max),
+                step: this.props.step,
+                getNow: this.props.getNow,
+                timeslots: this.props.timeslots,
+                components: components,
+                className: 'rbc-time-gutter',
+                getters: getters,
+              }),
+              this.renderEvents(
+                range,
+                rangeEvents,
+                rangeBackgroundEvents,
+                getNow()
+              )
+            )
+          )
         )
-      )
-    }
-
-    _proto.clearSelection = function clearSelection() {
-      clearTimeout(this._selectTimer)
-      this._pendingSelection = []
-    }
-
-    _proto.measureGutter = function measureGutter() {
-      var _this3 = this
-
-      if (this.measureGutterAnimationFrameRequest) {
-        window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
       }
 
-      this.measureGutterAnimationFrameRequest = window.requestAnimationFrame(
-        function() {
-          var width = getWidth(_this3.gutter)
+      _proto.clearSelection = function clearSelection() {
+        clearTimeout(this._selectTimer)
+        this._pendingSelection = []
+      }
 
-          if (width && _this3.state.gutterWidth !== width) {
-            _this3.setState({
-              gutterWidth: width,
-            })
-          }
+      _proto.measureGutter = function measureGutter() {
+        var _this3 = this
+
+        if (this.measureGutterAnimationFrameRequest) {
+          window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
         }
-      )
-    }
 
-    _proto.applyScroll = function applyScroll() {
-      if (this._scrollRatio != null) {
-        var content = this.contentRef.current
-        content.scrollTop = content.scrollHeight * this._scrollRatio // Only do this once
+        this.measureGutterAnimationFrameRequest = window.requestAnimationFrame(
+          function() {
+            var width = getWidth(_this3.gutter)
 
-        this._scrollRatio = null
-      }
-    }
-
-    _proto.calculateScroll = function calculateScroll(props) {
-      if (props === void 0) {
-        props = this.props
+            if (width && _this3.state.gutterWidth !== width) {
+              _this3.setState({
+                gutterWidth: width,
+              })
+            }
+          }
+        )
       }
 
-      var _props = props,
-        min = _props.min,
-        max = _props.max,
-        scrollToTime = _props.scrollToTime
-      var diffMillis = scrollToTime - startOf(scrollToTime, 'day')
-      var totalMillis = diff(max, min)
-      this._scrollRatio = diffMillis / totalMillis
-    }
+      _proto.applyScroll = function applyScroll() {
+        if (this._scrollRatio != null) {
+          var content = this.contentRef.current
+          content.scrollTop = content.scrollHeight * this._scrollRatio // Only do this once
 
-    return TimeGrid
-  })(React.PureComponent)
+          this._scrollRatio = null
+        }
+      }
+
+      _proto.calculateScroll = function calculateScroll(props) {
+        if (props === void 0) {
+          props = this.props
+        }
+
+        var _props = props,
+          min = _props.min,
+          max = _props.max,
+          scrollToTime = _props.scrollToTime
+        var diffMillis = scrollToTime - startOf(scrollToTime, 'day')
+        var totalMillis = diff(max, min)
+        this._scrollRatio = diffMillis / totalMillis
+      }
+
+      return TimeGrid
+    })(React.PureComponent)
   TimeGrid.propTypes = {
     events: propTypes.array.isRequired,
+    backgroundEvents: propTypes.array.isRequired,
     resources: propTypes.array,
     step: propTypes.number,
     timeslots: propTypes.number,
@@ -14639,32 +14593,37 @@
     scrollToTime: startOf(new Date(), 'day'),
   }
 
-  var Day = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(Day, _React$PureComponent)
+  var Day =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(Day, _React$PureComponent)
 
-    function Day() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
+      function Day() {
+        return _React$PureComponent.apply(this, arguments) || this
+      }
 
-    var _proto = Day.prototype
+      var _proto = Day.prototype
 
-    _proto.render = function render() {
-      var _this$props = this.props,
-        date = _this$props.date,
-        props = _objectWithoutPropertiesLoose(_this$props, ['date'])
+      _proto.render = function render() {
+        var _this$props = this.props,
+          date = _this$props.date,
+          props = _objectWithoutPropertiesLoose(_this$props, ['date'])
 
-      var range = Day.range(date)
-      return /*#__PURE__*/ React__default.createElement(
-        TimeGrid,
-        _extends({}, props, {
-          range: range,
-          eventOffset: 10,
-        })
-      )
-    }
+        var range = Day.range(date)
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            TimeGrid,
+            _extends({}, props, {
+              range: range,
+              eventOffset: 10,
+            })
+          )
+        )
+      }
 
-    return Day
-  })(React__default.PureComponent)
+      return Day
+    })(React__default.PureComponent)
 
   Day.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14692,32 +14651,37 @@
     return localizer.format(date, 'dayHeaderFormat')
   }
 
-  var Week = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(Week, _React$PureComponent)
+  var Week =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(Week, _React$PureComponent)
 
-    function Week() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
+      function Week() {
+        return _React$PureComponent.apply(this, arguments) || this
+      }
 
-    var _proto = Week.prototype
+      var _proto = Week.prototype
 
-    _proto.render = function render() {
-      var _this$props = this.props,
-        date = _this$props.date,
-        props = _objectWithoutPropertiesLoose(_this$props, ['date'])
+      _proto.render = function render() {
+        var _this$props = this.props,
+          date = _this$props.date,
+          props = _objectWithoutPropertiesLoose(_this$props, ['date'])
 
-      var range = Week.range(date, this.props)
-      return /*#__PURE__*/ React__default.createElement(
-        TimeGrid,
-        _extends({}, props, {
-          range: range,
-          eventOffset: 15,
-        })
-      )
-    }
+        var range = Week.range(date, this.props)
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            TimeGrid,
+            _extends({}, props, {
+              range: range,
+              eventOffset: 15,
+            })
+          )
+        )
+      }
 
-    return Week
-  })(React__default.PureComponent)
+      return Week
+    })(React__default.PureComponent)
 
   Week.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14776,32 +14740,37 @@
     })
   }
 
-  var WorkWeek = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(WorkWeek, _React$PureComponent)
+  var WorkWeek =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(WorkWeek, _React$PureComponent)
 
-    function WorkWeek() {
-      return _React$PureComponent.apply(this, arguments) || this
-    }
+      function WorkWeek() {
+        return _React$PureComponent.apply(this, arguments) || this
+      }
 
-    var _proto = WorkWeek.prototype
+      var _proto = WorkWeek.prototype
 
-    _proto.render = function render() {
-      var _this$props = this.props,
-        date = _this$props.date,
-        props = _objectWithoutPropertiesLoose(_this$props, ['date'])
+      _proto.render = function render() {
+        var _this$props = this.props,
+          date = _this$props.date,
+          props = _objectWithoutPropertiesLoose(_this$props, ['date'])
 
-      var range = workWeekRange(date, this.props)
-      return /*#__PURE__*/ React__default.createElement(
-        TimeGrid,
-        _extends({}, props, {
-          range: range,
-          eventOffset: 15,
-        })
-      )
-    }
+        var range = workWeekRange(date, this.props)
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            TimeGrid,
+            _extends({}, props, {
+              range: range,
+              eventOffset: 15,
+            })
+          )
+        )
+      }
 
-    return WorkWeek
-  })(React__default.PureComponent)
+      return WorkWeek
+    })(React__default.PureComponent)
 
   WorkWeek.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14912,46 +14881,54 @@
         var dateLabel = idx === 0 && localizer.format(day, 'agendaDateFormat')
         var first =
           idx === 0
-            ? /*#__PURE__*/ React__default.createElement(
+            ? /*#__PURE__*/
+              React__default.createElement(
                 'td',
                 {
                   rowSpan: events.length,
                   className: 'rbc-agenda-date-cell',
                 },
                 AgendaDate
-                  ? /*#__PURE__*/ React__default.createElement(AgendaDate, {
+                  ? /*#__PURE__*/
+                    React__default.createElement(AgendaDate, {
                       day: day,
                       label: dateLabel,
                     })
                   : dateLabel
               )
             : false
-        return /*#__PURE__*/ React__default.createElement(
-          'tr',
-          {
-            key: dayKey + '_' + idx,
-            className: userProps.className,
-            style: userProps.style,
-          },
-          first,
-          /*#__PURE__*/ React__default.createElement(
-            'td',
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'tr',
             {
-              className: 'rbc-agenda-time-cell',
+              key: dayKey + '_' + idx,
+              className: userProps.className,
+              style: userProps.style,
             },
-            timeRangeLabel(day, event)
-          ),
-          /*#__PURE__*/ React__default.createElement(
-            'td',
-            {
-              className: 'rbc-agenda-event-cell',
-            },
-            Event
-              ? /*#__PURE__*/ React__default.createElement(Event, {
-                  event: event,
-                  title: title,
-                })
-              : title
+            first,
+            /*#__PURE__*/
+            React__default.createElement(
+              'td',
+              {
+                className: 'rbc-agenda-time-cell',
+              },
+              timeRangeLabel(day, event)
+            ),
+            /*#__PURE__*/
+            React__default.createElement(
+              'td',
+              {
+                className: 'rbc-agenda-event-cell',
+              },
+              Event
+                ? /*#__PURE__*/
+                  React__default.createElement(Event, {
+                    event: event,
+                    title: title,
+                  })
+                : title
+            )
           )
         )
       }, [])
@@ -14984,18 +14961,22 @@
 
       if (gt(day, start, 'day')) labelClass = 'rbc-continues-prior'
       if (lt(day, end, 'day')) labelClass += ' rbc-continues-after'
-      return /*#__PURE__*/ React__default.createElement(
-        'span',
-        {
-          className: labelClass.trim(),
-        },
-        TimeComponent
-          ? /*#__PURE__*/ React__default.createElement(TimeComponent, {
-              event: event,
-              day: day,
-              label: label,
-            })
-          : label
+      return (
+        /*#__PURE__*/
+        React__default.createElement(
+          'span',
+          {
+            className: labelClass.trim(),
+          },
+          TimeComponent
+            ? /*#__PURE__*/
+              React__default.createElement(TimeComponent, {
+                event: event,
+                day: day,
+                label: label,
+              })
+            : label
+        )
       )
     }
 
@@ -15027,88 +15008,107 @@
     var end = add(date, length, 'day')
     var range$1 = range(date, end, 'day')
     events = events.filter(function(event) {
-      return inRange$1(event, date, end, accessors)
+      return inRange$1(
+        event,
+        startOf(date, 'day'),
+        endOf(end, 'day'),
+        accessors
+      )
     })
     events.sort(function(a, b) {
       return +accessors.start(a) - +accessors.start(b)
     })
-    return /*#__PURE__*/ React__default.createElement(
-      'div',
-      {
-        className: 'rbc-agenda-view',
-      },
-      events.length !== 0
-        ? /*#__PURE__*/ React__default.createElement(
-            React__default.Fragment,
-            null,
-            /*#__PURE__*/ React__default.createElement(
-              'table',
-              {
-                ref: headerRef,
-                className: 'rbc-agenda-table',
-              },
-              /*#__PURE__*/ React__default.createElement(
-                'thead',
-                null,
-                /*#__PURE__*/ React__default.createElement(
-                  'tr',
+    return (
+      /*#__PURE__*/
+      React__default.createElement(
+        'div',
+        {
+          className: 'rbc-agenda-view',
+        },
+        events.length !== 0
+          ? /*#__PURE__*/
+            React__default.createElement(
+              React__default.Fragment,
+              null,
+              /*#__PURE__*/
+              React__default.createElement(
+                'table',
+                {
+                  ref: headerRef,
+                  className: 'rbc-agenda-table',
+                },
+                /*#__PURE__*/
+                React__default.createElement(
+                  'thead',
                   null,
-                  /*#__PURE__*/ React__default.createElement(
-                    'th',
+                  /*#__PURE__*/
+                  React__default.createElement(
+                    'tr',
+                    null,
+                    /*#__PURE__*/
+                    React__default.createElement(
+                      'th',
+                      {
+                        className: 'rbc-header',
+                        ref: dateColRef,
+                      },
+                      messages.date
+                    ),
+                    /*#__PURE__*/
+                    React__default.createElement(
+                      'th',
+                      {
+                        className: 'rbc-header',
+                        ref: timeColRef,
+                      },
+                      messages.time
+                    ),
+                    /*#__PURE__*/
+                    React__default.createElement(
+                      'th',
+                      {
+                        className: 'rbc-header',
+                      },
+                      messages.event
+                    )
+                  )
+                )
+              ),
+              /*#__PURE__*/
+              React__default.createElement(
+                'div',
+                {
+                  className: 'rbc-agenda-content',
+                  ref: contentRef,
+                },
+                /*#__PURE__*/
+                React__default.createElement(
+                  'table',
+                  {
+                    className: 'rbc-agenda-table',
+                  },
+                  /*#__PURE__*/
+                  React__default.createElement(
+                    'tbody',
                     {
-                      className: 'rbc-header',
-                      ref: dateColRef,
+                      ref: tbodyRef,
                     },
-                    messages.date
-                  ),
-                  /*#__PURE__*/ React__default.createElement(
-                    'th',
-                    {
-                      className: 'rbc-header',
-                      ref: timeColRef,
-                    },
-                    messages.time
-                  ),
-                  /*#__PURE__*/ React__default.createElement(
-                    'th',
-                    {
-                      className: 'rbc-header',
-                    },
-                    messages.event
+                    range$1.map(function(day, idx) {
+                      return renderDay(day, events, idx)
+                    })
                   )
                 )
               )
-            ),
-            /*#__PURE__*/ React__default.createElement(
-              'div',
-              {
-                className: 'rbc-agenda-content',
-                ref: contentRef,
-              },
-              /*#__PURE__*/ React__default.createElement(
-                'table',
-                {
-                  className: 'rbc-agenda-table',
-                },
-                /*#__PURE__*/ React__default.createElement(
-                  'tbody',
-                  {
-                    ref: tbodyRef,
-                  },
-                  range$1.map(function(day, idx) {
-                    return renderDay(day, events, idx)
-                  })
-                )
-              )
             )
-          )
-        : /*#__PURE__*/ React__default.createElement(
-            'span',
-            {
-              className: 'rbc-agenda-empty',
-            },
-            messages.noEventsInRange
-          )
+          : /*#__PURE__*/
+            React__default.createElement(
+              'span',
+              {
+                className: 'rbc-agenda-empty',
+              },
+              messages.noEventsInRange
+            )
+      )
     )
   }
 
@@ -15208,121 +15208,135 @@
     return date
   }
 
-  var Toolbar = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(Toolbar, _React$PureComponent)
+  var Toolbar =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(Toolbar, _React$PureComponent)
 
-    function Toolbar() {
-      var _this
+      function Toolbar() {
+        var _this
 
-      for (
-        var _len = arguments.length, args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        args[_key] = arguments[_key]
+        for (
+          var _len = arguments.length, args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
+          args[_key] = arguments[_key]
+        }
+
+        _this =
+          _React$PureComponent.call.apply(
+            _React$PureComponent,
+            [this].concat(args)
+          ) || this
+
+        _this.navigate = function(action) {
+          _this.props.onNavigate(action)
+        }
+
+        _this.view = function(view) {
+          _this.props.onView(view)
+        }
+
+        return _this
       }
 
-      _this =
-        _React$PureComponent.call.apply(
-          _React$PureComponent,
-          [this].concat(args)
-        ) || this
+      var _proto = Toolbar.prototype
 
-      _this.navigate = function(action) {
-        _this.props.onNavigate(action)
-      }
-
-      _this.view = function(view) {
-        _this.props.onView(view)
-      }
-
-      return _this
-    }
-
-    var _proto = Toolbar.prototype
-
-    _proto.render = function render() {
-      var _this$props = this.props,
-        messages = _this$props.localizer.messages,
-        label = _this$props.label
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        {
-          className: 'rbc-toolbar',
-        },
-        /*#__PURE__*/ React__default.createElement(
-          'span',
-          {
-            className: 'rbc-btn-group',
-          },
-          /*#__PURE__*/ React__default.createElement(
-            'button',
+      _proto.render = function render() {
+        var _this$props = this.props,
+          messages = _this$props.localizer.messages,
+          label = _this$props.label
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
             {
-              type: 'button',
-              onClick: this.navigate.bind(null, navigate.TODAY),
+              className: 'rbc-toolbar',
             },
-            messages.today
-          ),
-          /*#__PURE__*/ React__default.createElement(
-            'button',
-            {
-              type: 'button',
-              onClick: this.navigate.bind(null, navigate.PREVIOUS),
-            },
-            messages.previous
-          ),
-          /*#__PURE__*/ React__default.createElement(
-            'button',
-            {
-              type: 'button',
-              onClick: this.navigate.bind(null, navigate.NEXT),
-            },
-            messages.next
+            /*#__PURE__*/
+            React__default.createElement(
+              'span',
+              {
+                className: 'rbc-btn-group',
+              },
+              /*#__PURE__*/
+              React__default.createElement(
+                'button',
+                {
+                  type: 'button',
+                  onClick: this.navigate.bind(null, navigate.TODAY),
+                },
+                messages.today
+              ),
+              /*#__PURE__*/
+              React__default.createElement(
+                'button',
+                {
+                  type: 'button',
+                  onClick: this.navigate.bind(null, navigate.PREVIOUS),
+                },
+                messages.previous
+              ),
+              /*#__PURE__*/
+              React__default.createElement(
+                'button',
+                {
+                  type: 'button',
+                  onClick: this.navigate.bind(null, navigate.NEXT),
+                },
+                messages.next
+              )
+            ),
+            /*#__PURE__*/
+            React__default.createElement(
+              'span',
+              {
+                className: 'rbc-toolbar-label',
+              },
+              label
+            ),
+            /*#__PURE__*/
+            React__default.createElement(
+              'span',
+              {
+                className: 'rbc-btn-group',
+              },
+              this.viewNamesGroup(messages)
+            )
           )
-        ),
-        /*#__PURE__*/ React__default.createElement(
-          'span',
-          {
-            className: 'rbc-toolbar-label',
-          },
-          label
-        ),
-        /*#__PURE__*/ React__default.createElement(
-          'span',
-          {
-            className: 'rbc-btn-group',
-          },
-          this.viewNamesGroup(messages)
         )
-      )
-    }
-
-    _proto.viewNamesGroup = function viewNamesGroup(messages) {
-      var _this2 = this
-
-      var viewNames = this.props.views
-      var view = this.props.view
-
-      if (viewNames.length > 1) {
-        return viewNames.map(function(name) {
-          return /*#__PURE__*/ React__default.createElement(
-            'button',
-            {
-              type: 'button',
-              key: name,
-              className: clsx({
-                'rbc-active': view === name,
-              }),
-              onClick: _this2.view.bind(null, name),
-            },
-            messages[name]
-          )
-        })
       }
-    }
 
-    return Toolbar
-  })(React__default.PureComponent)
+      _proto.viewNamesGroup = function viewNamesGroup(messages) {
+        var _this2 = this
+
+        var viewNames = this.props.views
+        var view = this.props.view
+
+        if (viewNames.length > 1) {
+          return viewNames.map(function(name) {
+            return (
+              /*#__PURE__*/
+              React__default.createElement(
+                'button',
+                {
+                  type: 'button',
+                  key: name,
+                  className: clsx({
+                    'rbc-active': view === name,
+                  }),
+                  onClick: _this2.view.bind(null, name),
+                },
+                messages[name]
+              )
+            )
+          })
+        }
+      }
+
+      return Toolbar
+    })(React__default.PureComponent)
 
   Toolbar.propTypes = {
     view: propTypes.string.isRequired,
@@ -15364,8 +15378,8 @@
    * @param {*} value The value to assign.
    */
   function baseAssignValue(object, key, value) {
-    if (key == '__proto__' && defineProperty$1) {
-      defineProperty$1(object, key, {
+    if (key == '__proto__' && defineProperty) {
+      defineProperty(object, key, {
         configurable: true,
         enumerable: true,
         value: value,
@@ -16526,377 +16540,410 @@
    * function `endAccessor` that returns the end date + 1 day for those events that end at midnight.
    */
 
-  var Calendar = /*#__PURE__*/ (function(_React$PureComponent) {
-    _inheritsLoose(Calendar, _React$PureComponent)
+  var Calendar =
+    /*#__PURE__*/
+    (function(_React$PureComponent) {
+      _inheritsLoose(Calendar, _React$PureComponent)
 
-    function Calendar() {
-      var _this
+      function Calendar() {
+        var _this
 
-      for (
-        var _len = arguments.length, _args = new Array(_len), _key = 0;
-        _key < _len;
-        _key++
-      ) {
-        _args[_key] = arguments[_key]
-      }
-
-      _this =
-        _React$PureComponent.call.apply(
-          _React$PureComponent,
-          [this].concat(_args)
-        ) || this
-
-      _this.getViews = function() {
-        var views = _this.props.views
-
-        if (Array.isArray(views)) {
-          return transform(
-            views,
-            function(obj, name) {
-              return (obj[name] = VIEWS[name])
-            },
-            {}
-          )
+        for (
+          var _len = arguments.length, _args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
+        ) {
+          _args[_key] = arguments[_key]
         }
 
-        if (typeof views === 'object') {
-          return mapValues(views, function(value, key) {
-            if (value === true) {
-              return VIEWS[key]
-            }
+        _this =
+          _React$PureComponent.call.apply(
+            _React$PureComponent,
+            [this].concat(_args)
+          ) || this
 
-            return value
-          })
-        }
+        _this.getViews = function() {
+          var views = _this.props.views
 
-        return VIEWS
-      }
-
-      _this.getView = function() {
-        var views = _this.getViews()
-
-        return views[_this.props.view]
-      }
-
-      _this.getDrilldownView = function(date) {
-        var _this$props = _this.props,
-          view = _this$props.view,
-          drilldownView = _this$props.drilldownView,
-          getDrilldownView = _this$props.getDrilldownView
-        if (!getDrilldownView) return drilldownView
-        return getDrilldownView(date, view, Object.keys(_this.getViews()))
-      }
-
-      _this.handleRangeChange = function(date, viewComponent, view) {
-        var _this$props2 = _this.props,
-          onRangeChange = _this$props2.onRangeChange,
-          localizer = _this$props2.localizer
-
-        if (onRangeChange) {
-          if (viewComponent.range) {
-            onRangeChange(
-              viewComponent.range(date, {
-                localizer: localizer,
-              }),
-              view
+          if (Array.isArray(views)) {
+            return transform(
+              views,
+              function(obj, name) {
+                return (obj[name] = VIEWS[name])
+              },
+              {}
             )
-          } else {
-            {
-              console.error('onRangeChange prop not supported for this view')
+          }
+
+          if (typeof views === 'object') {
+            return mapValues(views, function(value, key) {
+              if (value === true) {
+                return VIEWS[key]
+              }
+
+              return value
+            })
+          }
+
+          return VIEWS
+        }
+
+        _this.getView = function() {
+          var views = _this.getViews()
+
+          return views[_this.props.view]
+        }
+
+        _this.getDrilldownView = function(date) {
+          var _this$props = _this.props,
+            view = _this$props.view,
+            drilldownView = _this$props.drilldownView,
+            getDrilldownView = _this$props.getDrilldownView
+          if (!getDrilldownView) return drilldownView
+          return getDrilldownView(date, view, Object.keys(_this.getViews()))
+        }
+
+        _this.handleRangeChange = function(date, viewComponent, view) {
+          var _this$props2 = _this.props,
+            onRangeChange = _this$props2.onRangeChange,
+            localizer = _this$props2.localizer
+
+          if (onRangeChange) {
+            if (viewComponent.range) {
+              onRangeChange(
+                viewComponent.range(date, {
+                  localizer: localizer,
+                }),
+                view
+              )
+            } else {
+              {
+                console.error('onRangeChange prop not supported for this view')
+              }
             }
           }
         }
+
+        _this.handleNavigate = function(action, newDate) {
+          var _this$props3 = _this.props,
+            view = _this$props3.view,
+            date = _this$props3.date,
+            getNow = _this$props3.getNow,
+            onNavigate = _this$props3.onNavigate,
+            props = _objectWithoutPropertiesLoose(_this$props3, [
+              'view',
+              'date',
+              'getNow',
+              'onNavigate',
+            ])
+
+          var ViewComponent = _this.getView()
+
+          var today = getNow()
+          date = moveDate(
+            ViewComponent,
+            _extends({}, props, {
+              action: action,
+              date: newDate || date || today,
+              today: today,
+            })
+          )
+          onNavigate(date, view, action)
+
+          _this.handleRangeChange(date, ViewComponent)
+        }
+
+        _this.handleViewChange = function(view) {
+          if (view !== _this.props.view && isValidView(view, _this.props)) {
+            _this.props.onView(view)
+          }
+
+          var views = _this.getViews()
+
+          _this.handleRangeChange(
+            _this.props.date || _this.props.getNow(),
+            views[view],
+            view
+          )
+        }
+
+        _this.handleSelectEvent = function() {
+          for (
+            var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+            _key2 < _len2;
+            _key2++
+          ) {
+            args[_key2] = arguments[_key2]
+          }
+
+          notify(_this.props.onSelectEvent, args)
+        }
+
+        _this.handleDoubleClickEvent = function() {
+          for (
+            var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
+            _key3 < _len3;
+            _key3++
+          ) {
+            args[_key3] = arguments[_key3]
+          }
+
+          notify(_this.props.onDoubleClickEvent, args)
+        }
+
+        _this.handleKeyPressEvent = function() {
+          for (
+            var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
+            _key4 < _len4;
+            _key4++
+          ) {
+            args[_key4] = arguments[_key4]
+          }
+
+          notify(_this.props.onKeyPressEvent, args)
+        }
+
+        _this.handleSelectSlot = function(slotInfo) {
+          notify(_this.props.onSelectSlot, slotInfo)
+        }
+
+        _this.handleDrillDown = function(date, view) {
+          var onDrillDown = _this.props.onDrillDown
+
+          if (onDrillDown) {
+            onDrillDown(date, view, _this.drilldownView)
+            return
+          }
+
+          if (view) _this.handleViewChange(view)
+
+          _this.handleNavigate(navigate.DATE, date)
+        }
+
+        _this.state = {
+          context: _this.getContext(_this.props),
+        }
+        return _this
       }
 
-      _this.handleNavigate = function(action, newDate) {
-        var _this$props3 = _this.props,
-          view = _this$props3.view,
-          date = _this$props3.date,
-          getNow = _this$props3.getNow,
-          onNavigate = _this$props3.onNavigate,
-          props = _objectWithoutPropertiesLoose(_this$props3, [
+      var _proto = Calendar.prototype
+
+      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+        nextProps
+      ) {
+        this.setState({
+          context: this.getContext(nextProps),
+        })
+      }
+
+      _proto.getContext = function getContext(_ref2) {
+        var startAccessor = _ref2.startAccessor,
+          endAccessor = _ref2.endAccessor,
+          allDayAccessor = _ref2.allDayAccessor,
+          tooltipAccessor = _ref2.tooltipAccessor,
+          titleAccessor = _ref2.titleAccessor,
+          resourceAccessor = _ref2.resourceAccessor,
+          resourceIdAccessor = _ref2.resourceIdAccessor,
+          resourceTitleAccessor = _ref2.resourceTitleAccessor,
+          eventPropGetter = _ref2.eventPropGetter,
+          backgroundEventPropGetter = _ref2.backgroundEventPropGetter,
+          slotPropGetter = _ref2.slotPropGetter,
+          slotGroupPropGetter = _ref2.slotGroupPropGetter,
+          dayPropGetter = _ref2.dayPropGetter,
+          view = _ref2.view,
+          views = _ref2.views,
+          localizer = _ref2.localizer,
+          culture = _ref2.culture,
+          _ref2$messages = _ref2.messages,
+          messages$1 = _ref2$messages === void 0 ? {} : _ref2$messages,
+          _ref2$components = _ref2.components,
+          components = _ref2$components === void 0 ? {} : _ref2$components,
+          _ref2$formats = _ref2.formats,
+          formats = _ref2$formats === void 0 ? {} : _ref2$formats
+        var names = viewNames$1(views)
+        var msgs = messages(messages$1)
+        return {
+          viewNames: names,
+          localizer: mergeWithDefaults(localizer, culture, formats, msgs),
+          getters: {
+            eventProp: function eventProp() {
+              return (
+                (eventPropGetter && eventPropGetter.apply(void 0, arguments)) ||
+                {}
+              )
+            },
+            backgroundEventProp: function backgroundEventProp() {
+              return (
+                (backgroundEventPropGetter &&
+                  backgroundEventPropGetter.apply(void 0, arguments)) ||
+                {}
+              )
+            },
+            slotProp: function slotProp() {
+              return (
+                (slotPropGetter && slotPropGetter.apply(void 0, arguments)) ||
+                {}
+              )
+            },
+            slotGroupProp: function slotGroupProp() {
+              return (
+                (slotGroupPropGetter &&
+                  slotGroupPropGetter.apply(void 0, arguments)) ||
+                {}
+              )
+            },
+            dayProp: function dayProp() {
+              return (
+                (dayPropGetter && dayPropGetter.apply(void 0, arguments)) || {}
+              )
+            },
+          },
+          components: defaults(
+            components[view] || {},
+            omit(components, names),
+            {
+              eventWrapper: NoopWrapper,
+              backgroundEventWrapper: NoopWrapper,
+              eventContainerWrapper: NoopWrapper,
+              dateCellWrapper: NoopWrapper,
+              weekWrapper: NoopWrapper,
+              timeSlotWrapper: NoopWrapper,
+            }
+          ),
+          accessors: {
+            start: wrapAccessor(startAccessor),
+            end: wrapAccessor(endAccessor),
+            allDay: wrapAccessor(allDayAccessor),
+            tooltip: wrapAccessor(tooltipAccessor),
+            title: wrapAccessor(titleAccessor),
+            resource: wrapAccessor(resourceAccessor),
+            resourceId: wrapAccessor(resourceIdAccessor),
+            resourceTitle: wrapAccessor(resourceTitleAccessor),
+          },
+        }
+      }
+
+      _proto.render = function render() {
+        var _this$props4 = this.props,
+          view = _this$props4.view,
+          toolbar = _this$props4.toolbar,
+          events = _this$props4.events,
+          _this$props4$backgrou = _this$props4.backgroundEvents,
+          backgroundEvents =
+            _this$props4$backgrou === void 0 ? [] : _this$props4$backgrou,
+          style = _this$props4.style,
+          className = _this$props4.className,
+          elementProps = _this$props4.elementProps,
+          current = _this$props4.date,
+          getNow = _this$props4.getNow,
+          length = _this$props4.length,
+          inclusiveRange = _this$props4.inclusiveRange,
+          showMultiDayTimes = _this$props4.showMultiDayTimes,
+          onShowMore = _this$props4.onShowMore,
+          doShowMoreDrillDown = _this$props4.doShowMoreDrillDown,
+          _0 = _this$props4.components,
+          _1 = _this$props4.formats,
+          _2 = _this$props4.messages,
+          _3 = _this$props4.culture,
+          props = _objectWithoutPropertiesLoose(_this$props4, [
             'view',
+            'toolbar',
+            'events',
+            'backgroundEvents',
+            'style',
+            'className',
+            'elementProps',
             'date',
             'getNow',
-            'onNavigate',
+            'length',
+            'inclusiveRange',
+            'showMultiDayTimes',
+            'onShowMore',
+            'doShowMoreDrillDown',
+            'components',
+            'formats',
+            'messages',
+            'culture',
           ])
 
-        var ViewComponent = _this.getView()
-
-        var today = getNow()
-        date = moveDate(
-          ViewComponent,
-          _extends({}, props, {
-            action: action,
-            date: newDate || date || today,
-            today: today,
-          })
+        current = current || getNow()
+        var View = this.getView()
+        var _this$state$context = this.state.context,
+          accessors = _this$state$context.accessors,
+          components = _this$state$context.components,
+          getters = _this$state$context.getters,
+          localizer = _this$state$context.localizer,
+          viewNames = _this$state$context.viewNames
+        var CalToolbar = components.toolbar || Toolbar
+        var label = View.title(current, {
+          localizer: localizer,
+          length: length,
+          inclusiveRange: inclusiveRange,
+        })
+        return (
+          /*#__PURE__*/
+          React__default.createElement(
+            'div',
+            _extends({}, elementProps, {
+              className: clsx(
+                className,
+                'rbc-calendar',
+                props.rtl && 'rbc-rtl'
+              ),
+              style: style,
+            }),
+            toolbar &&
+              /*#__PURE__*/
+              React__default.createElement(CalToolbar, {
+                date: current,
+                view: view,
+                views: viewNames,
+                label: label,
+                onView: this.handleViewChange,
+                onNavigate: this.handleNavigate,
+                localizer: localizer,
+              }),
+            /*#__PURE__*/
+            React__default.createElement(
+              View,
+              _extends({}, props, {
+                events: events,
+                backgroundEvents: backgroundEvents,
+                date: current,
+                getNow: getNow,
+                length: length,
+                localizer: localizer,
+                getters: getters,
+                components: components,
+                accessors: accessors,
+                inclusiveRange: inclusiveRange,
+                showMultiDayTimes: showMultiDayTimes,
+                getDrilldownView: this.getDrilldownView,
+                onNavigate: this.handleNavigate,
+                onDrillDown: this.handleDrillDown,
+                onSelectEvent: this.handleSelectEvent,
+                onDoubleClickEvent: this.handleDoubleClickEvent,
+                onKeyPressEvent: this.handleKeyPressEvent,
+                onSelectSlot: this.handleSelectSlot,
+                onShowMore: onShowMore,
+                doShowMoreDrillDown: doShowMoreDrillDown,
+              })
+            )
+          )
         )
-        onNavigate(date, view, action)
-
-        _this.handleRangeChange(date, ViewComponent)
       }
+      /**
+       *
+       * @param date
+       * @param viewComponent
+       * @param {'month'|'week'|'work_week'|'day'|'agenda'} [view] - optional
+       * parameter. It appears when range change on view changing. It could be handy
+       * when you need to have both: range and view type at once, i.e. for manage rbc
+       * state via url
+       */
 
-      _this.handleViewChange = function(view) {
-        if (view !== _this.props.view && isValidView(view, _this.props)) {
-          _this.props.onView(view)
-        }
-
-        var views = _this.getViews()
-
-        _this.handleRangeChange(
-          _this.props.date || _this.props.getNow(),
-          views[view],
-          view
-        )
-      }
-
-      _this.handleSelectEvent = function() {
-        for (
-          var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
-          _key2 < _len2;
-          _key2++
-        ) {
-          args[_key2] = arguments[_key2]
-        }
-
-        notify(_this.props.onSelectEvent, args)
-      }
-
-      _this.handleDoubleClickEvent = function() {
-        for (
-          var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
-          _key3 < _len3;
-          _key3++
-        ) {
-          args[_key3] = arguments[_key3]
-        }
-
-        notify(_this.props.onDoubleClickEvent, args)
-      }
-
-      _this.handleKeyPressEvent = function() {
-        for (
-          var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
-          _key4 < _len4;
-          _key4++
-        ) {
-          args[_key4] = arguments[_key4]
-        }
-
-        notify(_this.props.onKeyPressEvent, args)
-      }
-
-      _this.handleSelectSlot = function(slotInfo) {
-        notify(_this.props.onSelectSlot, slotInfo)
-      }
-
-      _this.handleDrillDown = function(date, view) {
-        var onDrillDown = _this.props.onDrillDown
-
-        if (onDrillDown) {
-          onDrillDown(date, view, _this.drilldownView)
-          return
-        }
-
-        if (view) _this.handleViewChange(view)
-
-        _this.handleNavigate(navigate.DATE, date)
-      }
-
-      _this.state = {
-        context: _this.getContext(_this.props),
-      }
-      return _this
-    }
-
-    var _proto = Calendar.prototype
-
-    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-      nextProps
-    ) {
-      this.setState({
-        context: this.getContext(nextProps),
-      })
-    }
-
-    _proto.getContext = function getContext(_ref2) {
-      var startAccessor = _ref2.startAccessor,
-        endAccessor = _ref2.endAccessor,
-        allDayAccessor = _ref2.allDayAccessor,
-        tooltipAccessor = _ref2.tooltipAccessor,
-        titleAccessor = _ref2.titleAccessor,
-        resourceAccessor = _ref2.resourceAccessor,
-        resourceIdAccessor = _ref2.resourceIdAccessor,
-        resourceTitleAccessor = _ref2.resourceTitleAccessor,
-        eventPropGetter = _ref2.eventPropGetter,
-        slotPropGetter = _ref2.slotPropGetter,
-        slotGroupPropGetter = _ref2.slotGroupPropGetter,
-        dayPropGetter = _ref2.dayPropGetter,
-        view = _ref2.view,
-        views = _ref2.views,
-        localizer = _ref2.localizer,
-        culture = _ref2.culture,
-        _ref2$messages = _ref2.messages,
-        messages$1 = _ref2$messages === void 0 ? {} : _ref2$messages,
-        _ref2$components = _ref2.components,
-        components = _ref2$components === void 0 ? {} : _ref2$components,
-        _ref2$formats = _ref2.formats,
-        formats = _ref2$formats === void 0 ? {} : _ref2$formats
-      var names = viewNames$1(views)
-      var msgs = messages(messages$1)
-      return {
-        viewNames: names,
-        localizer: mergeWithDefaults(localizer, culture, formats, msgs),
-        getters: {
-          eventProp: function eventProp() {
-            return (
-              (eventPropGetter && eventPropGetter.apply(void 0, arguments)) ||
-              {}
-            )
-          },
-          slotProp: function slotProp() {
-            return (
-              (slotPropGetter && slotPropGetter.apply(void 0, arguments)) || {}
-            )
-          },
-          slotGroupProp: function slotGroupProp() {
-            return (
-              (slotGroupPropGetter &&
-                slotGroupPropGetter.apply(void 0, arguments)) ||
-              {}
-            )
-          },
-          dayProp: function dayProp() {
-            return (
-              (dayPropGetter && dayPropGetter.apply(void 0, arguments)) || {}
-            )
-          },
-        },
-        components: defaults(components[view] || {}, omit(components, names), {
-          eventWrapper: NoopWrapper,
-          eventContainerWrapper: NoopWrapper,
-          dateCellWrapper: NoopWrapper,
-          weekWrapper: NoopWrapper,
-          timeSlotWrapper: NoopWrapper,
-        }),
-        accessors: {
-          start: wrapAccessor(startAccessor),
-          end: wrapAccessor(endAccessor),
-          allDay: wrapAccessor(allDayAccessor),
-          tooltip: wrapAccessor(tooltipAccessor),
-          title: wrapAccessor(titleAccessor),
-          resource: wrapAccessor(resourceAccessor),
-          resourceId: wrapAccessor(resourceIdAccessor),
-          resourceTitle: wrapAccessor(resourceTitleAccessor),
-        },
-      }
-    }
-
-    _proto.render = function render() {
-      var _this$props4 = this.props,
-        view = _this$props4.view,
-        toolbar = _this$props4.toolbar,
-        events = _this$props4.events,
-        style = _this$props4.style,
-        className = _this$props4.className,
-        elementProps = _this$props4.elementProps,
-        current = _this$props4.date,
-        getNow = _this$props4.getNow,
-        length = _this$props4.length,
-        inclusiveRange = _this$props4.inclusiveRange,
-        showMultiDayTimes = _this$props4.showMultiDayTimes,
-        onShowMore = _this$props4.onShowMore,
-        _0 = _this$props4.components,
-        _1 = _this$props4.formats,
-        _2 = _this$props4.messages,
-        _3 = _this$props4.culture,
-        props = _objectWithoutPropertiesLoose(_this$props4, [
-          'view',
-          'toolbar',
-          'events',
-          'style',
-          'className',
-          'elementProps',
-          'date',
-          'getNow',
-          'length',
-          'inclusiveRange',
-          'showMultiDayTimes',
-          'onShowMore',
-          'components',
-          'formats',
-          'messages',
-          'culture',
-        ])
-
-      current = current || getNow()
-      var View = this.getView()
-      var _this$state$context = this.state.context,
-        accessors = _this$state$context.accessors,
-        components = _this$state$context.components,
-        getters = _this$state$context.getters,
-        localizer = _this$state$context.localizer,
-        viewNames = _this$state$context.viewNames
-      var CalToolbar = components.toolbar || Toolbar
-      var label = View.title(current, {
-        localizer: localizer,
-        length: length,
-        inclusiveRange: inclusiveRange,
-      })
-      return /*#__PURE__*/ React__default.createElement(
-        'div',
-        _extends({}, elementProps, {
-          className: clsx(className, 'rbc-calendar', props.rtl && 'rbc-rtl'),
-          style: style,
-        }),
-        toolbar &&
-          /*#__PURE__*/ React__default.createElement(CalToolbar, {
-            date: current,
-            view: view,
-            views: viewNames,
-            label: label,
-            onView: this.handleViewChange,
-            onNavigate: this.handleNavigate,
-            localizer: localizer,
-          }),
-        /*#__PURE__*/ React__default.createElement(
-          View,
-          _extends({}, props, {
-            events: events,
-            date: current,
-            getNow: getNow,
-            length: length,
-            localizer: localizer,
-            getters: getters,
-            components: components,
-            accessors: accessors,
-            inclusiveRange: inclusiveRange,
-            showMultiDayTimes: showMultiDayTimes,
-            getDrilldownView: this.getDrilldownView,
-            onNavigate: this.handleNavigate,
-            onDrillDown: this.handleDrillDown,
-            onSelectEvent: this.handleSelectEvent,
-            onDoubleClickEvent: this.handleDoubleClickEvent,
-            onKeyPressEvent: this.handleKeyPressEvent,
-            onSelectSlot: this.handleSelectSlot,
-            onShowMore: onShowMore,
-          })
-        )
-      )
-    }
-    /**
-     *
-     * @param date
-     * @param viewComponent
-     * @param {'month'|'week'|'work_week'|'day'|'agenda'} [view] - optional
-     * parameter. It appears when range change on view changing. It could be handy
-     * when you need to have both: range and view type at once, i.e. for manage rbc
-     * state via url
-     */
-
-    return Calendar
-  })(React__default.PureComponent)
+      return Calendar
+    })(React__default.PureComponent)
 
   Calendar.defaultProps = {
     elementProps: {},
@@ -16907,6 +16954,7 @@
     step: 30,
     length: 30,
     inclusiveRange: [1, 2, 3, 4, 5],
+    doShowMoreDrillDown: true,
     drilldownView: views.DAY,
     titleAccessor: 'title',
     tooltipAccessor: 'title',
@@ -16981,6 +17029,29 @@
      * ```
      */
     events: propTypes.arrayOf(propTypes.object),
+
+    /**
+     * An array of background event objects to display on the calendar. Background
+     * Events behave similarly to Events but are not factored into Event overlap logic,
+     * allowing them to sit behind any Events that may occur during the same period.
+     * Background Events objects can be any shape, as long as the Calendar knows how to
+     * retrieve the following details of the event:
+     *
+     *  - start time
+     *  - end time
+     *
+     * Each of these properties can be customized or generated dynamically by
+     * setting the various "accessor" props. Without any configuration the default
+     * event should look like:
+     *
+     * ```js
+     * BackgroundEvent {
+     *   start: Date,
+     *   end: Date,
+     * }
+     * ```
+     */
+    backgroundEvents: propTypes.arrayOf(propTypes.object),
 
     /**
      * Accessor for the event title, used to display event information. Should
@@ -17183,7 +17254,7 @@
     onDoubleClickEvent: propTypes.func,
 
     /**
-     * Callback fired when a focused calendar event recieves a key press.
+     * Callback fired when a focused calendar event receives a key press.
      *
      * ```js
      * (event: Object, e: SyntheticEvent) => void
@@ -17210,6 +17281,14 @@
      * ```
      */
     onShowMore: propTypes.func,
+
+    /**
+     * Displays all events on the month view instead of
+     * having some hidden behind +{count} more. This will
+     * cause the rows in the month view to be scrollable if
+     * the number of events exceed the height of the row.
+     */
+    showAllEvents: propTypes.bool,
 
     /**
      * The selected event, if any.
@@ -17248,6 +17327,13 @@
      ['month', 'week', 'day', 'agenda']
      */
     views: views$1,
+
+    /**
+     * Determines whether the drill down should occur when clicking on the "+_x_ more" link.
+     * If `popup` is false, and `doShowMoreDrillDown` is true, the drill down will occur as usual.
+     * If `popup` is false, and `doShowMoreDrillDown` is false, the drill down will not occur and the `onShowMore` function will trigger.
+     */
+    doShowMoreDrillDown: propTypes.bool,
 
     /**
      * The string name of the destination view for drill-down actions, such
@@ -17326,7 +17412,7 @@
     selectable: propTypes.oneOf([true, false, 'ignoreEvents']),
 
     /**
-     * Specifies the number of miliseconds the user must press and hold on the screen for a touch
+     * Specifies the number of milliseconds the user must press and hold on the screen for a touch
      * to be considered a "long press." Long presses are used for time slot selection on touch
      * devices.
      *
@@ -17564,6 +17650,7 @@
       eventWrapper: propTypes.elementType,
       eventContainerWrapper: propTypes.elementType,
       dateCellWrapper: propTypes.elementType,
+      dayColumnWrapper: propTypes.elementType,
       timeSlotWrapper: propTypes.elementType,
       timeGutterHeader: propTypes.elementType,
       resourceHeader: propTypes.elementType,

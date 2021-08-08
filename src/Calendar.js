@@ -113,6 +113,29 @@ class Calendar extends React.PureComponent {
     events: PropTypes.arrayOf(PropTypes.object),
 
     /**
+     * An array of background event objects to display on the calendar. Background
+     * Events behave similarly to Events but are not factored into Event overlap logic,
+     * allowing them to sit behind any Events that may occur during the same period.
+     * Background Events objects can be any shape, as long as the Calendar knows how to
+     * retrieve the following details of the event:
+     *
+     *  - start time
+     *  - end time
+     *
+     * Each of these properties can be customized or generated dynamically by
+     * setting the various "accessor" props. Without any configuration the default
+     * event should look like:
+     *
+     * ```js
+     * BackgroundEvent {
+     *   start: Date,
+     *   end: Date,
+     * }
+     * ```
+     */
+    backgroundEvents: PropTypes.arrayOf(PropTypes.object),
+
+    /**
      * Accessor for the event title, used to display event information. Should
      * resolve to a `renderable` value.
      *
@@ -313,7 +336,7 @@ class Calendar extends React.PureComponent {
     onDoubleClickEvent: PropTypes.func,
 
     /**
-     * Callback fired when a focused calendar event recieves a key press.
+     * Callback fired when a focused calendar event receives a key press.
      *
      * ```js
      * (event: Object, e: SyntheticEvent) => void
@@ -340,6 +363,14 @@ class Calendar extends React.PureComponent {
      * ```
      */
     onShowMore: PropTypes.func,
+
+    /**
+     * Displays all events on the month view instead of
+     * having some hidden behind +{count} more. This will
+     * cause the rows in the month view to be scrollable if
+     * the number of events exceed the height of the row.
+     */
+    showAllEvents: PropTypes.bool,
 
     /**
      * The selected event, if any.
@@ -378,6 +409,13 @@ class Calendar extends React.PureComponent {
      ['month', 'week', 'day', 'agenda']
      */
     views: componentViews,
+
+    /**
+     * Determines whether the drill down should occur when clicking on the "+_x_ more" link.
+     * If `popup` is false, and `doShowMoreDrillDown` is true, the drill down will occur as usual.
+     * If `popup` is false, and `doShowMoreDrillDown` is false, the drill down will not occur and the `onShowMore` function will trigger.
+     */
+    doShowMoreDrillDown: PropTypes.bool,
 
     /**
      * The string name of the destination view for drill-down actions, such
@@ -453,7 +491,7 @@ class Calendar extends React.PureComponent {
     selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
 
     /**
-     * Specifies the number of miliseconds the user must press and hold on the screen for a touch
+     * Specifies the number of milliseconds the user must press and hold on the screen for a touch
      * to be considered a "long press." Long presses are used for time slot selection on touch
      * devices.
      *
@@ -692,6 +730,7 @@ class Calendar extends React.PureComponent {
       eventWrapper: PropTypes.elementType,
       eventContainerWrapper: PropTypes.elementType,
       dateCellWrapper: PropTypes.elementType,
+      dayColumnWrapper: PropTypes.elementType,
       timeSlotWrapper: PropTypes.elementType,
       timeGutterHeader: PropTypes.elementType,
       resourceHeader: PropTypes.elementType,
@@ -757,6 +796,8 @@ class Calendar extends React.PureComponent {
     step: 30,
     length: 30,
     inclusiveRange: [1, 2, 3, 4, 5],
+
+    doShowMoreDrillDown: true,
     drilldownView: views.DAY,
 
     titleAccessor: 'title',
@@ -776,6 +817,7 @@ class Calendar extends React.PureComponent {
 
   constructor(...args) {
     super(...args)
+
     this.state = {
       context: this.getContext(this.props),
     }
@@ -794,6 +836,7 @@ class Calendar extends React.PureComponent {
     resourceIdAccessor,
     resourceTitleAccessor,
     eventPropGetter,
+    backgroundEventPropGetter,
     slotPropGetter,
     slotGroupPropGetter,
     dayPropGetter,
@@ -813,6 +856,9 @@ class Calendar extends React.PureComponent {
       getters: {
         eventProp: (...args) =>
           (eventPropGetter && eventPropGetter(...args)) || {},
+        backgroundEventProp: (...args) =>
+          (backgroundEventPropGetter && backgroundEventPropGetter(...args)) ||
+          {},
         slotProp: (...args) =>
           (slotPropGetter && slotPropGetter(...args)) || {},
         slotGroupProp: (...args) =>
@@ -821,6 +867,7 @@ class Calendar extends React.PureComponent {
       },
       components: defaults(components[view] || {}, omit(components, names), {
         eventWrapper: NoopWrapper,
+        backgroundEventWrapper: NoopWrapper,
         eventContainerWrapper: NoopWrapper,
         dateCellWrapper: NoopWrapper,
         weekWrapper: NoopWrapper,
@@ -878,6 +925,7 @@ class Calendar extends React.PureComponent {
       view,
       toolbar,
       events,
+      backgroundEvents = [],
       style,
       className,
       elementProps,
@@ -887,6 +935,7 @@ class Calendar extends React.PureComponent {
       inclusiveRange,
       showMultiDayTimes,
       onShowMore,
+      doShowMoreDrillDown,
       components: _0,
       formats: _1,
       messages: _2,
@@ -928,6 +977,7 @@ class Calendar extends React.PureComponent {
         <View
           {...props}
           events={events}
+          backgroundEvents={backgroundEvents}
           date={current}
           getNow={getNow}
           length={length}
@@ -945,6 +995,7 @@ class Calendar extends React.PureComponent {
           onKeyPressEvent={this.handleKeyPressEvent}
           onSelectSlot={this.handleSelectSlot}
           onShowMore={onShowMore}
+          doShowMoreDrillDown={doShowMoreDrillDown}
         />
       </div>
     )

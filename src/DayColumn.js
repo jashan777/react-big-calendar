@@ -14,6 +14,8 @@ import TimeSlotGroup from './TimeSlotGroup'
 import TimeGridEvent from './TimeGridEvent'
 import { DayLayoutAlgorithmPropType } from './utils/propTypes'
 
+import DayColumnWrapper from './DayColumnWrapper'
+
 class DayColumn extends React.PureComponent {
   state = { selecting: false, timeIndicatorPosition: null }
   intervalTriggered = false
@@ -108,6 +110,7 @@ class DayColumn extends React.PureComponent {
 
   render() {
     const {
+      date,
       max,
       rtl,
       isNow,
@@ -125,8 +128,12 @@ class DayColumn extends React.PureComponent {
 
     const { className, style } = dayProp(max)
 
+    const DayColumnWrapperComponent =
+      components.dayColumnWrapper || DayColumnWrapper
+
     return (
-      <div
+      <DayColumnWrapperComponent
+        date={date}
         style={style}
         className={clsx(
           className,
@@ -155,7 +162,11 @@ class DayColumn extends React.PureComponent {
           slotMetrics={slotMetrics}
         >
           <div className={clsx('rbc-events-container', rtl && 'rtl')}>
-            {this.renderEvents()}
+            {this.renderEvents({
+              events: this.props.backgroundEvents,
+              isBackgroundEvent: true,
+            })}
+            {this.renderEvents({ events: this.props.events })}
           </div>
         </EventContainer>
 
@@ -170,13 +181,12 @@ class DayColumn extends React.PureComponent {
             style={{ top: `${this.state.timeIndicatorPosition}%` }}
           />
         )}
-      </div>
+      </DayColumnWrapperComponent>
     )
   }
 
-  renderEvents = () => {
+  renderEvents = ({ events, isBackgroundEvent }) => {
     let {
-      events,
       rtl,
       selected,
       accessors,
@@ -233,6 +243,7 @@ class DayColumn extends React.PureComponent {
           selected={isSelected(event, selected)}
           onClick={e => this._select(event, e)}
           onDoubleClick={e => this._doubleClick(event, e)}
+          isBackgroundEvent={isBackgroundEvent}
           onKeyPress={e => this._keyPress(event, e)}
           resizable={resizable}
         />
@@ -382,6 +393,7 @@ class DayColumn extends React.PureComponent {
 
 DayColumn.propTypes = {
   events: PropTypes.array.isRequired,
+  backgroundEvents: PropTypes.array.isRequired,
   step: PropTypes.number.isRequired,
   date: PropTypes.instanceOf(Date).isRequired,
   min: PropTypes.instanceOf(Date).isRequired,
