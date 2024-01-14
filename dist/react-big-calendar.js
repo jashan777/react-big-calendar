@@ -1438,41 +1438,6 @@
     }
   })
 
-  function _extends$1() {
-    _extends$1 =
-      Object.assign ||
-      function(target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = arguments[i]
-
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key]
-            }
-          }
-        }
-
-        return target
-      }
-
-    return _extends$1.apply(this, arguments)
-  }
-
-  function _objectWithoutPropertiesLoose$1(source, excluded) {
-    if (source == null) return {}
-    var target = {}
-    var sourceKeys = Object.keys(source)
-    var key, i
-
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i]
-      if (excluded.indexOf(key) >= 0) continue
-      target[key] = source[key]
-    }
-
-    return target
-  }
-
   /**
    * Copyright (c) 2013-present, Facebook, Inc.
    *
@@ -1579,12 +1544,6 @@
       (typeof component !== 'function' ||
         (component.prototype && component.prototype.isReactComponent))
     )
-  }
-
-  function _inheritsLoose$1(subClass, superClass) {
-    subClass.prototype = Object.create(superClass.prototype)
-    subClass.prototype.constructor = subClass
-    subClass.__proto__ = superClass
   }
 
   /**
@@ -1776,7 +1735,7 @@
     var UncontrolledComponent =
       /*#__PURE__*/
       (function(_React$Component) {
-        _inheritsLoose$1(UncontrolledComponent, _React$Component)
+        _inheritsLoose(UncontrolledComponent, _React$Component)
 
         function UncontrolledComponent() {
           var _this
@@ -1828,7 +1787,7 @@
 
                   var values = _ref.values
                   return {
-                    values: _extends$1(
+                    values: _extends(
                       Object.create(null),
                       values,
                       ((_extends2 = {}),
@@ -1870,7 +1829,7 @@
           var values = _ref2.values,
             prevProps = _ref2.prevProps
           var nextState = {
-            values: _extends$1(Object.create(null), values),
+            values: _extends(Object.create(null), values),
             prevProps: {},
           }
           controlledProps.forEach(function(key) {
@@ -1896,7 +1855,7 @@
 
           var _this$props2 = this.props,
             innerRef = _this$props2.innerRef,
-            props = _objectWithoutPropertiesLoose$1(_this$props2, ['innerRef'])
+            props = _objectWithoutPropertiesLoose(_this$props2, ['innerRef'])
 
           PROPS_TO_OMIT.forEach(function(prop) {
             delete props[prop]
@@ -1911,7 +1870,7 @@
           })
           return React__default.createElement(
             Component,
-            _extends$1({}, props, newProps, this.handlers, {
+            _extends({}, props, newProps, this.handlers, {
               ref: innerRef || this.attachRef,
             })
           )
@@ -1922,7 +1881,7 @@
 
     polyfill(UncontrolledComponent)
     UncontrolledComponent.displayName = 'Uncontrolled(' + displayName + ')'
-    UncontrolledComponent.propTypes = _extends$1(
+    UncontrolledComponent.propTypes = _extends(
       {
         innerRef: function innerRef() {},
       },
@@ -1941,7 +1900,7 @@
       WrappedComponent = React__default.forwardRef(function(props, ref) {
         return React__default.createElement(
           UncontrolledComponent,
-          _extends$1({}, props, {
+          _extends({}, props, {
             innerRef: ref,
           })
         )
@@ -1966,7 +1925,7 @@
 
       return uncontrollable(
         newComponent,
-        _extends$1({}, controlledValues, additions),
+        _extends({}, controlledValues, additions),
         nextMethods
       )
     }
@@ -3084,26 +3043,6 @@
     return result
   }
 
-  function _extends$2() {
-    _extends$2 =
-      Object.assign ||
-      function(target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = arguments[i]
-
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key]
-            }
-          }
-        }
-
-        return target
-      }
-
-    return _extends$2.apply(this, arguments)
-  }
-
   function ownerDocument(node) {
     return (node && node.ownerDocument) || document
   }
@@ -3278,7 +3217,7 @@
     var marginTop = String(style(node, 'marginTop') || 0)
     var marginLeft = String(style(node, 'marginLeft') || 0) // Subtract parent offsets and node margins
 
-    return _extends$2({}, offset$1, {
+    return _extends({}, offset$1, {
       top: offset$1.top - parentOffset.top - (parseInt(marginTop, 10) || 0),
       left: offset$1.left - parentOffset.left - (parseInt(marginLeft, 10) || 0),
     })
@@ -3335,126 +3274,117 @@
   }
   var request = rafImpl
 
-  var EventCell =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(EventCell, _React$PureComponent)
+  var EventCell = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(EventCell, _React$PureComponent)
 
-      function EventCell() {
-        return _React$PureComponent.apply(this, arguments) || this
-      }
+    function EventCell() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = EventCell.prototype
+    var _proto = EventCell.prototype
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          style = _this$props.style,
-          className = _this$props.className,
-          event = _this$props.event,
-          selected = _this$props.selected,
-          isAllDay = _this$props.isAllDay,
-          onSelect = _this$props.onSelect,
-          _onDoubleClick = _this$props.onDoubleClick,
-          _onKeyPress = _this$props.onKeyPress,
-          localizer = _this$props.localizer,
-          continuesPrior = _this$props.continuesPrior,
-          continuesAfter = _this$props.continuesAfter,
-          accessors = _this$props.accessors,
-          getters = _this$props.getters,
-          children = _this$props.children,
-          _this$props$component = _this$props.components,
-          Event = _this$props$component.event,
-          EventWrapper = _this$props$component.eventWrapper,
-          slotStart = _this$props.slotStart,
-          slotEnd = _this$props.slotEnd,
-          props = _objectWithoutPropertiesLoose(_this$props, [
-            'style',
-            'className',
-            'event',
-            'selected',
-            'isAllDay',
-            'onSelect',
-            'onDoubleClick',
-            'onKeyPress',
-            'localizer',
-            'continuesPrior',
-            'continuesAfter',
-            'accessors',
-            'getters',
-            'children',
-            'components',
-            'slotStart',
-            'slotEnd',
-          ])
+    _proto.render = function render() {
+      var _this$props = this.props,
+        style = _this$props.style,
+        className = _this$props.className,
+        event = _this$props.event,
+        selected = _this$props.selected,
+        isAllDay = _this$props.isAllDay,
+        onSelect = _this$props.onSelect,
+        _onDoubleClick = _this$props.onDoubleClick,
+        _onKeyPress = _this$props.onKeyPress,
+        localizer = _this$props.localizer,
+        continuesPrior = _this$props.continuesPrior,
+        continuesAfter = _this$props.continuesAfter,
+        accessors = _this$props.accessors,
+        getters = _this$props.getters,
+        children = _this$props.children,
+        _this$props$component = _this$props.components,
+        Event = _this$props$component.event,
+        EventWrapper = _this$props$component.eventWrapper,
+        slotStart = _this$props.slotStart,
+        slotEnd = _this$props.slotEnd,
+        props = _objectWithoutPropertiesLoose(_this$props, [
+          'style',
+          'className',
+          'event',
+          'selected',
+          'isAllDay',
+          'onSelect',
+          'onDoubleClick',
+          'onKeyPress',
+          'localizer',
+          'continuesPrior',
+          'continuesAfter',
+          'accessors',
+          'getters',
+          'children',
+          'components',
+          'slotStart',
+          'slotEnd',
+        ])
 
-        delete props.resizable
-        var title = accessors.title(event)
-        var tooltip = accessors.tooltip(event)
-        var end = accessors.end(event)
-        var start = accessors.start(event)
-        var allDay = accessors.allDay(event)
-        var showAsAllDay =
-          isAllDay || allDay || diff(start, ceil(end, 'day'), 'day') > 1
-        var userProps = getters.eventProp(event, start, end, selected)
-        var content =
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              className: 'rbc-event-content',
-              title: tooltip || undefined,
-            },
-            Event
-              ? /*#__PURE__*/
-                React__default.createElement(Event, {
-                  event: event,
-                  continuesPrior: continuesPrior,
-                  continuesAfter: continuesAfter,
-                  title: title,
-                  isAllDay: allDay,
-                  localizer: localizer,
-                  slotStart: slotStart,
-                  slotEnd: slotEnd,
-                })
-              : title
-          )
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            EventWrapper,
-            _extends({}, this.props, {
-              type: 'date',
+      delete props.resizable
+      var title = accessors.title(event)
+      var tooltip = accessors.tooltip(event)
+      var end = accessors.end(event)
+      var start = accessors.start(event)
+      var allDay = accessors.allDay(event)
+      var showAsAllDay =
+        isAllDay || allDay || diff(start, ceil(end, 'day'), 'day') > 1
+      var userProps = getters.eventProp(event, start, end, selected)
+      var content = /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: 'rbc-event-content',
+          title: tooltip || undefined,
+        },
+        Event
+          ? /*#__PURE__*/ React__default.createElement(Event, {
+              event: event,
+              continuesPrior: continuesPrior,
+              continuesAfter: continuesAfter,
+              title: title,
+              isAllDay: allDay,
+              localizer: localizer,
+              slotStart: slotStart,
+              slotEnd: slotEnd,
+            })
+          : title
+      )
+      return /*#__PURE__*/ React__default.createElement(
+        EventWrapper,
+        _extends({}, this.props, {
+          type: 'date',
+        }),
+        /*#__PURE__*/ React__default.createElement(
+          'div',
+          _extends({}, props, {
+            tabIndex: 0,
+            style: _extends({}, userProps.style, style),
+            className: clsx('rbc-event', className, userProps.className, {
+              'rbc-selected': selected,
+              'rbc-event-allday': showAsAllDay,
+              'rbc-event-continues-prior': continuesPrior,
+              'rbc-event-continues-after': continuesAfter,
             }),
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              _extends({}, props, {
-                tabIndex: 0,
-                style: _extends({}, userProps.style, style),
-                className: clsx('rbc-event', className, userProps.className, {
-                  'rbc-selected': selected,
-                  'rbc-event-allday': showAsAllDay,
-                  'rbc-event-continues-prior': continuesPrior,
-                  'rbc-event-continues-after': continuesAfter,
-                }),
-                onClick: function onClick(e) {
-                  return onSelect && onSelect(event, e)
-                },
-                onDoubleClick: function onDoubleClick(e) {
-                  return _onDoubleClick && _onDoubleClick(event, e)
-                },
-                onKeyPress: function onKeyPress(e) {
-                  return _onKeyPress && _onKeyPress(event, e)
-                },
-              }),
-              typeof children === 'function' ? children(content) : content
-            )
-          )
+            onClick: function onClick(e) {
+              return onSelect && onSelect(event, e)
+            },
+            onDoubleClick: function onDoubleClick(e) {
+              return _onDoubleClick && _onDoubleClick(event, e)
+            },
+            onKeyPress: function onKeyPress(e) {
+              return _onKeyPress && _onKeyPress(event, e)
+            },
+          }),
+          typeof children === 'function' ? children(content) : content
         )
-      }
+      )
+    }
 
-      return EventCell
-    })(React__default.PureComponent)
+    return EventCell
+  })(React__default.PureComponent)
 
   EventCell.propTypes = {
     event: propTypes.object.isRequired,
@@ -3550,123 +3480,112 @@
     }
   }
 
-  var Popup =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(Popup, _React$PureComponent)
+  var Popup = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Popup, _React$PureComponent)
 
-      function Popup() {
-        return _React$PureComponent.apply(this, arguments) || this
+    function Popup() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
+
+    var _proto = Popup.prototype
+
+    _proto.componentDidMount = function componentDidMount() {
+      var _this$props = this.props,
+        _this$props$popupOffs = _this$props.popupOffset,
+        popupOffset =
+          _this$props$popupOffs === void 0 ? 5 : _this$props$popupOffs,
+        popperRef = _this$props.popperRef,
+        _getOffset = offset(popperRef.current),
+        top = _getOffset.top,
+        left = _getOffset.left,
+        width = _getOffset.width,
+        height = _getOffset.height,
+        viewBottom = window.innerHeight + getScrollTop(window),
+        viewRight = window.innerWidth + getScrollLeft(window),
+        bottom = top + height,
+        right = left + width
+
+      if (bottom > viewBottom || right > viewRight) {
+        var topOffset, leftOffset
+        if (bottom > viewBottom)
+          topOffset = bottom - viewBottom + (popupOffset.y || +popupOffset || 0)
+        if (right > viewRight)
+          leftOffset = right - viewRight + (popupOffset.x || +popupOffset || 0)
+        this.setState({
+          topOffset: topOffset,
+          leftOffset: leftOffset,
+        }) //eslint-disable-line
       }
+    }
 
-      var _proto = Popup.prototype
+    _proto.render = function render() {
+      var _this = this
 
-      _proto.componentDidMount = function componentDidMount() {
-        var _this$props = this.props,
-          _this$props$popupOffs = _this$props.popupOffset,
-          popupOffset =
-            _this$props$popupOffs === void 0 ? 5 : _this$props$popupOffs,
-          popperRef = _this$props.popperRef,
-          _getOffset = offset(popperRef.current),
-          top = _getOffset.top,
-          left = _getOffset.left,
-          width = _getOffset.width,
-          height = _getOffset.height,
-          viewBottom = window.innerHeight + getScrollTop(window),
-          viewRight = window.innerWidth + getScrollLeft(window),
-          bottom = top + height,
-          right = left + width
-
-        if (bottom > viewBottom || right > viewRight) {
-          var topOffset, leftOffset
-          if (bottom > viewBottom)
-            topOffset =
-              bottom - viewBottom + (popupOffset.y || +popupOffset || 0)
-          if (right > viewRight)
-            leftOffset =
-              right - viewRight + (popupOffset.x || +popupOffset || 0)
-          this.setState({
-            topOffset: topOffset,
-            leftOffset: leftOffset,
-          }) //eslint-disable-line
-        }
+      var _this$props2 = this.props,
+        events = _this$props2.events,
+        selected = _this$props2.selected,
+        getters = _this$props2.getters,
+        accessors = _this$props2.accessors,
+        components = _this$props2.components,
+        onSelect = _this$props2.onSelect,
+        onDoubleClick = _this$props2.onDoubleClick,
+        onKeyPress = _this$props2.onKeyPress,
+        slotStart = _this$props2.slotStart,
+        slotEnd = _this$props2.slotEnd,
+        localizer = _this$props2.localizer,
+        popperRef = _this$props2.popperRef
+      var width = this.props.position.width,
+        topOffset = (this.state || {}).topOffset || 0,
+        leftOffset = (this.state || {}).leftOffset || 0
+      var style = {
+        top: -topOffset,
+        left: -leftOffset,
+        minWidth: width + width / 2,
       }
-
-      _proto.render = function render() {
-        var _this = this
-
-        var _this$props2 = this.props,
-          events = _this$props2.events,
-          selected = _this$props2.selected,
-          getters = _this$props2.getters,
-          accessors = _this$props2.accessors,
-          components = _this$props2.components,
-          onSelect = _this$props2.onSelect,
-          onDoubleClick = _this$props2.onDoubleClick,
-          onKeyPress = _this$props2.onKeyPress,
-          slotStart = _this$props2.slotStart,
-          slotEnd = _this$props2.slotEnd,
-          localizer = _this$props2.localizer,
-          popperRef = _this$props2.popperRef
-        var width = this.props.position.width,
-          topOffset = (this.state || {}).topOffset || 0,
-          leftOffset = (this.state || {}).leftOffset || 0
-        var style = {
-          top: -topOffset,
-          left: -leftOffset,
-          minWidth: width + width / 2,
-        }
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              style: _extends({}, this.props.style, style),
-              className: 'rbc-overlay',
-              ref: popperRef,
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          style: _extends({}, this.props.style, style),
+          className: 'rbc-overlay',
+          ref: popperRef,
+        },
+        /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            className: 'rbc-overlay-header',
+          },
+          localizer.format(slotStart, 'dayHeaderFormat')
+        ),
+        events.map(function(event, idx) {
+          return /*#__PURE__*/ React__default.createElement(EventCell, {
+            key: idx,
+            type: 'popup',
+            event: event,
+            getters: getters,
+            onSelect: onSelect,
+            accessors: accessors,
+            components: components,
+            onDoubleClick: onDoubleClick,
+            onKeyPress: onKeyPress,
+            continuesPrior: lt(accessors.end(event), slotStart, 'day'),
+            continuesAfter: gte(accessors.start(event), slotEnd, 'day'),
+            slotStart: slotStart,
+            slotEnd: slotEnd,
+            selected: isSelected(event, selected),
+            draggable: true,
+            onDragStart: function onDragStart() {
+              return _this.props.handleDragStart(event)
             },
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                className: 'rbc-overlay-header',
-              },
-              localizer.format(slotStart, 'dayHeaderFormat')
-            ),
-            events.map(function(event, idx) {
-              return (
-                /*#__PURE__*/
-                React__default.createElement(EventCell, {
-                  key: idx,
-                  type: 'popup',
-                  event: event,
-                  getters: getters,
-                  onSelect: onSelect,
-                  accessors: accessors,
-                  components: components,
-                  onDoubleClick: onDoubleClick,
-                  onKeyPress: onKeyPress,
-                  continuesPrior: lt(accessors.end(event), slotStart, 'day'),
-                  continuesAfter: gte(accessors.start(event), slotEnd, 'day'),
-                  slotStart: slotStart,
-                  slotEnd: slotEnd,
-                  selected: isSelected(event, selected),
-                  draggable: true,
-                  onDragStart: function onDragStart() {
-                    return _this.props.handleDragStart(event)
-                  },
-                  onDragEnd: function onDragEnd() {
-                    return _this.props.show()
-                  },
-                })
-              )
-            })
-          )
-        )
-      }
+            onDragEnd: function onDragEnd() {
+              return _this.props.show()
+            },
+          })
+        })
+      )
+    }
 
-      return Popup
-    })(React__default.PureComponent)
+    return Popup
+  })(React__default.PureComponent)
 
   Popup.propTypes = {
     position: propTypes.object,
@@ -3696,60 +3615,23 @@
         current: propTypes.Element,
       }),
     ]),
-    /**
-     * The Overlay component, of react-overlays, creates a ref that is passed to the Popup, and
-     * requires proper ref forwarding to be used without error
-     */
   }
-  var Popup$1 /*#__PURE__*/ = React__default.forwardRef(function(props, ref) {
-    return (
-      /*#__PURE__*/
-      React__default.createElement(
-        Popup,
-        _extends(
-          {
-            popperRef: ref,
-          },
-          props
-        )
+  /**
+   * The Overlay component, of react-overlays, creates a ref that is passed to the Popup, and
+   * requires proper ref forwarding to be used without error
+   */
+
+  var Popup$1 = /*#__PURE__*/ React__default.forwardRef(function(props, ref) {
+    return /*#__PURE__*/ React__default.createElement(
+      Popup,
+      _extends(
+        {
+          popperRef: ref,
+        },
+        props
       )
     )
   })
-
-  function _extends$3() {
-    _extends$3 =
-      Object.assign ||
-      function(target) {
-        for (var i = 1; i < arguments.length; i++) {
-          var source = arguments[i]
-
-          for (var key in source) {
-            if (Object.prototype.hasOwnProperty.call(source, key)) {
-              target[key] = source[key]
-            }
-          }
-        }
-
-        return target
-      }
-
-    return _extends$3.apply(this, arguments)
-  }
-
-  function _objectWithoutPropertiesLoose$2(source, excluded) {
-    if (source == null) return {}
-    var target = {}
-    var sourceKeys = Object.keys(source)
-    var key, i
-
-    for (i = 0; i < sourceKeys.length; i++) {
-      key = sourceKeys[i]
-      if (excluded.indexOf(key) >= 0) continue
-      target[key] = source[key]
-    }
-
-    return target
-  }
 
   /**
    * A convenience hook around `useState` designed to be paired with
@@ -3878,21 +3760,11 @@
     return placement.split('-')[0]
   }
 
-  // Returns the layout rect of an element relative to its offsetParent. Layout
-  // means it doesn't take into account transforms.
-  function getLayoutRect(element) {
-    return {
-      x: element.offsetLeft,
-      y: element.offsetTop,
-      width: element.offsetWidth,
-      height: element.offsetHeight,
-    }
-  }
-
-  /*:: import type { Window } from '../types'; */
-
-  /*:: declare function getWindow(node: Node | Window): Window; */
   function getWindow(node) {
+    if (node == null) {
+      return window
+    }
+
     if (node.toString() !== '[object Window]') {
       var ownerDocument = node.ownerDocument
       return ownerDocument ? ownerDocument.defaultView || window : window
@@ -3901,26 +3773,121 @@
     return node
   }
 
-  /*:: declare function isElement(node: mixed): boolean %checks(node instanceof
-    Element); */
-
   function isElement(node) {
     var OwnElement = getWindow(node).Element
     return node instanceof OwnElement || node instanceof Element
   }
-  /*:: declare function isHTMLElement(node: mixed): boolean %checks(node instanceof
-    HTMLElement); */
 
   function isHTMLElement$1(node) {
     var OwnElement = getWindow(node).HTMLElement
     return node instanceof OwnElement || node instanceof HTMLElement
   }
-  /*:: declare function isShadowRoot(node: mixed): boolean %checks(node instanceof
-    ShadowRoot); */
 
   function isShadowRoot(node) {
+    // IE 11 has no ShadowRoot
+    if (typeof ShadowRoot === 'undefined') {
+      return false
+    }
+
     var OwnElement = getWindow(node).ShadowRoot
     return node instanceof OwnElement || node instanceof ShadowRoot
+  }
+
+  var max$1 = Math.max
+  var min$1 = Math.min
+  var round = Math.round
+
+  function getUAString() {
+    var uaData = navigator.userAgentData
+
+    if (uaData != null && uaData.brands && Array.isArray(uaData.brands)) {
+      return uaData.brands
+        .map(function(item) {
+          return item.brand + '/' + item.version
+        })
+        .join(' ')
+    }
+
+    return navigator.userAgent
+  }
+
+  function isLayoutViewport() {
+    return !/^((?!chrome|android).)*safari/i.test(getUAString())
+  }
+
+  function getBoundingClientRect(element, includeScale, isFixedStrategy) {
+    if (includeScale === void 0) {
+      includeScale = false
+    }
+
+    if (isFixedStrategy === void 0) {
+      isFixedStrategy = false
+    }
+
+    var clientRect = element.getBoundingClientRect()
+    var scaleX = 1
+    var scaleY = 1
+
+    if (includeScale && isHTMLElement$1(element)) {
+      scaleX =
+        element.offsetWidth > 0
+          ? round(clientRect.width) / element.offsetWidth || 1
+          : 1
+      scaleY =
+        element.offsetHeight > 0
+          ? round(clientRect.height) / element.offsetHeight || 1
+          : 1
+    }
+
+    var _ref = isElement(element) ? getWindow(element) : window,
+      visualViewport = _ref.visualViewport
+
+    var addVisualOffsets = !isLayoutViewport() && isFixedStrategy
+    var x =
+      (clientRect.left +
+        (addVisualOffsets && visualViewport ? visualViewport.offsetLeft : 0)) /
+      scaleX
+    var y =
+      (clientRect.top +
+        (addVisualOffsets && visualViewport ? visualViewport.offsetTop : 0)) /
+      scaleY
+    var width = clientRect.width / scaleX
+    var height = clientRect.height / scaleY
+    return {
+      width: width,
+      height: height,
+      top: y,
+      right: x + width,
+      bottom: y + height,
+      left: x,
+      x: x,
+      y: y,
+    }
+  }
+
+  // means it doesn't take into account transforms.
+
+  function getLayoutRect(element) {
+    var clientRect = getBoundingClientRect(element) // Use the clientRect sizes if it's not been transformed.
+    // Fixes https://github.com/popperjs/popper-core/issues/1223
+
+    var width = element.offsetWidth
+    var height = element.offsetHeight
+
+    if (Math.abs(clientRect.width - width) <= 1) {
+      width = clientRect.width
+    }
+
+    if (Math.abs(clientRect.height - height) <= 1) {
+      height = clientRect.height
+    }
+
+    return {
+      x: element.offsetLeft,
+      y: element.offsetTop,
+      width: width,
+      height: height,
+    }
   }
 
   function contains$1(parent, child) {
@@ -3976,8 +3943,7 @@
       // $FlowFixMe[prop-missing]
       element.assignedSlot || // step into the shadow DOM of the parent of a slotted node
       element.parentNode || // DOM Element detected
-      // $FlowFixMe[incompatible-return]: need a better way to handle this...
-      element.host || // ShadowRoot detected
+      (isShadowRoot(element) ? element.host : null) || // ShadowRoot detected
       // $FlowFixMe[incompatible-call]: HTMLElement is a Node
       getDocumentElement(element) // fallback
     )
@@ -3991,26 +3957,28 @@
       return null
     }
 
-    var offsetParent = element.offsetParent
-
-    if (offsetParent) {
-      var html = getDocumentElement(offsetParent)
-
-      if (
-        getNodeName(offsetParent) === 'body' &&
-        getComputedStyle$1(offsetParent).position === 'static' &&
-        getComputedStyle$1(html).position !== 'static'
-      ) {
-        return html
-      }
-    }
-
-    return offsetParent
+    return element.offsetParent
   } // `.offsetParent` reports `null` for fixed elements, while absolute elements
   // return the containing block
 
   function getContainingBlock(element) {
+    var isFirefox = /firefox/i.test(getUAString())
+    var isIE = /Trident/i.test(getUAString())
+
+    if (isIE && isHTMLElement$1(element)) {
+      // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
+      var elementCss = getComputedStyle$1(element)
+
+      if (elementCss.position === 'fixed') {
+        return null
+      }
+    }
+
     var currentNode = getParentNode(element)
+
+    if (isShadowRoot(currentNode)) {
+      currentNode = currentNode.host
+    }
 
     while (
       isHTMLElement$1(currentNode) &&
@@ -4018,11 +3986,15 @@
     ) {
       var css = getComputedStyle$1(currentNode) // This is non-exhaustive but covers the most common CSS properties that
       // create a containing block.
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/Containing_block#identifying_the_containing_block
 
       if (
         css.transform !== 'none' ||
         css.perspective !== 'none' ||
-        (css.willChange && css.willChange !== 'auto')
+        css.contain === 'paint' ||
+        ['transform', 'perspective'].indexOf(css.willChange) !== -1 ||
+        (isFirefox && css.willChange === 'filter') ||
+        (isFirefox && css.filter && css.filter !== 'none')
       ) {
         return currentNode
       } else {
@@ -4048,8 +4020,9 @@
 
     if (
       offsetParent &&
-      getNodeName(offsetParent) === 'body' &&
-      getComputedStyle$1(offsetParent).position === 'static'
+      (getNodeName(offsetParent) === 'html' ||
+        (getNodeName(offsetParent) === 'body' &&
+          getComputedStyle$1(offsetParent).position === 'static'))
     ) {
       return window
     }
@@ -4062,7 +4035,11 @@
   }
 
   function within(min, value, max) {
-    return Math.max(min, Math.min(value, max))
+    return max$1(min, min$1(value, max))
+  }
+  function withinMaxClamp(min, value, max) {
+    var v = within(min, value, max)
+    return v > max ? max : v
   }
 
   function getFreshSideObject() {
@@ -4075,7 +4052,7 @@
   }
 
   function mergePaddingObject(paddingObject) {
-    return Object.assign(Object.assign({}, getFreshSideObject()), paddingObject)
+    return Object.assign({}, getFreshSideObject(), paddingObject)
   }
 
   function expandToHashMap(value, keys) {
@@ -4085,11 +4062,28 @@
     }, {})
   }
 
+  var toPaddingObject = function toPaddingObject(padding, state) {
+    padding =
+      typeof padding === 'function'
+        ? padding(
+            Object.assign({}, state.rects, {
+              placement: state.placement,
+            })
+          )
+        : padding
+    return mergePaddingObject(
+      typeof padding !== 'number'
+        ? padding
+        : expandToHashMap(padding, basePlacements)
+    )
+  }
+
   function arrow(_ref) {
     var _state$modifiersData$
 
     var state = _ref.state,
-      name = _ref.name
+      name = _ref.name,
+      options = _ref.options
     var arrowElement = state.elements.arrow
     var popperOffsets = state.modifiersData.popperOffsets
     var basePlacement = getBasePlacement(state.placement)
@@ -4101,7 +4095,7 @@
       return
     }
 
-    var paddingObject = state.modifiersData[name + '#persistent'].padding
+    var paddingObject = toPaddingObject(options.padding, state)
     var arrowRect = getLayoutRect(arrowElement)
     var minProp = axis === 'y' ? top : left
     var maxProp = axis === 'y' ? bottom : right
@@ -4135,13 +4129,10 @@
 
   function effect(_ref2) {
     var state = _ref2.state,
-      options = _ref2.options,
-      name = _ref2.name
+      options = _ref2.options
     var _options$element = options.element,
       arrowElement =
-        _options$element === void 0 ? '[data-popper-arrow]' : _options$element,
-      _options$padding = options.padding,
-      padding = _options$padding === void 0 ? 0 : _options$padding
+        _options$element === void 0 ? '[data-popper-arrow]' : _options$element
 
     if (arrowElement == null) {
       return
@@ -4155,39 +4146,11 @@
       }
     }
 
-    {
-      if (!isHTMLElement$1(arrowElement)) {
-        console.error(
-          [
-            'Popper: "arrow" element must be an HTMLElement (not an SVGElement).',
-            'To use an SVG arrow, wrap it in an HTMLElement that will be used as',
-            'the arrow.',
-          ].join(' ')
-        )
-      }
-    }
-
     if (!contains$1(state.elements.popper, arrowElement)) {
-      {
-        console.error(
-          [
-            'Popper: "arrow" modifier\'s `element` must be a child of the popper',
-            'element.',
-          ].join(' ')
-        )
-      }
-
       return
     }
 
     state.elements.arrow = arrowElement
-    state.modifiersData[name + '#persistent'] = {
-      padding: mergePaddingObject(
-        typeof padding !== 'number'
-          ? padding
-          : expandToHashMap(padding, basePlacements)
-      ),
-    }
   } // eslint-disable-next-line import/no-unused-modules
 
   var arrow$1 = {
@@ -4200,6 +4163,10 @@
     requiresIfExists: ['preventOverflow'],
   }
 
+  function getVariation(placement) {
+    return placement.split('-')[1]
+  }
+
   var unsetSides = {
     top: 'auto',
     right: 'auto',
@@ -4209,14 +4176,13 @@
   // Zooming can change the DPR, but it seems to report a value that will
   // cleanly divide the values into the appropriate subpixels.
 
-  function roundOffsetsByDPR(_ref) {
+  function roundOffsetsByDPR(_ref, win) {
     var x = _ref.x,
       y = _ref.y
-    var win = window
     var dpr = win.devicePixelRatio || 1
     return {
-      x: Math.round(x * dpr) / dpr || 0,
-      y: Math.round(y * dpr) / dpr || 0,
+      x: round(x * dpr) / dpr || 0,
+      y: round(y * dpr) / dpr || 0,
     }
   }
 
@@ -4226,18 +4192,31 @@
     var popper = _ref2.popper,
       popperRect = _ref2.popperRect,
       placement = _ref2.placement,
+      variation = _ref2.variation,
       offsets = _ref2.offsets,
       position = _ref2.position,
       gpuAcceleration = _ref2.gpuAcceleration,
       adaptive = _ref2.adaptive,
-      roundOffsets = _ref2.roundOffsets
+      roundOffsets = _ref2.roundOffsets,
+      isFixed = _ref2.isFixed
+    var _offsets$x = offsets.x,
+      x = _offsets$x === void 0 ? 0 : _offsets$x,
+      _offsets$y = offsets.y,
+      y = _offsets$y === void 0 ? 0 : _offsets$y
 
-    var _ref3 = roundOffsets ? roundOffsetsByDPR(offsets) : offsets,
-      _ref3$x = _ref3.x,
-      x = _ref3$x === void 0 ? 0 : _ref3$x,
-      _ref3$y = _ref3.y,
-      y = _ref3$y === void 0 ? 0 : _ref3$y
+    var _ref3 =
+      typeof roundOffsets === 'function'
+        ? roundOffsets({
+            x: x,
+            y: y,
+          })
+        : {
+            x: x,
+            y: y,
+          }
 
+    x = _ref3.x
+    y = _ref3.y
     var hasX = offsets.hasOwnProperty('x')
     var hasY = offsets.hasOwnProperty('y')
     var sideX = left
@@ -4246,22 +4225,46 @@
 
     if (adaptive) {
       var offsetParent = getOffsetParent(popper)
+      var heightProp = 'clientHeight'
+      var widthProp = 'clientWidth'
 
       if (offsetParent === getWindow(popper)) {
         offsetParent = getDocumentElement(popper)
+
+        if (
+          getComputedStyle$1(offsetParent).position !== 'static' &&
+          position === 'absolute'
+        ) {
+          heightProp = 'scrollHeight'
+          widthProp = 'scrollWidth'
+        }
       } // $FlowFixMe[incompatible-cast]: force type refinement, we compare offsetParent with window above, but Flow doesn't detect it
 
-      /*:: offsetParent = (offsetParent: Element); */
+      offsetParent = offsetParent
 
-      if (placement === top) {
+      if (
+        placement === top ||
+        ((placement === left || placement === right) && variation === end)
+      ) {
         sideY = bottom
-        y -= offsetParent.clientHeight - popperRect.height
+        var offsetY =
+          isFixed && offsetParent === win && win.visualViewport
+            ? win.visualViewport.height // $FlowFixMe[prop-missing]
+            : offsetParent[heightProp]
+        y -= offsetY - popperRect.height
         y *= gpuAcceleration ? 1 : -1
       }
 
-      if (placement === left) {
+      if (
+        placement === left ||
+        ((placement === top || placement === bottom) && variation === end)
+      ) {
         sideX = right
-        x -= offsetParent.clientWidth - popperRect.width
+        var offsetX =
+          isFixed && offsetParent === win && win.visualViewport
+            ? win.visualViewport.width // $FlowFixMe[prop-missing]
+            : offsetParent[widthProp]
+        x -= offsetX - popperRect.width
         x *= gpuAcceleration ? 1 : -1
       }
     }
@@ -4273,17 +4276,34 @@
       adaptive && unsetSides
     )
 
+    var _ref4 =
+      roundOffsets === true
+        ? roundOffsetsByDPR(
+            {
+              x: x,
+              y: y,
+            },
+            getWindow(popper)
+          )
+        : {
+            x: x,
+            y: y,
+          }
+
+    x = _ref4.x
+    y = _ref4.y
+
     if (gpuAcceleration) {
       var _Object$assign
 
       return Object.assign(
-        Object.assign({}, commonStyles),
         {},
+        commonStyles,
         ((_Object$assign = {}),
         (_Object$assign[sideY] = hasY ? '0' : ''),
         (_Object$assign[sideX] = hasX ? '0' : ''),
         (_Object$assign.transform =
-          (win.devicePixelRatio || 1) < 2
+          (win.devicePixelRatio || 1) <= 1
             ? 'translate(' + x + 'px, ' + y + 'px)'
             : 'translate3d(' + x + 'px, ' + y + 'px, 0)'),
         _Object$assign)
@@ -4291,8 +4311,8 @@
     }
 
     return Object.assign(
-      Object.assign({}, commonStyles),
       {},
+      commonStyles,
       ((_Object$assign2 = {}),
       (_Object$assign2[sideY] = hasY ? y + 'px' : ''),
       (_Object$assign2[sideX] = hasX ? x + 'px' : ''),
@@ -4301,9 +4321,9 @@
     )
   }
 
-  function computeStyles(_ref4) {
-    var state = _ref4.state,
-      options = _ref4.options
+  function computeStyles(_ref5) {
+    var state = _ref5.state,
+      options = _ref5.options
     var _options$gpuAccelerat = options.gpuAcceleration,
       gpuAcceleration =
         _options$gpuAccelerat === void 0 ? true : _options$gpuAccelerat,
@@ -4312,86 +4332,48 @@
       _options$roundOffsets = options.roundOffsets,
       roundOffsets =
         _options$roundOffsets === void 0 ? true : _options$roundOffsets
-
-    {
-      var transitionProperty =
-        getComputedStyle$1(state.elements.popper).transitionProperty || ''
-
-      if (
-        adaptive &&
-        ['transform', 'top', 'right', 'bottom', 'left'].some(function(
-          property
-        ) {
-          return transitionProperty.indexOf(property) >= 0
-        })
-      ) {
-        console.warn(
-          [
-            'Popper: Detected CSS transitions on at least one of the following',
-            'CSS properties: "transform", "top", "right", "bottom", "left".',
-            '\n\n',
-            'Disable the "computeStyles" modifier\'s `adaptive` option to allow',
-            'for smooth transitions, or remove these properties from the CSS',
-            'transition declaration on the popper element if only transitioning',
-            'opacity or background-color for example.',
-            '\n\n',
-            'We recommend using the popper element as a wrapper around an inner',
-            'element that can have any CSS property transitioned for animations.',
-          ].join(' ')
-        )
-      }
-    }
-
     var commonStyles = {
       placement: getBasePlacement(state.placement),
+      variation: getVariation(state.placement),
       popper: state.elements.popper,
       popperRect: state.rects.popper,
       gpuAcceleration: gpuAcceleration,
+      isFixed: state.options.strategy === 'fixed',
     }
 
     if (state.modifiersData.popperOffsets != null) {
       state.styles.popper = Object.assign(
-        Object.assign({}, state.styles.popper),
+        {},
+        state.styles.popper,
         mapToStyles(
-          Object.assign(
-            Object.assign({}, commonStyles),
-            {},
-            {
-              offsets: state.modifiersData.popperOffsets,
-              position: state.options.strategy,
-              adaptive: adaptive,
-              roundOffsets: roundOffsets,
-            }
-          )
+          Object.assign({}, commonStyles, {
+            offsets: state.modifiersData.popperOffsets,
+            position: state.options.strategy,
+            adaptive: adaptive,
+            roundOffsets: roundOffsets,
+          })
         )
       )
     }
 
     if (state.modifiersData.arrow != null) {
       state.styles.arrow = Object.assign(
-        Object.assign({}, state.styles.arrow),
+        {},
+        state.styles.arrow,
         mapToStyles(
-          Object.assign(
-            Object.assign({}, commonStyles),
-            {},
-            {
-              offsets: state.modifiersData.arrow,
-              position: 'absolute',
-              adaptive: false,
-              roundOffsets: roundOffsets,
-            }
-          )
+          Object.assign({}, commonStyles, {
+            offsets: state.modifiersData.arrow,
+            position: 'absolute',
+            adaptive: false,
+            roundOffsets: roundOffsets,
+          })
         )
       )
     }
 
-    state.attributes.popper = Object.assign(
-      Object.assign({}, state.attributes.popper),
-      {},
-      {
-        'data-popper-placement': state.placement,
-      }
-    )
+    state.attributes.popper = Object.assign({}, state.attributes.popper, {
+      'data-popper-placement': state.placement,
+    })
   } // eslint-disable-next-line import/no-unused-modules
 
   var computeStyles$1 = {
@@ -4474,20 +4456,6 @@
     })
   }
 
-  function getBoundingClientRect(element) {
-    var rect = element.getBoundingClientRect()
-    return {
-      width: rect.width,
-      height: rect.height,
-      top: rect.top,
-      right: rect.right,
-      bottom: rect.bottom,
-      left: rect.left,
-      x: rect.left,
-      y: rect.top,
-    }
-  }
-
   function getWindowScroll(node) {
     var win = getWindow(node)
     var scrollLeft = win.pageXOffset
@@ -4512,31 +4480,21 @@
     )
   }
 
-  function getViewportRect(element) {
+  function getViewportRect(element, strategy) {
     var win = getWindow(element)
     var html = getDocumentElement(element)
     var visualViewport = win.visualViewport
     var width = html.clientWidth
     var height = html.clientHeight
     var x = 0
-    var y = 0 // NB: This isn't supported on iOS <= 12. If the keyboard is open, the popper
-    // can be obscured underneath it.
-    // Also, `html.clientHeight` adds the bottom bar height in Safari iOS, even
-    // if it isn't open, so if this isn't available, the popper will be detected
-    // to overflow the bottom of the screen too early.
+    var y = 0
 
     if (visualViewport) {
       width = visualViewport.width
-      height = visualViewport.height // Uses Layout Viewport (like Chrome; Safari does not currently)
-      // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
-      // errors due to floating point numbers, so we need to check precision.
-      // Safari returns a number <= 0, usually < -1 when pinch-zoomed
-      // Feature detection fails in mobile emulation mode in Chrome.
-      // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
-      // 0.001
-      // Fallback here: "Not Safari" userAgent
+      height = visualViewport.height
+      var layoutViewport = isLayoutViewport()
 
-      if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
+      if (layoutViewport || (!layoutViewport && strategy === 'fixed')) {
         x = visualViewport.offsetLeft
         y = visualViewport.offsetTop
       }
@@ -4553,16 +4511,21 @@
   // of the `<html>` and `<body>` rect bounds if horizontally scrollable
 
   function getDocumentRect(element) {
+    var _element$ownerDocumen
+
     var html = getDocumentElement(element)
     var winScroll = getWindowScroll(element)
-    var body = element.ownerDocument.body
-    var width = Math.max(
+    var body =
+      (_element$ownerDocumen = element.ownerDocument) == null
+        ? void 0
+        : _element$ownerDocumen.body
+    var width = max$1(
       html.scrollWidth,
       html.clientWidth,
       body ? body.scrollWidth : 0,
       body ? body.clientWidth : 0
     )
-    var height = Math.max(
+    var height = max$1(
       html.scrollHeight,
       html.clientHeight,
       body ? body.scrollHeight : 0,
@@ -4572,7 +4535,7 @@
     var y = -winScroll.scrollTop
 
     if (getComputedStyle$1(body || html).direction === 'rtl') {
-      x += Math.max(html.clientWidth, body ? body.clientWidth : 0) - width
+      x += max$1(html.clientWidth, body ? body.clientWidth : 0) - width
     }
 
     return {
@@ -4614,12 +4577,18 @@
   */
 
   function listScrollParents(element, list) {
+    var _element$ownerDocumen
+
     if (list === void 0) {
       list = []
     }
 
     var scrollParent = getScrollParent(element)
-    var isBody = getNodeName(scrollParent) === 'body'
+    var isBody =
+      scrollParent ===
+      ((_element$ownerDocumen = element.ownerDocument) == null
+        ? void 0
+        : _element$ownerDocumen.body)
     var win = getWindow(scrollParent)
     var target = isBody
       ? [win].concat(
@@ -4634,20 +4603,16 @@
   }
 
   function rectToClientRect(rect) {
-    return Object.assign(
-      Object.assign({}, rect),
-      {},
-      {
-        left: rect.x,
-        top: rect.y,
-        right: rect.x + rect.width,
-        bottom: rect.y + rect.height,
-      }
-    )
+    return Object.assign({}, rect, {
+      left: rect.x,
+      top: rect.y,
+      right: rect.x + rect.width,
+      bottom: rect.y + rect.height,
+    })
   }
 
-  function getInnerBoundingClientRect(element) {
-    var rect = getBoundingClientRect(element)
+  function getInnerBoundingClientRect(element, strategy) {
+    var rect = getBoundingClientRect(element, false, strategy === 'fixed')
     rect.top = rect.top + element.clientTop
     rect.left = rect.left + element.clientLeft
     rect.bottom = rect.top + element.clientHeight
@@ -4659,11 +4624,11 @@
     return rect
   }
 
-  function getClientRectFromMixedType(element, clippingParent) {
+  function getClientRectFromMixedType(element, clippingParent, strategy) {
     return clippingParent === viewport
-      ? rectToClientRect(getViewportRect(element))
-      : isHTMLElement$1(clippingParent)
-      ? getInnerBoundingClientRect(clippingParent)
+      ? rectToClientRect(getViewportRect(element, strategy))
+      : isElement(clippingParent)
+      ? getInnerBoundingClientRect(clippingParent, strategy)
       : rectToClientRect(getDocumentRect(getDocumentElement(element)))
   } // A "clipping parent" is an overflowable container with the characteristic of
   // clipping (or hiding) overflowing elements with a position different from
@@ -4692,7 +4657,7 @@
   } // Gets the maximum area that the element is visible in due to any number of
   // clipping parents
 
-  function getClippingRect(element, boundary, rootBoundary) {
+  function getClippingRect(element, boundary, rootBoundary, strategy) {
     var mainClippingParents =
       boundary === 'clippingParents'
         ? getClippingParents(element)
@@ -4703,23 +4668,19 @@
       accRect,
       clippingParent
     ) {
-      var rect = getClientRectFromMixedType(element, clippingParent)
-      accRect.top = Math.max(rect.top, accRect.top)
-      accRect.right = Math.min(rect.right, accRect.right)
-      accRect.bottom = Math.min(rect.bottom, accRect.bottom)
-      accRect.left = Math.max(rect.left, accRect.left)
+      var rect = getClientRectFromMixedType(element, clippingParent, strategy)
+      accRect.top = max$1(rect.top, accRect.top)
+      accRect.right = min$1(rect.right, accRect.right)
+      accRect.bottom = min$1(rect.bottom, accRect.bottom)
+      accRect.left = max$1(rect.left, accRect.left)
       return accRect
     },
-    getClientRectFromMixedType(element, firstClippingParent))
+    getClientRectFromMixedType(element, firstClippingParent, strategy))
     clippingRect.width = clippingRect.right - clippingRect.left
     clippingRect.height = clippingRect.bottom - clippingRect.top
     clippingRect.x = clippingRect.left
     clippingRect.y = clippingRect.top
     return clippingRect
-  }
-
-  function getVariation(placement) {
-    return placement.split('-')[1]
   }
 
   function computeOffsets(_ref) {
@@ -4800,6 +4761,9 @@
       _options$placement = _options.placement,
       placement =
         _options$placement === void 0 ? state.placement : _options$placement,
+      _options$strategy = _options.strategy,
+      strategy =
+        _options$strategy === void 0 ? state.strategy : _options$strategy,
       _options$boundary = _options.boundary,
       boundary =
         _options$boundary === void 0 ? clippingParents : _options$boundary,
@@ -4820,7 +4784,6 @@
         : expandToHashMap(padding, basePlacements)
     )
     var altContext = elementContext === popper ? reference : popper
-    var referenceElement = state.elements.reference
     var popperRect = state.rects.popper
     var element = state.elements[altBoundary ? altContext : elementContext]
     var clippingClientRect = getClippingRect(
@@ -4828,9 +4791,10 @@
         ? element
         : element.contextElement || getDocumentElement(state.elements.popper),
       boundary,
-      rootBoundary
+      rootBoundary,
+      strategy
     )
-    var referenceClientRect = getBoundingClientRect(referenceElement)
+    var referenceClientRect = getBoundingClientRect(state.elements.reference)
     var popperOffsets = computeOffsets({
       reference: referenceClientRect,
       element: popperRect,
@@ -4838,7 +4802,7 @@
       placement: placement,
     })
     var popperClientRect = rectToClientRect(
-      Object.assign(Object.assign({}, popperRect), popperOffsets)
+      Object.assign({}, popperRect, popperOffsets)
     )
     var elementClientRect =
       elementContext === popper ? popperClientRect : referenceClientRect // positive = overflowing the clipping rect
@@ -4871,9 +4835,6 @@
     return overflowOffsets
   }
 
-  /*:: type OverflowsMap = { [ComputedPlacement]: number }; */
-
-  /*;; type OverflowsMap = { [key in ComputedPlacement]: number }; */
   function computeAutoPlacement(state, options) {
     if (options === void 0) {
       options = {}
@@ -4902,18 +4863,6 @@
 
     if (allowedPlacements.length === 0) {
       allowedPlacements = placements$1
-
-      {
-        console.error(
-          [
-            'Popper: The `allowedAutoPlacements` option did not allow any',
-            'placements. Ensure the `placement` option matches the variation',
-            'of the allowed placements.',
-            'For example, "auto" cannot be used to allow "bottom-start".',
-            'Use "auto-start" instead.',
-          ].join(' ')
-        )
-      }
     } // $FlowFixMe[incompatible-type]: Flow seems to have problems with two array unions...
 
     var overflows = allowedPlacements.reduce(function(acc, placement) {
@@ -5146,14 +5095,10 @@
       isReferenceHidden: isReferenceHidden,
       hasPopperEscaped: hasPopperEscaped,
     }
-    state.attributes.popper = Object.assign(
-      Object.assign({}, state.attributes.popper),
-      {},
-      {
-        'data-popper-reference-hidden': isReferenceHidden,
-        'data-popper-escaped': hasPopperEscaped,
-      }
-    )
+    state.attributes.popper = Object.assign({}, state.attributes.popper, {
+      'data-popper-reference-hidden': isReferenceHidden,
+      'data-popper-escaped': hasPopperEscaped,
+    })
   } // eslint-disable-next-line import/no-unused-modules
 
   var hide$1 = {
@@ -5171,13 +5116,9 @@
     var _ref =
         typeof offset === 'function'
           ? offset(
-              Object.assign(
-                Object.assign({}, rects),
-                {},
-                {
-                  placement: placement,
-                }
-              )
+              Object.assign({}, rects, {
+                placement: placement,
+              })
             )
           : offset,
       skidding = _ref[0],
@@ -5287,15 +5228,27 @@
     var tetherOffsetValue =
       typeof tetherOffset === 'function'
         ? tetherOffset(
-            Object.assign(
-              Object.assign({}, state.rects),
-              {},
-              {
-                placement: state.placement,
-              }
-            )
+            Object.assign({}, state.rects, {
+              placement: state.placement,
+            })
           )
         : tetherOffset
+    var normalizedTetherOffsetValue =
+      typeof tetherOffsetValue === 'number'
+        ? {
+            mainAxis: tetherOffsetValue,
+            altAxis: tetherOffsetValue,
+          }
+        : Object.assign(
+            {
+              mainAxis: 0,
+              altAxis: 0,
+            },
+            tetherOffsetValue
+          )
+    var offsetModifierState = state.modifiersData.offset
+      ? state.modifiersData.offset[state.placement]
+      : null
     var data = {
       x: 0,
       y: 0,
@@ -5306,12 +5259,14 @@
     }
 
     if (checkMainAxis) {
+      var _offsetModifierState$
+
       var mainSide = mainAxis === 'y' ? top : left
       var altSide = mainAxis === 'y' ? bottom : right
       var len = mainAxis === 'y' ? 'height' : 'width'
       var offset = popperOffsets[mainAxis]
-      var min = popperOffsets[mainAxis] + overflow[mainSide]
-      var max = popperOffsets[mainAxis] - overflow[altSide]
+      var min = offset + overflow[mainSide]
+      var max = offset - overflow[altSide]
       var additive = tether ? -popperRect[len] / 2 : 0
       var minLen = variation === start ? referenceRect[len] : popperRect[len]
       var maxLen = variation === start ? -popperRect[len] : -referenceRect[len] // We need to include the arrow in the calculation so the arrow doesn't go
@@ -5341,15 +5296,21 @@
           additive -
           arrowLen -
           arrowPaddingMin -
-          tetherOffsetValue
-        : minLen - arrowLen - arrowPaddingMin - tetherOffsetValue
+          normalizedTetherOffsetValue.mainAxis
+        : minLen -
+          arrowLen -
+          arrowPaddingMin -
+          normalizedTetherOffsetValue.mainAxis
       var maxOffset = isBasePlacement
         ? -referenceRect[len] / 2 +
           additive +
           arrowLen +
           arrowPaddingMax +
-          tetherOffsetValue
-        : maxLen + arrowLen + arrowPaddingMax + tetherOffsetValue
+          normalizedTetherOffsetValue.mainAxis
+        : maxLen +
+          arrowLen +
+          arrowPaddingMax +
+          normalizedTetherOffsetValue.mainAxis
       var arrowOffsetParent =
         state.elements.arrow && getOffsetParent(state.elements.arrow)
       var clientOffset = arrowOffsetParent
@@ -5357,33 +5318,73 @@
           ? arrowOffsetParent.clientTop || 0
           : arrowOffsetParent.clientLeft || 0
         : 0
-      var offsetModifierValue = state.modifiersData.offset
-        ? state.modifiersData.offset[state.placement][mainAxis]
-        : 0
-      var tetherMin =
-        popperOffsets[mainAxis] + minOffset - offsetModifierValue - clientOffset
-      var tetherMax = popperOffsets[mainAxis] + maxOffset - offsetModifierValue
+      var offsetModifierValue =
+        (_offsetModifierState$ =
+          offsetModifierState == null
+            ? void 0
+            : offsetModifierState[mainAxis]) != null
+          ? _offsetModifierState$
+          : 0
+      var tetherMin = offset + minOffset - offsetModifierValue - clientOffset
+      var tetherMax = offset + maxOffset - offsetModifierValue
       var preventedOffset = within(
-        tether ? Math.min(min, tetherMin) : min,
+        tether ? min$1(min, tetherMin) : min,
         offset,
-        tether ? Math.max(max, tetherMax) : max
+        tether ? max$1(max, tetherMax) : max
       )
       popperOffsets[mainAxis] = preventedOffset
       data[mainAxis] = preventedOffset - offset
     }
 
     if (checkAltAxis) {
+      var _offsetModifierState$2
+
       var _mainSide = mainAxis === 'x' ? top : left
 
       var _altSide = mainAxis === 'x' ? bottom : right
 
       var _offset = popperOffsets[altAxis]
 
+      var _len = altAxis === 'y' ? 'height' : 'width'
+
       var _min = _offset + overflow[_mainSide]
 
       var _max = _offset - overflow[_altSide]
 
-      var _preventedOffset = within(_min, _offset, _max)
+      var isOriginSide = [top, left].indexOf(basePlacement) !== -1
+
+      var _offsetModifierValue =
+        (_offsetModifierState$2 =
+          offsetModifierState == null
+            ? void 0
+            : offsetModifierState[altAxis]) != null
+          ? _offsetModifierState$2
+          : 0
+
+      var _tetherMin = isOriginSide
+        ? _min
+        : _offset -
+          referenceRect[_len] -
+          popperRect[_len] -
+          _offsetModifierValue +
+          normalizedTetherOffsetValue.altAxis
+
+      var _tetherMax = isOriginSide
+        ? _offset +
+          referenceRect[_len] +
+          popperRect[_len] -
+          _offsetModifierValue -
+          normalizedTetherOffsetValue.altAxis
+        : _max
+
+      var _preventedOffset =
+        tether && isOriginSide
+          ? withinMaxClamp(_tetherMin, _offset, _tetherMax)
+          : within(
+              tether ? _tetherMin : _min,
+              _offset,
+              tether ? _tetherMax : _max
+            )
 
       popperOffsets[altAxis] = _preventedOffset
       data[altAxis] = _preventedOffset - _offset
@@ -5415,6 +5416,12 @@
     }
   }
 
+  function isElementScaled(element) {
+    var rect = element.getBoundingClientRect()
+    var scaleX = round(rect.width) / element.offsetWidth || 1
+    var scaleY = round(rect.height) / element.offsetHeight || 1
+    return scaleX !== 1 || scaleY !== 1
+  } // Returns the composite rect of an element relative to its offsetParent.
   // Composite means it takes into account transforms as well as layout.
 
   function getCompositeRect(elementOrVirtualElement, offsetParent, isFixed) {
@@ -5422,9 +5429,15 @@
       isFixed = false
     }
 
-    var documentElement = getDocumentElement(offsetParent)
-    var rect = getBoundingClientRect(elementOrVirtualElement)
     var isOffsetParentAnElement = isHTMLElement$1(offsetParent)
+    var offsetParentIsScaled =
+      isHTMLElement$1(offsetParent) && isElementScaled(offsetParent)
+    var documentElement = getDocumentElement(offsetParent)
+    var rect = getBoundingClientRect(
+      elementOrVirtualElement,
+      offsetParentIsScaled,
+      isFixed
+    )
     var scroll = {
       scrollLeft: 0,
       scrollTop: 0,
@@ -5443,7 +5456,7 @@
       }
 
       if (isHTMLElement$1(offsetParent)) {
-        offsets = getBoundingClientRect(offsetParent)
+        offsets = getBoundingClientRect(offsetParent, true)
         offsets.x += offsetParent.clientLeft
         offsets.y += offsetParent.clientTop
       } else if (documentElement) {
@@ -5523,211 +5536,14 @@
     }
   }
 
-  function format(str) {
-    for (
-      var _len = arguments.length,
-        args = new Array(_len > 1 ? _len - 1 : 0),
-        _key = 1;
-      _key < _len;
-      _key++
-    ) {
-      args[_key - 1] = arguments[_key]
-    }
-
-    return [].concat(args).reduce(function(p, c) {
-      return p.replace(/%s/, c)
-    }, str)
-  }
-
-  var INVALID_MODIFIER_ERROR =
-    'Popper: modifier "%s" provided an invalid %s property, expected %s but got %s'
-  var MISSING_DEPENDENCY_ERROR =
-    'Popper: modifier "%s" requires "%s", but "%s" modifier is not available'
-  var VALID_PROPERTIES = [
-    'name',
-    'enabled',
-    'phase',
-    'fn',
-    'effect',
-    'requires',
-    'options',
-  ]
-  function validateModifiers(modifiers) {
-    modifiers.forEach(function(modifier) {
-      Object.keys(modifier).forEach(function(key) {
-        switch (key) {
-          case 'name':
-            if (typeof modifier.name !== 'string') {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  String(modifier.name),
-                  '"name"',
-                  '"string"',
-                  '"' + String(modifier.name) + '"'
-                )
-              )
-            }
-
-            break
-
-          case 'enabled':
-            if (typeof modifier.enabled !== 'boolean') {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  modifier.name,
-                  '"enabled"',
-                  '"boolean"',
-                  '"' + String(modifier.enabled) + '"'
-                )
-              )
-            }
-
-          case 'phase':
-            if (modifierPhases.indexOf(modifier.phase) < 0) {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  modifier.name,
-                  '"phase"',
-                  'either ' + modifierPhases.join(', '),
-                  '"' + String(modifier.phase) + '"'
-                )
-              )
-            }
-
-            break
-
-          case 'fn':
-            if (typeof modifier.fn !== 'function') {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  modifier.name,
-                  '"fn"',
-                  '"function"',
-                  '"' + String(modifier.fn) + '"'
-                )
-              )
-            }
-
-            break
-
-          case 'effect':
-            if (typeof modifier.effect !== 'function') {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  modifier.name,
-                  '"effect"',
-                  '"function"',
-                  '"' + String(modifier.fn) + '"'
-                )
-              )
-            }
-
-            break
-
-          case 'requires':
-            if (!Array.isArray(modifier.requires)) {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  modifier.name,
-                  '"requires"',
-                  '"array"',
-                  '"' + String(modifier.requires) + '"'
-                )
-              )
-            }
-
-            break
-
-          case 'requiresIfExists':
-            if (!Array.isArray(modifier.requiresIfExists)) {
-              console.error(
-                format(
-                  INVALID_MODIFIER_ERROR,
-                  modifier.name,
-                  '"requiresIfExists"',
-                  '"array"',
-                  '"' + String(modifier.requiresIfExists) + '"'
-                )
-              )
-            }
-
-            break
-
-          case 'options':
-          case 'data':
-            break
-
-          default:
-            console.error(
-              'PopperJS: an invalid property has been provided to the "' +
-                modifier.name +
-                '" modifier, valid properties are ' +
-                VALID_PROPERTIES.map(function(s) {
-                  return '"' + s + '"'
-                }).join(', ') +
-                '; but "' +
-                key +
-                '" was provided.'
-            )
-        }
-
-        modifier.requires &&
-          modifier.requires.forEach(function(requirement) {
-            if (
-              modifiers.find(function(mod) {
-                return mod.name === requirement
-              }) == null
-            ) {
-              console.error(
-                format(
-                  MISSING_DEPENDENCY_ERROR,
-                  String(modifier.name),
-                  requirement,
-                  requirement
-                )
-              )
-            }
-          })
-      })
-    })
-  }
-
-  function uniqueBy(arr, fn) {
-    var identifiers = new Set()
-    return arr.filter(function(item) {
-      var identifier = fn(item)
-
-      if (!identifiers.has(identifier)) {
-        identifiers.add(identifier)
-        return true
-      }
-    })
-  }
-
   function mergeByName(modifiers) {
     var merged = modifiers.reduce(function(merged, current) {
       var existing = merged[current.name]
       merged[current.name] = existing
-        ? Object.assign(
-            Object.assign(Object.assign({}, existing), current),
-            {},
-            {
-              options: Object.assign(
-                Object.assign({}, existing.options),
-                current.options
-              ),
-              data: Object.assign(
-                Object.assign({}, existing.data),
-                current.data
-              ),
-            }
-          )
+        ? Object.assign({}, existing, current, {
+            options: Object.assign({}, existing.options, current.options),
+            data: Object.assign({}, existing.data, current.data),
+          })
         : current
       return merged
     }, {}) // IE11 does not support Object.values
@@ -5737,10 +5553,6 @@
     })
   }
 
-  var INVALID_ELEMENT_ERROR =
-    'Popper: Invalid reference or popper argument provided. They must be either a DOM element or virtual element.'
-  var INFINITE_LOOP_ERROR =
-    'Popper: An infinite loop in the modifiers cycle has been detected! The cycle has been interrupted to prevent a browser crash.'
   var DEFAULT_OPTIONS = {
     placement: 'bottom',
     modifiers: [],
@@ -5783,10 +5595,7 @@
       var state = {
         placement: 'bottom',
         orderedModifiers: [],
-        options: Object.assign(
-          Object.assign({}, DEFAULT_OPTIONS),
-          defaultOptions
-        ),
+        options: Object.assign({}, DEFAULT_OPTIONS, defaultOptions),
         modifiersData: {},
         elements: {
           reference: reference,
@@ -5799,10 +5608,16 @@
       var isDestroyed = false
       var instance = {
         state: state,
-        setOptions: function setOptions(options) {
+        setOptions: function setOptions(setOptionsAction) {
+          var options =
+            typeof setOptionsAction === 'function'
+              ? setOptionsAction(state.options)
+              : setOptionsAction
           cleanupModifierEffects()
           state.options = Object.assign(
-            Object.assign(Object.assign({}, defaultOptions), state.options),
+            {},
+            defaultOptions,
+            state.options,
             options
           )
           state.scrollParents = {
@@ -5821,61 +5636,7 @@
 
           state.orderedModifiers = orderedModifiers.filter(function(m) {
             return m.enabled
-          }) // Validate the provided modifiers so that the consumer will get warned
-          // if one of the modifiers is invalid for any reason
-
-          {
-            var modifiers = uniqueBy(
-              [].concat(orderedModifiers, state.options.modifiers),
-              function(_ref) {
-                var name = _ref.name
-                return name
-              }
-            )
-            validateModifiers(modifiers)
-
-            if (getBasePlacement(state.options.placement) === auto) {
-              var flipModifier = state.orderedModifiers.find(function(_ref2) {
-                var name = _ref2.name
-                return name === 'flip'
-              })
-
-              if (!flipModifier) {
-                console.error(
-                  [
-                    'Popper: "auto" placements require the "flip" modifier be',
-                    'present and enabled to work.',
-                  ].join(' ')
-                )
-              }
-            }
-
-            var _getComputedStyle = getComputedStyle$1(popper),
-              marginTop = _getComputedStyle.marginTop,
-              marginRight = _getComputedStyle.marginRight,
-              marginBottom = _getComputedStyle.marginBottom,
-              marginLeft = _getComputedStyle.marginLeft // We no longer take into account `margins` on the popper, and it can
-            // cause bugs with positioning, so we'll warn the consumer
-
-            if (
-              [marginTop, marginRight, marginBottom, marginLeft].some(function(
-                margin
-              ) {
-                return parseFloat(margin)
-              })
-            ) {
-              console.warn(
-                [
-                  'Popper: CSS "margin" styles cannot be used to apply padding',
-                  'between the popper and its reference element or boundary.',
-                  'To replicate margin, use the `offset` modifier, as well as',
-                  'the `padding` option in the `preventOverflow` and `flip`',
-                  'modifiers.',
-                ].join(' ')
-              )
-            }
-          }
-
+          })
           runModifierEffects()
           return instance.update()
         },
@@ -5895,10 +5656,6 @@
           // anymore
 
           if (!areValidElements(reference, popper)) {
-            {
-              console.error(INVALID_ELEMENT_ERROR)
-            }
-
             return
           } // Store the reference and popper rects to be read by modifiers
 
@@ -5927,18 +5684,8 @@
               modifier.data
             ))
           })
-          var __debug_loops__ = 0
 
           for (var index = 0; index < state.orderedModifiers.length; index++) {
-            {
-              __debug_loops__ += 1
-
-              if (__debug_loops__ > 100) {
-                console.error(INFINITE_LOOP_ERROR)
-                break
-              }
-            }
-
             if (state.reset === true) {
               state.reset = false
               index = -1
@@ -5978,10 +5725,6 @@
       }
 
       if (!areValidElements(reference, popper)) {
-        {
-          console.error(INVALID_ELEMENT_ERROR)
-        }
-
         return instance
       }
 
@@ -5996,11 +5739,11 @@
       // one.
 
       function runModifierEffects() {
-        state.orderedModifiers.forEach(function(_ref3) {
-          var name = _ref3.name,
-            _ref3$options = _ref3.options,
-            options = _ref3$options === void 0 ? {} : _ref3$options,
-            effect = _ref3.effect
+        state.orderedModifiers.forEach(function(_ref) {
+          var name = _ref.name,
+            _ref$options = _ref.options,
+            options = _ref$options === void 0 ? {} : _ref$options,
+            effect = _ref.effect
 
           if (typeof effect === 'function') {
             var cleanupFn = effect({
@@ -6183,7 +5926,7 @@
       _ref3$modifiers = _ref3.modifiers,
       modifiers =
         _ref3$modifiers === void 0 ? EMPTY_MODIFIERS : _ref3$modifiers,
-      config = _objectWithoutPropertiesLoose$2(_ref3, [
+      config = _objectWithoutPropertiesLoose(_ref3, [
         'enabled',
         'placement',
         'strategy',
@@ -6273,7 +6016,7 @@
         popperInstanceRef.current = createPopper(
           referenceElement,
           popperElement,
-          _extends$3({}, config, {
+          _extends({}, config, {
             placement: placement,
             strategy: strategy,
             modifiers: [].concat(modifiers, [
@@ -6287,7 +6030,7 @@
             popperInstanceRef.current.destroy()
             popperInstanceRef.current = undefined
             setState(function(s) {
-              return _extends$3({}, s, {
+              return _extends({}, s, {
                 attributes: {},
                 styles: {
                   popper: initialPopperStyles(strategy),
@@ -6680,17 +6423,17 @@
       _ref$popperConfig = _ref.popperConfig,
       popperConfig = _ref$popperConfig === void 0 ? {} : _ref$popperConfig
     var modifiers = toModifierMap(popperConfig.modifiers)
-    return _extends$3({}, popperConfig, {
+    return _extends({}, popperConfig, {
       placement: placement,
       enabled: enabled,
       modifiers: toModifierArray(
-        _extends$3({}, modifiers, {
+        _extends({}, modifiers, {
           eventListeners: {
             enabled: enableEvents,
           },
-          preventOverflow: _extends$3({}, modifiers.preventOverflow, {
+          preventOverflow: _extends({}, modifiers.preventOverflow, {
             options: containerPadding
-              ? _extends$3(
+              ? _extends(
                   {
                     padding: containerPadding,
                   },
@@ -6703,7 +6446,7 @@
               : _modifiers$preventOve2.options,
           }),
           offset: {
-            options: _extends$3(
+            options: _extends(
               {
                 offset: offset,
               },
@@ -6712,9 +6455,9 @@
                 : _modifiers$offset.options
             ),
           },
-          arrow: _extends$3({}, modifiers.arrow, {
+          arrow: _extends({}, modifiers.arrow, {
             enabled: !!arrowElement,
-            options: _extends$3(
+            options: _extends(
               {},
               (_modifiers$arrow = modifiers.arrow) == null
                 ? void 0
@@ -6724,7 +6467,7 @@
               }
             ),
           }),
-          flip: _extends$3(
+          flip: _extends(
             {
               enabled: !!flip,
             },
@@ -6784,7 +6527,7 @@
       ),
       styles = _usePopper.styles,
       attributes = _usePopper.attributes,
-      popper = _objectWithoutPropertiesLoose$2(_usePopper, [
+      popper = _objectWithoutPropertiesLoose(_usePopper, [
         'styles',
         'attributes',
       ])
@@ -6815,13 +6558,13 @@
     }
 
     var child = props.children(
-      _extends$3({}, popper, {
+      _extends({}, popper, {
         show: !!props.show,
-        props: _extends$3({}, attributes.popper, {
+        props: _extends({}, attributes.popper, {
           style: styles.popper,
           ref: mergedRef,
         }),
-        arrowProps: _extends$3({}, attributes.arrow, {
+        arrowProps: _extends({}, attributes.arrow, {
           style: styles.arrow,
           ref: attachArrowRef,
         }),
@@ -7088,456 +6831,449 @@
   var clickTolerance = 5
   var clickInterval = 250
 
-  var Selection =
-    /*#__PURE__*/
-    (function() {
-      function Selection(node, _temp) {
-        var _ref2 = _temp === void 0 ? {} : _temp,
-          _ref2$global = _ref2.global,
-          global = _ref2$global === void 0 ? false : _ref2$global,
-          _ref2$longPressThresh = _ref2.longPressThreshold,
-          longPressThreshold =
-            _ref2$longPressThresh === void 0 ? 250 : _ref2$longPressThresh
+  var Selection = /*#__PURE__*/ (function() {
+    function Selection(node, _temp) {
+      var _ref2 = _temp === void 0 ? {} : _temp,
+        _ref2$global = _ref2.global,
+        global = _ref2$global === void 0 ? false : _ref2$global,
+        _ref2$longPressThresh = _ref2.longPressThreshold,
+        longPressThreshold =
+          _ref2$longPressThresh === void 0 ? 250 : _ref2$longPressThresh
 
-        this.isDetached = false
-        this.container = node
-        this.globalMouse = !node || global
-        this.longPressThreshold = longPressThreshold
-        this._listeners = Object.create(null)
-        this._handleInitialEvent = this._handleInitialEvent.bind(this)
-        this._handleMoveEvent = this._handleMoveEvent.bind(this)
-        this._handleTerminatingEvent = this._handleTerminatingEvent.bind(this)
-        this._keyListener = this._keyListener.bind(this)
-        this._dropFromOutsideListener = this._dropFromOutsideListener.bind(this)
-        this._dragOverFromOutsideListener = this._dragOverFromOutsideListener.bind(
-          this
-        ) // Fixes an iOS 10 bug where scrolling could not be prevented on the window.
-        // https://github.com/metafizzy/flickity/issues/457#issuecomment-254501356
+      this.isDetached = false
+      this.container = node
+      this.globalMouse = !node || global
+      this.longPressThreshold = longPressThreshold
+      this._listeners = Object.create(null)
+      this._handleInitialEvent = this._handleInitialEvent.bind(this)
+      this._handleMoveEvent = this._handleMoveEvent.bind(this)
+      this._handleTerminatingEvent = this._handleTerminatingEvent.bind(this)
+      this._keyListener = this._keyListener.bind(this)
+      this._dropFromOutsideListener = this._dropFromOutsideListener.bind(this)
+      this._dragOverFromOutsideListener = this._dragOverFromOutsideListener.bind(
+        this
+      ) // Fixes an iOS 10 bug where scrolling could not be prevented on the window.
+      // https://github.com/metafizzy/flickity/issues/457#issuecomment-254501356
 
-        this._removeTouchMoveWindowListener = addEventListener$1(
-          'touchmove',
-          function() {},
-          window
-        )
-        this._removeKeyDownListener = addEventListener$1(
-          'keydown',
-          this._keyListener
-        )
-        this._removeKeyUpListener = addEventListener$1(
-          'keyup',
-          this._keyListener
-        )
-        this._removeDropFromOutsideListener = addEventListener$1(
-          'drop',
-          this._dropFromOutsideListener
-        )
-        this._removeDragOverFromOutsideListener = addEventListener$1(
-          'dragover',
-          this._dragOverFromOutsideListener
-        )
+      this._removeTouchMoveWindowListener = addEventListener$1(
+        'touchmove',
+        function() {},
+        window
+      )
+      this._removeKeyDownListener = addEventListener$1(
+        'keydown',
+        this._keyListener
+      )
+      this._removeKeyUpListener = addEventListener$1('keyup', this._keyListener)
+      this._removeDropFromOutsideListener = addEventListener$1(
+        'drop',
+        this._dropFromOutsideListener
+      )
+      this._removeDragOverFromOutsideListener = addEventListener$1(
+        'dragover',
+        this._dragOverFromOutsideListener
+      )
 
-        this._addInitialEventListener()
+      this._addInitialEventListener()
+    }
+
+    var _proto = Selection.prototype
+
+    _proto.on = function on(type, handler) {
+      var handlers = this._listeners[type] || (this._listeners[type] = [])
+      handlers.push(handler)
+      return {
+        remove: function remove() {
+          var idx = handlers.indexOf(handler)
+          if (idx !== -1) handlers.splice(idx, 1)
+        },
       }
+    }
 
-      var _proto = Selection.prototype
-
-      _proto.on = function on(type, handler) {
-        var handlers = this._listeners[type] || (this._listeners[type] = [])
-        handlers.push(handler)
-        return {
-          remove: function remove() {
-            var idx = handlers.indexOf(handler)
-            if (idx !== -1) handlers.splice(idx, 1)
-          },
-        }
-      }
-
-      _proto.emit = function emit(type) {
-        for (
-          var _len = arguments.length,
-            args = new Array(_len > 1 ? _len - 1 : 0),
-            _key = 1;
-          _key < _len;
-          _key++
-        ) {
-          args[_key - 1] = arguments[_key]
-        }
-
-        var result
-        var handlers = this._listeners[type] || []
-        handlers.forEach(function(fn) {
-          if (result === undefined) result = fn.apply(void 0, args)
-        })
-        return result
-      }
-
-      _proto.teardown = function teardown() {
-        this.isDetached = true
-        this.listeners = Object.create(null)
-        this._removeTouchMoveWindowListener &&
-          this._removeTouchMoveWindowListener()
-        this._removeInitialEventListener && this._removeInitialEventListener()
-        this._removeEndListener && this._removeEndListener()
-        this._onEscListener && this._onEscListener()
-        this._removeMoveListener && this._removeMoveListener()
-        this._removeKeyUpListener && this._removeKeyUpListener()
-        this._removeKeyDownListener && this._removeKeyDownListener()
-        this._removeDropFromOutsideListener &&
-          this._removeDropFromOutsideListener()
-        this._removeDragOverFromOutsideListener &&
-          this._removeDragOverFromOutsideListener()
-      }
-
-      _proto.isSelected = function isSelected(node) {
-        var box = this._selectRect
-        if (!box || !this.selecting) return false
-        return objectsCollide(box, getBoundsForNode(node))
-      }
-
-      _proto.filter = function filter(items) {
-        var box = this._selectRect //not selecting
-
-        if (!box || !this.selecting) return []
-        return items.filter(this.isSelected, this)
-      } // Adds a listener that will call the handler only after the user has pressed on the screen
-      // without moving their finger for 250ms.
-
-      _proto._addLongPressListener = function _addLongPressListener(
-        handler,
-        initialEvent
+    _proto.emit = function emit(type) {
+      for (
+        var _len = arguments.length,
+          args = new Array(_len > 1 ? _len - 1 : 0),
+          _key = 1;
+        _key < _len;
+        _key++
       ) {
-        var _this = this
+        args[_key - 1] = arguments[_key]
+      }
 
-        var timer = null
-        var removeTouchMoveListener = null
-        var removeTouchEndListener = null
+      var result
+      var handlers = this._listeners[type] || []
+      handlers.forEach(function(fn) {
+        if (result === undefined) result = fn.apply(void 0, args)
+      })
+      return result
+    }
 
-        var handleTouchStart = function handleTouchStart(initialEvent) {
-          timer = setTimeout(function() {
-            cleanup()
-            handler(initialEvent)
-          }, _this.longPressThreshold)
-          removeTouchMoveListener = addEventListener$1('touchmove', function() {
-            return cleanup()
-          })
-          removeTouchEndListener = addEventListener$1('touchend', function() {
-            return cleanup()
-          })
-        }
+    _proto.teardown = function teardown() {
+      this.isDetached = true
+      this.listeners = Object.create(null)
+      this._removeTouchMoveWindowListener &&
+        this._removeTouchMoveWindowListener()
+      this._removeInitialEventListener && this._removeInitialEventListener()
+      this._removeEndListener && this._removeEndListener()
+      this._onEscListener && this._onEscListener()
+      this._removeMoveListener && this._removeMoveListener()
+      this._removeKeyUpListener && this._removeKeyUpListener()
+      this._removeKeyDownListener && this._removeKeyDownListener()
+      this._removeDropFromOutsideListener &&
+        this._removeDropFromOutsideListener()
+      this._removeDragOverFromOutsideListener &&
+        this._removeDragOverFromOutsideListener()
+    }
 
-        var removeTouchStartListener = addEventListener$1(
-          'touchstart',
-          handleTouchStart
-        )
+    _proto.isSelected = function isSelected(node) {
+      var box = this._selectRect
+      if (!box || !this.selecting) return false
+      return objectsCollide(box, getBoundsForNode(node))
+    }
 
-        var cleanup = function cleanup() {
-          if (timer) {
-            clearTimeout(timer)
-          }
+    _proto.filter = function filter(items) {
+      var box = this._selectRect //not selecting
 
-          if (removeTouchMoveListener) {
-            removeTouchMoveListener()
-          }
+      if (!box || !this.selecting) return []
+      return items.filter(this.isSelected, this)
+    } // Adds a listener that will call the handler only after the user has pressed on the screen
+    // without moving their finger for 250ms.
 
-          if (removeTouchEndListener) {
-            removeTouchEndListener()
-          }
+    _proto._addLongPressListener = function _addLongPressListener(
+      handler,
+      initialEvent
+    ) {
+      var _this = this
 
-          timer = null
-          removeTouchMoveListener = null
-          removeTouchEndListener = null
-        }
+      var timer = null
+      var removeTouchMoveListener = null
+      var removeTouchEndListener = null
 
-        if (initialEvent) {
-          handleTouchStart(initialEvent)
-        }
-
-        return function() {
+      var handleTouchStart = function handleTouchStart(initialEvent) {
+        timer = setTimeout(function() {
           cleanup()
-          removeTouchStartListener()
-        }
-      } // Listen for mousedown and touchstart events. When one is received, disable the other and setup
-      // future event handling based on the type of event.
-
-      _proto._addInitialEventListener = function _addInitialEventListener() {
-        var _this2 = this
-
-        var removeMouseDownListener = addEventListener$1('mousedown', function(
-          e
-        ) {
-          _this2._removeInitialEventListener()
-
-          _this2._handleInitialEvent(e)
-
-          _this2._removeInitialEventListener = addEventListener$1(
-            'mousedown',
-            _this2._handleInitialEvent
-          )
+          handler(initialEvent)
+        }, _this.longPressThreshold)
+        removeTouchMoveListener = addEventListener$1('touchmove', function() {
+          return cleanup()
         })
-        var removeTouchStartListener = addEventListener$1(
-          'touchstart',
-          function(e) {
-            _this2._removeInitialEventListener()
-
-            _this2._removeInitialEventListener = _this2._addLongPressListener(
-              _this2._handleInitialEvent,
-              e
-            )
-          }
-        )
-
-        this._removeInitialEventListener = function() {
-          removeMouseDownListener()
-          removeTouchStartListener()
-        }
+        removeTouchEndListener = addEventListener$1('touchend', function() {
+          return cleanup()
+        })
       }
 
-      _proto._dropFromOutsideListener = function _dropFromOutsideListener(e) {
-        var _getEventCoordinates = getEventCoordinates(e),
-          pageX = _getEventCoordinates.pageX,
-          pageY = _getEventCoordinates.pageY,
-          clientX = _getEventCoordinates.clientX,
-          clientY = _getEventCoordinates.clientY
+      var removeTouchStartListener = addEventListener$1(
+        'touchstart',
+        handleTouchStart
+      )
 
-        this.emit('dropFromOutside', {
-          x: pageX,
-          y: pageY,
-          clientX: clientX,
-          clientY: clientY,
-        })
-        e.preventDefault()
+      var cleanup = function cleanup() {
+        if (timer) {
+          clearTimeout(timer)
+        }
+
+        if (removeTouchMoveListener) {
+          removeTouchMoveListener()
+        }
+
+        if (removeTouchEndListener) {
+          removeTouchEndListener()
+        }
+
+        timer = null
+        removeTouchMoveListener = null
+        removeTouchEndListener = null
       }
 
-      _proto._dragOverFromOutsideListener = function _dragOverFromOutsideListener(
+      if (initialEvent) {
+        handleTouchStart(initialEvent)
+      }
+
+      return function() {
+        cleanup()
+        removeTouchStartListener()
+      }
+    } // Listen for mousedown and touchstart events. When one is received, disable the other and setup
+    // future event handling based on the type of event.
+
+    _proto._addInitialEventListener = function _addInitialEventListener() {
+      var _this2 = this
+
+      var removeMouseDownListener = addEventListener$1('mousedown', function(
         e
       ) {
-        var _getEventCoordinates2 = getEventCoordinates(e),
-          pageX = _getEventCoordinates2.pageX,
-          pageY = _getEventCoordinates2.pageY,
-          clientX = _getEventCoordinates2.clientX,
-          clientY = _getEventCoordinates2.clientY
+        _this2._removeInitialEventListener()
 
-        this.emit('dragOverFromOutside', {
+        _this2._handleInitialEvent(e)
+
+        _this2._removeInitialEventListener = addEventListener$1(
+          'mousedown',
+          _this2._handleInitialEvent
+        )
+      })
+      var removeTouchStartListener = addEventListener$1('touchstart', function(
+        e
+      ) {
+        _this2._removeInitialEventListener()
+
+        _this2._removeInitialEventListener = _this2._addLongPressListener(
+          _this2._handleInitialEvent,
+          e
+        )
+      })
+
+      this._removeInitialEventListener = function() {
+        removeMouseDownListener()
+        removeTouchStartListener()
+      }
+    }
+
+    _proto._dropFromOutsideListener = function _dropFromOutsideListener(e) {
+      var _getEventCoordinates = getEventCoordinates(e),
+        pageX = _getEventCoordinates.pageX,
+        pageY = _getEventCoordinates.pageY,
+        clientX = _getEventCoordinates.clientX,
+        clientY = _getEventCoordinates.clientY
+
+      this.emit('dropFromOutside', {
+        x: pageX,
+        y: pageY,
+        clientX: clientX,
+        clientY: clientY,
+      })
+      e.preventDefault()
+    }
+
+    _proto._dragOverFromOutsideListener = function _dragOverFromOutsideListener(
+      e
+    ) {
+      var _getEventCoordinates2 = getEventCoordinates(e),
+        pageX = _getEventCoordinates2.pageX,
+        pageY = _getEventCoordinates2.pageY,
+        clientX = _getEventCoordinates2.clientX,
+        clientY = _getEventCoordinates2.clientY
+
+      this.emit('dragOverFromOutside', {
+        x: pageX,
+        y: pageY,
+        clientX: clientX,
+        clientY: clientY,
+      })
+      e.preventDefault()
+    }
+
+    _proto._handleInitialEvent = function _handleInitialEvent(e) {
+      if (this.isDetached) {
+        return
+      }
+
+      var _getEventCoordinates3 = getEventCoordinates(e),
+        clientX = _getEventCoordinates3.clientX,
+        clientY = _getEventCoordinates3.clientY,
+        pageX = _getEventCoordinates3.pageX,
+        pageY = _getEventCoordinates3.pageY
+
+      var node = this.container(),
+        collides,
+        offsetData // Right clicks
+
+      if (
+        e.which === 3 ||
+        e.button === 2 ||
+        !isOverContainer(node, clientX, clientY)
+      )
+        return
+
+      if (!this.globalMouse && node && !contains(node, e.target)) {
+        var _normalizeDistance = normalizeDistance(0),
+          top = _normalizeDistance.top,
+          left = _normalizeDistance.left,
+          bottom = _normalizeDistance.bottom,
+          right = _normalizeDistance.right
+
+        offsetData = getBoundsForNode(node)
+        collides = objectsCollide(
+          {
+            top: offsetData.top - top,
+            left: offsetData.left - left,
+            bottom: offsetData.bottom + bottom,
+            right: offsetData.right + right,
+          },
+          {
+            top: pageY,
+            left: pageX,
+          }
+        )
+        if (!collides) return
+      }
+
+      var result = this.emit(
+        'beforeSelect',
+        (this._initialEventData = {
+          isTouch: /^touch/.test(e.type),
           x: pageX,
           y: pageY,
           clientX: clientX,
           clientY: clientY,
         })
-        e.preventDefault()
-      }
+      )
+      if (result === false) return
 
-      _proto._handleInitialEvent = function _handleInitialEvent(e) {
-        if (this.isDetached) {
-          return
-        }
-
-        var _getEventCoordinates3 = getEventCoordinates(e),
-          clientX = _getEventCoordinates3.clientX,
-          clientY = _getEventCoordinates3.clientY,
-          pageX = _getEventCoordinates3.pageX,
-          pageY = _getEventCoordinates3.pageY
-
-        var node = this.container(),
-          collides,
-          offsetData // Right clicks
-
-        if (
-          e.which === 3 ||
-          e.button === 2 ||
-          !isOverContainer(node, clientX, clientY)
-        )
-          return
-
-        if (!this.globalMouse && node && !contains(node, e.target)) {
-          var _normalizeDistance = normalizeDistance(0),
-            top = _normalizeDistance.top,
-            left = _normalizeDistance.left,
-            bottom = _normalizeDistance.bottom,
-            right = _normalizeDistance.right
-
-          offsetData = getBoundsForNode(node)
-          collides = objectsCollide(
-            {
-              top: offsetData.top - top,
-              left: offsetData.left - left,
-              bottom: offsetData.bottom + bottom,
-              right: offsetData.right + right,
-            },
-            {
-              top: pageY,
-              left: pageX,
-            }
+      switch (e.type) {
+        case 'mousedown':
+          this._removeEndListener = addEventListener$1(
+            'mouseup',
+            this._handleTerminatingEvent
           )
-          if (!collides) return
-        }
+          this._onEscListener = addEventListener$1(
+            'keydown',
+            this._handleTerminatingEvent
+          )
+          this._removeMoveListener = addEventListener$1(
+            'mousemove',
+            this._handleMoveEvent
+          )
+          break
 
-        var result = this.emit(
-          'beforeSelect',
-          (this._initialEventData = {
-            isTouch: /^touch/.test(e.type),
-            x: pageX,
-            y: pageY,
-            clientX: clientX,
-            clientY: clientY,
-          })
-        )
-        if (result === false) return
+        case 'touchstart':
+          this._handleMoveEvent(e)
 
-        switch (e.type) {
-          case 'mousedown':
-            this._removeEndListener = addEventListener$1(
-              'mouseup',
-              this._handleTerminatingEvent
-            )
-            this._onEscListener = addEventListener$1(
-              'keydown',
-              this._handleTerminatingEvent
-            )
-            this._removeMoveListener = addEventListener$1(
-              'mousemove',
-              this._handleMoveEvent
-            )
-            break
+          this._removeEndListener = addEventListener$1(
+            'touchend',
+            this._handleTerminatingEvent
+          )
+          this._removeMoveListener = addEventListener$1(
+            'touchmove',
+            this._handleMoveEvent
+          )
+          break
+      }
+    }
 
-          case 'touchstart':
-            this._handleMoveEvent(e)
+    _proto._handleTerminatingEvent = function _handleTerminatingEvent(e) {
+      var _getEventCoordinates4 = getEventCoordinates(e),
+        pageX = _getEventCoordinates4.pageX,
+        pageY = _getEventCoordinates4.pageY
 
-            this._removeEndListener = addEventListener$1(
-              'touchend',
-              this._handleTerminatingEvent
-            )
-            this._removeMoveListener = addEventListener$1(
-              'touchmove',
-              this._handleMoveEvent
-            )
-            break
-        }
+      this.selecting = false
+      this._removeEndListener && this._removeEndListener()
+      this._removeMoveListener && this._removeMoveListener()
+      if (!this._initialEventData) return
+      var inRoot = !this.container || contains(this.container(), e.target)
+      var bounds = this._selectRect
+      var click = this.isClick(pageX, pageY)
+      this._initialEventData = null
+
+      if (e.key === 'Escape') {
+        return this.emit('reset')
       }
 
-      _proto._handleTerminatingEvent = function _handleTerminatingEvent(e) {
-        var _getEventCoordinates4 = getEventCoordinates(e),
-          pageX = _getEventCoordinates4.pageX,
-          pageY = _getEventCoordinates4.pageY
-
-        this.selecting = false
-        this._removeEndListener && this._removeEndListener()
-        this._removeMoveListener && this._removeMoveListener()
-        if (!this._initialEventData) return
-        var inRoot = !this.container || contains(this.container(), e.target)
-        var bounds = this._selectRect
-        var click = this.isClick(pageX, pageY)
-        this._initialEventData = null
-
-        if (e.key === 'Escape') {
-          return this.emit('reset')
-        }
-
-        if (!inRoot) {
-          return this.emit('reset')
-        }
-
-        if (click && inRoot) {
-          return this._handleClickEvent(e)
-        } // User drag-clicked in the Selectable area
-
-        if (!click) return this.emit('select', bounds)
+      if (!inRoot) {
+        return this.emit('reset')
       }
 
-      _proto._handleClickEvent = function _handleClickEvent(e) {
-        var _getEventCoordinates5 = getEventCoordinates(e),
-          pageX = _getEventCoordinates5.pageX,
-          pageY = _getEventCoordinates5.pageY,
-          clientX = _getEventCoordinates5.clientX,
-          clientY = _getEventCoordinates5.clientY
+      if (click && inRoot) {
+        return this._handleClickEvent(e)
+      } // User drag-clicked in the Selectable area
 
-        var now = new Date().getTime()
+      if (!click) return this.emit('select', bounds)
+    }
 
-        if (
-          this._lastClickData &&
-          now - this._lastClickData.timestamp < clickInterval
-        ) {
-          // Double click event
-          this._lastClickData = null
-          return this.emit('doubleClick', {
-            x: pageX,
-            y: pageY,
-            clientX: clientX,
-            clientY: clientY,
-          })
-        } // Click event
+    _proto._handleClickEvent = function _handleClickEvent(e) {
+      var _getEventCoordinates5 = getEventCoordinates(e),
+        pageX = _getEventCoordinates5.pageX,
+        pageY = _getEventCoordinates5.pageY,
+        clientX = _getEventCoordinates5.clientX,
+        clientY = _getEventCoordinates5.clientY
 
-        this._lastClickData = {
-          timestamp: now,
-        }
-        return this.emit('click', {
+      var now = new Date().getTime()
+
+      if (
+        this._lastClickData &&
+        now - this._lastClickData.timestamp < clickInterval
+      ) {
+        // Double click event
+        this._lastClickData = null
+        return this.emit('doubleClick', {
           x: pageX,
           y: pageY,
           clientX: clientX,
           clientY: clientY,
         })
+      } // Click event
+
+      this._lastClickData = {
+        timestamp: now,
+      }
+      return this.emit('click', {
+        x: pageX,
+        y: pageY,
+        clientX: clientX,
+        clientY: clientY,
+      })
+    }
+
+    _proto._handleMoveEvent = function _handleMoveEvent(e) {
+      if (this._initialEventData === null || this.isDetached) {
+        return
       }
 
-      _proto._handleMoveEvent = function _handleMoveEvent(e) {
-        if (this._initialEventData === null || this.isDetached) {
-          return
-        }
+      var _this$_initialEventDa = this._initialEventData,
+        x = _this$_initialEventDa.x,
+        y = _this$_initialEventDa.y
 
-        var _this$_initialEventDa = this._initialEventData,
-          x = _this$_initialEventDa.x,
-          y = _this$_initialEventDa.y
+      var _getEventCoordinates6 = getEventCoordinates(e),
+        pageX = _getEventCoordinates6.pageX,
+        pageY = _getEventCoordinates6.pageY
 
-        var _getEventCoordinates6 = getEventCoordinates(e),
-          pageX = _getEventCoordinates6.pageX,
-          pageY = _getEventCoordinates6.pageY
+      var w = Math.abs(x - pageX)
+      var h = Math.abs(y - pageY)
+      var left = Math.min(pageX, x),
+        top = Math.min(pageY, y),
+        old = this.selecting // Prevent emitting selectStart event until mouse is moved.
+      // in Chrome on Windows, mouseMove event may be fired just after mouseDown event.
 
-        var w = Math.abs(x - pageX)
-        var h = Math.abs(y - pageY)
-        var left = Math.min(pageX, x),
-          top = Math.min(pageY, y),
-          old = this.selecting // Prevent emitting selectStart event until mouse is moved.
-        // in Chrome on Windows, mouseMove event may be fired just after mouseDown event.
-
-        if (this.isClick(pageX, pageY) && !old && !(w || h)) {
-          return
-        }
-
-        this.selecting = true
-        this._selectRect = {
-          top: top,
-          left: left,
-          x: pageX,
-          y: pageY,
-          right: left + w,
-          bottom: top + h,
-        }
-
-        if (!old) {
-          this.emit('selectStart', this._initialEventData)
-        }
-
-        if (!this.isClick(pageX, pageY))
-          this.emit('selecting', this._selectRect)
-        e.preventDefault()
+      if (this.isClick(pageX, pageY) && !old && !(w || h)) {
+        return
       }
 
-      _proto._keyListener = function _keyListener(e) {
-        this.ctrl = e.metaKey || e.ctrlKey
+      this.selecting = true
+      this._selectRect = {
+        top: top,
+        left: left,
+        x: pageX,
+        y: pageY,
+        right: left + w,
+        bottom: top + h,
       }
 
-      _proto.isClick = function isClick(pageX, pageY) {
-        var _this$_initialEventDa2 = this._initialEventData,
-          x = _this$_initialEventDa2.x,
-          y = _this$_initialEventDa2.y,
-          isTouch = _this$_initialEventDa2.isTouch
-        return (
-          !isTouch &&
-          Math.abs(pageX - x) <= clickTolerance &&
-          Math.abs(pageY - y) <= clickTolerance
-        )
+      if (!old) {
+        this.emit('selectStart', this._initialEventData)
       }
 
-      return Selection
-    })()
+      if (!this.isClick(pageX, pageY)) this.emit('selecting', this._selectRect)
+      e.preventDefault()
+    }
+
+    _proto._keyListener = function _keyListener(e) {
+      this.ctrl = e.metaKey || e.ctrlKey
+    }
+
+    _proto.isClick = function isClick(pageX, pageY) {
+      var _this$_initialEventDa2 = this._initialEventData,
+        x = _this$_initialEventDa2.x,
+        y = _this$_initialEventDa2.y,
+        isTouch = _this$_initialEventDa2.isTouch
+      return (
+        !isTouch &&
+        Math.abs(pageX - x) <= clickTolerance &&
+        Math.abs(pageY - y) <= clickTolerance
+      )
+    }
+
+    return Selection
+  })()
   /**
    * Resolve the disance prop from either an Int or an Object
    * @return {Object}
@@ -7621,223 +7357,214 @@
     if (dir === 'top') return window.pageYOffset || document.body.scrollTop || 0
   }
 
-  var BackgroundCells =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(BackgroundCells, _React$PureComponent)
+  var BackgroundCells = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(BackgroundCells, _React$PureComponent)
 
-      function BackgroundCells(props, context) {
-        var _this
+    function BackgroundCells(props, context) {
+      var _this
 
-        _this = _React$PureComponent.call(this, props, context) || this
-        _this.state = {
-          selecting: false,
-        }
-        return _this
+      _this = _React$PureComponent.call(this, props, context) || this
+      _this.state = {
+        selecting: false,
       }
+      return _this
+    }
 
-      var _proto = BackgroundCells.prototype
+    var _proto = BackgroundCells.prototype
 
-      _proto.componentDidMount = function componentDidMount() {
-        this.props.selectable && this._selectable()
-      }
+    _proto.componentDidMount = function componentDidMount() {
+      this.props.selectable && this._selectable()
+    }
 
-      _proto.componentWillUnmount = function componentWillUnmount() {
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      this._teardownSelectable()
+    }
+
+    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+      nextProps
+    ) {
+      if (nextProps.selectable && !this.props.selectable) this._selectable()
+      if (!nextProps.selectable && this.props.selectable)
         this._teardownSelectable()
-      }
+    }
 
-      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-        nextProps
-      ) {
-        if (nextProps.selectable && !this.props.selectable) this._selectable()
-        if (!nextProps.selectable && this.props.selectable)
-          this._teardownSelectable()
-      }
+    _proto.render = function render() {
+      var _this$props = this.props,
+        range = _this$props.range,
+        getNow = _this$props.getNow,
+        getters = _this$props.getters,
+        currentDate = _this$props.date,
+        Wrapper = _this$props.components.dateCellWrapper
+      var _this$state = this.state,
+        selecting = _this$state.selecting,
+        startIdx = _this$state.startIdx,
+        endIdx = _this$state.endIdx
+      var current = getNow()
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: 'rbc-row-bg',
+        },
+        range.map(function(date, index) {
+          var selected = selecting && index >= startIdx && index <= endIdx
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          range = _this$props.range,
-          getNow = _this$props.getNow,
-          getters = _this$props.getters,
-          currentDate = _this$props.date,
-          Wrapper = _this$props.components.dateCellWrapper
-        var _this$state = this.state,
-          selecting = _this$state.selecting,
-          startIdx = _this$state.startIdx,
-          endIdx = _this$state.endIdx
-        var current = getNow()
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
+          var _getters$dayProp = getters.dayProp(date),
+            className = _getters$dayProp.className,
+            style = _getters$dayProp.style
+
+          return /*#__PURE__*/ React__default.createElement(
+            Wrapper,
             {
-              className: 'rbc-row-bg',
+              key: index,
+              value: date,
+              range: range,
             },
-            range.map(function(date, index) {
-              var selected = selecting && index >= startIdx && index <= endIdx
-
-              var _getters$dayProp = getters.dayProp(date),
-                className = _getters$dayProp.className,
-                style = _getters$dayProp.style
-
-              return (
-                /*#__PURE__*/
-                React__default.createElement(
-                  Wrapper,
-                  {
-                    key: index,
-                    value: date,
-                    range: range,
-                  },
-                  /*#__PURE__*/
-                  React__default.createElement('div', {
-                    style: style,
-                    className: clsx(
-                      'rbc-day-bg',
-                      className,
-                      selected && 'rbc-selected-cell',
-                      eq(date, current, 'day') && 'rbc-today',
-                      currentDate &&
-                        month(currentDate) !== month(date) &&
-                        'rbc-off-range-bg'
-                    ),
-                  })
-                )
-              )
+            /*#__PURE__*/ React__default.createElement('div', {
+              style: style,
+              className: clsx(
+                'rbc-day-bg',
+                className,
+                selected && 'rbc-selected-cell',
+                eq(date, current, 'day') && 'rbc-today',
+                currentDate &&
+                  month(currentDate) !== month(date) &&
+                  'rbc-off-range-bg'
+              ),
             })
           )
-        )
-      }
+        })
+      )
+    }
 
-      _proto._selectable = function _selectable() {
-        var _this2 = this
+    _proto._selectable = function _selectable() {
+      var _this2 = this
 
-        var node = ReactDOM.findDOMNode(this)
-        var selector = (this._selector = new Selection(this.props.container, {
-          longPressThreshold: this.props.longPressThreshold,
-        }))
+      var node = ReactDOM.findDOMNode(this)
+      var selector = (this._selector = new Selection(this.props.container, {
+        longPressThreshold: this.props.longPressThreshold,
+      }))
 
-        var selectorClicksHandler = function selectorClicksHandler(
-          point,
-          actionType
-        ) {
-          if (!isEvent(ReactDOM.findDOMNode(_this2), point)) {
-            var rowBox = getBoundsForNode(node)
-            var _this2$props = _this2.props,
-              range = _this2$props.range,
-              rtl = _this2$props.rtl
+      var selectorClicksHandler = function selectorClicksHandler(
+        point,
+        actionType
+      ) {
+        if (!isEvent(ReactDOM.findDOMNode(_this2), point)) {
+          var rowBox = getBoundsForNode(node)
+          var _this2$props = _this2.props,
+            range = _this2$props.range,
+            rtl = _this2$props.rtl
 
-            if (pointInBox(rowBox, point)) {
-              var currentCell = getSlotAtX(rowBox, point.x, rtl, range.length)
+          if (pointInBox(rowBox, point)) {
+            var currentCell = getSlotAtX(rowBox, point.x, rtl, range.length)
 
-              _this2._selectSlot({
-                startIdx: currentCell,
-                endIdx: currentCell,
-                action: actionType,
-                box: point,
-              })
-            }
+            _this2._selectSlot({
+              startIdx: currentCell,
+              endIdx: currentCell,
+              action: actionType,
+              box: point,
+            })
           }
-
-          _this2._initial = {}
-
-          _this2.setState({
-            selecting: false,
-          })
         }
 
-        selector.on('selecting', function(box) {
-          var _this2$props2 = _this2.props,
-            range = _this2$props2.range,
-            rtl = _this2$props2.rtl
-          var startIdx = -1
-          var endIdx = -1
+        _this2._initial = {}
 
-          if (!_this2.state.selecting) {
-            notify(_this2.props.onSelectStart, [box])
-            _this2._initial = {
-              x: box.x,
-              y: box.y,
-            }
+        _this2.setState({
+          selecting: false,
+        })
+      }
+
+      selector.on('selecting', function(box) {
+        var _this2$props2 = _this2.props,
+          range = _this2$props2.range,
+          rtl = _this2$props2.rtl
+        var startIdx = -1
+        var endIdx = -1
+
+        if (!_this2.state.selecting) {
+          notify(_this2.props.onSelectStart, [box])
+          _this2._initial = {
+            x: box.x,
+            y: box.y,
           }
+        }
 
-          if (selector.isSelected(node)) {
-            var nodeBox = getBoundsForNode(node)
+        if (selector.isSelected(node)) {
+          var nodeBox = getBoundsForNode(node)
 
-            var _dateCellSelection = dateCellSelection(
-              _this2._initial,
-              nodeBox,
-              box,
-              range.length,
-              rtl
-            )
-
-            startIdx = _dateCellSelection.startIdx
-            endIdx = _dateCellSelection.endIdx
-          }
-
-          _this2.setState({
-            selecting: true,
-            startIdx: startIdx,
-            endIdx: endIdx,
-          })
-        })
-        selector.on('beforeSelect', function(box) {
-          if (_this2.props.selectable !== 'ignoreEvents') return
-          return !isEvent(ReactDOM.findDOMNode(_this2), box)
-        })
-        selector.on('click', function(point) {
-          return selectorClicksHandler(point, 'click')
-        })
-        selector.on('doubleClick', function(point) {
-          return selectorClicksHandler(point, 'doubleClick')
-        })
-        selector.on('select', function(bounds) {
-          _this2._selectSlot(
-            _extends({}, _this2.state, {
-              action: 'select',
-              bounds: bounds,
-            })
+          var _dateCellSelection = dateCellSelection(
+            _this2._initial,
+            nodeBox,
+            box,
+            range.length,
+            rtl
           )
 
-          _this2._initial = {}
+          startIdx = _dateCellSelection.startIdx
+          endIdx = _dateCellSelection.endIdx
+        }
 
-          _this2.setState({
-            selecting: false,
-          })
-
-          notify(_this2.props.onSelectEnd, [_this2.state])
+        _this2.setState({
+          selecting: true,
+          startIdx: startIdx,
+          endIdx: endIdx,
         })
-      }
+      })
+      selector.on('beforeSelect', function(box) {
+        if (_this2.props.selectable !== 'ignoreEvents') return
+        return !isEvent(ReactDOM.findDOMNode(_this2), box)
+      })
+      selector.on('click', function(point) {
+        return selectorClicksHandler(point, 'click')
+      })
+      selector.on('doubleClick', function(point) {
+        return selectorClicksHandler(point, 'doubleClick')
+      })
+      selector.on('select', function(bounds) {
+        _this2._selectSlot(
+          _extends({}, _this2.state, {
+            action: 'select',
+            bounds: bounds,
+          })
+        )
 
-      _proto._teardownSelectable = function _teardownSelectable() {
-        if (!this._selector) return
+        _this2._initial = {}
 
-        this._selector.teardown()
+        _this2.setState({
+          selecting: false,
+        })
 
-        this._selector = null
-      }
+        notify(_this2.props.onSelectEnd, [_this2.state])
+      })
+    }
 
-      _proto._selectSlot = function _selectSlot(_ref) {
-        var endIdx = _ref.endIdx,
-          startIdx = _ref.startIdx,
-          action = _ref.action,
-          bounds = _ref.bounds,
-          box = _ref.box
-        if (endIdx !== -1 && startIdx !== -1)
-          this.props.onSelectSlot &&
-            this.props.onSelectSlot({
-              start: startIdx,
-              end: endIdx,
-              action: action,
-              bounds: bounds,
-              box: box,
-              resourceId: this.props.resourceId,
-            })
-      }
+    _proto._teardownSelectable = function _teardownSelectable() {
+      if (!this._selector) return
 
-      return BackgroundCells
-    })(React__default.PureComponent)
+      this._selector.teardown()
+
+      this._selector = null
+    }
+
+    _proto._selectSlot = function _selectSlot(_ref) {
+      var endIdx = _ref.endIdx,
+        startIdx = _ref.startIdx,
+        action = _ref.action,
+        bounds = _ref.bounds,
+        box = _ref.box
+      if (endIdx !== -1 && startIdx !== -1)
+        this.props.onSelectSlot &&
+          this.props.onSelectSlot({
+            start: startIdx,
+            end: endIdx,
+            action: action,
+            bounds: bounds,
+            box: box,
+            resourceId: this.props.resourceId,
+          })
+    }
+
+    return BackgroundCells
+  })(React__default.PureComponent)
 
   BackgroundCells.propTypes = {
     date: propTypes.instanceOf(Date),
@@ -7890,25 +7617,22 @@
         resizable = props.resizable
       var continuesPrior = slotMetrics.continuesPrior(event)
       var continuesAfter = slotMetrics.continuesAfter(event)
-      return (
-        /*#__PURE__*/
-        React__default.createElement(EventCell, {
-          event: event,
-          getters: getters,
-          localizer: localizer,
-          accessors: accessors,
-          components: components,
-          onSelect: onSelect,
-          onDoubleClick: onDoubleClick,
-          onKeyPress: onKeyPress,
-          continuesPrior: continuesPrior,
-          continuesAfter: continuesAfter,
-          slotStart: slotMetrics.first,
-          slotEnd: slotMetrics.last,
-          selected: isSelected(event, selected),
-          resizable: resizable,
-        })
-      )
+      return /*#__PURE__*/ React__default.createElement(EventCell, {
+        event: event,
+        getters: getters,
+        localizer: localizer,
+        accessors: accessors,
+        components: components,
+        onSelect: onSelect,
+        onDoubleClick: onDoubleClick,
+        onKeyPress: onKeyPress,
+        continuesPrior: continuesPrior,
+        continuesAfter: continuesAfter,
+        slotStart: slotMetrics.first,
+        slotEnd: slotMetrics.last,
+        selected: isSelected(event, selected),
+        resizable: resizable,
+      })
     },
     renderSpan: function renderSpan(slots, len, key, content) {
       if (content === void 0) {
@@ -7916,71 +7640,62 @@
       }
 
       var per = (Math.abs(len) / slots) * 100 + '%'
-      return (
-        /*#__PURE__*/
-        React__default.createElement(
-          'div',
-          {
-            key: key,
-            className: 'rbc-row-segment', // IE10/11 need max-width. flex-basis doesn't respect box-sizing
-            style: {
-              WebkitFlexBasis: per,
-              flexBasis: per,
-              maxWidth: per,
-            },
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          key: key,
+          className: 'rbc-row-segment', // IE10/11 need max-width. flex-basis doesn't respect box-sizing
+          style: {
+            WebkitFlexBasis: per,
+            flexBasis: per,
+            maxWidth: per,
           },
-          content
-        )
+        },
+        content
       )
     },
   }
 
-  var EventRow =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(EventRow, _React$PureComponent)
+  var EventRow = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(EventRow, _React$PureComponent)
 
-      function EventRow() {
-        return _React$PureComponent.apply(this, arguments) || this
-      }
+    function EventRow() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = EventRow.prototype
+    var _proto = EventRow.prototype
 
-      _proto.render = function render() {
-        var _this = this
+    _proto.render = function render() {
+      var _this = this
 
-        var _this$props = this.props,
-          segments = _this$props.segments,
-          slots = _this$props.slotMetrics.slots,
-          className = _this$props.className
-        var lastEnd = 1
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              className: clsx(className, 'rbc-row'),
-            },
-            segments.reduce(function(row, _ref, li) {
-              var event = _ref.event,
-                left = _ref.left,
-                right = _ref.right,
-                span = _ref.span
-              var key = '_lvl_' + li
-              var gap = left - lastEnd
-              var content = EventRowMixin.renderEvent(_this.props, event)
-              if (gap)
-                row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
-              row.push(EventRowMixin.renderSpan(slots, span, key, content))
-              lastEnd = right + 1
-              return row
-            }, [])
-          )
-        )
-      }
+      var _this$props = this.props,
+        segments = _this$props.segments,
+        slots = _this$props.slotMetrics.slots,
+        className = _this$props.className
+      var lastEnd = 1
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: clsx(className, 'rbc-row'),
+        },
+        segments.reduce(function(row, _ref, li) {
+          var event = _ref.event,
+            left = _ref.left,
+            right = _ref.right,
+            span = _ref.span
+          var key = '_lvl_' + li
+          var gap = left - lastEnd
+          var content = EventRowMixin.renderEvent(_this.props, event)
+          if (gap) row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
+          row.push(EventRowMixin.renderSpan(slots, span, key, content))
+          lastEnd = right + 1
+          return row
+        }, [])
+      )
+    }
 
-      return EventRow
-    })(React__default.PureComponent)
+    return EventRow
+  })(React__default.PureComponent)
 
   EventRow.propTypes = _extends(
     {
@@ -10724,120 +10439,114 @@
     }).length
   }
 
-  var EventEndingRow =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(EventEndingRow, _React$PureComponent)
+  var EventEndingRow = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(EventEndingRow, _React$PureComponent)
 
-      function EventEndingRow() {
-        return _React$PureComponent.apply(this, arguments) || this
-      }
+    function EventEndingRow() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = EventEndingRow.prototype
+    var _proto = EventEndingRow.prototype
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          segments = _this$props.segments,
-          slots = _this$props.slotMetrics.slots
-        var rowSegments = eventLevels(segments).levels[0]
-        var current = 1,
-          lastEnd = 1,
-          row = []
+    _proto.render = function render() {
+      var _this$props = this.props,
+        segments = _this$props.segments,
+        slots = _this$props.slotMetrics.slots
+      var rowSegments = eventLevels(segments).levels[0]
+      var current = 1,
+        lastEnd = 1,
+        row = []
 
-        while (current <= slots) {
-          var key = '_lvl_' + current
+      while (current <= slots) {
+        var key = '_lvl_' + current
 
-          var _ref =
-              rowSegments.filter(function(seg) {
-                return isSegmentInSlot(seg, current)
-              })[0] || {},
-            event = _ref.event,
-            left = _ref.left,
-            right = _ref.right,
-            span = _ref.span //eslint-disable-line
+        var _ref =
+            rowSegments.filter(function(seg) {
+              return isSegmentInSlot(seg, current)
+            })[0] || {},
+          event = _ref.event,
+          left = _ref.left,
+          right = _ref.right,
+          span = _ref.span //eslint-disable-line
 
-          if (!event) {
-            current++
-            continue
-          }
-
-          var gap = Math.max(0, left - lastEnd)
-
-          if (this.canRenderSlotEvent(left, span)) {
-            var content = EventRowMixin.renderEvent(this.props, event)
-
-            if (gap) {
-              row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
-            }
-
-            row.push(EventRowMixin.renderSpan(slots, span, key, content))
-            lastEnd = current = right + 1
-          } else {
-            if (gap) {
-              row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
-            }
-
-            row.push(
-              EventRowMixin.renderSpan(
-                slots,
-                1,
-                key,
-                this.renderShowMore(segments, current)
-              )
-            )
-            lastEnd = current = current + 1
-          }
+        if (!event) {
+          current++
+          continue
         }
 
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              className: 'rbc-row',
-            },
-            row
-          )
-        )
-      }
+        var gap = Math.max(0, left - lastEnd)
 
-      _proto.canRenderSlotEvent = function canRenderSlotEvent(slot, span) {
-        var segments = this.props.segments
-        return range$1(slot, slot + span).every(function(s) {
-          var count = eventsInSlot(segments, s)
-          return count === 1
-        })
-      }
+        if (this.canRenderSlotEvent(left, span)) {
+          var content = EventRowMixin.renderEvent(this.props, event)
 
-      _proto.renderShowMore = function renderShowMore(segments, slot) {
-        var _this = this
+          if (gap) {
+            row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
+          }
 
-        var localizer = this.props.localizer
-        var count = eventsInSlot(segments, slot)
-        return count
-          ? /*#__PURE__*/
-            React__default.createElement(
-              'a',
-              {
-                key: 'sm_' + slot,
-                href: '#',
-                className: 'rbc-show-more',
-                onClick: function onClick(e) {
-                  return _this.showMore(slot, e)
-                },
-              },
-              localizer.messages.showMore(count)
+          row.push(EventRowMixin.renderSpan(slots, span, key, content))
+          lastEnd = current = right + 1
+        } else {
+          if (gap) {
+            row.push(EventRowMixin.renderSpan(slots, gap, key + '_gap'))
+          }
+
+          row.push(
+            EventRowMixin.renderSpan(
+              slots,
+              1,
+              key,
+              this.renderShowMore(segments, current)
             )
-          : false
+          )
+          lastEnd = current = current + 1
+        }
       }
 
-      _proto.showMore = function showMore(slot, e) {
-        e.preventDefault()
-        this.props.onShowMore(slot, e.target)
-      }
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: 'rbc-row',
+        },
+        row
+      )
+    }
 
-      return EventEndingRow
-    })(React__default.PureComponent)
+    _proto.canRenderSlotEvent = function canRenderSlotEvent(slot, span) {
+      var segments = this.props.segments
+      return range$1(slot, slot + span).every(function(s) {
+        var count = eventsInSlot(segments, s)
+        return count === 1
+      })
+    }
+
+    _proto.renderShowMore = function renderShowMore(segments, slot) {
+      var _this = this
+
+      var localizer = this.props.localizer
+      var count = eventsInSlot(segments, slot)
+      return count
+        ? /*#__PURE__*/ React__default.createElement(
+            'a',
+            {
+              key: 'sm_' + slot,
+              href: '#',
+              className: 'rbc-show-more',
+              onClick: function onClick(e) {
+                return _this.showMore(slot, e)
+              },
+            },
+            localizer.messages.showMore(count)
+          )
+        : false
+    }
+
+    _proto.showMore = function showMore(slot, e) {
+      e.preventDefault()
+      this.props.onShowMore(slot, e.target)
+    }
+
+    return EventEndingRow
+  })(React__default.PureComponent)
 
   EventEndingRow.propTypes = _extends(
     {
@@ -10851,15 +10560,12 @@
 
   var ScrollableWeekWrapper = function ScrollableWeekWrapper(_ref) {
     var children = _ref.children
-    return (
-      /*#__PURE__*/
-      React__default.createElement(
-        'div',
-        {
-          className: 'rbc-row-content-scroll-container',
-        },
-        children
-      )
+    return /*#__PURE__*/ React__default.createElement(
+      'div',
+      {
+        className: 'rbc-row-content-scroll-container',
+      },
+      children
     )
   }
 
@@ -10982,291 +10688,130 @@
     }, isEqual)
   }
 
-  var DateContentRow =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(DateContentRow, _React$PureComponent)
+  var DateContentRow = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(DateContentRow, _React$PureComponent)
 
-      function DateContentRow() {
-        var _this
+    function DateContentRow() {
+      var _this
 
-        for (
-          var _len = arguments.length, args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          args[_key] = arguments[_key]
-        }
-
-        _this =
-          _React$PureComponent.call.apply(
-            _React$PureComponent,
-            [this].concat(args)
-          ) || this
-
-        _this.handleSelectSlot = function(slot) {
-          var _this$props = _this.props,
-            range = _this$props.range,
-            onSelectSlot = _this$props.onSelectSlot
-          onSelectSlot(range.slice(slot.start, slot.end + 1), slot)
-        }
-
-        _this.handleShowMore = function(slot, target) {
-          var _this$props2 = _this.props,
-            range = _this$props2.range,
-            onShowMore = _this$props2.onShowMore
-
-          var metrics = _this.slotMetrics(_this.props)
-
-          var row = qsa(
-            ReactDOM.findDOMNode(_assertThisInitialized(_this)),
-            '.rbc-row-bg'
-          )[0]
-          var cell
-          if (row) cell = row.children[slot - 1]
-          var events = metrics.getEventsForSlot(slot)
-          onShowMore(events, range[slot - 1], cell, slot, target)
-        }
-
-        _this.createHeadingRef = function(r) {
-          _this.headingRow = r
-        }
-
-        _this.createEventRef = function(r) {
-          _this.eventRow = r
-        }
-
-        _this.getContainer = function() {
-          var container = _this.props.container
-          return container
-            ? container()
-            : ReactDOM.findDOMNode(_assertThisInitialized(_this))
-        }
-
-        _this.renderHeadingCell = function(date, index) {
-          var _this$props3 = _this.props,
-            renderHeader = _this$props3.renderHeader,
-            getNow = _this$props3.getNow
-          return renderHeader({
-            date: date,
-            key: 'header_' + index,
-            className: clsx(
-              'rbc-date-cell',
-              eq(date, getNow(), 'day') && 'rbc-now'
-            ),
-          })
-        }
-
-        _this.renderDummy = function() {
-          var _this$props4 = _this.props,
-            className = _this$props4.className,
-            range = _this$props4.range,
-            renderHeader = _this$props4.renderHeader,
-            showAllEvents = _this$props4.showAllEvents
-          return (
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                className: className,
-              },
-              /*#__PURE__*/
-              React__default.createElement(
-                'div',
-                {
-                  className: clsx(
-                    'rbc-row-content',
-                    showAllEvents && 'rbc-row-content-scrollable'
-                  ),
-                },
-                renderHeader &&
-                  /*#__PURE__*/
-                  React__default.createElement(
-                    'div',
-                    {
-                      className: 'rbc-row',
-                      ref: _this.createHeadingRef,
-                    },
-                    range.map(_this.renderHeadingCell)
-                  ),
-                /*#__PURE__*/
-                React__default.createElement(
-                  'div',
-                  {
-                    className: 'rbc-row',
-                    ref: _this.createEventRef,
-                  },
-                  /*#__PURE__*/
-                  React__default.createElement(
-                    'div',
-                    {
-                      className: 'rbc-row-segment',
-                    },
-                    /*#__PURE__*/
-                    React__default.createElement(
-                      'div',
-                      {
-                        className: 'rbc-event',
-                      },
-                      /*#__PURE__*/
-                      React__default.createElement(
-                        'div',
-                        {
-                          className: 'rbc-event-content',
-                        },
-                        '\xA0'
-                      )
-                    )
-                  )
-                )
-              )
-            )
-          )
-        }
-
-        _this.slotMetrics = getSlotMetrics()
-        return _this
+      for (
+        var _len = arguments.length, args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
+      ) {
+        args[_key] = arguments[_key]
       }
 
-      var _proto = DateContentRow.prototype
+      _this =
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(args)
+        ) || this
 
-      _proto.getRowLimit = function getRowLimit() {
-        var eventHeight = height(this.eventRow)
-        var headingHeight = this.headingRow ? height(this.headingRow) : 0
-        var eventSpace = height(ReactDOM.findDOMNode(this)) - headingHeight
-        return Math.max(Math.floor(eventSpace / eventHeight), 1)
+      _this.handleSelectSlot = function(slot) {
+        var _this$props = _this.props,
+          range = _this$props.range,
+          onSelectSlot = _this$props.onSelectSlot
+        onSelectSlot(range.slice(slot.start, slot.end + 1), slot)
       }
 
-      _proto.render = function render() {
-        var _this$props5 = this.props,
-          date = _this$props5.date,
-          rtl = _this$props5.rtl,
-          range = _this$props5.range,
-          className = _this$props5.className,
-          selected = _this$props5.selected,
-          selectable = _this$props5.selectable,
-          renderForMeasure = _this$props5.renderForMeasure,
-          accessors = _this$props5.accessors,
-          getters = _this$props5.getters,
-          components = _this$props5.components,
-          getNow = _this$props5.getNow,
-          renderHeader = _this$props5.renderHeader,
-          onSelect = _this$props5.onSelect,
-          localizer = _this$props5.localizer,
-          onSelectStart = _this$props5.onSelectStart,
-          onSelectEnd = _this$props5.onSelectEnd,
-          onDoubleClick = _this$props5.onDoubleClick,
-          onKeyPress = _this$props5.onKeyPress,
-          resourceId = _this$props5.resourceId,
-          longPressThreshold = _this$props5.longPressThreshold,
-          isAllDay = _this$props5.isAllDay,
-          resizable = _this$props5.resizable,
-          showAllEvents = _this$props5.showAllEvents
-        if (renderForMeasure) return this.renderDummy()
-        var metrics = this.slotMetrics(this.props)
-        var levels = metrics.levels,
-          extra = metrics.extra
-        var ScrollableWeekComponent = showAllEvents
-          ? ScrollableWeekWrapper
-          : NoopWrapper
-        var WeekWrapper = components.weekWrapper
-        var eventRowProps = {
-          selected: selected,
-          accessors: accessors,
-          getters: getters,
-          localizer: localizer,
-          components: components,
-          onSelect: onSelect,
-          onDoubleClick: onDoubleClick,
-          onKeyPress: onKeyPress,
-          resourceId: resourceId,
-          slotMetrics: metrics,
-          resizable: resizable,
-        }
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
+      _this.handleShowMore = function(slot, target) {
+        var _this$props2 = _this.props,
+          range = _this$props2.range,
+          onShowMore = _this$props2.onShowMore
+
+        var metrics = _this.slotMetrics(_this.props)
+
+        var row = qsa(
+          ReactDOM.findDOMNode(_assertThisInitialized(_this)),
+          '.rbc-row-bg'
+        )[0]
+        var cell
+        if (row) cell = row.children[slot - 1]
+        var events = metrics.getEventsForSlot(slot)
+        onShowMore(events, range[slot - 1], cell, slot, target)
+      }
+
+      _this.createHeadingRef = function(r) {
+        _this.headingRow = r
+      }
+
+      _this.createEventRef = function(r) {
+        _this.eventRow = r
+      }
+
+      _this.getContainer = function() {
+        var container = _this.props.container
+        return container
+          ? container()
+          : ReactDOM.findDOMNode(_assertThisInitialized(_this))
+      }
+
+      _this.renderHeadingCell = function(date, index) {
+        var _this$props3 = _this.props,
+          renderHeader = _this$props3.renderHeader,
+          getNow = _this$props3.getNow
+        return renderHeader({
+          date: date,
+          key: 'header_' + index,
+          className: clsx(
+            'rbc-date-cell',
+            eq(date, getNow(), 'day') && 'rbc-now'
+          ),
+        })
+      }
+
+      _this.renderDummy = function() {
+        var _this$props4 = _this.props,
+          className = _this$props4.className,
+          range = _this$props4.range,
+          renderHeader = _this$props4.renderHeader,
+          showAllEvents = _this$props4.showAllEvents
+        return /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            className: className,
+          },
+          /*#__PURE__*/ React__default.createElement(
             'div',
             {
-              className: className,
-              role: 'rowgroup',
+              className: clsx(
+                'rbc-row-content',
+                showAllEvents && 'rbc-row-content-scrollable'
+              ),
             },
-            /*#__PURE__*/
-            React__default.createElement(BackgroundCells, {
-              date: date,
-              getNow: getNow,
-              rtl: rtl,
-              range: range,
-              selectable: selectable,
-              container: this.getContainer,
-              getters: getters,
-              onSelectStart: onSelectStart,
-              onSelectEnd: onSelectEnd,
-              onSelectSlot: this.handleSelectSlot,
-              components: components,
-              longPressThreshold: longPressThreshold,
-              resourceId: resourceId,
-            }),
-            /*#__PURE__*/
-            React__default.createElement(
+            renderHeader &&
+              /*#__PURE__*/ React__default.createElement(
+                'div',
+                {
+                  className: 'rbc-row',
+                  ref: _this.createHeadingRef,
+                },
+                range.map(_this.renderHeadingCell)
+              ),
+            /*#__PURE__*/ React__default.createElement(
               'div',
               {
-                className: clsx(
-                  'rbc-row-content',
-                  showAllEvents && 'rbc-row-content-scrollable'
-                ),
-                role: 'row',
+                className: 'rbc-row',
+                ref: _this.createEventRef,
               },
-              renderHeader &&
-                /*#__PURE__*/
-                React__default.createElement(
+              /*#__PURE__*/ React__default.createElement(
+                'div',
+                {
+                  className: 'rbc-row-segment',
+                },
+                /*#__PURE__*/ React__default.createElement(
                   'div',
                   {
-                    className: 'rbc-row ',
-                    ref: this.createHeadingRef,
+                    className: 'rbc-event',
                   },
-                  range.map(this.renderHeadingCell)
-                ),
-              /*#__PURE__*/
-              React__default.createElement(
-                ScrollableWeekComponent,
-                null,
-                /*#__PURE__*/
-                React__default.createElement(
-                  WeekWrapper,
-                  _extends(
+                  /*#__PURE__*/ React__default.createElement(
+                    'div',
                     {
-                      isAllDay: isAllDay,
+                      className: 'rbc-event-content',
                     },
-                    eventRowProps
-                  ),
-                  levels.map(function(segs, idx) {
-                    return (
-                      /*#__PURE__*/
-                      React__default.createElement(
-                        EventRow,
-                        _extends(
-                          {
-                            key: idx,
-                            segments: segs,
-                          },
-                          eventRowProps
-                        )
-                      )
-                    )
-                  }),
-                  !!extra.length &&
-                    /*#__PURE__*/
-                    React__default.createElement(
-                      EventEndingRow,
-                      _extends(
-                        {
-                          segments: extra,
-                          onShowMore: this.handleShowMore,
-                        },
-                        eventRowProps
-                      )
-                    )
+                    '\xA0'
+                  )
                 )
               )
             )
@@ -11274,8 +10819,146 @@
         )
       }
 
-      return DateContentRow
-    })(React__default.PureComponent)
+      _this.slotMetrics = getSlotMetrics()
+      return _this
+    }
+
+    var _proto = DateContentRow.prototype
+
+    _proto.getRowLimit = function getRowLimit() {
+      var eventHeight = height(this.eventRow)
+      var headingHeight = this.headingRow ? height(this.headingRow) : 0
+      var eventSpace = height(ReactDOM.findDOMNode(this)) - headingHeight
+      return Math.max(Math.floor(eventSpace / eventHeight), 1)
+    }
+
+    _proto.render = function render() {
+      var _this$props5 = this.props,
+        date = _this$props5.date,
+        rtl = _this$props5.rtl,
+        range = _this$props5.range,
+        className = _this$props5.className,
+        selected = _this$props5.selected,
+        selectable = _this$props5.selectable,
+        renderForMeasure = _this$props5.renderForMeasure,
+        accessors = _this$props5.accessors,
+        getters = _this$props5.getters,
+        components = _this$props5.components,
+        getNow = _this$props5.getNow,
+        renderHeader = _this$props5.renderHeader,
+        onSelect = _this$props5.onSelect,
+        localizer = _this$props5.localizer,
+        onSelectStart = _this$props5.onSelectStart,
+        onSelectEnd = _this$props5.onSelectEnd,
+        onDoubleClick = _this$props5.onDoubleClick,
+        onKeyPress = _this$props5.onKeyPress,
+        resourceId = _this$props5.resourceId,
+        longPressThreshold = _this$props5.longPressThreshold,
+        isAllDay = _this$props5.isAllDay,
+        resizable = _this$props5.resizable,
+        showAllEvents = _this$props5.showAllEvents
+      if (renderForMeasure) return this.renderDummy()
+      var metrics = this.slotMetrics(this.props)
+      var levels = metrics.levels,
+        extra = metrics.extra
+      var ScrollableWeekComponent = showAllEvents
+        ? ScrollableWeekWrapper
+        : NoopWrapper
+      var WeekWrapper = components.weekWrapper
+      var eventRowProps = {
+        selected: selected,
+        accessors: accessors,
+        getters: getters,
+        localizer: localizer,
+        components: components,
+        onSelect: onSelect,
+        onDoubleClick: onDoubleClick,
+        onKeyPress: onKeyPress,
+        resourceId: resourceId,
+        slotMetrics: metrics,
+        resizable: resizable,
+      }
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: className,
+          role: 'rowgroup',
+        },
+        /*#__PURE__*/ React__default.createElement(BackgroundCells, {
+          date: date,
+          getNow: getNow,
+          rtl: rtl,
+          range: range,
+          selectable: selectable,
+          container: this.getContainer,
+          getters: getters,
+          onSelectStart: onSelectStart,
+          onSelectEnd: onSelectEnd,
+          onSelectSlot: this.handleSelectSlot,
+          components: components,
+          longPressThreshold: longPressThreshold,
+          resourceId: resourceId,
+        }),
+        /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            className: clsx(
+              'rbc-row-content',
+              showAllEvents && 'rbc-row-content-scrollable'
+            ),
+            role: 'row',
+          },
+          renderHeader &&
+            /*#__PURE__*/ React__default.createElement(
+              'div',
+              {
+                className: 'rbc-row ',
+                ref: this.createHeadingRef,
+              },
+              range.map(this.renderHeadingCell)
+            ),
+          /*#__PURE__*/ React__default.createElement(
+            ScrollableWeekComponent,
+            null,
+            /*#__PURE__*/ React__default.createElement(
+              WeekWrapper,
+              _extends(
+                {
+                  isAllDay: isAllDay,
+                },
+                eventRowProps
+              ),
+              levels.map(function(segs, idx) {
+                return /*#__PURE__*/ React__default.createElement(
+                  EventRow,
+                  _extends(
+                    {
+                      key: idx,
+                      segments: segs,
+                    },
+                    eventRowProps
+                  )
+                )
+              }),
+              !!extra.length &&
+                /*#__PURE__*/ React__default.createElement(
+                  EventEndingRow,
+                  _extends(
+                    {
+                      segments: extra,
+                      onShowMore: this.handleShowMore,
+                    },
+                    eventRowProps
+                  )
+                )
+            )
+          )
+        )
+      )
+    }
+
+    return DateContentRow
+  })(React__default.PureComponent)
 
   DateContentRow.propTypes = {
     date: propTypes.instanceOf(Date),
@@ -11317,16 +11000,13 @@
 
   var Header = function Header(_ref) {
     var label = _ref.label
-    return (
-      /*#__PURE__*/
-      React__default.createElement(
-        'span',
-        {
-          role: 'columnheader',
-          'aria-sort': 'none',
-        },
-        label
-      )
+    return /*#__PURE__*/ React__default.createElement(
+      'span',
+      {
+        role: 'columnheader',
+        'aria-sort': 'none',
+      },
+      label
     )
   }
 
@@ -11340,23 +11020,17 @@
       onDrillDown = _ref.onDrillDown
 
     if (!drilldownView) {
-      return (
-        /*#__PURE__*/
-        React__default.createElement('span', null, label)
-      )
+      return /*#__PURE__*/ React__default.createElement('span', null, label)
     }
 
-    return (
-      /*#__PURE__*/
-      React__default.createElement(
-        'a',
-        {
-          href: '#',
-          onClick: onDrillDown,
-          role: 'cell',
-        },
-        label
-      )
+    return /*#__PURE__*/ React__default.createElement(
+      'a',
+      {
+        href: '#',
+        onClick: onDrillDown,
+        role: 'cell',
+      },
+      label
     )
   }
 
@@ -11374,432 +11048,407 @@
     })
   }
 
-  var MonthView =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(MonthView, _React$PureComponent)
+  var MonthView = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(MonthView, _React$PureComponent)
 
-      function MonthView() {
-        var _this
+    function MonthView() {
+      var _this
+
+      for (
+        var _len = arguments.length, _args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
+      ) {
+        _args[_key] = arguments[_key]
+      }
+
+      _this =
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(_args)
+        ) || this
+
+      _this.getContainer = function() {
+        return ReactDOM.findDOMNode(_assertThisInitialized(_this))
+      }
+
+      _this.renderWeek = function(week, weekIdx) {
+        var _this$props = _this.props,
+          events = _this$props.events,
+          components = _this$props.components,
+          selectable = _this$props.selectable,
+          getNow = _this$props.getNow,
+          selected = _this$props.selected,
+          date = _this$props.date,
+          localizer = _this$props.localizer,
+          longPressThreshold = _this$props.longPressThreshold,
+          accessors = _this$props.accessors,
+          getters = _this$props.getters,
+          truncateEvents = _this$props.truncateEvents,
+          showAllEvents = _this$props.showAllEvents
+        var _this$state = _this.state,
+          needLimitMeasure = _this$state.needLimitMeasure,
+          rowLimit = _this$state.rowLimit
+        events = eventsForWeek(
+          events,
+          week[0],
+          week[week.length - 1],
+          accessors
+        )
+        events.sort(function(a, b) {
+          return sortEvents(a, b, accessors)
+        })
+        return /*#__PURE__*/ React__default.createElement(DateContentRow, {
+          key: weekIdx,
+          ref: weekIdx === 0 ? _this.slotRowRef : undefined,
+          container: _this.getContainer,
+          className: 'rbc-month-row',
+          getNow: getNow,
+          date: date,
+          range: week,
+          events: events,
+          maxRows: showAllEvents ? Infinity : rowLimit,
+          selected: selected,
+          selectable: selectable,
+          components: components,
+          accessors: accessors,
+          getters: getters,
+          localizer: localizer,
+          renderHeader: _this.readerDateHeading,
+          renderForMeasure: needLimitMeasure,
+          onShowMore: _this.handleShowMore,
+          onSelect: _this.handleSelectEvent,
+          onDoubleClick: _this.handleDoubleClickEvent,
+          onKeyPress: _this.handleKeyPressEvent,
+          onSelectSlot: _this.handleSelectSlot,
+          longPressThreshold: longPressThreshold,
+          rtl: _this.props.rtl,
+          resizable: _this.props.resizable,
+          truncateEvents: truncateEvents,
+          showAllEvents: showAllEvents,
+        })
+      }
+
+      _this.readerDateHeading = function(_ref) {
+        var date = _ref.date,
+          className = _ref.className,
+          props = _objectWithoutPropertiesLoose(_ref, ['date', 'className'])
+
+        var _this$props2 = _this.props,
+          currentDate = _this$props2.date,
+          getDrilldownView = _this$props2.getDrilldownView,
+          localizer = _this$props2.localizer
+        var isOffRange = month(date) !== month(currentDate)
+        var isCurrent = eq(date, currentDate, 'day')
+        var drilldownView = getDrilldownView(date)
+        var label = localizer.format(date, 'dateFormat')
+        var DateHeaderComponent =
+          _this.props.components.dateHeader || DateHeader
+        return /*#__PURE__*/ React__default.createElement(
+          'div',
+          _extends({}, props, {
+            className: clsx(
+              className,
+              isOffRange && 'rbc-off-range',
+              isCurrent && 'rbc-current'
+            ),
+            role: 'cell',
+          }),
+          /*#__PURE__*/ React__default.createElement(DateHeaderComponent, {
+            label: label,
+            date: date,
+            drilldownView: drilldownView,
+            isOffRange: isOffRange,
+            onDrillDown: function onDrillDown(e) {
+              return _this.handleHeadingClick(date, drilldownView, e)
+            },
+          })
+        )
+      }
+
+      _this.handleSelectSlot = function(range, slotInfo) {
+        _this._pendingSelection = _this._pendingSelection.concat(range)
+        clearTimeout(_this._selectTimer)
+        _this._selectTimer = setTimeout(function() {
+          return _this.selectDates(slotInfo)
+        })
+      }
+
+      _this.handleHeadingClick = function(date, view, e) {
+        e.preventDefault()
+
+        _this.clearSelection()
+
+        notify(_this.props.onDrillDown, [date, view])
+      }
+
+      _this.handleSelectEvent = function() {
+        _this.clearSelection()
 
         for (
-          var _len = arguments.length, _args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
+          var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+          _key2 < _len2;
+          _key2++
         ) {
-          _args[_key] = arguments[_key]
+          args[_key2] = arguments[_key2]
         }
 
-        _this =
-          _React$PureComponent.call.apply(
-            _React$PureComponent,
-            [this].concat(_args)
-          ) || this
+        notify(_this.props.onSelectEvent, args)
+      }
 
-        _this.getContainer = function() {
-          return ReactDOM.findDOMNode(_assertThisInitialized(_this))
+      _this.handleDoubleClickEvent = function() {
+        _this.clearSelection()
+
+        for (
+          var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
+          _key3 < _len3;
+          _key3++
+        ) {
+          args[_key3] = arguments[_key3]
         }
 
-        _this.renderWeek = function(week, weekIdx) {
-          var _this$props = _this.props,
-            events = _this$props.events,
-            components = _this$props.components,
-            selectable = _this$props.selectable,
-            getNow = _this$props.getNow,
-            selected = _this$props.selected,
-            date = _this$props.date,
-            localizer = _this$props.localizer,
-            longPressThreshold = _this$props.longPressThreshold,
-            accessors = _this$props.accessors,
-            getters = _this$props.getters,
-            truncateEvents = _this$props.truncateEvents,
-            showAllEvents = _this$props.showAllEvents
-          var _this$state = _this.state,
-            needLimitMeasure = _this$state.needLimitMeasure,
-            rowLimit = _this$state.rowLimit
-          events = eventsForWeek(
-            events,
-            week[0],
-            week[week.length - 1],
-            accessors
+        notify(_this.props.onDoubleClickEvent, args)
+      }
+
+      _this.handleKeyPressEvent = function() {
+        _this.clearSelection()
+
+        for (
+          var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
+          _key4 < _len4;
+          _key4++
+        ) {
+          args[_key4] = arguments[_key4]
+        }
+
+        notify(_this.props.onKeyPressEvent, args)
+      }
+
+      _this.handleShowMore = function(events, date, cell, slot, target) {
+        var _this$props3 = _this.props,
+          popup = _this$props3.popup,
+          onDrillDown = _this$props3.onDrillDown,
+          onShowMore = _this$props3.onShowMore,
+          getDrilldownView = _this$props3.getDrilldownView,
+          doShowMoreDrillDown = _this$props3.doShowMoreDrillDown //cancel any pending selections so only the event click goes through.
+
+        _this.clearSelection()
+
+        if (popup) {
+          var position$1 = position(
+            cell,
+            ReactDOM.findDOMNode(_assertThisInitialized(_this))
           )
-          events.sort(function(a, b) {
-            return sortEvents(a, b, accessors)
-          })
-          return (
-            /*#__PURE__*/
-            React__default.createElement(DateContentRow, {
-              key: weekIdx,
-              ref: weekIdx === 0 ? _this.slotRowRef : undefined,
-              container: _this.getContainer,
-              className: 'rbc-month-row',
-              getNow: getNow,
+
+          _this.setState({
+            overlay: {
               date: date,
-              range: week,
               events: events,
-              maxRows: showAllEvents ? Infinity : rowLimit,
-              selected: selected,
-              selectable: selectable,
-              components: components,
+              position: position$1,
+              target: target,
+            },
+          })
+        } else if (doShowMoreDrillDown) {
+          notify(onDrillDown, [date, getDrilldownView(date) || views.DAY])
+        }
+
+        notify(onShowMore, [events, date, slot])
+      }
+
+      _this.overlayDisplay = function() {
+        _this.setState({
+          overlay: null,
+        })
+      }
+
+      _this._bgRows = []
+      _this._pendingSelection = []
+      _this.slotRowRef = /*#__PURE__*/ React__default.createRef()
+      _this.state = {
+        rowLimit: 5,
+        needLimitMeasure: true,
+      }
+      return _this
+    }
+
+    var _proto = MonthView.prototype
+
+    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+      _ref2
+    ) {
+      var date = _ref2.date
+      this.setState({
+        needLimitMeasure: !eq(date, this.props.date, 'month'),
+      })
+    }
+
+    _proto.componentDidMount = function componentDidMount() {
+      var _this2 = this
+
+      var running
+      if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
+      window.addEventListener(
+        'resize',
+        (this._resizeListener = function() {
+          if (!running) {
+            request(function() {
+              running = false
+
+              _this2.setState({
+                needLimitMeasure: true,
+              }) //eslint-disable-line
+            })
+          }
+        }),
+        false
+      )
+    }
+
+    _proto.componentDidUpdate = function componentDidUpdate() {
+      if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
+    }
+
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      window.removeEventListener('resize', this._resizeListener, false)
+    }
+
+    _proto.render = function render() {
+      var _this$props4 = this.props,
+        date = _this$props4.date,
+        localizer = _this$props4.localizer,
+        className = _this$props4.className,
+        month = visibleDays(date, localizer),
+        weeks = chunk(month, 7)
+      this._weekCount = weeks.length
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: clsx('rbc-month-view', className),
+          role: 'table',
+          'aria-label': 'Month View',
+        },
+        /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            className: 'rbc-row rbc-month-header',
+            role: 'row',
+          },
+          this.renderHeaders(weeks[0])
+        ),
+        weeks.map(this.renderWeek),
+        this.props.popup && this.renderOverlay()
+      )
+    }
+
+    _proto.renderHeaders = function renderHeaders(row) {
+      var _this$props5 = this.props,
+        localizer = _this$props5.localizer,
+        components = _this$props5.components
+      var first = row[0]
+      var last = row[row.length - 1]
+      var HeaderComponent = components.header || Header
+      return range(first, last, 'day').map(function(day, idx) {
+        return /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            key: 'header_' + idx,
+            className: 'rbc-header',
+          },
+          /*#__PURE__*/ React__default.createElement(HeaderComponent, {
+            date: day,
+            localizer: localizer,
+            label: localizer.format(day, 'weekdayFormat'),
+          })
+        )
+      })
+    }
+
+    _proto.renderOverlay = function renderOverlay() {
+      var _this3 = this
+
+      var overlay = (this.state && this.state.overlay) || {}
+      var _this$props6 = this.props,
+        accessors = _this$props6.accessors,
+        localizer = _this$props6.localizer,
+        components = _this$props6.components,
+        getters = _this$props6.getters,
+        selected = _this$props6.selected,
+        popupOffset = _this$props6.popupOffset
+      return /*#__PURE__*/ React__default.createElement(
+        Overlay,
+        {
+          rootClose: true,
+          placement: 'bottom',
+          show: !!overlay.position,
+          onHide: function onHide() {
+            return _this3.setState({
+              overlay: null,
+            })
+          },
+          target: function target() {
+            return overlay.target
+          },
+        },
+        function(_ref3) {
+          var props = _ref3.props
+          return /*#__PURE__*/ React__default.createElement(
+            Popup$1,
+            _extends({}, props, {
+              popupOffset: popupOffset,
               accessors: accessors,
               getters: getters,
+              selected: selected,
+              components: components,
               localizer: localizer,
-              renderHeader: _this.readerDateHeading,
-              renderForMeasure: needLimitMeasure,
-              onShowMore: _this.handleShowMore,
-              onSelect: _this.handleSelectEvent,
-              onDoubleClick: _this.handleDoubleClickEvent,
-              onKeyPress: _this.handleKeyPressEvent,
-              onSelectSlot: _this.handleSelectSlot,
-              longPressThreshold: longPressThreshold,
-              rtl: _this.props.rtl,
-              resizable: _this.props.resizable,
-              truncateEvents: truncateEvents,
-              showAllEvents: showAllEvents,
+              position: overlay.position,
+              show: _this3.overlayDisplay,
+              events: overlay.events,
+              slotStart: overlay.date,
+              slotEnd: overlay.end,
+              onSelect: _this3.handleSelectEvent,
+              onDoubleClick: _this3.handleDoubleClickEvent,
+              onKeyPress: _this3.handleKeyPressEvent,
+              handleDragStart: _this3.props.handleDragStart,
             })
           )
         }
+      )
+    }
 
-        _this.readerDateHeading = function(_ref) {
-          var date = _ref.date,
-            className = _ref.className,
-            props = _objectWithoutPropertiesLoose(_ref, ['date', 'className'])
+    _proto.measureRowLimit = function measureRowLimit() {
+      this.setState({
+        needLimitMeasure: false,
+        rowLimit: this.slotRowRef.current.getRowLimit(),
+      })
+    }
 
-          var _this$props2 = _this.props,
-            currentDate = _this$props2.date,
-            getDrilldownView = _this$props2.getDrilldownView,
-            localizer = _this$props2.localizer
-          var isOffRange = month(date) !== month(currentDate)
-          var isCurrent = eq(date, currentDate, 'day')
-          var drilldownView = getDrilldownView(date)
-          var label = localizer.format(date, 'dateFormat')
-          var DateHeaderComponent =
-            _this.props.components.dateHeader || DateHeader
-          return (
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              _extends({}, props, {
-                className: clsx(
-                  className,
-                  isOffRange && 'rbc-off-range',
-                  isCurrent && 'rbc-current'
-                ),
-                role: 'cell',
-              }),
-              /*#__PURE__*/
-              React__default.createElement(DateHeaderComponent, {
-                label: label,
-                date: date,
-                drilldownView: drilldownView,
-                isOffRange: isOffRange,
-                onDrillDown: function onDrillDown(e) {
-                  return _this.handleHeadingClick(date, drilldownView, e)
-                },
-              })
-            )
-          )
-        }
+    _proto.selectDates = function selectDates(slotInfo) {
+      var slots = this._pendingSelection.slice()
 
-        _this.handleSelectSlot = function(range, slotInfo) {
-          _this._pendingSelection = _this._pendingSelection.concat(range)
-          clearTimeout(_this._selectTimer)
-          _this._selectTimer = setTimeout(function() {
-            return _this.selectDates(slotInfo)
-          })
-        }
+      this._pendingSelection = []
+      slots.sort(function(a, b) {
+        return +a - +b
+      })
+      var start = new Date(slots[0])
+      var end = new Date(slots[slots.length - 1])
+      end.setDate(slots[slots.length - 1].getDate() + 1)
+      notify(this.props.onSelectSlot, {
+        slots: slots,
+        start: start,
+        end: end,
+        action: slotInfo.action,
+        bounds: slotInfo.bounds,
+        box: slotInfo.box,
+      })
+    }
 
-        _this.handleHeadingClick = function(date, view, e) {
-          e.preventDefault()
+    _proto.clearSelection = function clearSelection() {
+      clearTimeout(this._selectTimer)
+      this._pendingSelection = []
+    }
 
-          _this.clearSelection()
-
-          notify(_this.props.onDrillDown, [date, view])
-        }
-
-        _this.handleSelectEvent = function() {
-          _this.clearSelection()
-
-          for (
-            var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
-            _key2 < _len2;
-            _key2++
-          ) {
-            args[_key2] = arguments[_key2]
-          }
-
-          notify(_this.props.onSelectEvent, args)
-        }
-
-        _this.handleDoubleClickEvent = function() {
-          _this.clearSelection()
-
-          for (
-            var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
-            _key3 < _len3;
-            _key3++
-          ) {
-            args[_key3] = arguments[_key3]
-          }
-
-          notify(_this.props.onDoubleClickEvent, args)
-        }
-
-        _this.handleKeyPressEvent = function() {
-          _this.clearSelection()
-
-          for (
-            var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
-            _key4 < _len4;
-            _key4++
-          ) {
-            args[_key4] = arguments[_key4]
-          }
-
-          notify(_this.props.onKeyPressEvent, args)
-        }
-
-        _this.handleShowMore = function(events, date, cell, slot, target) {
-          var _this$props3 = _this.props,
-            popup = _this$props3.popup,
-            onDrillDown = _this$props3.onDrillDown,
-            onShowMore = _this$props3.onShowMore,
-            getDrilldownView = _this$props3.getDrilldownView,
-            doShowMoreDrillDown = _this$props3.doShowMoreDrillDown //cancel any pending selections so only the event click goes through.
-
-          _this.clearSelection()
-
-          if (popup) {
-            var position$1 = position(
-              cell,
-              ReactDOM.findDOMNode(_assertThisInitialized(_this))
-            )
-
-            _this.setState({
-              overlay: {
-                date: date,
-                events: events,
-                position: position$1,
-                target: target,
-              },
-            })
-          } else if (doShowMoreDrillDown) {
-            notify(onDrillDown, [date, getDrilldownView(date) || views.DAY])
-          }
-
-          notify(onShowMore, [events, date, slot])
-        }
-
-        _this.overlayDisplay = function() {
-          _this.setState({
-            overlay: null,
-          })
-        }
-
-        _this._bgRows = []
-        _this._pendingSelection = []
-        _this.slotRowRef =
-          /*#__PURE__*/
-          React__default.createRef()
-        _this.state = {
-          rowLimit: 5,
-          needLimitMeasure: true,
-        }
-        return _this
-      }
-
-      var _proto = MonthView.prototype
-
-      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-        _ref2
-      ) {
-        var date = _ref2.date
-        this.setState({
-          needLimitMeasure: !eq(date, this.props.date, 'month'),
-        })
-      }
-
-      _proto.componentDidMount = function componentDidMount() {
-        var _this2 = this
-
-        var running
-        if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
-        window.addEventListener(
-          'resize',
-          (this._resizeListener = function() {
-            if (!running) {
-              request(function() {
-                running = false
-
-                _this2.setState({
-                  needLimitMeasure: true,
-                }) //eslint-disable-line
-              })
-            }
-          }),
-          false
-        )
-      }
-
-      _proto.componentDidUpdate = function componentDidUpdate() {
-        if (this.state.needLimitMeasure) this.measureRowLimit(this.props)
-      }
-
-      _proto.componentWillUnmount = function componentWillUnmount() {
-        window.removeEventListener('resize', this._resizeListener, false)
-      }
-
-      _proto.render = function render() {
-        var _this$props4 = this.props,
-          date = _this$props4.date,
-          localizer = _this$props4.localizer,
-          className = _this$props4.className,
-          month = visibleDays(date, localizer),
-          weeks = chunk(month, 7)
-        this._weekCount = weeks.length
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              className: clsx('rbc-month-view', className),
-              role: 'table',
-              'aria-label': 'Month View',
-            },
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                className: 'rbc-row rbc-month-header',
-                role: 'row',
-              },
-              this.renderHeaders(weeks[0])
-            ),
-            weeks.map(this.renderWeek),
-            this.props.popup && this.renderOverlay()
-          )
-        )
-      }
-
-      _proto.renderHeaders = function renderHeaders(row) {
-        var _this$props5 = this.props,
-          localizer = _this$props5.localizer,
-          components = _this$props5.components
-        var first = row[0]
-        var last = row[row.length - 1]
-        var HeaderComponent = components.header || Header
-        return range(first, last, 'day').map(function(day, idx) {
-          return (
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                key: 'header_' + idx,
-                className: 'rbc-header',
-              },
-              /*#__PURE__*/
-              React__default.createElement(HeaderComponent, {
-                date: day,
-                localizer: localizer,
-                label: localizer.format(day, 'weekdayFormat'),
-              })
-            )
-          )
-        })
-      }
-
-      _proto.renderOverlay = function renderOverlay() {
-        var _this3 = this
-
-        var overlay = (this.state && this.state.overlay) || {}
-        var _this$props6 = this.props,
-          accessors = _this$props6.accessors,
-          localizer = _this$props6.localizer,
-          components = _this$props6.components,
-          getters = _this$props6.getters,
-          selected = _this$props6.selected,
-          popupOffset = _this$props6.popupOffset
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            Overlay,
-            {
-              rootClose: true,
-              placement: 'bottom',
-              show: !!overlay.position,
-              onHide: function onHide() {
-                return _this3.setState({
-                  overlay: null,
-                })
-              },
-              target: function target() {
-                return overlay.target
-              },
-            },
-            function(_ref3) {
-              var props = _ref3.props
-              return (
-                /*#__PURE__*/
-                React__default.createElement(
-                  Popup$1,
-                  _extends({}, props, {
-                    popupOffset: popupOffset,
-                    accessors: accessors,
-                    getters: getters,
-                    selected: selected,
-                    components: components,
-                    localizer: localizer,
-                    position: overlay.position,
-                    show: _this3.overlayDisplay,
-                    events: overlay.events,
-                    slotStart: overlay.date,
-                    slotEnd: overlay.end,
-                    onSelect: _this3.handleSelectEvent,
-                    onDoubleClick: _this3.handleDoubleClickEvent,
-                    onKeyPress: _this3.handleKeyPressEvent,
-                    handleDragStart: _this3.props.handleDragStart,
-                  })
-                )
-              )
-            }
-          )
-        )
-      }
-
-      _proto.measureRowLimit = function measureRowLimit() {
-        this.setState({
-          needLimitMeasure: false,
-          rowLimit: this.slotRowRef.current.getRowLimit(),
-        })
-      }
-
-      _proto.selectDates = function selectDates(slotInfo) {
-        var slots = this._pendingSelection.slice()
-
-        this._pendingSelection = []
-        slots.sort(function(a, b) {
-          return +a - +b
-        })
-        var start = new Date(slots[0])
-        var end = new Date(slots[slots.length - 1])
-        end.setDate(slots[slots.length - 1].getDate() + 1)
-        notify(this.props.onSelectSlot, {
-          slots: slots,
-          start: start,
-          end: end,
-          action: slotInfo.action,
-          bounds: slotInfo.bounds,
-          box: slotInfo.box,
-        })
-      }
-
-      _proto.clearSelection = function clearSelection() {
-        clearTimeout(this._selectTimer)
-        this._pendingSelection = []
-      }
-
-      return MonthView
-    })(React__default.PureComponent)
+    return MonthView
+  })(React__default.PureComponent)
 
   MonthView.propTypes = {
     events: propTypes.array.isRequired,
@@ -12542,107 +12191,105 @@
     return baseOrderBy(collection, baseFlatten(iteratees, 1), [])
   })
 
-  var Event =
-    /*#__PURE__*/
-    (function() {
-      function Event(data, _ref) {
-        var accessors = _ref.accessors,
-          slotMetrics = _ref.slotMetrics
+  var Event = /*#__PURE__*/ (function() {
+    function Event(data, _ref) {
+      var accessors = _ref.accessors,
+        slotMetrics = _ref.slotMetrics
 
-        var _slotMetrics$getRange = slotMetrics.getRange(
-            accessors.start(data),
-            accessors.end(data)
-          ),
-          start = _slotMetrics$getRange.start,
-          startDate = _slotMetrics$getRange.startDate,
-          end = _slotMetrics$getRange.end,
-          endDate = _slotMetrics$getRange.endDate,
-          top = _slotMetrics$getRange.top,
-          height = _slotMetrics$getRange.height
+      var _slotMetrics$getRange = slotMetrics.getRange(
+          accessors.start(data),
+          accessors.end(data)
+        ),
+        start = _slotMetrics$getRange.start,
+        startDate = _slotMetrics$getRange.startDate,
+        end = _slotMetrics$getRange.end,
+        endDate = _slotMetrics$getRange.endDate,
+        top = _slotMetrics$getRange.top,
+        height = _slotMetrics$getRange.height
 
-        this.start = start
-        this.end = end
-        this.startMs = +startDate
-        this.endMs = +endDate
-        this.top = top
-        this.height = height
-        this.data = data
-      }
-      /**
-       * The event's width without any overlap.
-       */
+      this.start = start
+      this.end = end
+      this.startMs = +startDate
+      this.endMs = +endDate
+      this.top = top
+      this.height = height
+      this.data = data
+    }
+    /**
+     * The event's width without any overlap.
+     */
 
-      _createClass(Event, [
-        {
-          key: '_width',
-          get: function get() {
-            // The container event's width is determined by the maximum number of
-            // events in any of its rows.
-            if (this.rows) {
-              var columns =
-                this.rows.reduce(
-                  function(max, row) {
-                    return Math.max(max, row.leaves.length + 1)
-                  }, // add itself
-                  0
-                ) + 1 // add the container
+    _createClass(Event, [
+      {
+        key: '_width',
+        get: function get() {
+          // The container event's width is determined by the maximum number of
+          // events in any of its rows.
+          if (this.rows) {
+            var columns =
+              this.rows.reduce(
+                function(max, row) {
+                  return Math.max(max, row.leaves.length + 1)
+                }, // add itself
+                0
+              ) + 1 // add the container
 
-              return 100 / columns
-            }
+            return 100 / columns
+          }
 
-            var availableWidth = 100 - this.container._width // The row event's width is the space left by the container, divided
-            // among itself and its leaves.
+          var availableWidth = 100 - this.container._width // The row event's width is the space left by the container, divided
+          // among itself and its leaves.
 
-            if (this.leaves) {
-              return availableWidth / (this.leaves.length + 1)
-            } // The leaf event's width is determined by its row's width
+          if (this.leaves) {
+            return availableWidth / (this.leaves.length + 1)
+          } // The leaf event's width is determined by its row's width
 
-            return this.row._width
-          },
-          /**
-           * The event's calculated width, possibly with extra width added for
-           * overlapping effect.
-           */
+          return this.row._width
         },
-        {
-          key: 'width',
-          get: function get() {
-            var noOverlap = this._width
-            var overlap = Math.min(100, this._width * 1.7) // Containers can always grow.
+        /**
+         * The event's calculated width, possibly with extra width added for
+         * overlapping effect.
+         */
+      },
+      {
+        key: 'width',
+        get: function get() {
+          var noOverlap = this._width
+          var overlap = Math.min(100, this._width * 1.7) // Containers can always grow.
 
-            if (this.rows) {
-              return overlap
-            } // Rows can grow if they have leaves.
+          if (this.rows) {
+            return overlap
+          } // Rows can grow if they have leaves.
 
-            if (this.leaves) {
-              return this.leaves.length > 0 ? overlap : noOverlap
-            } // Leaves can grow unless they're the last item in a row.
+          if (this.leaves) {
+            return this.leaves.length > 0 ? overlap : noOverlap
+          } // Leaves can grow unless they're the last item in a row.
 
-            var leaves = this.row.leaves
-            var index = leaves.indexOf(this)
-            return index === leaves.length - 1 ? noOverlap : overlap
-          },
+          var leaves = this.row.leaves
+          var index = leaves.indexOf(this)
+          return index === leaves.length - 1 ? noOverlap : overlap
         },
-        {
-          key: 'xOffset',
-          get: function get() {
-            // Containers have no offset.
-            if (this.rows) return 0 // Rows always start where their container ends.
+      },
+      {
+        key: 'xOffset',
+        get: function get() {
+          // Containers have no offset.
+          if (this.rows) return 0 // Rows always start where their container ends.
 
-            if (this.leaves) return this.container._width // Leaves are spread out evenly on the space left by its row.
+          if (this.leaves) return this.container._width // Leaves are spread out evenly on the space left by its row.
 
-            var _this$row = this.row,
-              leaves = _this$row.leaves,
-              xOffset = _this$row.xOffset,
-              _width = _this$row._width
-            var index = leaves.indexOf(this) + 1
-            return xOffset + index * _width
-          },
+          var _this$row = this.row,
+            leaves = _this$row.leaves,
+            xOffset = _this$row.xOffset,
+            _width = _this$row._width
+          var index = leaves.indexOf(this) + 1
+          return xOffset + index * _width
         },
-      ])
+      },
+    ])
 
-      return Event
-    })()
+    return Event
+  })()
   /**
    * Return true if event a and b is considered to be on the same row.
    */
@@ -12900,74 +12547,65 @@
     return algorithm.apply(this, arguments)
   }
 
-  var TimeSlotGroup =
-    /*#__PURE__*/
-    (function(_PureComponent) {
-      _inheritsLoose(TimeSlotGroup, _PureComponent)
+  var TimeSlotGroup = /*#__PURE__*/ (function(_PureComponent) {
+    _inheritsLoose(TimeSlotGroup, _PureComponent)
 
-      function TimeSlotGroup() {
-        return _PureComponent.apply(this, arguments) || this
-      }
+    function TimeSlotGroup() {
+      return _PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = TimeSlotGroup.prototype
+    var _proto = TimeSlotGroup.prototype
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          renderSlot = _this$props.renderSlot,
-          resource = _this$props.resource,
-          group = _this$props.group,
-          getters = _this$props.getters,
-          _this$props$component = _this$props.components
-        _this$props$component =
-          _this$props$component === void 0 ? {} : _this$props$component
-        var _this$props$component2 = _this$props$component.timeSlotWrapper,
-          Wrapper =
-            _this$props$component2 === void 0
-              ? NoopWrapper
-              : _this$props$component2,
-          isTimeGutter = _this$props.isTimeGutter
-        var groupProps = getters ? getters.slotGroupProp() : {}
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            _extends(
-              {
-                className: 'rbc-timeslot-group',
-              },
-              groupProps
-            ),
-            group.map(function(value, idx) {
-              var slotProps = getters ? getters.slotProp(value, resource) : {}
-              var slotPropClassName = isTimeGutter
-                ? 'gutter-' + slotProps.className
-                : slotProps.className
-              return (
-                /*#__PURE__*/
-                React__default.createElement(
-                  Wrapper,
-                  {
-                    key: idx,
-                    value: value,
-                    resource: resource,
-                  },
-                  /*#__PURE__*/
-                  React__default.createElement(
-                    'div',
-                    _extends({}, slotProps, {
-                      className: clsx('rbc-time-slot', slotPropClassName),
-                    }),
-                    renderSlot && renderSlot(value, idx)
-                  )
-                )
-              )
-            })
+    _proto.render = function render() {
+      var _this$props = this.props,
+        renderSlot = _this$props.renderSlot,
+        resource = _this$props.resource,
+        group = _this$props.group,
+        getters = _this$props.getters,
+        _this$props$component = _this$props.components
+      _this$props$component =
+        _this$props$component === void 0 ? {} : _this$props$component
+      var _this$props$component2 = _this$props$component.timeSlotWrapper,
+        Wrapper =
+          _this$props$component2 === void 0
+            ? NoopWrapper
+            : _this$props$component2,
+        isTimeGutter = _this$props.isTimeGutter
+      var groupProps = getters ? getters.slotGroupProp() : {}
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        _extends(
+          {
+            className: 'rbc-timeslot-group',
+          },
+          groupProps
+        ),
+        group.map(function(value, idx) {
+          var slotProps = getters ? getters.slotProp(value, resource) : {}
+          var slotPropClassName = isTimeGutter
+            ? 'gutter-' + slotProps.className
+            : slotProps.className
+          return /*#__PURE__*/ React__default.createElement(
+            Wrapper,
+            {
+              key: idx,
+              value: value,
+              resource: resource,
+            },
+            /*#__PURE__*/ React__default.createElement(
+              'div',
+              _extends({}, slotProps, {
+                className: clsx('rbc-time-slot', slotPropClassName),
+              }),
+              renderSlot && renderSlot(value, idx)
+            )
           )
-        )
-      }
+        })
+      )
+    }
 
-      return TimeSlotGroup
-    })(React.PureComponent)
+    return TimeSlotGroup
+  })(React.PureComponent)
   TimeSlotGroup.propTypes = {
     renderSlot: propTypes.func,
     group: propTypes.array.isRequired,
@@ -12982,684 +12620,655 @@
   }
   /* eslint-disable react/prop-types */
 
-  var TimeGridEvent =
-    /*#__PURE__*/
-    React__default.memo(function(props) {
-      var _extends2, _extends3
+  var TimeGridEvent = /*#__PURE__*/ React__default.memo(function(props) {
+    var _extends2, _extends3
 
-      var style = props.style,
-        className = props.className,
-        event = props.event,
-        accessors = props.accessors,
-        rtl = props.rtl,
-        selected = props.selected,
-        label = props.label,
-        continuesEarlier = props.continuesEarlier,
-        continuesLater = props.continuesLater,
-        getters = props.getters,
-        onClick = props.onClick,
-        onDoubleClick = props.onDoubleClick,
-        isBackgroundEvent = props.isBackgroundEvent,
-        onKeyPress = props.onKeyPress,
-        _props$components = props.components,
-        Event = _props$components.event,
-        EventWrapper = _props$components.eventWrapper
-      var title = accessors.title(event)
-      var tooltip = accessors.tooltip(event)
-      var end = accessors.end(event)
-      var start = accessors.start(event)
-      var userProps = getters.eventProp(event, start, end, selected)
-      var height = style.height,
-        top = style.top,
-        width = style.width,
-        xOffset = style.xOffset
-      var inner = [
-        /*#__PURE__*/
-        React__default.createElement(
-          'div',
-          {
-            key: '1',
-            className: 'rbc-event-label',
-          },
-          label
-        ),
-        /*#__PURE__*/
-        React__default.createElement(
-          'div',
-          {
-            key: '2',
-            className: 'rbc-event-content',
-          },
-          Event
-            ? /*#__PURE__*/
-              React__default.createElement(Event, {
-                event: event,
-                title: title,
-              })
-            : title
-        ),
-      ]
-      var eventStyle = isBackgroundEvent
-        ? _extends(
-            {},
-            userProps.style,
-            ((_extends2 = {
-              top: stringifyPercent(top),
-              height: stringifyPercent(height),
-              // Adding 10px to take events container right margin into account
-              width: 'calc(' + width + ' + 10px)',
-            }),
-            (_extends2[rtl ? 'right' : 'left'] = stringifyPercent(
-              Math.max(0, xOffset)
-            )),
-            _extends2)
-          )
-        : _extends(
-            {},
-            userProps.style,
-            ((_extends3 = {
-              top: stringifyPercent(top),
-              width: stringifyPercent(width),
-              height: stringifyPercent(height),
-            }),
-            (_extends3[rtl ? 'right' : 'left'] = stringifyPercent(xOffset)),
-            _extends3)
-          )
-      return (
-        /*#__PURE__*/
-        React__default.createElement(
-          EventWrapper,
-          _extends(
-            {
-              type: 'time',
-            },
-            props
-          ),
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              onClick: onClick,
-              onDoubleClick: onDoubleClick,
-              style: eventStyle,
-              onKeyPress: onKeyPress,
-              title: tooltip
-                ? (typeof label === 'string' ? label + ': ' : '') + tooltip
-                : undefined,
-              className: clsx(
-                isBackgroundEvent ? 'rbc-background-event' : 'rbc-event',
-                className,
-                userProps.className,
-                {
-                  'rbc-selected': selected,
-                  'rbc-event-continues-earlier': continuesEarlier,
-                  'rbc-event-continues-later': continuesLater,
-                }
-              ),
-            },
-            inner
-          )
+    var style = props.style,
+      className = props.className,
+      event = props.event,
+      accessors = props.accessors,
+      rtl = props.rtl,
+      selected = props.selected,
+      label = props.label,
+      continuesEarlier = props.continuesEarlier,
+      continuesLater = props.continuesLater,
+      getters = props.getters,
+      onClick = props.onClick,
+      onDoubleClick = props.onDoubleClick,
+      isBackgroundEvent = props.isBackgroundEvent,
+      onKeyPress = props.onKeyPress,
+      _props$components = props.components,
+      Event = _props$components.event,
+      EventWrapper = _props$components.eventWrapper
+    var title = accessors.title(event)
+    var tooltip = accessors.tooltip(event)
+    var end = accessors.end(event)
+    var start = accessors.start(event)
+    var userProps = getters.eventProp(event, start, end, selected)
+    var height = style.height,
+      top = style.top,
+      width = style.width,
+      xOffset = style.xOffset
+    var inner = [
+      /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          key: '1',
+          className: 'rbc-event-label',
+        },
+        label
+      ),
+      /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          key: '2',
+          className: 'rbc-event-content',
+        },
+        Event
+          ? /*#__PURE__*/ React__default.createElement(Event, {
+              event: event,
+              title: title,
+            })
+          : title
+      ),
+    ]
+    var eventStyle = isBackgroundEvent
+      ? _extends(
+          {},
+          userProps.style,
+          ((_extends2 = {
+            top: stringifyPercent(top),
+            height: stringifyPercent(height),
+            // Adding 10px to take events container right margin into account
+            width: 'calc(' + width + ' + 10px)',
+          }),
+          (_extends2[rtl ? 'right' : 'left'] = stringifyPercent(
+            Math.max(0, xOffset)
+          )),
+          _extends2)
         )
+      : _extends(
+          {},
+          userProps.style,
+          ((_extends3 = {
+            top: stringifyPercent(top),
+            width: stringifyPercent(width),
+            height: stringifyPercent(height),
+          }),
+          (_extends3[rtl ? 'right' : 'left'] = stringifyPercent(xOffset)),
+          _extends3)
+        )
+    return /*#__PURE__*/ React__default.createElement(
+      EventWrapper,
+      _extends(
+        {
+          type: 'time',
+        },
+        props
+      ),
+      /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          onClick: onClick,
+          onDoubleClick: onDoubleClick,
+          style: eventStyle,
+          onKeyPress: onKeyPress,
+          title: tooltip
+            ? (typeof label === 'string' ? label + ': ' : '') + tooltip
+            : undefined,
+          className: clsx(
+            isBackgroundEvent ? 'rbc-background-event' : 'rbc-event',
+            className,
+            userProps.className,
+            {
+              'rbc-selected': selected,
+              'rbc-event-continues-earlier': continuesEarlier,
+              'rbc-event-continues-later': continuesLater,
+            }
+          ),
+        },
+        inner
       )
-    })
+    )
+  })
 
   var DayColumnWrapper = function DayColumnWrapper(_ref) {
     var children = _ref.children,
       className = _ref.className,
       style = _ref.style
-    return (
-      /*#__PURE__*/
-      React__default.createElement(
-        'div',
-        {
-          className: className,
-          style: style,
-        },
-        children
-      )
+    return /*#__PURE__*/ React__default.createElement(
+      'div',
+      {
+        className: className,
+        style: style,
+      },
+      children
     )
   }
 
-  var DayColumn =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(DayColumn, _React$PureComponent)
+  var DayColumn = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(DayColumn, _React$PureComponent)
 
-      function DayColumn() {
-        var _this
+    function DayColumn() {
+      var _this
 
-        for (
-          var _len = arguments.length, _args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          _args[_key] = arguments[_key]
-        }
+      for (
+        var _len = arguments.length, _args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
+      ) {
+        _args[_key] = arguments[_key]
+      }
 
-        _this =
-          _React$PureComponent.call.apply(
-            _React$PureComponent,
-            [this].concat(_args)
-          ) || this
-        _this.state = {
-          selecting: false,
-          timeIndicatorPosition: null,
-        }
-        _this.intervalTriggered = false
+      _this =
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(_args)
+        ) || this
+      _this.state = {
+        selecting: false,
+        timeIndicatorPosition: null,
+      }
+      _this.intervalTriggered = false
 
-        _this.renderEvents = function(_ref) {
-          var events = _ref.events,
-            isBackgroundEvent = _ref.isBackgroundEvent
-          var _this$props = _this.props,
-            rtl = _this$props.rtl,
-            selected = _this$props.selected,
-            accessors = _this$props.accessors,
-            localizer = _this$props.localizer,
-            getters = _this$props.getters,
-            components = _this$props.components,
-            step = _this$props.step,
-            timeslots = _this$props.timeslots,
-            dayLayoutAlgorithm = _this$props.dayLayoutAlgorithm,
-            resizable = _this$props.resizable
+      _this.renderEvents = function(_ref) {
+        var events = _ref.events,
+          isBackgroundEvent = _ref.isBackgroundEvent
+        var _this$props = _this.props,
+          rtl = _this$props.rtl,
+          selected = _this$props.selected,
+          accessors = _this$props.accessors,
+          localizer = _this$props.localizer,
+          getters = _this$props.getters,
+          components = _this$props.components,
+          step = _this$props.step,
+          timeslots = _this$props.timeslots,
+          dayLayoutAlgorithm = _this$props.dayLayoutAlgorithm,
+          resizable = _this$props.resizable
 
-          var _assertThisInitialize = _assertThisInitialized(_this),
-            slotMetrics = _assertThisInitialize.slotMetrics
+        var _assertThisInitialize = _assertThisInitialized(_this),
+          slotMetrics = _assertThisInitialize.slotMetrics
 
-          var messages = localizer.messages
-          var styledEvents = getStyledEvents$1({
-            events: events,
-            accessors: accessors,
-            slotMetrics: slotMetrics,
-            minimumStartDifference: Math.ceil((step * timeslots) / 2),
-            dayLayoutAlgorithm: dayLayoutAlgorithm,
-          })
-          return styledEvents.map(function(_ref2, idx) {
-            var event = _ref2.event,
-              style = _ref2.style
-            var end = accessors.end(event)
-            var start = accessors.start(event)
-            var format = 'eventTimeRangeFormat'
-            var label
-            var startsBeforeDay = slotMetrics.startsBeforeDay(start)
-            var startsAfterDay = slotMetrics.startsAfterDay(end)
-            if (startsBeforeDay) format = 'eventTimeRangeEndFormat'
-            else if (startsAfterDay) format = 'eventTimeRangeStartFormat'
-            if (startsBeforeDay && startsAfterDay) label = messages.allDay
-            else
-              label = localizer.format(
-                {
-                  start: start,
-                  end: end,
-                },
-                format
-              )
-            var continuesEarlier =
-              startsBeforeDay || slotMetrics.startsBefore(start)
-            var continuesLater = startsAfterDay || slotMetrics.startsAfter(end)
-            return (
-              /*#__PURE__*/
-              React__default.createElement(TimeGridEvent, {
-                style: style,
-                event: event,
-                label: label,
-                key: 'evt_' + idx,
-                getters: getters,
-                rtl: rtl,
-                components: components,
-                continuesEarlier: continuesEarlier,
-                continuesLater: continuesLater,
-                accessors: accessors,
-                selected: isSelected(event, selected),
-                onClick: function onClick(e) {
-                  return _this._select(event, e)
-                },
-                onDoubleClick: function onDoubleClick(e) {
-                  return _this._doubleClick(event, e)
-                },
-                isBackgroundEvent: isBackgroundEvent,
-                onKeyPress: function onKeyPress(e) {
-                  return _this._keyPress(event, e)
-                },
-                resizable: resizable,
-              })
+        var messages = localizer.messages
+        var styledEvents = getStyledEvents$1({
+          events: events,
+          accessors: accessors,
+          slotMetrics: slotMetrics,
+          minimumStartDifference: Math.ceil((step * timeslots) / 2),
+          dayLayoutAlgorithm: dayLayoutAlgorithm,
+        })
+        return styledEvents.map(function(_ref2, idx) {
+          var event = _ref2.event,
+            style = _ref2.style
+          var end = accessors.end(event)
+          var start = accessors.start(event)
+          var format = 'eventTimeRangeFormat'
+          var label
+          var startsBeforeDay = slotMetrics.startsBeforeDay(start)
+          var startsAfterDay = slotMetrics.startsAfterDay(end)
+          if (startsBeforeDay) format = 'eventTimeRangeEndFormat'
+          else if (startsAfterDay) format = 'eventTimeRangeStartFormat'
+          if (startsBeforeDay && startsAfterDay) label = messages.allDay
+          else
+            label = localizer.format(
+              {
+                start: start,
+                end: end,
+              },
+              format
             )
-          })
-        }
-
-        _this._selectable = function() {
-          var node = ReactDOM.findDOMNode(_assertThisInitialized(_this))
-          var selector = (_this._selector = new Selection(
-            function() {
-              return ReactDOM.findDOMNode(_assertThisInitialized(_this))
+          var continuesEarlier =
+            startsBeforeDay || slotMetrics.startsBefore(start)
+          var continuesLater = startsAfterDay || slotMetrics.startsAfter(end)
+          return /*#__PURE__*/ React__default.createElement(TimeGridEvent, {
+            style: style,
+            event: event,
+            label: label,
+            key: 'evt_' + idx,
+            getters: getters,
+            rtl: rtl,
+            components: components,
+            continuesEarlier: continuesEarlier,
+            continuesLater: continuesLater,
+            accessors: accessors,
+            selected: isSelected(event, selected),
+            onClick: function onClick(e) {
+              return _this._select(event, e)
             },
-            {
-              longPressThreshold: _this.props.longPressThreshold,
-            }
-          ))
+            onDoubleClick: function onDoubleClick(e) {
+              return _this._doubleClick(event, e)
+            },
+            isBackgroundEvent: isBackgroundEvent,
+            onKeyPress: function onKeyPress(e) {
+              return _this._keyPress(event, e)
+            },
+            resizable: resizable,
+          })
+        })
+      }
 
-          var maybeSelect = function maybeSelect(box) {
-            var onSelecting = _this.props.onSelecting
-            var current = _this.state || {}
-            var state = selectionState(box)
-            var start = state.startDate,
-              end = state.endDate
+      _this._selectable = function() {
+        var node = ReactDOM.findDOMNode(_assertThisInitialized(_this))
+        var selector = (_this._selector = new Selection(
+          function() {
+            return ReactDOM.findDOMNode(_assertThisInitialized(_this))
+          },
+          {
+            longPressThreshold: _this.props.longPressThreshold,
+          }
+        ))
 
-            if (onSelecting) {
-              if (
-                (eq(current.startDate, start, 'minutes') &&
-                  eq(current.endDate, end, 'minutes')) ||
-                onSelecting({
-                  start: start,
-                  end: end,
-                  resourceId: _this.props.resource,
-                }) === false
-              )
-                return
-            }
+        var maybeSelect = function maybeSelect(box) {
+          var onSelecting = _this.props.onSelecting
+          var current = _this.state || {}
+          var state = selectionState(box)
+          var start = state.startDate,
+            end = state.endDate
 
+          if (onSelecting) {
             if (
-              _this.state.start !== state.start ||
-              _this.state.end !== state.end ||
-              _this.state.selecting !== state.selecting
-            ) {
-              _this.setState(state)
-            }
+              (eq(current.startDate, start, 'minutes') &&
+                eq(current.endDate, end, 'minutes')) ||
+              onSelecting({
+                start: start,
+                end: end,
+                resourceId: _this.props.resource,
+              }) === false
+            )
+              return
           }
 
-          var selectionState = function selectionState(point) {
-            var currentSlot = _this.slotMetrics.closestSlotFromPoint(
-              point,
-              getBoundsForNode(node)
-            )
+          if (
+            _this.state.start !== state.start ||
+            _this.state.end !== state.end ||
+            _this.state.selecting !== state.selecting
+          ) {
+            _this.setState(state)
+          }
+        }
 
-            if (!_this.state.selecting) {
-              _this._initialSlot = currentSlot
-            }
+        var selectionState = function selectionState(point) {
+          var currentSlot = _this.slotMetrics.closestSlotFromPoint(
+            point,
+            getBoundsForNode(node)
+          )
 
-            var initialSlot = _this._initialSlot
+          if (!_this.state.selecting) {
+            _this._initialSlot = currentSlot
+          }
 
-            if (lte(initialSlot, currentSlot)) {
-              currentSlot = _this.slotMetrics.nextSlot(currentSlot)
-            } else if (gt(initialSlot, currentSlot)) {
-              initialSlot = _this.slotMetrics.nextSlot(initialSlot)
-            }
+          var initialSlot = _this._initialSlot
 
-            var selectRange = _this.slotMetrics.getRange(
-              min(initialSlot, currentSlot),
-              max(initialSlot, currentSlot)
-            )
+          if (lte(initialSlot, currentSlot)) {
+            currentSlot = _this.slotMetrics.nextSlot(currentSlot)
+          } else if (gt(initialSlot, currentSlot)) {
+            initialSlot = _this.slotMetrics.nextSlot(initialSlot)
+          }
 
-            return _extends({}, selectRange, {
-              selecting: true,
-              top: selectRange.top + '%',
-              height: selectRange.height + '%',
+          var selectRange = _this.slotMetrics.getRange(
+            min(initialSlot, currentSlot),
+            max(initialSlot, currentSlot)
+          )
+
+          return _extends({}, selectRange, {
+            selecting: true,
+            top: selectRange.top + '%',
+            height: selectRange.height + '%',
+          })
+        }
+
+        var selectorClicksHandler = function selectorClicksHandler(
+          box,
+          actionType
+        ) {
+          if (
+            !isEvent(ReactDOM.findDOMNode(_assertThisInitialized(_this)), box)
+          ) {
+            var _selectionState = selectionState(box),
+              startDate = _selectionState.startDate,
+              endDate = _selectionState.endDate
+
+            _this._selectSlot({
+              startDate: startDate,
+              endDate: endDate,
+              action: actionType,
+              box: box,
             })
           }
 
-          var selectorClicksHandler = function selectorClicksHandler(
-            box,
-            actionType
-          ) {
-            if (
-              !isEvent(ReactDOM.findDOMNode(_assertThisInitialized(_this)), box)
-            ) {
-              var _selectionState = selectionState(box),
-                startDate = _selectionState.startDate,
-                endDate = _selectionState.endDate
+          _this.setState({
+            selecting: false,
+          })
+        }
 
-              _this._selectSlot({
-                startDate: startDate,
-                endDate: endDate,
-                action: actionType,
-                box: box,
+        selector.on('selecting', maybeSelect)
+        selector.on('selectStart', maybeSelect)
+        selector.on('beforeSelect', function(box) {
+          if (_this.props.selectable !== 'ignoreEvents') return
+          return !isEvent(
+            ReactDOM.findDOMNode(_assertThisInitialized(_this)),
+            box
+          )
+        })
+        selector.on('click', function(box) {
+          return selectorClicksHandler(box, 'click')
+        })
+        selector.on('doubleClick', function(box) {
+          return selectorClicksHandler(box, 'doubleClick')
+        })
+        selector.on('select', function(bounds) {
+          if (_this.state.selecting) {
+            _this._selectSlot(
+              _extends({}, _this.state, {
+                action: 'select',
+                bounds: bounds,
               })
-            }
+            )
 
             _this.setState({
               selecting: false,
             })
           }
-
-          selector.on('selecting', maybeSelect)
-          selector.on('selectStart', maybeSelect)
-          selector.on('beforeSelect', function(box) {
-            if (_this.props.selectable !== 'ignoreEvents') return
-            return !isEvent(
-              ReactDOM.findDOMNode(_assertThisInitialized(_this)),
-              box
-            )
-          })
-          selector.on('click', function(box) {
-            return selectorClicksHandler(box, 'click')
-          })
-          selector.on('doubleClick', function(box) {
-            return selectorClicksHandler(box, 'doubleClick')
-          })
-          selector.on('select', function(bounds) {
-            if (_this.state.selecting) {
-              _this._selectSlot(
-                _extends({}, _this.state, {
-                  action: 'select',
-                  bounds: bounds,
-                })
-              )
-
-              _this.setState({
-                selecting: false,
-              })
-            }
-          })
-          selector.on('reset', function() {
-            if (_this.state.selecting) {
-              _this.setState({
-                selecting: false,
-              })
-            }
-          })
-        }
-
-        _this._teardownSelectable = function() {
-          if (!_this._selector) return
-
-          _this._selector.teardown()
-
-          _this._selector = null
-        }
-
-        _this._selectSlot = function(_ref3) {
-          var startDate = _ref3.startDate,
-            endDate = _ref3.endDate,
-            action = _ref3.action,
-            bounds = _ref3.bounds,
-            box = _ref3.box
-          var current = startDate,
-            slots = []
-
-          while (lte(current, endDate)) {
-            slots.push(current)
-            current = new Date(+current + _this.props.step * 60 * 1000) // using Date ensures not to create an endless loop the day DST begins
+        })
+        selector.on('reset', function() {
+          if (_this.state.selecting) {
+            _this.setState({
+              selecting: false,
+            })
           }
-
-          notify(_this.props.onSelectSlot, {
-            slots: slots,
-            start: startDate,
-            end: endDate,
-            resourceId: _this.props.resource,
-            action: action,
-            bounds: bounds,
-            box: box,
-          })
-        }
-
-        _this._select = function() {
-          for (
-            var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
-            _key2 < _len2;
-            _key2++
-          ) {
-            args[_key2] = arguments[_key2]
-          }
-
-          notify(_this.props.onSelectEvent, args)
-        }
-
-        _this._doubleClick = function() {
-          for (
-            var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
-            _key3 < _len3;
-            _key3++
-          ) {
-            args[_key3] = arguments[_key3]
-          }
-
-          notify(_this.props.onDoubleClickEvent, args)
-        }
-
-        _this._keyPress = function() {
-          for (
-            var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
-            _key4 < _len4;
-            _key4++
-          ) {
-            args[_key4] = arguments[_key4]
-          }
-
-          notify(_this.props.onKeyPressEvent, args)
-        }
-
-        _this.slotMetrics = getSlotMetrics$1(_this.props)
-        return _this
+        })
       }
 
-      var _proto = DayColumn.prototype
+      _this._teardownSelectable = function() {
+        if (!_this._selector) return
 
-      _proto.componentDidMount = function componentDidMount() {
-        this.props.selectable && this._selectable()
+        _this._selector.teardown()
 
-        if (this.props.isNow) {
-          this.setTimeIndicatorPositionUpdateInterval()
-        }
+        _this._selector = null
       }
 
-      _proto.componentWillUnmount = function componentWillUnmount() {
-        this._teardownSelectable()
+      _this._selectSlot = function(_ref3) {
+        var startDate = _ref3.startDate,
+          endDate = _ref3.endDate,
+          action = _ref3.action,
+          bounds = _ref3.bounds,
+          box = _ref3.box
+        var current = startDate,
+          slots = []
 
-        this.clearTimeIndicatorInterval()
-      }
-
-      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-        nextProps
-      ) {
-        if (nextProps.selectable && !this.props.selectable) this._selectable()
-        if (!nextProps.selectable && this.props.selectable)
-          this._teardownSelectable()
-        this.slotMetrics = this.slotMetrics.update(nextProps)
-      }
-
-      _proto.componentDidUpdate = function componentDidUpdate(
-        prevProps,
-        prevState
-      ) {
-        var getNowChanged = !eq(
-          prevProps.getNow(),
-          this.props.getNow(),
-          'minutes'
-        )
-
-        if (prevProps.isNow !== this.props.isNow || getNowChanged) {
-          this.clearTimeIndicatorInterval()
-
-          if (this.props.isNow) {
-            var tail =
-              !getNowChanged &&
-              eq(prevProps.date, this.props.date, 'minutes') &&
-              prevState.timeIndicatorPosition ===
-                this.state.timeIndicatorPosition
-            this.setTimeIndicatorPositionUpdateInterval(tail)
-          }
-        } else if (
-          this.props.isNow &&
-          (!eq(prevProps.min, this.props.min, 'minutes') ||
-            !eq(prevProps.max, this.props.max, 'minutes'))
-        ) {
-          this.positionTimeIndicator()
-        }
-      }
-      /**
-       * @param tail {Boolean} - whether `positionTimeIndicator` call should be
-       *   deferred or called upon setting interval (`true` - if deferred);
-       */
-
-      _proto.setTimeIndicatorPositionUpdateInterval = function setTimeIndicatorPositionUpdateInterval(
-        tail
-      ) {
-        var _this2 = this
-
-        if (tail === void 0) {
-          tail = false
+        while (lte(current, endDate)) {
+          slots.push(current)
+          current = new Date(+current + _this.props.step * 60 * 1000) // using Date ensures not to create an endless loop the day DST begins
         }
 
-        if (!this.intervalTriggered && !tail) {
-          this.positionTimeIndicator()
-        }
-
-        this._timeIndicatorTimeout = window.setTimeout(function() {
-          _this2.intervalTriggered = true
-
-          _this2.positionTimeIndicator()
-
-          _this2.setTimeIndicatorPositionUpdateInterval()
-        }, 60000)
-      }
-
-      _proto.clearTimeIndicatorInterval = function clearTimeIndicatorInterval() {
-        this.intervalTriggered = false
-        window.clearTimeout(this._timeIndicatorTimeout)
-      }
-
-      _proto.positionTimeIndicator = function positionTimeIndicator() {
-        var _this$props2 = this.props,
-          min = _this$props2.min,
-          max = _this$props2.max,
-          getNow = _this$props2.getNow
-        var current = getNow()
-
-        if (current >= min && current <= max) {
-          var top = this.slotMetrics.getCurrentTimePosition(current)
-          this.intervalTriggered = true
-          this.setState({
-            timeIndicatorPosition: top,
-          })
-        } else {
-          this.clearTimeIndicatorInterval()
-        }
-      }
-
-      _proto.render = function render() {
-        var _this$props3 = this.props,
-          date = _this$props3.date,
-          max = _this$props3.max,
-          rtl = _this$props3.rtl,
-          isNow = _this$props3.isNow,
-          resource = _this$props3.resource,
-          accessors = _this$props3.accessors,
-          localizer = _this$props3.localizer,
-          _this$props3$getters = _this$props3.getters,
-          dayProp = _this$props3$getters.dayProp,
-          getters = _objectWithoutPropertiesLoose(_this$props3$getters, [
-            'dayProp',
-          ]),
-          _this$props3$componen = _this$props3.components,
-          EventContainer = _this$props3$componen.eventContainerWrapper,
-          components = _objectWithoutPropertiesLoose(_this$props3$componen, [
-            'eventContainerWrapper',
-          ])
-
-        var slotMetrics = this.slotMetrics
-        var _this$state = this.state,
-          selecting = _this$state.selecting,
-          top = _this$state.top,
-          height = _this$state.height,
-          startDate = _this$state.startDate,
-          endDate = _this$state.endDate
-        var selectDates = {
+        notify(_this.props.onSelectSlot, {
+          slots: slots,
           start: startDate,
           end: endDate,
-        }
-
-        var _dayProp = dayProp(max),
-          className = _dayProp.className,
-          style = _dayProp.style
-
-        var DayColumnWrapperComponent =
-          components.dayColumnWrapper || DayColumnWrapper
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            DayColumnWrapperComponent,
-            {
-              date: date,
-              style: style,
-              className: clsx(
-                className,
-                'rbc-day-slot',
-                'rbc-time-column',
-                isNow && 'rbc-now',
-                isNow && 'rbc-today', // WHY
-                selecting && 'rbc-slot-selecting'
-              ),
-            },
-            slotMetrics.groups.map(function(grp, idx) {
-              return (
-                /*#__PURE__*/
-                React__default.createElement(TimeSlotGroup, {
-                  key: idx,
-                  group: grp,
-                  resource: resource,
-                  getters: getters,
-                  components: components,
-                })
-              )
-            }),
-            /*#__PURE__*/
-            React__default.createElement(
-              EventContainer,
-              {
-                localizer: localizer,
-                resource: resource,
-                accessors: accessors,
-                getters: getters,
-                components: components,
-                slotMetrics: slotMetrics,
-              },
-              /*#__PURE__*/
-              React__default.createElement(
-                'div',
-                {
-                  className: clsx('rbc-events-container', rtl && 'rtl'),
-                },
-                this.renderEvents({
-                  events: this.props.backgroundEvents,
-                  isBackgroundEvent: true,
-                }),
-                this.renderEvents({
-                  events: this.props.events,
-                })
-              )
-            ),
-            selecting &&
-              /*#__PURE__*/
-              React__default.createElement(
-                'div',
-                {
-                  className: 'rbc-slot-selection',
-                  style: {
-                    top: top,
-                    height: height,
-                  },
-                },
-                /*#__PURE__*/
-                React__default.createElement(
-                  'span',
-                  null,
-                  localizer.format(selectDates, 'selectRangeFormat')
-                )
-              ),
-            isNow &&
-              this.intervalTriggered &&
-              /*#__PURE__*/
-              React__default.createElement('div', {
-                className: 'rbc-current-time-indicator',
-                style: {
-                  top: this.state.timeIndicatorPosition + '%',
-                },
-              })
-          )
-        )
+          resourceId: _this.props.resource,
+          action: action,
+          bounds: bounds,
+          box: box,
+        })
       }
 
-      return DayColumn
-    })(React__default.PureComponent)
+      _this._select = function() {
+        for (
+          var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+          _key2 < _len2;
+          _key2++
+        ) {
+          args[_key2] = arguments[_key2]
+        }
+
+        notify(_this.props.onSelectEvent, args)
+      }
+
+      _this._doubleClick = function() {
+        for (
+          var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
+          _key3 < _len3;
+          _key3++
+        ) {
+          args[_key3] = arguments[_key3]
+        }
+
+        notify(_this.props.onDoubleClickEvent, args)
+      }
+
+      _this._keyPress = function() {
+        for (
+          var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
+          _key4 < _len4;
+          _key4++
+        ) {
+          args[_key4] = arguments[_key4]
+        }
+
+        notify(_this.props.onKeyPressEvent, args)
+      }
+
+      _this.slotMetrics = getSlotMetrics$1(_this.props)
+      return _this
+    }
+
+    var _proto = DayColumn.prototype
+
+    _proto.componentDidMount = function componentDidMount() {
+      this.props.selectable && this._selectable()
+
+      if (this.props.isNow) {
+        this.setTimeIndicatorPositionUpdateInterval()
+      }
+    }
+
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      this._teardownSelectable()
+
+      this.clearTimeIndicatorInterval()
+    }
+
+    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+      nextProps
+    ) {
+      if (nextProps.selectable && !this.props.selectable) this._selectable()
+      if (!nextProps.selectable && this.props.selectable)
+        this._teardownSelectable()
+      this.slotMetrics = this.slotMetrics.update(nextProps)
+    }
+
+    _proto.componentDidUpdate = function componentDidUpdate(
+      prevProps,
+      prevState
+    ) {
+      var getNowChanged = !eq(
+        prevProps.getNow(),
+        this.props.getNow(),
+        'minutes'
+      )
+
+      if (prevProps.isNow !== this.props.isNow || getNowChanged) {
+        this.clearTimeIndicatorInterval()
+
+        if (this.props.isNow) {
+          var tail =
+            !getNowChanged &&
+            eq(prevProps.date, this.props.date, 'minutes') &&
+            prevState.timeIndicatorPosition === this.state.timeIndicatorPosition
+          this.setTimeIndicatorPositionUpdateInterval(tail)
+        }
+      } else if (
+        this.props.isNow &&
+        (!eq(prevProps.min, this.props.min, 'minutes') ||
+          !eq(prevProps.max, this.props.max, 'minutes'))
+      ) {
+        this.positionTimeIndicator()
+      }
+    }
+    /**
+     * @param tail {Boolean} - whether `positionTimeIndicator` call should be
+     *   deferred or called upon setting interval (`true` - if deferred);
+     */
+
+    _proto.setTimeIndicatorPositionUpdateInterval = function setTimeIndicatorPositionUpdateInterval(
+      tail
+    ) {
+      var _this2 = this
+
+      if (tail === void 0) {
+        tail = false
+      }
+
+      if (!this.intervalTriggered && !tail) {
+        this.positionTimeIndicator()
+      }
+
+      this._timeIndicatorTimeout = window.setTimeout(function() {
+        _this2.intervalTriggered = true
+
+        _this2.positionTimeIndicator()
+
+        _this2.setTimeIndicatorPositionUpdateInterval()
+      }, 60000)
+    }
+
+    _proto.clearTimeIndicatorInterval = function clearTimeIndicatorInterval() {
+      this.intervalTriggered = false
+      window.clearTimeout(this._timeIndicatorTimeout)
+    }
+
+    _proto.positionTimeIndicator = function positionTimeIndicator() {
+      var _this$props2 = this.props,
+        min = _this$props2.min,
+        max = _this$props2.max,
+        getNow = _this$props2.getNow
+      var current = getNow()
+
+      if (current >= min && current <= max) {
+        var top = this.slotMetrics.getCurrentTimePosition(current)
+        this.intervalTriggered = true
+        this.setState({
+          timeIndicatorPosition: top,
+        })
+      } else {
+        this.clearTimeIndicatorInterval()
+      }
+    }
+
+    _proto.render = function render() {
+      var _this$props3 = this.props,
+        date = _this$props3.date,
+        max = _this$props3.max,
+        rtl = _this$props3.rtl,
+        isNow = _this$props3.isNow,
+        resource = _this$props3.resource,
+        accessors = _this$props3.accessors,
+        localizer = _this$props3.localizer,
+        _this$props3$getters = _this$props3.getters,
+        dayProp = _this$props3$getters.dayProp,
+        getters = _objectWithoutPropertiesLoose(_this$props3$getters, [
+          'dayProp',
+        ]),
+        _this$props3$componen = _this$props3.components,
+        EventContainer = _this$props3$componen.eventContainerWrapper,
+        components = _objectWithoutPropertiesLoose(_this$props3$componen, [
+          'eventContainerWrapper',
+        ])
+
+      var slotMetrics = this.slotMetrics
+      var _this$state = this.state,
+        selecting = _this$state.selecting,
+        top = _this$state.top,
+        height = _this$state.height,
+        startDate = _this$state.startDate,
+        endDate = _this$state.endDate
+      var selectDates = {
+        start: startDate,
+        end: endDate,
+      }
+
+      var _dayProp = dayProp(max),
+        className = _dayProp.className,
+        style = _dayProp.style
+
+      var DayColumnWrapperComponent =
+        components.dayColumnWrapper || DayColumnWrapper
+      return /*#__PURE__*/ React__default.createElement(
+        DayColumnWrapperComponent,
+        {
+          date: date,
+          style: style,
+          className: clsx(
+            className,
+            'rbc-day-slot',
+            'rbc-time-column',
+            isNow && 'rbc-now',
+            isNow && 'rbc-today', // WHY
+            selecting && 'rbc-slot-selecting'
+          ),
+        },
+        slotMetrics.groups.map(function(grp, idx) {
+          return /*#__PURE__*/ React__default.createElement(TimeSlotGroup, {
+            key: idx,
+            group: grp,
+            resource: resource,
+            getters: getters,
+            components: components,
+          })
+        }),
+        /*#__PURE__*/ React__default.createElement(
+          EventContainer,
+          {
+            localizer: localizer,
+            resource: resource,
+            accessors: accessors,
+            getters: getters,
+            components: components,
+            slotMetrics: slotMetrics,
+          },
+          /*#__PURE__*/ React__default.createElement(
+            'div',
+            {
+              className: clsx('rbc-events-container', rtl && 'rtl'),
+            },
+            this.renderEvents({
+              events: this.props.backgroundEvents,
+              isBackgroundEvent: true,
+            }),
+            this.renderEvents({
+              events: this.props.events,
+            })
+          )
+        ),
+        selecting &&
+          /*#__PURE__*/ React__default.createElement(
+            'div',
+            {
+              className: 'rbc-slot-selection',
+              style: {
+                top: top,
+                height: height,
+              },
+            },
+            /*#__PURE__*/ React__default.createElement(
+              'span',
+              null,
+              localizer.format(selectDates, 'selectRangeFormat')
+            )
+          ),
+        isNow &&
+          this.intervalTriggered &&
+          /*#__PURE__*/ React__default.createElement('div', {
+            className: 'rbc-current-time-indicator',
+            style: {
+              top: this.state.timeIndicatorPosition + '%',
+            },
+          })
+      )
+    }
+
+    return DayColumn
+  })(React__default.PureComponent)
 
   DayColumn.propTypes = {
     events: propTypes.array.isRequired,
@@ -13698,110 +13307,99 @@
     timeslots: 2,
   }
 
-  var TimeGutter =
-    /*#__PURE__*/
-    (function(_PureComponent) {
-      _inheritsLoose(TimeGutter, _PureComponent)
+  var TimeGutter = /*#__PURE__*/ (function(_PureComponent) {
+    _inheritsLoose(TimeGutter, _PureComponent)
 
-      function TimeGutter() {
-        var _this
+    function TimeGutter() {
+      var _this
 
-        for (
-          var _len = arguments.length, args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          args[_key] = arguments[_key]
-        }
-
-        _this =
-          _PureComponent.call.apply(_PureComponent, [this].concat(args)) || this
-
-        _this.renderSlot = function(value, idx) {
-          if (idx !== 0) return null
-          var _this$props = _this.props,
-            localizer = _this$props.localizer,
-            getNow = _this$props.getNow
-
-          var isNow = _this.slotMetrics.dateIsInGroup(getNow(), idx)
-
-          return (
-            /*#__PURE__*/
-            React__default.createElement(
-              'span',
-              {
-                className: clsx('rbc-label', isNow && 'rbc-now'),
-              },
-              localizer.format(value, 'timeGutterFormat')
-            )
-          )
-        }
-
-        var _this$props2 = _this.props,
-          min = _this$props2.min,
-          max = _this$props2.max,
-          timeslots = _this$props2.timeslots,
-          step = _this$props2.step
-        _this.slotMetrics = getSlotMetrics$1({
-          min: min,
-          max: max,
-          timeslots: timeslots,
-          step: step,
-        })
-        return _this
-      }
-
-      var _proto = TimeGutter.prototype
-
-      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-        nextProps
+      for (
+        var _len = arguments.length, args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
       ) {
-        var min = nextProps.min,
-          max = nextProps.max,
-          timeslots = nextProps.timeslots,
-          step = nextProps.step
-        this.slotMetrics = this.slotMetrics.update({
-          min: min,
-          max: max,
-          timeslots: timeslots,
-          step: step,
-        })
+        args[_key] = arguments[_key]
       }
 
-      _proto.render = function render() {
-        var _this2 = this
+      _this =
+        _PureComponent.call.apply(_PureComponent, [this].concat(args)) || this
 
-        var _this$props3 = this.props,
-          resource = _this$props3.resource,
-          components = _this$props3.components,
-          getters = _this$props3.getters
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              className: 'rbc-time-gutter rbc-time-column',
-            },
-            this.slotMetrics.groups.map(function(grp, idx) {
-              return (
-                /*#__PURE__*/
-                React__default.createElement(TimeSlotGroup, {
-                  key: idx,
-                  group: grp,
-                  resource: resource,
-                  components: components,
-                  renderSlot: _this2.renderSlot,
-                  getters: getters,
-                  isTimeGutter: true,
-                })
-              )
-            })
-          )
+      _this.renderSlot = function(value, idx) {
+        if (idx !== 0) return null
+        var _this$props = _this.props,
+          localizer = _this$props.localizer,
+          getNow = _this$props.getNow
+
+        var isNow = _this.slotMetrics.dateIsInGroup(getNow(), idx)
+
+        return /*#__PURE__*/ React__default.createElement(
+          'span',
+          {
+            className: clsx('rbc-label', isNow && 'rbc-now'),
+          },
+          localizer.format(value, 'timeGutterFormat')
         )
       }
 
-      return TimeGutter
-    })(React.PureComponent)
+      var _this$props2 = _this.props,
+        min = _this$props2.min,
+        max = _this$props2.max,
+        timeslots = _this$props2.timeslots,
+        step = _this$props2.step
+      _this.slotMetrics = getSlotMetrics$1({
+        min: min,
+        max: max,
+        timeslots: timeslots,
+        step: step,
+      })
+      return _this
+    }
+
+    var _proto = TimeGutter.prototype
+
+    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+      nextProps
+    ) {
+      var min = nextProps.min,
+        max = nextProps.max,
+        timeslots = nextProps.timeslots,
+        step = nextProps.step
+      this.slotMetrics = this.slotMetrics.update({
+        min: min,
+        max: max,
+        timeslots: timeslots,
+        step: step,
+      })
+    }
+
+    _proto.render = function render() {
+      var _this2 = this
+
+      var _this$props3 = this.props,
+        resource = _this$props3.resource,
+        components = _this$props3.components,
+        getters = _this$props3.getters
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: 'rbc-time-gutter rbc-time-column',
+        },
+        this.slotMetrics.groups.map(function(grp, idx) {
+          return /*#__PURE__*/ React__default.createElement(TimeSlotGroup, {
+            key: idx,
+            group: grp,
+            resource: resource,
+            components: components,
+            renderSlot: _this2.renderSlot,
+            getters: getters,
+            isTimeGutter: true,
+          })
+        })
+      )
+    }
+
+    return TimeGutter
+  })(React.PureComponent)
   TimeGutter.propTypes = {
     min: propTypes.instanceOf(Date).isRequired,
     max: propTypes.instanceOf(Date).isRequired,
@@ -13840,9 +13438,10 @@
 
   var ResourceHeader = function ResourceHeader(_ref) {
     var label = _ref.label
-    return (
-      /*#__PURE__*/
-      React__default.createElement(React__default.Fragment, null, label)
+    return /*#__PURE__*/ React__default.createElement(
+      React__default.Fragment,
+      null,
+      label
     )
   }
 
@@ -13852,278 +13451,257 @@
     resource: propTypes.object,
   }
 
-  var TimeGridHeader =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(TimeGridHeader, _React$PureComponent)
+  var TimeGridHeader = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(TimeGridHeader, _React$PureComponent)
 
-      function TimeGridHeader() {
-        var _this
+    function TimeGridHeader() {
+      var _this
 
-        for (
-          var _len = arguments.length, args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          args[_key] = arguments[_key]
-        }
+      for (
+        var _len = arguments.length, args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
+      ) {
+        args[_key] = arguments[_key]
+      }
 
-        _this =
-          _React$PureComponent.call.apply(
-            _React$PureComponent,
-            [this].concat(args)
-          ) || this
+      _this =
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(args)
+        ) || this
 
-        _this.handleHeaderClick = function(date, view, e) {
-          e.preventDefault()
-          notify(_this.props.onDrillDown, [date, view])
-        }
+      _this.handleHeaderClick = function(date, view, e) {
+        e.preventDefault()
+        notify(_this.props.onDrillDown, [date, view])
+      }
 
-        _this.renderRow = function(resource) {
-          var _this$props = _this.props,
-            events = _this$props.events,
-            rtl = _this$props.rtl,
-            selectable = _this$props.selectable,
-            getNow = _this$props.getNow,
-            range = _this$props.range,
-            getters = _this$props.getters,
-            localizer = _this$props.localizer,
-            accessors = _this$props.accessors,
-            components = _this$props.components,
-            resizable = _this$props.resizable
-          var resourceId = accessors.resourceId(resource)
-          var eventsToDisplay = resource
-            ? events.filter(function(event) {
-                return accessors.resource(event) === resourceId
-              })
-            : events
-          return (
-            /*#__PURE__*/
-            React__default.createElement(DateContentRow, {
+      _this.renderRow = function(resource) {
+        var _this$props = _this.props,
+          events = _this$props.events,
+          rtl = _this$props.rtl,
+          selectable = _this$props.selectable,
+          getNow = _this$props.getNow,
+          range = _this$props.range,
+          getters = _this$props.getters,
+          localizer = _this$props.localizer,
+          accessors = _this$props.accessors,
+          components = _this$props.components,
+          resizable = _this$props.resizable
+        var resourceId = accessors.resourceId(resource)
+        var eventsToDisplay = resource
+          ? events.filter(function(event) {
+              return accessors.resource(event) === resourceId
+            })
+          : events
+        return /*#__PURE__*/ React__default.createElement(DateContentRow, {
+          isAllDay: true,
+          rtl: rtl,
+          getNow: getNow,
+          minRows: 2,
+          range: range,
+          events: eventsToDisplay,
+          resourceId: resourceId,
+          className: 'rbc-allday-cell',
+          selectable: selectable,
+          selected: _this.props.selected,
+          components: components,
+          accessors: accessors,
+          getters: getters,
+          localizer: localizer,
+          onSelect: _this.props.onSelectEvent,
+          onDoubleClick: _this.props.onDoubleClickEvent,
+          onKeyPress: _this.props.onKeyPressEvent,
+          onSelectSlot: _this.props.onSelectSlot,
+          longPressThreshold: _this.props.longPressThreshold,
+          resizable: resizable,
+        })
+      }
+
+      return _this
+    }
+
+    var _proto = TimeGridHeader.prototype
+
+    _proto.renderHeaderCells = function renderHeaderCells(range) {
+      var _this2 = this
+
+      var _this$props2 = this.props,
+        localizer = _this$props2.localizer,
+        getDrilldownView = _this$props2.getDrilldownView,
+        getNow = _this$props2.getNow,
+        dayProp = _this$props2.getters.dayProp,
+        _this$props2$componen = _this$props2.components.header,
+        HeaderComponent =
+          _this$props2$componen === void 0 ? Header : _this$props2$componen
+      var today = getNow()
+      return range.map(function(date, i) {
+        var drilldownView = getDrilldownView(date)
+        var label = localizer.format(date, 'dayFormat')
+
+        var _dayProp = dayProp(date),
+          className = _dayProp.className,
+          style = _dayProp.style
+
+        var header = /*#__PURE__*/ React__default.createElement(
+          HeaderComponent,
+          {
+            date: date,
+            label: label,
+            localizer: localizer,
+          }
+        )
+        return /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            key: i,
+            style: style,
+            className: clsx(
+              'rbc-header',
+              className,
+              eq(date, today, 'day') && 'rbc-today'
+            ),
+          },
+          drilldownView
+            ? /*#__PURE__*/ React__default.createElement(
+                'a',
+                {
+                  href: '#',
+                  onClick: function onClick(e) {
+                    return _this2.handleHeaderClick(date, drilldownView, e)
+                  },
+                },
+                header
+              )
+            : /*#__PURE__*/ React__default.createElement('span', null, header)
+        )
+      })
+    }
+
+    _proto.render = function render() {
+      var _this3 = this
+
+      var _this$props3 = this.props,
+        width = _this$props3.width,
+        rtl = _this$props3.rtl,
+        resources = _this$props3.resources,
+        range = _this$props3.range,
+        events = _this$props3.events,
+        getNow = _this$props3.getNow,
+        accessors = _this$props3.accessors,
+        selectable = _this$props3.selectable,
+        components = _this$props3.components,
+        getters = _this$props3.getters,
+        scrollRef = _this$props3.scrollRef,
+        localizer = _this$props3.localizer,
+        isOverflowing = _this$props3.isOverflowing,
+        _this$props3$componen = _this$props3.components,
+        TimeGutterHeader = _this$props3$componen.timeGutterHeader,
+        _this$props3$componen2 = _this$props3$componen.resourceHeader,
+        ResourceHeaderComponent =
+          _this$props3$componen2 === void 0
+            ? ResourceHeader
+            : _this$props3$componen2,
+        resizable = _this$props3.resizable
+      var style = {}
+
+      if (isOverflowing) {
+        style[rtl ? 'marginLeft' : 'marginRight'] = scrollbarSize() + 'px'
+      }
+
+      var groupedEvents = resources.groupEvents(events)
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          style: style,
+          ref: scrollRef,
+          className: clsx(
+            'rbc-time-header',
+            isOverflowing && 'rbc-overflowing'
+          ),
+        },
+        /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            className: 'rbc-label rbc-time-header-gutter',
+            style: {
+              width: width,
+              minWidth: width,
+              maxWidth: width,
+            },
+          },
+          TimeGutterHeader &&
+            /*#__PURE__*/ React__default.createElement(TimeGutterHeader, null)
+        ),
+        resources.map(function(_ref, idx) {
+          var id = _ref[0],
+            resource = _ref[1]
+          return /*#__PURE__*/ React__default.createElement(
+            'div',
+            {
+              className: 'rbc-time-header-content',
+              key: id || idx,
+            },
+            resource &&
+              /*#__PURE__*/ React__default.createElement(
+                'div',
+                {
+                  className: 'rbc-row rbc-row-resource',
+                  key: 'resource_' + idx,
+                },
+                /*#__PURE__*/ React__default.createElement(
+                  'div',
+                  {
+                    className: 'rbc-header',
+                  },
+                  /*#__PURE__*/ React__default.createElement(
+                    ResourceHeaderComponent,
+                    {
+                      index: idx,
+                      label: accessors.resourceTitle(resource),
+                      resource: resource,
+                    }
+                  )
+                )
+              ),
+            /*#__PURE__*/ React__default.createElement(
+              'div',
+              {
+                className:
+                  'rbc-row rbc-time-header-cell' +
+                  (range.length <= 1 ? ' rbc-time-header-cell-single-day' : ''),
+              },
+              _this3.renderHeaderCells(range)
+            ),
+            /*#__PURE__*/ React__default.createElement(DateContentRow, {
               isAllDay: true,
               rtl: rtl,
               getNow: getNow,
               minRows: 2,
               range: range,
-              events: eventsToDisplay,
-              resourceId: resourceId,
+              events: groupedEvents.get(id) || [],
+              resourceId: resource && id,
               className: 'rbc-allday-cell',
               selectable: selectable,
-              selected: _this.props.selected,
+              selected: _this3.props.selected,
               components: components,
               accessors: accessors,
               getters: getters,
               localizer: localizer,
-              onSelect: _this.props.onSelectEvent,
-              onDoubleClick: _this.props.onDoubleClickEvent,
-              onKeyPress: _this.props.onKeyPressEvent,
-              onSelectSlot: _this.props.onSelectSlot,
-              longPressThreshold: _this.props.longPressThreshold,
+              onSelect: _this3.props.onSelectEvent,
+              onDoubleClick: _this3.props.onDoubleClickEvent,
+              onKeyPress: _this3.props.onKeyPressEvent,
+              onSelectSlot: _this3.props.onSelectSlot,
+              longPressThreshold: _this3.props.longPressThreshold,
               resizable: resizable,
             })
           )
-        }
-
-        return _this
-      }
-
-      var _proto = TimeGridHeader.prototype
-
-      _proto.renderHeaderCells = function renderHeaderCells(range) {
-        var _this2 = this
-
-        var _this$props2 = this.props,
-          localizer = _this$props2.localizer,
-          getDrilldownView = _this$props2.getDrilldownView,
-          getNow = _this$props2.getNow,
-          dayProp = _this$props2.getters.dayProp,
-          _this$props2$componen = _this$props2.components.header,
-          HeaderComponent =
-            _this$props2$componen === void 0 ? Header : _this$props2$componen
-        var today = getNow()
-        return range.map(function(date, i) {
-          var drilldownView = getDrilldownView(date)
-          var label = localizer.format(date, 'dayFormat')
-
-          var _dayProp = dayProp(date),
-            className = _dayProp.className,
-            style = _dayProp.style
-
-          var header =
-            /*#__PURE__*/
-            React__default.createElement(HeaderComponent, {
-              date: date,
-              label: label,
-              localizer: localizer,
-            })
-          return (
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                key: i,
-                style: style,
-                className: clsx(
-                  'rbc-header',
-                  className,
-                  eq(date, today, 'day') && 'rbc-today'
-                ),
-              },
-              drilldownView
-                ? /*#__PURE__*/
-                  React__default.createElement(
-                    'a',
-                    {
-                      href: '#',
-                      onClick: function onClick(e) {
-                        return _this2.handleHeaderClick(date, drilldownView, e)
-                      },
-                    },
-                    header
-                  )
-                : /*#__PURE__*/
-                  React__default.createElement('span', null, header)
-            )
-          )
         })
-      }
+      )
+    }
 
-      _proto.render = function render() {
-        var _this3 = this
-
-        var _this$props3 = this.props,
-          width = _this$props3.width,
-          rtl = _this$props3.rtl,
-          resources = _this$props3.resources,
-          range = _this$props3.range,
-          events = _this$props3.events,
-          getNow = _this$props3.getNow,
-          accessors = _this$props3.accessors,
-          selectable = _this$props3.selectable,
-          components = _this$props3.components,
-          getters = _this$props3.getters,
-          scrollRef = _this$props3.scrollRef,
-          localizer = _this$props3.localizer,
-          isOverflowing = _this$props3.isOverflowing,
-          _this$props3$componen = _this$props3.components,
-          TimeGutterHeader = _this$props3$componen.timeGutterHeader,
-          _this$props3$componen2 = _this$props3$componen.resourceHeader,
-          ResourceHeaderComponent =
-            _this$props3$componen2 === void 0
-              ? ResourceHeader
-              : _this$props3$componen2,
-          resizable = _this$props3.resizable
-        var style = {}
-
-        if (isOverflowing) {
-          style[rtl ? 'marginLeft' : 'marginRight'] = scrollbarSize() + 'px'
-        }
-
-        var groupedEvents = resources.groupEvents(events)
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              style: style,
-              ref: scrollRef,
-              className: clsx(
-                'rbc-time-header',
-                isOverflowing && 'rbc-overflowing'
-              ),
-            },
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                className: 'rbc-label rbc-time-header-gutter',
-                style: {
-                  width: width,
-                  minWidth: width,
-                  maxWidth: width,
-                },
-              },
-              TimeGutterHeader &&
-                /*#__PURE__*/
-                React__default.createElement(TimeGutterHeader, null)
-            ),
-            resources.map(function(_ref, idx) {
-              var id = _ref[0],
-                resource = _ref[1]
-              return (
-                /*#__PURE__*/
-                React__default.createElement(
-                  'div',
-                  {
-                    className: 'rbc-time-header-content',
-                    key: id || idx,
-                  },
-                  resource &&
-                    /*#__PURE__*/
-                    React__default.createElement(
-                      'div',
-                      {
-                        className: 'rbc-row rbc-row-resource',
-                        key: 'resource_' + idx,
-                      },
-                      /*#__PURE__*/
-                      React__default.createElement(
-                        'div',
-                        {
-                          className: 'rbc-header',
-                        },
-                        /*#__PURE__*/
-                        React__default.createElement(ResourceHeaderComponent, {
-                          index: idx,
-                          label: accessors.resourceTitle(resource),
-                          resource: resource,
-                        })
-                      )
-                    ),
-                  /*#__PURE__*/
-                  React__default.createElement(
-                    'div',
-                    {
-                      className:
-                        'rbc-row rbc-time-header-cell' +
-                        (range.length <= 1
-                          ? ' rbc-time-header-cell-single-day'
-                          : ''),
-                    },
-                    _this3.renderHeaderCells(range)
-                  ),
-                  /*#__PURE__*/
-                  React__default.createElement(DateContentRow, {
-                    isAllDay: true,
-                    rtl: rtl,
-                    getNow: getNow,
-                    minRows: 2,
-                    range: range,
-                    events: groupedEvents.get(id) || [],
-                    resourceId: resource && id,
-                    className: 'rbc-allday-cell',
-                    selectable: selectable,
-                    selected: _this3.props.selected,
-                    components: components,
-                    accessors: accessors,
-                    getters: getters,
-                    localizer: localizer,
-                    onSelect: _this3.props.onSelectEvent,
-                    onDoubleClick: _this3.props.onDoubleClickEvent,
-                    onKeyPress: _this3.props.onKeyPressEvent,
-                    onSelectSlot: _this3.props.onSelectSlot,
-                    longPressThreshold: _this3.props.longPressThreshold,
-                    resizable: resizable,
-                  })
-                )
-              )
-            })
-          )
-        )
-      }
-
-      return TimeGridHeader
-    })(React__default.PureComponent)
+    return TimeGridHeader
+  })(React__default.PureComponent)
 
   TimeGridHeader.propTypes = {
     range: propTypes.array.isRequired,
@@ -14179,378 +13757,358 @@
     }
   }
 
-  var TimeGrid =
-    /*#__PURE__*/
-    (function(_PureComponent) {
-      _inheritsLoose(TimeGrid, _PureComponent)
+  var TimeGrid = /*#__PURE__*/ (function(_PureComponent) {
+    _inheritsLoose(TimeGrid, _PureComponent)
 
-      function TimeGrid(props) {
-        var _this
+    function TimeGrid(props) {
+      var _this
 
-        _this = _PureComponent.call(this, props) || this
+      _this = _PureComponent.call(this, props) || this
 
-        _this.handleScroll = function(e) {
-          if (_this.scrollRef.current) {
-            _this.scrollRef.current.scrollLeft = e.target.scrollLeft
-          }
-        }
-
-        _this.handleResize = function() {
-          cancel(_this.rafHandle)
-          _this.rafHandle = request(_this.checkOverflow)
-        }
-
-        _this.gutterRef = function(ref) {
-          _this.gutter = ref && ReactDOM.findDOMNode(ref)
-        }
-
-        _this.handleSelectAlldayEvent = function() {
-          //cancel any pending selections so only the event click goes through.
-          _this.clearSelection()
-
-          for (
-            var _len = arguments.length, args = new Array(_len), _key = 0;
-            _key < _len;
-            _key++
-          ) {
-            args[_key] = arguments[_key]
-          }
-
-          notify(_this.props.onSelectEvent, args)
-        }
-
-        _this.handleSelectAllDaySlot = function(slots, slotInfo) {
-          var onSelectSlot = _this.props.onSelectSlot
-          var start = new Date(slots[0])
-          var end = new Date(slots[slots.length - 1])
-          end.setDate(slots[slots.length - 1].getDate() + 1)
-          notify(onSelectSlot, {
-            slots: slots,
-            start: start,
-            end: end,
-            action: slotInfo.action,
-            resourceId: slotInfo.resourceId,
-          })
-        }
-
-        _this.checkOverflow = function() {
-          if (_this._updatingOverflow) return
-          var content = _this.contentRef.current
-          var isOverflowing = content.scrollHeight > content.clientHeight
-
-          if (_this.state.isOverflowing !== isOverflowing) {
-            _this._updatingOverflow = true
-
-            _this.setState(
-              {
-                isOverflowing: isOverflowing,
-              },
-              function() {
-                _this._updatingOverflow = false
-              }
-            )
-          }
-        }
-
-        _this.memoizedResources = memoizeOne(function(resources, accessors) {
-          return Resources(resources, accessors)
-        })
-        _this.state = {
-          gutterWidth: undefined,
-          isOverflowing: null,
-        }
-        _this.scrollRef =
-          /*#__PURE__*/
-          React__default.createRef()
-        _this.contentRef =
-          /*#__PURE__*/
-          React__default.createRef()
-        _this._scrollRatio = null
-        return _this
-      }
-
-      var _proto = TimeGrid.prototype
-
-      _proto.UNSAFE_componentWillMount = function UNSAFE_componentWillMount() {
-        this.calculateScroll()
-      }
-
-      _proto.componentDidMount = function componentDidMount() {
-        this.checkOverflow()
-
-        if (this.props.width == null) {
-          this.measureGutter()
-        }
-
-        this.applyScroll()
-        window.addEventListener('resize', this.handleResize)
-      }
-
-      _proto.componentWillUnmount = function componentWillUnmount() {
-        window.removeEventListener('resize', this.handleResize)
-        cancel(this.rafHandle)
-
-        if (this.measureGutterAnimationFrameRequest) {
-          window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
+      _this.handleScroll = function(e) {
+        if (_this.scrollRef.current) {
+          _this.scrollRef.current.scrollLeft = e.target.scrollLeft
         }
       }
 
-      _proto.componentDidUpdate = function componentDidUpdate() {
-        if (this.props.width == null) {
-          this.measureGutter()
-        }
-
-        this.applyScroll() //this.checkOverflow()
+      _this.handleResize = function() {
+        cancel(_this.rafHandle)
+        _this.rafHandle = request(_this.checkOverflow)
       }
 
-      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-        nextProps
-      ) {
-        var _this$props = this.props,
-          range = _this$props.range,
-          scrollToTime = _this$props.scrollToTime // When paginating, reset scroll
+      _this.gutterRef = function(ref) {
+        _this.gutter = ref && ReactDOM.findDOMNode(ref)
+      }
 
-        if (
-          !eq(nextProps.range[0], range[0], 'minute') ||
-          !eq(nextProps.scrollToTime, scrollToTime, 'minute')
+      _this.handleSelectAlldayEvent = function() {
+        //cancel any pending selections so only the event click goes through.
+        _this.clearSelection()
+
+        for (
+          var _len = arguments.length, args = new Array(_len), _key = 0;
+          _key < _len;
+          _key++
         ) {
-          this.calculateScroll(nextProps)
+          args[_key] = arguments[_key]
+        }
+
+        notify(_this.props.onSelectEvent, args)
+      }
+
+      _this.handleSelectAllDaySlot = function(slots, slotInfo) {
+        var onSelectSlot = _this.props.onSelectSlot
+        var start = new Date(slots[0])
+        var end = new Date(slots[slots.length - 1])
+        end.setDate(slots[slots.length - 1].getDate() + 1)
+        notify(onSelectSlot, {
+          slots: slots,
+          start: start,
+          end: end,
+          action: slotInfo.action,
+          resourceId: slotInfo.resourceId,
+        })
+      }
+
+      _this.checkOverflow = function() {
+        if (_this._updatingOverflow) return
+        var content = _this.contentRef.current
+        var isOverflowing = content.scrollHeight > content.clientHeight
+
+        if (_this.state.isOverflowing !== isOverflowing) {
+          _this._updatingOverflow = true
+
+          _this.setState(
+            {
+              isOverflowing: isOverflowing,
+            },
+            function() {
+              _this._updatingOverflow = false
+            }
+          )
         }
       }
 
-      _proto.renderEvents = function renderEvents(
-        range,
-        events,
-        backgroundEvents,
-        now
-      ) {
-        var _this2 = this
+      _this.memoizedResources = memoizeOne(function(resources, accessors) {
+        return Resources(resources, accessors)
+      })
+      _this.state = {
+        gutterWidth: undefined,
+        isOverflowing: null,
+      }
+      _this.scrollRef = /*#__PURE__*/ React__default.createRef()
+      _this.contentRef = /*#__PURE__*/ React__default.createRef()
+      _this._scrollRatio = null
+      return _this
+    }
 
-        var _this$props2 = this.props,
-          min = _this$props2.min,
-          max = _this$props2.max,
-          components = _this$props2.components,
-          accessors = _this$props2.accessors,
-          localizer = _this$props2.localizer,
-          dayLayoutAlgorithm = _this$props2.dayLayoutAlgorithm
-        var resources = this.memoizedResources(this.props.resources, accessors)
-        var groupedEvents = resources.groupEvents(events)
-        var groupedBackgroundEvents = resources.groupEvents(backgroundEvents)
-        return resources.map(function(_ref, i) {
-          var id = _ref[0],
-            resource = _ref[1]
-          return range.map(function(date, jj) {
-            var daysEvents = (groupedEvents.get(id) || []).filter(function(
-              event
-            ) {
-              return inRange(
-                date,
-                accessors.start(event),
-                accessors.end(event),
-                'day'
-              )
-            })
-            var daysBackgroundEvents = (
-              groupedBackgroundEvents.get(id) || []
-            ).filter(function(event) {
-              return inRange(
-                date,
-                accessors.start(event),
-                accessors.end(event),
-                'day'
-              )
-            })
-            return (
-              /*#__PURE__*/
-              React__default.createElement(
-                DayColumn,
-                _extends({}, _this2.props, {
-                  localizer: localizer,
-                  min: merge(date, min),
-                  max: merge(date, max),
-                  resource: resource && id,
-                  components: components,
-                  isNow: eq(date, now, 'day'),
-                  key: i + '-' + jj,
-                  date: date,
-                  events: daysEvents,
-                  backgroundEvents: daysBackgroundEvents,
-                  dayLayoutAlgorithm: dayLayoutAlgorithm,
-                })
-              )
+    var _proto = TimeGrid.prototype
+
+    _proto.UNSAFE_componentWillMount = function UNSAFE_componentWillMount() {
+      this.calculateScroll()
+    }
+
+    _proto.componentDidMount = function componentDidMount() {
+      this.checkOverflow()
+
+      if (this.props.width == null) {
+        this.measureGutter()
+      }
+
+      this.applyScroll()
+      window.addEventListener('resize', this.handleResize)
+    }
+
+    _proto.componentWillUnmount = function componentWillUnmount() {
+      window.removeEventListener('resize', this.handleResize)
+      cancel(this.rafHandle)
+
+      if (this.measureGutterAnimationFrameRequest) {
+        window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
+      }
+    }
+
+    _proto.componentDidUpdate = function componentDidUpdate() {
+      if (this.props.width == null) {
+        this.measureGutter()
+      }
+
+      this.applyScroll() //this.checkOverflow()
+    }
+
+    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+      nextProps
+    ) {
+      var _this$props = this.props,
+        range = _this$props.range,
+        scrollToTime = _this$props.scrollToTime // When paginating, reset scroll
+
+      if (
+        !eq(nextProps.range[0], range[0], 'minute') ||
+        !eq(nextProps.scrollToTime, scrollToTime, 'minute')
+      ) {
+        this.calculateScroll(nextProps)
+      }
+    }
+
+    _proto.renderEvents = function renderEvents(
+      range,
+      events,
+      backgroundEvents,
+      now
+    ) {
+      var _this2 = this
+
+      var _this$props2 = this.props,
+        min = _this$props2.min,
+        max = _this$props2.max,
+        components = _this$props2.components,
+        accessors = _this$props2.accessors,
+        localizer = _this$props2.localizer,
+        dayLayoutAlgorithm = _this$props2.dayLayoutAlgorithm
+      var resources = this.memoizedResources(this.props.resources, accessors)
+      var groupedEvents = resources.groupEvents(events)
+      var groupedBackgroundEvents = resources.groupEvents(backgroundEvents)
+      return resources.map(function(_ref, i) {
+        var id = _ref[0],
+          resource = _ref[1]
+        return range.map(function(date, jj) {
+          var daysEvents = (groupedEvents.get(id) || []).filter(function(
+            event
+          ) {
+            return inRange(
+              date,
+              accessors.start(event),
+              accessors.end(event),
+              'day'
             )
           })
-        })
-      }
-
-      _proto.render = function render() {
-        var _this$props3 = this.props,
-          events = _this$props3.events,
-          backgroundEvents = _this$props3.backgroundEvents,
-          range = _this$props3.range,
-          width = _this$props3.width,
-          rtl = _this$props3.rtl,
-          selected = _this$props3.selected,
-          getNow = _this$props3.getNow,
-          resources = _this$props3.resources,
-          components = _this$props3.components,
-          accessors = _this$props3.accessors,
-          getters = _this$props3.getters,
-          localizer = _this$props3.localizer,
-          min = _this$props3.min,
-          max = _this$props3.max,
-          showMultiDayTimes = _this$props3.showMultiDayTimes,
-          longPressThreshold = _this$props3.longPressThreshold,
-          resizable = _this$props3.resizable
-        width = width || this.state.gutterWidth
-        var start = range[0],
-          end = range[range.length - 1]
-        this.slots = range.length
-        var allDayEvents = [],
-          rangeEvents = [],
-          rangeBackgroundEvents = []
-        events.forEach(function(event) {
-          if (inRange$1(event, start, end, accessors)) {
-            var eStart = accessors.start(event),
-              eEnd = accessors.end(event)
-
-            if (
-              accessors.allDay(event) ||
-              (isJustDate(eStart) && isJustDate(eEnd)) ||
-              (!showMultiDayTimes && !eq(eStart, eEnd, 'day'))
-            ) {
-              allDayEvents.push(event)
-            } else {
-              rangeEvents.push(event)
-            }
-          }
-        })
-        backgroundEvents.forEach(function(event) {
-          if (inRange$1(event, start, end, accessors)) {
-            rangeBackgroundEvents.push(event)
-          }
-        })
-        allDayEvents.sort(function(a, b) {
-          return sortEvents(a, b, accessors)
-        })
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            {
-              className: clsx(
-                'rbc-time-view',
-                resources && 'rbc-time-view-resources'
-              ),
-            },
-            /*#__PURE__*/
-            React__default.createElement(TimeGridHeader, {
-              range: range,
-              events: allDayEvents,
-              width: width,
-              rtl: rtl,
-              getNow: getNow,
-              localizer: localizer,
-              selected: selected,
-              resources: this.memoizedResources(resources, accessors),
-              selectable: this.props.selectable,
-              accessors: accessors,
-              getters: getters,
-              components: components,
-              scrollRef: this.scrollRef,
-              isOverflowing: this.state.isOverflowing,
-              longPressThreshold: longPressThreshold,
-              onSelectSlot: this.handleSelectAllDaySlot,
-              onSelectEvent: this.handleSelectAlldayEvent,
-              onDoubleClickEvent: this.props.onDoubleClickEvent,
-              onKeyPressEvent: this.props.onKeyPressEvent,
-              onDrillDown: this.props.onDrillDown,
-              getDrilldownView: this.props.getDrilldownView,
-              resizable: resizable,
-            }),
-            /*#__PURE__*/
-            React__default.createElement(
-              'div',
-              {
-                ref: this.contentRef,
-                className: 'rbc-time-content',
-                onScroll: this.handleScroll,
-              },
-              /*#__PURE__*/
-              React__default.createElement(TimeGutter, {
-                date: start,
-                ref: this.gutterRef,
-                localizer: localizer,
-                min: merge(start, min),
-                max: merge(start, max),
-                step: this.props.step,
-                getNow: this.props.getNow,
-                timeslots: this.props.timeslots,
-                components: components,
-                className: 'rbc-time-gutter',
-                getters: getters,
-              }),
-              this.renderEvents(
-                range,
-                rangeEvents,
-                rangeBackgroundEvents,
-                getNow()
-              )
+          var daysBackgroundEvents = (
+            groupedBackgroundEvents.get(id) || []
+          ).filter(function(event) {
+            return inRange(
+              date,
+              accessors.start(event),
+              accessors.end(event),
+              'day'
             )
+          })
+          return /*#__PURE__*/ React__default.createElement(
+            DayColumn,
+            _extends({}, _this2.props, {
+              localizer: localizer,
+              min: merge(date, min),
+              max: merge(date, max),
+              resource: resource && id,
+              components: components,
+              isNow: eq(date, now, 'day'),
+              key: i + '-' + jj,
+              date: date,
+              events: daysEvents,
+              backgroundEvents: daysBackgroundEvents,
+              dayLayoutAlgorithm: dayLayoutAlgorithm,
+            })
           )
-        )
-      }
+        })
+      })
+    }
 
-      _proto.clearSelection = function clearSelection() {
-        clearTimeout(this._selectTimer)
-        this._pendingSelection = []
-      }
+    _proto.render = function render() {
+      var _this$props3 = this.props,
+        events = _this$props3.events,
+        backgroundEvents = _this$props3.backgroundEvents,
+        range = _this$props3.range,
+        width = _this$props3.width,
+        rtl = _this$props3.rtl,
+        selected = _this$props3.selected,
+        getNow = _this$props3.getNow,
+        resources = _this$props3.resources,
+        components = _this$props3.components,
+        accessors = _this$props3.accessors,
+        getters = _this$props3.getters,
+        localizer = _this$props3.localizer,
+        min = _this$props3.min,
+        max = _this$props3.max,
+        showMultiDayTimes = _this$props3.showMultiDayTimes,
+        longPressThreshold = _this$props3.longPressThreshold,
+        resizable = _this$props3.resizable
+      width = width || this.state.gutterWidth
+      var start = range[0],
+        end = range[range.length - 1]
+      this.slots = range.length
+      var allDayEvents = [],
+        rangeEvents = [],
+        rangeBackgroundEvents = []
+      events.forEach(function(event) {
+        if (inRange$1(event, start, end, accessors)) {
+          var eStart = accessors.start(event),
+            eEnd = accessors.end(event)
 
-      _proto.measureGutter = function measureGutter() {
-        var _this3 = this
-
-        if (this.measureGutterAnimationFrameRequest) {
-          window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
-        }
-
-        this.measureGutterAnimationFrameRequest = window.requestAnimationFrame(
-          function() {
-            var width = getWidth(_this3.gutter)
-
-            if (width && _this3.state.gutterWidth !== width) {
-              _this3.setState({
-                gutterWidth: width,
-              })
-            }
+          if (
+            accessors.allDay(event) ||
+            (isJustDate(eStart) && isJustDate(eEnd)) ||
+            (!showMultiDayTimes && !eq(eStart, eEnd, 'day'))
+          ) {
+            allDayEvents.push(event)
+          } else {
+            rangeEvents.push(event)
           }
+        }
+      })
+      backgroundEvents.forEach(function(event) {
+        if (inRange$1(event, start, end, accessors)) {
+          rangeBackgroundEvents.push(event)
+        }
+      })
+      allDayEvents.sort(function(a, b) {
+        return sortEvents(a, b, accessors)
+      })
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: clsx(
+            'rbc-time-view',
+            resources && 'rbc-time-view-resources'
+          ),
+        },
+        /*#__PURE__*/ React__default.createElement(TimeGridHeader, {
+          range: range,
+          events: allDayEvents,
+          width: width,
+          rtl: rtl,
+          getNow: getNow,
+          localizer: localizer,
+          selected: selected,
+          resources: this.memoizedResources(resources, accessors),
+          selectable: this.props.selectable,
+          accessors: accessors,
+          getters: getters,
+          components: components,
+          scrollRef: this.scrollRef,
+          isOverflowing: this.state.isOverflowing,
+          longPressThreshold: longPressThreshold,
+          onSelectSlot: this.handleSelectAllDaySlot,
+          onSelectEvent: this.handleSelectAlldayEvent,
+          onDoubleClickEvent: this.props.onDoubleClickEvent,
+          onKeyPressEvent: this.props.onKeyPressEvent,
+          onDrillDown: this.props.onDrillDown,
+          getDrilldownView: this.props.getDrilldownView,
+          resizable: resizable,
+        }),
+        /*#__PURE__*/ React__default.createElement(
+          'div',
+          {
+            ref: this.contentRef,
+            className: 'rbc-time-content',
+            onScroll: this.handleScroll,
+          },
+          /*#__PURE__*/ React__default.createElement(TimeGutter, {
+            date: start,
+            ref: this.gutterRef,
+            localizer: localizer,
+            min: merge(start, min),
+            max: merge(start, max),
+            step: this.props.step,
+            getNow: this.props.getNow,
+            timeslots: this.props.timeslots,
+            components: components,
+            className: 'rbc-time-gutter',
+            getters: getters,
+          }),
+          this.renderEvents(range, rangeEvents, rangeBackgroundEvents, getNow())
         )
+      )
+    }
+
+    _proto.clearSelection = function clearSelection() {
+      clearTimeout(this._selectTimer)
+      this._pendingSelection = []
+    }
+
+    _proto.measureGutter = function measureGutter() {
+      var _this3 = this
+
+      if (this.measureGutterAnimationFrameRequest) {
+        window.cancelAnimationFrame(this.measureGutterAnimationFrameRequest)
       }
 
-      _proto.applyScroll = function applyScroll() {
-        if (this._scrollRatio != null) {
-          var content = this.contentRef.current
-          content.scrollTop = content.scrollHeight * this._scrollRatio // Only do this once
+      this.measureGutterAnimationFrameRequest = window.requestAnimationFrame(
+        function() {
+          var width = getWidth(_this3.gutter)
 
-          this._scrollRatio = null
+          if (width && _this3.state.gutterWidth !== width) {
+            _this3.setState({
+              gutterWidth: width,
+            })
+          }
         }
+      )
+    }
+
+    _proto.applyScroll = function applyScroll() {
+      if (this._scrollRatio != null) {
+        var content = this.contentRef.current
+        content.scrollTop = content.scrollHeight * this._scrollRatio // Only do this once
+
+        this._scrollRatio = null
+      }
+    }
+
+    _proto.calculateScroll = function calculateScroll(props) {
+      if (props === void 0) {
+        props = this.props
       }
 
-      _proto.calculateScroll = function calculateScroll(props) {
-        if (props === void 0) {
-          props = this.props
-        }
+      var _props = props,
+        min = _props.min,
+        max = _props.max,
+        scrollToTime = _props.scrollToTime
+      var diffMillis = scrollToTime - startOf(scrollToTime, 'day')
+      var totalMillis = diff(max, min)
+      this._scrollRatio = diffMillis / totalMillis
+    }
 
-        var _props = props,
-          min = _props.min,
-          max = _props.max,
-          scrollToTime = _props.scrollToTime
-        var diffMillis = scrollToTime - startOf(scrollToTime, 'day')
-        var totalMillis = diff(max, min)
-        this._scrollRatio = diffMillis / totalMillis
-      }
-
-      return TimeGrid
-    })(React.PureComponent)
+    return TimeGrid
+  })(React.PureComponent)
   TimeGrid.propTypes = {
     events: propTypes.array.isRequired,
     backgroundEvents: propTypes.array.isRequired,
@@ -14592,37 +14150,32 @@
     scrollToTime: startOf(new Date(), 'day'),
   }
 
-  var Day =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(Day, _React$PureComponent)
+  var Day = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Day, _React$PureComponent)
 
-      function Day() {
-        return _React$PureComponent.apply(this, arguments) || this
-      }
+    function Day() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = Day.prototype
+    var _proto = Day.prototype
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          date = _this$props.date,
-          props = _objectWithoutPropertiesLoose(_this$props, ['date'])
+    _proto.render = function render() {
+      var _this$props = this.props,
+        date = _this$props.date,
+        props = _objectWithoutPropertiesLoose(_this$props, ['date'])
 
-        var range = Day.range(date)
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            TimeGrid,
-            _extends({}, props, {
-              range: range,
-              eventOffset: 10,
-            })
-          )
-        )
-      }
+      var range = Day.range(date)
+      return /*#__PURE__*/ React__default.createElement(
+        TimeGrid,
+        _extends({}, props, {
+          range: range,
+          eventOffset: 10,
+        })
+      )
+    }
 
-      return Day
-    })(React__default.PureComponent)
+    return Day
+  })(React__default.PureComponent)
 
   Day.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14650,37 +14203,32 @@
     return localizer.format(date, 'dayHeaderFormat')
   }
 
-  var Week =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(Week, _React$PureComponent)
+  var Week = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Week, _React$PureComponent)
 
-      function Week() {
-        return _React$PureComponent.apply(this, arguments) || this
-      }
+    function Week() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = Week.prototype
+    var _proto = Week.prototype
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          date = _this$props.date,
-          props = _objectWithoutPropertiesLoose(_this$props, ['date'])
+    _proto.render = function render() {
+      var _this$props = this.props,
+        date = _this$props.date,
+        props = _objectWithoutPropertiesLoose(_this$props, ['date'])
 
-        var range = Week.range(date, this.props)
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            TimeGrid,
-            _extends({}, props, {
-              range: range,
-              eventOffset: 15,
-            })
-          )
-        )
-      }
+      var range = Week.range(date, this.props)
+      return /*#__PURE__*/ React__default.createElement(
+        TimeGrid,
+        _extends({}, props, {
+          range: range,
+          eventOffset: 15,
+        })
+      )
+    }
 
-      return Week
-    })(React__default.PureComponent)
+    return Week
+  })(React__default.PureComponent)
 
   Week.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14739,37 +14287,32 @@
     })
   }
 
-  var WorkWeek =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(WorkWeek, _React$PureComponent)
+  var WorkWeek = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(WorkWeek, _React$PureComponent)
 
-      function WorkWeek() {
-        return _React$PureComponent.apply(this, arguments) || this
-      }
+    function WorkWeek() {
+      return _React$PureComponent.apply(this, arguments) || this
+    }
 
-      var _proto = WorkWeek.prototype
+    var _proto = WorkWeek.prototype
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          date = _this$props.date,
-          props = _objectWithoutPropertiesLoose(_this$props, ['date'])
+    _proto.render = function render() {
+      var _this$props = this.props,
+        date = _this$props.date,
+        props = _objectWithoutPropertiesLoose(_this$props, ['date'])
 
-        var range = workWeekRange(date, this.props)
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            TimeGrid,
-            _extends({}, props, {
-              range: range,
-              eventOffset: 15,
-            })
-          )
-        )
-      }
+      var range = workWeekRange(date, this.props)
+      return /*#__PURE__*/ React__default.createElement(
+        TimeGrid,
+        _extends({}, props, {
+          range: range,
+          eventOffset: 15,
+        })
+      )
+    }
 
-      return WorkWeek
-    })(React__default.PureComponent)
+    return WorkWeek
+  })(React__default.PureComponent)
 
   WorkWeek.propTypes = {
     date: propTypes.instanceOf(Date).isRequired,
@@ -14880,54 +14423,46 @@
         var dateLabel = idx === 0 && localizer.format(day, 'agendaDateFormat')
         var first =
           idx === 0
-            ? /*#__PURE__*/
-              React__default.createElement(
+            ? /*#__PURE__*/ React__default.createElement(
                 'td',
                 {
                   rowSpan: events.length,
                   className: 'rbc-agenda-date-cell',
                 },
                 AgendaDate
-                  ? /*#__PURE__*/
-                    React__default.createElement(AgendaDate, {
+                  ? /*#__PURE__*/ React__default.createElement(AgendaDate, {
                       day: day,
                       label: dateLabel,
                     })
                   : dateLabel
               )
             : false
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'tr',
+        return /*#__PURE__*/ React__default.createElement(
+          'tr',
+          {
+            key: dayKey + '_' + idx,
+            className: userProps.className,
+            style: userProps.style,
+          },
+          first,
+          /*#__PURE__*/ React__default.createElement(
+            'td',
             {
-              key: dayKey + '_' + idx,
-              className: userProps.className,
-              style: userProps.style,
+              className: 'rbc-agenda-time-cell',
             },
-            first,
-            /*#__PURE__*/
-            React__default.createElement(
-              'td',
-              {
-                className: 'rbc-agenda-time-cell',
-              },
-              timeRangeLabel(day, event)
-            ),
-            /*#__PURE__*/
-            React__default.createElement(
-              'td',
-              {
-                className: 'rbc-agenda-event-cell',
-              },
-              Event
-                ? /*#__PURE__*/
-                  React__default.createElement(Event, {
-                    event: event,
-                    title: title,
-                  })
-                : title
-            )
+            timeRangeLabel(day, event)
+          ),
+          /*#__PURE__*/ React__default.createElement(
+            'td',
+            {
+              className: 'rbc-agenda-event-cell',
+            },
+            Event
+              ? /*#__PURE__*/ React__default.createElement(Event, {
+                  event: event,
+                  title: title,
+                })
+              : title
           )
         )
       }, [])
@@ -14960,22 +14495,18 @@
 
       if (gt(day, start, 'day')) labelClass = 'rbc-continues-prior'
       if (lt(day, end, 'day')) labelClass += ' rbc-continues-after'
-      return (
-        /*#__PURE__*/
-        React__default.createElement(
-          'span',
-          {
-            className: labelClass.trim(),
-          },
-          TimeComponent
-            ? /*#__PURE__*/
-              React__default.createElement(TimeComponent, {
-                event: event,
-                day: day,
-                label: label,
-              })
-            : label
-        )
+      return /*#__PURE__*/ React__default.createElement(
+        'span',
+        {
+          className: labelClass.trim(),
+        },
+        TimeComponent
+          ? /*#__PURE__*/ React__default.createElement(TimeComponent, {
+              event: event,
+              day: day,
+              label: label,
+            })
+          : label
       )
     }
 
@@ -15017,97 +14548,83 @@
     events.sort(function(a, b) {
       return +accessors.start(a) - +accessors.start(b)
     })
-    return (
-      /*#__PURE__*/
-      React__default.createElement(
-        'div',
-        {
-          className: 'rbc-agenda-view',
-        },
-        events.length !== 0
-          ? /*#__PURE__*/
-            React__default.createElement(
-              React__default.Fragment,
-              null,
-              /*#__PURE__*/
-              React__default.createElement(
-                'table',
-                {
-                  ref: headerRef,
-                  className: 'rbc-agenda-table',
-                },
-                /*#__PURE__*/
-                React__default.createElement(
-                  'thead',
+    return /*#__PURE__*/ React__default.createElement(
+      'div',
+      {
+        className: 'rbc-agenda-view',
+      },
+      events.length !== 0
+        ? /*#__PURE__*/ React__default.createElement(
+            React__default.Fragment,
+            null,
+            /*#__PURE__*/ React__default.createElement(
+              'table',
+              {
+                ref: headerRef,
+                className: 'rbc-agenda-table',
+              },
+              /*#__PURE__*/ React__default.createElement(
+                'thead',
+                null,
+                /*#__PURE__*/ React__default.createElement(
+                  'tr',
                   null,
-                  /*#__PURE__*/
-                  React__default.createElement(
-                    'tr',
-                    null,
-                    /*#__PURE__*/
-                    React__default.createElement(
-                      'th',
-                      {
-                        className: 'rbc-header',
-                        ref: dateColRef,
-                      },
-                      messages.date
-                    ),
-                    /*#__PURE__*/
-                    React__default.createElement(
-                      'th',
-                      {
-                        className: 'rbc-header',
-                        ref: timeColRef,
-                      },
-                      messages.time
-                    ),
-                    /*#__PURE__*/
-                    React__default.createElement(
-                      'th',
-                      {
-                        className: 'rbc-header',
-                      },
-                      messages.event
-                    )
-                  )
-                )
-              ),
-              /*#__PURE__*/
-              React__default.createElement(
-                'div',
-                {
-                  className: 'rbc-agenda-content',
-                  ref: contentRef,
-                },
-                /*#__PURE__*/
-                React__default.createElement(
-                  'table',
-                  {
-                    className: 'rbc-agenda-table',
-                  },
-                  /*#__PURE__*/
-                  React__default.createElement(
-                    'tbody',
+                  /*#__PURE__*/ React__default.createElement(
+                    'th',
                     {
-                      ref: tbodyRef,
+                      className: 'rbc-header',
+                      ref: dateColRef,
                     },
-                    range$1.map(function(day, idx) {
-                      return renderDay(day, events, idx)
-                    })
+                    messages.date
+                  ),
+                  /*#__PURE__*/ React__default.createElement(
+                    'th',
+                    {
+                      className: 'rbc-header',
+                      ref: timeColRef,
+                    },
+                    messages.time
+                  ),
+                  /*#__PURE__*/ React__default.createElement(
+                    'th',
+                    {
+                      className: 'rbc-header',
+                    },
+                    messages.event
                   )
                 )
               )
-            )
-          : /*#__PURE__*/
-            React__default.createElement(
-              'span',
+            ),
+            /*#__PURE__*/ React__default.createElement(
+              'div',
               {
-                className: 'rbc-agenda-empty',
+                className: 'rbc-agenda-content',
+                ref: contentRef,
               },
-              messages.noEventsInRange
+              /*#__PURE__*/ React__default.createElement(
+                'table',
+                {
+                  className: 'rbc-agenda-table',
+                },
+                /*#__PURE__*/ React__default.createElement(
+                  'tbody',
+                  {
+                    ref: tbodyRef,
+                  },
+                  range$1.map(function(day, idx) {
+                    return renderDay(day, events, idx)
+                  })
+                )
+              )
             )
-      )
+          )
+        : /*#__PURE__*/ React__default.createElement(
+            'span',
+            {
+              className: 'rbc-agenda-empty',
+            },
+            messages.noEventsInRange
+          )
     )
   }
 
@@ -15207,135 +14724,121 @@
     return date
   }
 
-  var Toolbar =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(Toolbar, _React$PureComponent)
+  var Toolbar = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Toolbar, _React$PureComponent)
 
-      function Toolbar() {
-        var _this
+    function Toolbar() {
+      var _this
 
-        for (
-          var _len = arguments.length, args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          args[_key] = arguments[_key]
-        }
-
-        _this =
-          _React$PureComponent.call.apply(
-            _React$PureComponent,
-            [this].concat(args)
-          ) || this
-
-        _this.navigate = function(action) {
-          _this.props.onNavigate(action)
-        }
-
-        _this.view = function(view) {
-          _this.props.onView(view)
-        }
-
-        return _this
+      for (
+        var _len = arguments.length, args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
+      ) {
+        args[_key] = arguments[_key]
       }
 
-      var _proto = Toolbar.prototype
+      _this =
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(args)
+        ) || this
 
-      _proto.render = function render() {
-        var _this$props = this.props,
-          messages = _this$props.localizer.messages,
-          label = _this$props.label
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
+      _this.navigate = function(action) {
+        _this.props.onNavigate(action)
+      }
+
+      _this.view = function(view) {
+        _this.props.onView(view)
+      }
+
+      return _this
+    }
+
+    var _proto = Toolbar.prototype
+
+    _proto.render = function render() {
+      var _this$props = this.props,
+        messages = _this$props.localizer.messages,
+        label = _this$props.label
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        {
+          className: 'rbc-toolbar',
+        },
+        /*#__PURE__*/ React__default.createElement(
+          'span',
+          {
+            className: 'rbc-btn-group',
+          },
+          /*#__PURE__*/ React__default.createElement(
+            'button',
             {
-              className: 'rbc-toolbar',
+              type: 'button',
+              onClick: this.navigate.bind(null, navigate.TODAY),
             },
-            /*#__PURE__*/
-            React__default.createElement(
-              'span',
-              {
-                className: 'rbc-btn-group',
-              },
-              /*#__PURE__*/
-              React__default.createElement(
-                'button',
-                {
-                  type: 'button',
-                  onClick: this.navigate.bind(null, navigate.TODAY),
-                },
-                messages.today
-              ),
-              /*#__PURE__*/
-              React__default.createElement(
-                'button',
-                {
-                  type: 'button',
-                  onClick: this.navigate.bind(null, navigate.PREVIOUS),
-                },
-                messages.previous
-              ),
-              /*#__PURE__*/
-              React__default.createElement(
-                'button',
-                {
-                  type: 'button',
-                  onClick: this.navigate.bind(null, navigate.NEXT),
-                },
-                messages.next
-              )
-            ),
-            /*#__PURE__*/
-            React__default.createElement(
-              'span',
-              {
-                className: 'rbc-toolbar-label',
-              },
-              label
-            ),
-            /*#__PURE__*/
-            React__default.createElement(
-              'span',
-              {
-                className: 'rbc-btn-group',
-              },
-              this.viewNamesGroup(messages)
-            )
+            messages.today
+          ),
+          /*#__PURE__*/ React__default.createElement(
+            'button',
+            {
+              type: 'button',
+              onClick: this.navigate.bind(null, navigate.PREVIOUS),
+            },
+            messages.previous
+          ),
+          /*#__PURE__*/ React__default.createElement(
+            'button',
+            {
+              type: 'button',
+              onClick: this.navigate.bind(null, navigate.NEXT),
+            },
+            messages.next
           )
+        ),
+        /*#__PURE__*/ React__default.createElement(
+          'span',
+          {
+            className: 'rbc-toolbar-label',
+          },
+          label
+        ),
+        /*#__PURE__*/ React__default.createElement(
+          'span',
+          {
+            className: 'rbc-btn-group',
+          },
+          this.viewNamesGroup(messages)
         )
+      )
+    }
+
+    _proto.viewNamesGroup = function viewNamesGroup(messages) {
+      var _this2 = this
+
+      var viewNames = this.props.views
+      var view = this.props.view
+
+      if (viewNames.length > 1) {
+        return viewNames.map(function(name) {
+          return /*#__PURE__*/ React__default.createElement(
+            'button',
+            {
+              type: 'button',
+              key: name,
+              className: clsx({
+                'rbc-active': view === name,
+              }),
+              onClick: _this2.view.bind(null, name),
+            },
+            messages[name]
+          )
+        })
       }
+    }
 
-      _proto.viewNamesGroup = function viewNamesGroup(messages) {
-        var _this2 = this
-
-        var viewNames = this.props.views
-        var view = this.props.view
-
-        if (viewNames.length > 1) {
-          return viewNames.map(function(name) {
-            return (
-              /*#__PURE__*/
-              React__default.createElement(
-                'button',
-                {
-                  type: 'button',
-                  key: name,
-                  className: clsx({
-                    'rbc-active': view === name,
-                  }),
-                  onClick: _this2.view.bind(null, name),
-                },
-                messages[name]
-              )
-            )
-          })
-        }
-      }
-
-      return Toolbar
-    })(React__default.PureComponent)
+    return Toolbar
+  })(React__default.PureComponent)
 
   Toolbar.propTypes = {
     view: propTypes.string.isRequired,
@@ -16539,410 +16042,394 @@
    * function `endAccessor` that returns the end date + 1 day for those events that end at midnight.
    */
 
-  var Calendar =
-    /*#__PURE__*/
-    (function(_React$PureComponent) {
-      _inheritsLoose(Calendar, _React$PureComponent)
+  var Calendar = /*#__PURE__*/ (function(_React$PureComponent) {
+    _inheritsLoose(Calendar, _React$PureComponent)
 
-      function Calendar() {
-        var _this
+    function Calendar() {
+      var _this
 
-        for (
-          var _len = arguments.length, _args = new Array(_len), _key = 0;
-          _key < _len;
-          _key++
-        ) {
-          _args[_key] = arguments[_key]
-        }
-
-        _this =
-          _React$PureComponent.call.apply(
-            _React$PureComponent,
-            [this].concat(_args)
-          ) || this
-
-        _this.getViews = function() {
-          var views = _this.props.views
-
-          if (Array.isArray(views)) {
-            return transform(
-              views,
-              function(obj, name) {
-                return (obj[name] = VIEWS[name])
-              },
-              {}
-            )
-          }
-
-          if (typeof views === 'object') {
-            return mapValues(views, function(value, key) {
-              if (value === true) {
-                return VIEWS[key]
-              }
-
-              return value
-            })
-          }
-
-          return VIEWS
-        }
-
-        _this.getView = function() {
-          var views = _this.getViews()
-
-          return views[_this.props.view]
-        }
-
-        _this.getDrilldownView = function(date) {
-          var _this$props = _this.props,
-            view = _this$props.view,
-            drilldownView = _this$props.drilldownView,
-            getDrilldownView = _this$props.getDrilldownView
-          if (!getDrilldownView) return drilldownView
-          return getDrilldownView(date, view, Object.keys(_this.getViews()))
-        }
-
-        _this.handleRangeChange = function(date, viewComponent, view) {
-          var _this$props2 = _this.props,
-            onRangeChange = _this$props2.onRangeChange,
-            localizer = _this$props2.localizer
-
-          if (onRangeChange) {
-            if (viewComponent.range) {
-              onRangeChange(
-                viewComponent.range(date, {
-                  localizer: localizer,
-                }),
-                view
-              )
-            } else {
-              {
-                console.error('onRangeChange prop not supported for this view')
-              }
-            }
-          }
-        }
-
-        _this.handleNavigate = function(action, newDate) {
-          var _this$props3 = _this.props,
-            view = _this$props3.view,
-            date = _this$props3.date,
-            getNow = _this$props3.getNow,
-            onNavigate = _this$props3.onNavigate,
-            props = _objectWithoutPropertiesLoose(_this$props3, [
-              'view',
-              'date',
-              'getNow',
-              'onNavigate',
-            ])
-
-          var ViewComponent = _this.getView()
-
-          var today = getNow()
-          date = moveDate(
-            ViewComponent,
-            _extends({}, props, {
-              action: action,
-              date: newDate || date || today,
-              today: today,
-            })
-          )
-          onNavigate(date, view, action)
-
-          _this.handleRangeChange(date, ViewComponent)
-        }
-
-        _this.handleViewChange = function(view) {
-          if (view !== _this.props.view && isValidView(view, _this.props)) {
-            _this.props.onView(view)
-          }
-
-          var views = _this.getViews()
-
-          _this.handleRangeChange(
-            _this.props.date || _this.props.getNow(),
-            views[view],
-            view
-          )
-        }
-
-        _this.handleSelectEvent = function() {
-          for (
-            var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
-            _key2 < _len2;
-            _key2++
-          ) {
-            args[_key2] = arguments[_key2]
-          }
-
-          notify(_this.props.onSelectEvent, args)
-        }
-
-        _this.handleDoubleClickEvent = function() {
-          for (
-            var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
-            _key3 < _len3;
-            _key3++
-          ) {
-            args[_key3] = arguments[_key3]
-          }
-
-          notify(_this.props.onDoubleClickEvent, args)
-        }
-
-        _this.handleKeyPressEvent = function() {
-          for (
-            var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
-            _key4 < _len4;
-            _key4++
-          ) {
-            args[_key4] = arguments[_key4]
-          }
-
-          notify(_this.props.onKeyPressEvent, args)
-        }
-
-        _this.handleSelectSlot = function(slotInfo) {
-          notify(_this.props.onSelectSlot, slotInfo)
-        }
-
-        _this.handleDrillDown = function(date, view) {
-          var onDrillDown = _this.props.onDrillDown
-
-          if (onDrillDown) {
-            onDrillDown(date, view, _this.drilldownView)
-            return
-          }
-
-          if (view) _this.handleViewChange(view)
-
-          _this.handleNavigate(navigate.DATE, date)
-        }
-
-        _this.state = {
-          context: _this.getContext(_this.props),
-        }
-        return _this
-      }
-
-      var _proto = Calendar.prototype
-
-      _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
-        nextProps
+      for (
+        var _len = arguments.length, _args = new Array(_len), _key = 0;
+        _key < _len;
+        _key++
       ) {
-        this.setState({
-          context: this.getContext(nextProps),
-        })
+        _args[_key] = arguments[_key]
       }
 
-      _proto.getContext = function getContext(_ref2) {
-        var startAccessor = _ref2.startAccessor,
-          endAccessor = _ref2.endAccessor,
-          allDayAccessor = _ref2.allDayAccessor,
-          tooltipAccessor = _ref2.tooltipAccessor,
-          titleAccessor = _ref2.titleAccessor,
-          resourceAccessor = _ref2.resourceAccessor,
-          resourceIdAccessor = _ref2.resourceIdAccessor,
-          resourceTitleAccessor = _ref2.resourceTitleAccessor,
-          eventPropGetter = _ref2.eventPropGetter,
-          backgroundEventPropGetter = _ref2.backgroundEventPropGetter,
-          slotPropGetter = _ref2.slotPropGetter,
-          slotGroupPropGetter = _ref2.slotGroupPropGetter,
-          dayPropGetter = _ref2.dayPropGetter,
-          view = _ref2.view,
-          views = _ref2.views,
-          localizer = _ref2.localizer,
-          culture = _ref2.culture,
-          _ref2$messages = _ref2.messages,
-          messages$1 = _ref2$messages === void 0 ? {} : _ref2$messages,
-          _ref2$components = _ref2.components,
-          components = _ref2$components === void 0 ? {} : _ref2$components,
-          _ref2$formats = _ref2.formats,
-          formats = _ref2$formats === void 0 ? {} : _ref2$formats
-        var names = viewNames$1(views)
-        var msgs = messages(messages$1)
-        return {
-          viewNames: names,
-          localizer: mergeWithDefaults(localizer, culture, formats, msgs),
-          getters: {
-            eventProp: function eventProp() {
-              return (
-                (eventPropGetter && eventPropGetter.apply(void 0, arguments)) ||
-                {}
-              )
+      _this =
+        _React$PureComponent.call.apply(
+          _React$PureComponent,
+          [this].concat(_args)
+        ) || this
+
+      _this.getViews = function() {
+        var views = _this.props.views
+
+        if (Array.isArray(views)) {
+          return transform(
+            views,
+            function(obj, name) {
+              return (obj[name] = VIEWS[name])
             },
-            backgroundEventProp: function backgroundEventProp() {
-              return (
-                (backgroundEventPropGetter &&
-                  backgroundEventPropGetter.apply(void 0, arguments)) ||
-                {}
-              )
-            },
-            slotProp: function slotProp() {
-              return (
-                (slotPropGetter && slotPropGetter.apply(void 0, arguments)) ||
-                {}
-              )
-            },
-            slotGroupProp: function slotGroupProp() {
-              return (
-                (slotGroupPropGetter &&
-                  slotGroupPropGetter.apply(void 0, arguments)) ||
-                {}
-              )
-            },
-            dayProp: function dayProp() {
-              return (
-                (dayPropGetter && dayPropGetter.apply(void 0, arguments)) || {}
-              )
-            },
-          },
-          components: defaults(
-            components[view] || {},
-            omit(components, names),
-            {
-              eventWrapper: NoopWrapper,
-              backgroundEventWrapper: NoopWrapper,
-              eventContainerWrapper: NoopWrapper,
-              dateCellWrapper: NoopWrapper,
-              weekWrapper: NoopWrapper,
-              timeSlotWrapper: NoopWrapper,
-            }
-          ),
-          accessors: {
-            start: wrapAccessor(startAccessor),
-            end: wrapAccessor(endAccessor),
-            allDay: wrapAccessor(allDayAccessor),
-            tooltip: wrapAccessor(tooltipAccessor),
-            title: wrapAccessor(titleAccessor),
-            resource: wrapAccessor(resourceAccessor),
-            resourceId: wrapAccessor(resourceIdAccessor),
-            resourceTitle: wrapAccessor(resourceTitleAccessor),
-          },
+            {}
+          )
         }
+
+        if (typeof views === 'object') {
+          return mapValues(views, function(value, key) {
+            if (value === true) {
+              return VIEWS[key]
+            }
+
+            return value
+          })
+        }
+
+        return VIEWS
       }
 
-      _proto.render = function render() {
-        var _this$props4 = this.props,
-          view = _this$props4.view,
-          toolbar = _this$props4.toolbar,
-          events = _this$props4.events,
-          _this$props4$backgrou = _this$props4.backgroundEvents,
-          backgroundEvents =
-            _this$props4$backgrou === void 0 ? [] : _this$props4$backgrou,
-          style = _this$props4.style,
-          className = _this$props4.className,
-          elementProps = _this$props4.elementProps,
-          current = _this$props4.date,
-          getNow = _this$props4.getNow,
-          length = _this$props4.length,
-          inclusiveRange = _this$props4.inclusiveRange,
-          showMultiDayTimes = _this$props4.showMultiDayTimes,
-          onShowMore = _this$props4.onShowMore,
-          doShowMoreDrillDown = _this$props4.doShowMoreDrillDown,
-          _0 = _this$props4.components,
-          _1 = _this$props4.formats,
-          _2 = _this$props4.messages,
-          _3 = _this$props4.culture,
-          props = _objectWithoutPropertiesLoose(_this$props4, [
-            'view',
-            'toolbar',
-            'events',
-            'backgroundEvents',
-            'style',
-            'className',
-            'elementProps',
-            'date',
-            'getNow',
-            'length',
-            'inclusiveRange',
-            'showMultiDayTimes',
-            'onShowMore',
-            'doShowMoreDrillDown',
-            'components',
-            'formats',
-            'messages',
-            'culture',
-          ])
+      _this.getView = function() {
+        var views = _this.getViews()
 
-        current = current || getNow()
-        var View = this.getView()
-        var _this$state$context = this.state.context,
-          accessors = _this$state$context.accessors,
-          components = _this$state$context.components,
-          getters = _this$state$context.getters,
-          localizer = _this$state$context.localizer,
-          viewNames = _this$state$context.viewNames
-        var CalToolbar = components.toolbar || Toolbar
-        var label = View.title(current, {
-          localizer: localizer,
-          length: length,
-          inclusiveRange: inclusiveRange,
-        })
-        return (
-          /*#__PURE__*/
-          React__default.createElement(
-            'div',
-            _extends({}, elementProps, {
-              className: clsx(
-                className,
-                'rbc-calendar',
-                props.rtl && 'rbc-rtl'
-              ),
-              style: style,
-            }),
-            toolbar &&
-              /*#__PURE__*/
-              React__default.createElement(CalToolbar, {
-                date: current,
-                view: view,
-                views: viewNames,
-                label: label,
-                onView: this.handleViewChange,
-                onNavigate: this.handleNavigate,
+        return views[_this.props.view]
+      }
+
+      _this.getDrilldownView = function(date) {
+        var _this$props = _this.props,
+          view = _this$props.view,
+          drilldownView = _this$props.drilldownView,
+          getDrilldownView = _this$props.getDrilldownView
+        if (!getDrilldownView) return drilldownView
+        return getDrilldownView(date, view, Object.keys(_this.getViews()))
+      }
+
+      _this.handleRangeChange = function(date, viewComponent, view) {
+        var _this$props2 = _this.props,
+          onRangeChange = _this$props2.onRangeChange,
+          localizer = _this$props2.localizer
+
+        if (onRangeChange) {
+          if (viewComponent.range) {
+            onRangeChange(
+              viewComponent.range(date, {
                 localizer: localizer,
               }),
-            /*#__PURE__*/
-            React__default.createElement(
-              View,
-              _extends({}, props, {
-                events: events,
-                backgroundEvents: backgroundEvents,
-                date: current,
-                getNow: getNow,
-                length: length,
-                localizer: localizer,
-                getters: getters,
-                components: components,
-                accessors: accessors,
-                inclusiveRange: inclusiveRange,
-                showMultiDayTimes: showMultiDayTimes,
-                getDrilldownView: this.getDrilldownView,
-                onNavigate: this.handleNavigate,
-                onDrillDown: this.handleDrillDown,
-                onSelectEvent: this.handleSelectEvent,
-                onDoubleClickEvent: this.handleDoubleClickEvent,
-                onKeyPressEvent: this.handleKeyPressEvent,
-                onSelectSlot: this.handleSelectSlot,
-                onShowMore: onShowMore,
-                doShowMoreDrillDown: doShowMoreDrillDown,
-              })
+              view
             )
-          )
+          } else {
+            {
+              console.error('onRangeChange prop not supported for this view')
+            }
+          }
+        }
+      }
+
+      _this.handleNavigate = function(action, newDate) {
+        var _this$props3 = _this.props,
+          view = _this$props3.view,
+          date = _this$props3.date,
+          getNow = _this$props3.getNow,
+          onNavigate = _this$props3.onNavigate,
+          props = _objectWithoutPropertiesLoose(_this$props3, [
+            'view',
+            'date',
+            'getNow',
+            'onNavigate',
+          ])
+
+        var ViewComponent = _this.getView()
+
+        var today = getNow()
+        date = moveDate(
+          ViewComponent,
+          _extends({}, props, {
+            action: action,
+            date: newDate || date || today,
+            today: today,
+          })
+        )
+        onNavigate(date, view, action)
+
+        _this.handleRangeChange(date, ViewComponent)
+      }
+
+      _this.handleViewChange = function(view) {
+        if (view !== _this.props.view && isValidView(view, _this.props)) {
+          _this.props.onView(view)
+        }
+
+        var views = _this.getViews()
+
+        _this.handleRangeChange(
+          _this.props.date || _this.props.getNow(),
+          views[view],
+          view
         )
       }
-      /**
-       *
-       * @param date
-       * @param viewComponent
-       * @param {'month'|'week'|'work_week'|'day'|'agenda'} [view] - optional
-       * parameter. It appears when range change on view changing. It could be handy
-       * when you need to have both: range and view type at once, i.e. for manage rbc
-       * state via url
-       */
 
-      return Calendar
-    })(React__default.PureComponent)
+      _this.handleSelectEvent = function() {
+        for (
+          var _len2 = arguments.length, args = new Array(_len2), _key2 = 0;
+          _key2 < _len2;
+          _key2++
+        ) {
+          args[_key2] = arguments[_key2]
+        }
+
+        notify(_this.props.onSelectEvent, args)
+      }
+
+      _this.handleDoubleClickEvent = function() {
+        for (
+          var _len3 = arguments.length, args = new Array(_len3), _key3 = 0;
+          _key3 < _len3;
+          _key3++
+        ) {
+          args[_key3] = arguments[_key3]
+        }
+
+        notify(_this.props.onDoubleClickEvent, args)
+      }
+
+      _this.handleKeyPressEvent = function() {
+        for (
+          var _len4 = arguments.length, args = new Array(_len4), _key4 = 0;
+          _key4 < _len4;
+          _key4++
+        ) {
+          args[_key4] = arguments[_key4]
+        }
+
+        notify(_this.props.onKeyPressEvent, args)
+      }
+
+      _this.handleSelectSlot = function(slotInfo) {
+        notify(_this.props.onSelectSlot, slotInfo)
+      }
+
+      _this.handleDrillDown = function(date, view) {
+        var onDrillDown = _this.props.onDrillDown
+
+        if (onDrillDown) {
+          onDrillDown(date, view, _this.drilldownView)
+          return
+        }
+
+        if (view) _this.handleViewChange(view)
+
+        _this.handleNavigate(navigate.DATE, date)
+      }
+
+      _this.state = {
+        context: _this.getContext(_this.props),
+      }
+      return _this
+    }
+
+    var _proto = Calendar.prototype
+
+    _proto.UNSAFE_componentWillReceiveProps = function UNSAFE_componentWillReceiveProps(
+      nextProps
+    ) {
+      this.setState({
+        context: this.getContext(nextProps),
+      })
+    }
+
+    _proto.getContext = function getContext(_ref2) {
+      var startAccessor = _ref2.startAccessor,
+        endAccessor = _ref2.endAccessor,
+        allDayAccessor = _ref2.allDayAccessor,
+        tooltipAccessor = _ref2.tooltipAccessor,
+        titleAccessor = _ref2.titleAccessor,
+        resourceAccessor = _ref2.resourceAccessor,
+        resourceIdAccessor = _ref2.resourceIdAccessor,
+        resourceTitleAccessor = _ref2.resourceTitleAccessor,
+        eventPropGetter = _ref2.eventPropGetter,
+        backgroundEventPropGetter = _ref2.backgroundEventPropGetter,
+        slotPropGetter = _ref2.slotPropGetter,
+        slotGroupPropGetter = _ref2.slotGroupPropGetter,
+        dayPropGetter = _ref2.dayPropGetter,
+        view = _ref2.view,
+        views = _ref2.views,
+        localizer = _ref2.localizer,
+        culture = _ref2.culture,
+        _ref2$messages = _ref2.messages,
+        messages$1 = _ref2$messages === void 0 ? {} : _ref2$messages,
+        _ref2$components = _ref2.components,
+        components = _ref2$components === void 0 ? {} : _ref2$components,
+        _ref2$formats = _ref2.formats,
+        formats = _ref2$formats === void 0 ? {} : _ref2$formats
+      var names = viewNames$1(views)
+      var msgs = messages(messages$1)
+      return {
+        viewNames: names,
+        localizer: mergeWithDefaults(localizer, culture, formats, msgs),
+        getters: {
+          eventProp: function eventProp() {
+            return (
+              (eventPropGetter && eventPropGetter.apply(void 0, arguments)) ||
+              {}
+            )
+          },
+          backgroundEventProp: function backgroundEventProp() {
+            return (
+              (backgroundEventPropGetter &&
+                backgroundEventPropGetter.apply(void 0, arguments)) ||
+              {}
+            )
+          },
+          slotProp: function slotProp() {
+            return (
+              (slotPropGetter && slotPropGetter.apply(void 0, arguments)) || {}
+            )
+          },
+          slotGroupProp: function slotGroupProp() {
+            return (
+              (slotGroupPropGetter &&
+                slotGroupPropGetter.apply(void 0, arguments)) ||
+              {}
+            )
+          },
+          dayProp: function dayProp() {
+            return (
+              (dayPropGetter && dayPropGetter.apply(void 0, arguments)) || {}
+            )
+          },
+        },
+        components: defaults(components[view] || {}, omit(components, names), {
+          eventWrapper: NoopWrapper,
+          backgroundEventWrapper: NoopWrapper,
+          eventContainerWrapper: NoopWrapper,
+          dateCellWrapper: NoopWrapper,
+          weekWrapper: NoopWrapper,
+          timeSlotWrapper: NoopWrapper,
+        }),
+        accessors: {
+          start: wrapAccessor(startAccessor),
+          end: wrapAccessor(endAccessor),
+          allDay: wrapAccessor(allDayAccessor),
+          tooltip: wrapAccessor(tooltipAccessor),
+          title: wrapAccessor(titleAccessor),
+          resource: wrapAccessor(resourceAccessor),
+          resourceId: wrapAccessor(resourceIdAccessor),
+          resourceTitle: wrapAccessor(resourceTitleAccessor),
+        },
+      }
+    }
+
+    _proto.render = function render() {
+      var _this$props4 = this.props,
+        view = _this$props4.view,
+        toolbar = _this$props4.toolbar,
+        events = _this$props4.events,
+        _this$props4$backgrou = _this$props4.backgroundEvents,
+        backgroundEvents =
+          _this$props4$backgrou === void 0 ? [] : _this$props4$backgrou,
+        style = _this$props4.style,
+        className = _this$props4.className,
+        elementProps = _this$props4.elementProps,
+        current = _this$props4.date,
+        getNow = _this$props4.getNow,
+        length = _this$props4.length,
+        inclusiveRange = _this$props4.inclusiveRange,
+        showMultiDayTimes = _this$props4.showMultiDayTimes,
+        onShowMore = _this$props4.onShowMore,
+        doShowMoreDrillDown = _this$props4.doShowMoreDrillDown,
+        _0 = _this$props4.components,
+        _1 = _this$props4.formats,
+        _2 = _this$props4.messages,
+        _3 = _this$props4.culture,
+        props = _objectWithoutPropertiesLoose(_this$props4, [
+          'view',
+          'toolbar',
+          'events',
+          'backgroundEvents',
+          'style',
+          'className',
+          'elementProps',
+          'date',
+          'getNow',
+          'length',
+          'inclusiveRange',
+          'showMultiDayTimes',
+          'onShowMore',
+          'doShowMoreDrillDown',
+          'components',
+          'formats',
+          'messages',
+          'culture',
+        ])
+
+      current = current || getNow()
+      var View = this.getView()
+      var _this$state$context = this.state.context,
+        accessors = _this$state$context.accessors,
+        components = _this$state$context.components,
+        getters = _this$state$context.getters,
+        localizer = _this$state$context.localizer,
+        viewNames = _this$state$context.viewNames
+      var CalToolbar = components.toolbar || Toolbar
+      var label = View.title(current, {
+        localizer: localizer,
+        length: length,
+        inclusiveRange: inclusiveRange,
+      })
+      return /*#__PURE__*/ React__default.createElement(
+        'div',
+        _extends({}, elementProps, {
+          className: clsx(className, 'rbc-calendar', props.rtl && 'rbc-rtl'),
+          style: style,
+        }),
+        toolbar &&
+          /*#__PURE__*/ React__default.createElement(CalToolbar, {
+            date: current,
+            view: view,
+            views: viewNames,
+            label: label,
+            onView: this.handleViewChange,
+            onNavigate: this.handleNavigate,
+            localizer: localizer,
+          }),
+        /*#__PURE__*/ React__default.createElement(
+          View,
+          _extends({}, props, {
+            events: events,
+            backgroundEvents: backgroundEvents,
+            date: current,
+            getNow: getNow,
+            length: length,
+            localizer: localizer,
+            getters: getters,
+            components: components,
+            accessors: accessors,
+            inclusiveRange: inclusiveRange,
+            showMultiDayTimes: showMultiDayTimes,
+            getDrilldownView: this.getDrilldownView,
+            onNavigate: this.handleNavigate,
+            onDrillDown: this.handleDrillDown,
+            onSelectEvent: this.handleSelectEvent,
+            onDoubleClickEvent: this.handleDoubleClickEvent,
+            onKeyPressEvent: this.handleKeyPressEvent,
+            onSelectSlot: this.handleSelectSlot,
+            onShowMore: onShowMore,
+            doShowMoreDrillDown: doShowMoreDrillDown,
+          })
+        )
+      )
+    }
+    /**
+     *
+     * @param date
+     * @param viewComponent
+     * @param {'month'|'week'|'work_week'|'day'|'agenda'} [view] - optional
+     * parameter. It appears when range change on view changing. It could be handy
+     * when you need to have both: range and view type at once, i.e. for manage rbc
+     * state via url
+     */
+
+    return Calendar
+  })(React__default.PureComponent)
 
   Calendar.defaultProps = {
     elementProps: {},
